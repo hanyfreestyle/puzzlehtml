@@ -15,4 +15,9 @@ class AdminController extends Controller
     {
         return view('admin.dashbord');
     }
+
+    public function blank()
+    {
+        return view('admin.dashbord');
+    }
 }

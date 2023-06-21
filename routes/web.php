@@ -20,4 +20,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/DashBord', [AdminController::class, 'index'])->name('home');
+#Route::get('/DashBord', [AdminController::class, 'index'])->name('home');
+
+Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
+    Route::get('/Home', [AdminController::class, 'index'])->name('Dashboard');
+    Route::get('/Page1', [AdminController::class, 'blank'])->name('page1');
+    Route::get('/Page2', [AdminController::class, 'blank'])->name('page2');
+
+    Route::get('/Home2', [AdminController::class, 'index'])->name('Dashboard2');
+    Route::get('/Page3', [AdminController::class, 'blank'])->name('page3');
+    Route::get('/Page4', [AdminController::class, 'blank'])->name('page4');
+});
