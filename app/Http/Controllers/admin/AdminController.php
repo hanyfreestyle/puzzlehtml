@@ -18,6 +18,6 @@ class AdminController extends Controller
 
     public function blank()
     {
-        return view('admin.dashbord');
+        return view('admin.test');
     }
 }

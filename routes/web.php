@@ -28,8 +28,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::get('/Page1', [AdminController::class, 'blank'])->name('page1');
         Route::get('/Page2', [AdminController::class, 'blank'])->name('page2');
 
-        Route::get('/Home2', [AdminController::class, 'index'])->name('Dashboard2');
-        Route::get('/Page3', [AdminController::class, 'blank'])->name('page3');
-        Route::get('/Page4', [AdminController::class, 'blank'])->name('page4');
+        Route::get('/Config/Env', [AdminController::class, 'blank'])->name('config.env');
+        Route::get('/Config/Photo', [AdminController::class, 'blank'])->name('config.photo');
+        Route::get('/Config/Web', [AdminController::class, 'blank'])->name('config.web');
+
+        Route::get('/Config/Env2', [AdminController::class, 'blank'])->name('config.env2');
+        Route::get('/Config/Photo2', [AdminController::class, 'blank'])->name('config.photo2');
+        Route::get('/Config/Web2', [AdminController::class, 'blank'])->name('config.web2');
+
     });
 });

@@ -34,43 +34,46 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column {{sideBarNavUlStyle()}}" data-widget="treeview" role="menu" data-accordion="false">
 
-                <li class="nav-item {{openMenu(['admin.Dashboard','admin.page1','admin.page2'])}}">
-                    <a href="#" class="nav-link {{ areActiveRoutes(['admin.Dashboard','admin.page1','admin.page2'])}}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Menu 1<i class="right fas fa-angle-left"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.page1') }}" class="nav-link {{ areActiveRoutes(['admin.page1'])}}"><i class="far fa-circle nav-icon"></i>
-                                <p>Page1</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.page2') }}" class="nav-link {{ areActiveRoutes(['admin.page2'])}}"><i class="far fa-circle nav-icon"></i>
-                                <p>Page2</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @foreach( config('adminMenu.menu') as $MenuList )
 
-                <li class="nav-item {{openMenu(['admin.Dashboard2','admin.page3','admin.page4'])}}">
-                    <a href="#" class="nav-link {{ areActiveRoutes(['admin.Dashboard2','admin.page3','admin.page4'])}}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Menu 2<i class="right fas fa-angle-left"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview">
+                    @if($MenuList['type'] == 'one')
                         <li class="nav-item">
-                            <a href="{{ route('admin.page3') }}" class="nav-link {{ areActiveRoutes(['admin.page3'])}}"><i class="far fa-circle nav-icon"></i>
-                                <p>Page3</p>
+                            <a href="{{ route($MenuList['url']) }}" class="nav-link  @if(Route::currentRouteName() == $MenuList['url']) active @endif ">
+                                @if(isset($MenuList['icon']))<i class="nav-icon {{$MenuList['icon']}}"></i>@endif
+                                <p>{{$MenuList['text']}}</p>
+
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.page4') }}" class="nav-link {{ areActiveRoutes(['admin.page4'])}}"><i class="far fa-circle nav-icon"></i>
-                                <p>Page4</p>
+                    @elseif($MenuList['type'] == 'many')
+
+                        <li class="nav-item
+                        @foreach($MenuList['submenu'] as $SubMenu)
+                        @if( Route::currentRouteName() == $SubMenu['url'] ) menu-open @endif
+                        @endforeach">
+
+                            <a href="#" class="nav-link
+                            @foreach($MenuList['submenu'] as $SubMenu)
+                            @if( Route::currentRouteName() == $SubMenu['url'] ) active @endif
+                            @endforeach">
+
+                                @if(isset($MenuList['icon']))<i class="nav-icon {{$MenuList['icon']}}"></i>@endif
+                                <p>{{$MenuList['text']}}<i class="right fas fa-angle-left"></i></p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                @foreach($MenuList['submenu'] as $SubMenu)
+                                    <li class="nav-item">
+                                        <a href="{{ route($SubMenu['url']) }}" class="nav-link @if(Route::currentRouteName() == $SubMenu['url']) active @endif ">
+                                            @if(isset($SubMenu['icon']))<i class="nav-icon {{$SubMenu['icon']}}"></i>@endif
+                                            <p>{{$SubMenu['text']}}</p>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </li>
-                    </ul>
-                </li>
+                    @endif
+
+            @endforeach
+
 
             </ul>
         </nav>
