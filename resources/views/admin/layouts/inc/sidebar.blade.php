@@ -19,33 +19,29 @@
 
         <!-- SidebarSearch Form -->
         @if(config('adminConfig.sidebar_navbar_search') == true)
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
         @endif
-        <!-- Sidebar Menu -->
+
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column {{sideBarNavUlStyle()}}" data-widget="treeview" role="menu" data-accordion="false">
-
                 @foreach( config('adminMenu.menu') as $MenuList )
-
                     @if($MenuList['type'] == 'one')
                         <li class="nav-item">
                             <a href="{{ route($MenuList['url']) }}" class="nav-link  @if(Route::currentRouteName() == $MenuList['url']) active @endif ">
                                 @if(isset($MenuList['icon']))<i class="nav-icon {{$MenuList['icon']}}"></i>@endif
                                 <p>{{$MenuList['text']}}</p>
-
                             </a>
                         </li>
                     @elseif($MenuList['type'] == 'many')
-
                         <li class="nav-item
                         @foreach($MenuList['submenu'] as $SubMenu)
                         @if( Route::currentRouteName() == $SubMenu['url'] ) menu-open @endif
@@ -72,12 +68,9 @@
                         </li>
                     @endif
 
-            @endforeach
-
-
+                @endforeach
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
+
     </div>
-    <!-- /.sidebar -->
 </aside>
