@@ -38,6 +38,22 @@
         </li>
         @endif
 
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link" data-toggle="dropdown">
+                {!! AdminHelper::detectFlag(LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['regional'])['flagIcon'] !!}
+
+            </a>
+            <div class="dropdown-menu dropdown-menu-right p-0">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    @if (thisCurrentLocale() != $localeCode)
+                        <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                            {!! AdminHelper::detectFlag($properties['regional'])['flagIcon'] !!} {{ $properties['native'] }}
+                        </a>
+                    @endif
+                @endforeach
+            </div>
+        </li>
+
         @if(config('adminConfig.top_navbar_messages') == true)
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">

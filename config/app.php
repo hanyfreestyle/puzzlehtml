@@ -180,9 +180,12 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        #'Image' => Intervention\Image\Facades\Image::class,
+        # 'HomeController'=> App\Http\Controllers\HomeController::class,
+        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+        'AdminHelper' => App\Helpers\AdminHelper::class,
     ])->toArray(),
 
 ];

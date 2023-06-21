@@ -78,4 +78,20 @@ if (!function_exists('areActiveRoutes')) {
         }
     }
 }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #    thisCurrentLocale
+if (!function_exists('thisCurrentLocale')) {
+    function thisCurrentLocale(){
+        return LaravelLocalization::getCurrentLocale();
+    }
+}
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # htmlArDir
+if (!function_exists('htmlArDir')) {
+    function htmlArDir()
+    {
+        $sendStyle = ' dir="'.LaravelLocalization::getCurrentLocaleDirection().'" ' ;
+        return $sendStyle;
+    }
+}
 ?>
