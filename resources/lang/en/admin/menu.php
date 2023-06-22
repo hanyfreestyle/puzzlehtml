@@ -1,5 +1,5 @@
 <?php
 return [
-    'Version' => 'النسخة',
+    'setting.config' => 'Settings',
 
 ];

@@ -12,12 +12,12 @@
     @if(config('adminConfig.pace_progress') == true and config('adminConfig.preloader') == false)
         <link rel="stylesheet" href="{{ defAdminAssets('plugins/pace-progress/themes/black/pace-theme-flat-top.css') }}">
     @endif
-    <link rel="stylesheet" href="{{defAdminAssets('css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{defAdminAssets('css/adminlte.css')}}">
 
     @if( thisCurrentLocale() == 'ar')
         <link rel="stylesheet" href="{{ defAdminAssets('rtl/css/adminlte-rtl.css') }}">
         <link rel="stylesheet" href="{{ defAdminAssets('rtl/css/custom.css') }}">
-        <link rel="stylesheet" href="{{ defAdminAssets('rtl/custom_ar.css') }}">
+        <link rel="stylesheet" href="{{ defAdminAssets('rtl/css/custom_ar.css') }}">
     @endif
 </head>
 

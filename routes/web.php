@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +29,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::get('/Page1', [AdminController::class, 'blank'])->name('page1');
         Route::get('/Page2', [AdminController::class, 'blank'])->name('page2');
 
+        Route::get('/config/webConfig', [SettingsController::class, 'index'])->name('config.web');
         Route::get('/Config/Env', [AdminController::class, 'blank'])->name('config.env');
         Route::get('/Config/Photo', [AdminController::class, 'blank'])->name('config.photo');
-        Route::get('/Config/Web', [AdminController::class, 'blank'])->name('config.web');
+
 
         Route::get('/Config/Env2', [AdminController::class, 'blank'])->name('config.env2');
         Route::get('/Config/Photo2', [AdminController::class, 'blank'])->name('config.photo2');

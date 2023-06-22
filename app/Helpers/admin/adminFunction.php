@@ -1,4 +1,10 @@
 <?php
+if (!function_exists('getTrans')) {
+    function getTrans($name)
+    {
+        return  "dddddddddddd";
+    }
+}
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #    static_admin_asset
 if (!function_exists('defAdminAssets')) {

@@ -14,9 +14,10 @@ return [
             'icon'=>'fas fa-tachometer-alt'
         ],
         [
+            'view'=>true,
             'type'=>'many',
-            'text'=> 'Settings',
-            'icon'=>'fas  fa-home',
+            'lang'=> 'admin/menu.setting.config',
+            'icon'=>'fas fa-cogs',
             'submenu'=>[
                 ['text'=> 'Web','url'=> 'admin.config.web'],
                 ['text'=> 'Photo','url'=> 'admin.config.photo'],

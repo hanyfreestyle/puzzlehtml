@@ -1,6 +1,6 @@
 <?php
 return [
-    'Version' => 'النسخة',
+    'setting.config' => 'الاعدادات',
 
 ];
 
