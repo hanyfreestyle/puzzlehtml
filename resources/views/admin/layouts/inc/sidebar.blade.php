@@ -71,6 +71,5 @@
                 @endforeach
             </ul>
         </nav>
-
     </div>
 </aside>

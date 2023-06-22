@@ -1,0 +1,25 @@
+.back-to-top {
+    bottom: 2.7rem!important;
+}
+.main-footer {
+    background-color: #343a40;
+    border-color: #4b545c;
+}
+
+
+.liveClock .nav-link{
+/*
+    padding: 0px!important;
+    font-size: .9rem;
+    line-height: 2.3rem;
+ */
+}
+
+
+.liveClock_span{
+    color: rgba(255,255,255,.75)!important;
+    padding: .5rem 1rem !important;
+}
+.required_Span{color: red!important; font-weight: bold}
+
+
