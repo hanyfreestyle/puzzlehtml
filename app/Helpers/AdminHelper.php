@@ -14,8 +14,7 @@ class AdminHelper{
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #       detectFlag
-    public static function detectFlag($regional)
-    {
+    public static function detectFlag($regional){
         $data = [];
         if (!empty($regional)) {
             $regional = Str::lower($regional);
@@ -34,8 +33,7 @@ class AdminHelper{
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     returnPageDate
-    public static function returnPageDate($controllerName)
-    {
+    public static function returnPageDate($controllerName){
         $data = [];
         $data['ControllerName'] = $controllerName;
         $data['TitlePage'] = __(ucfirst($controllerName) . '.main.title');
@@ -52,9 +50,9 @@ class AdminHelper{
 
         return $data;
     }
-
-    public static function error($value, $name, $label)
-    {
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     error
+    public static function error($value, $name, $label){
         $newName = trim(str_replace('_', " ", $name));
         return str_replace($newName, $label, $value);
     }

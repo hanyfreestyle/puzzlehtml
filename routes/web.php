@@ -25,6 +25,7 @@ Auth::routes();
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
     Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
+
         Route::get('/Home', [AdminController::class, 'index'])->name('Dashboard');
         Route::get('/Page1', [AdminController::class, 'blank'])->name('page1');
         Route::get('/Page2', [AdminController::class, 'blank'])->name('page2');

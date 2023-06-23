@@ -12,7 +12,7 @@ return [
     'html_ar_dir' => true ,
     'login_logo_img_view'=> true,
    // 'login_logo_img' => 'assets/admin/img/login_logo.png' ,
-    'login_logo_img' => defAdminAssets('/img/login_logo.png') ,
+   // 'login_logo_img' => defAdminAssets('/img/login_logo.png') ,
     'pace_progress'=> true,
     'pace_progress_style'=> 'pace-primary',
     'preloader'=> false,

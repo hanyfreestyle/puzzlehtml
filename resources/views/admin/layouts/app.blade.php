@@ -12,8 +12,8 @@
     @if(config('adminConfig.pace_progress') == true and config('adminConfig.preloader') == false)
         <link rel="stylesheet" href="{{ defAdminAssets('plugins/pace-progress/themes/black/pace-theme-flat-top.css') }}">
     @endif
-    <link rel="stylesheet" href="{{defAdminAssets('css/adminlte.css')}}">
-
+    <link rel="stylesheet" href="{{ defAdminAssets('css/adminlte.css') }}">
+    <link rel="stylesheet" href="{{ defAdminAssets('css/custom_admin.css') }}">
     @if( thisCurrentLocale() == 'ar')
         <link rel="stylesheet" href="{{ defAdminAssets('rtl/css/adminlte-rtl.css') }}">
         <link rel="stylesheet" href="{{ defAdminAssets('rtl/css/custom.css') }}">
@@ -31,9 +31,9 @@
 
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper"><div class="content py-4">
         @yield('content')
-    </div>
+    </div></div>
 
 
     <!-- Control Sidebar -->

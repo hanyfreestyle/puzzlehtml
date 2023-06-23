@@ -16,10 +16,10 @@ return [
         [
             'view'=>true,
             'type'=>'many',
-            'lang'=> 'admin/menu.setting.config',
+            'text'=> 'admin/menu.setting.config',
             'icon'=>'fas fa-cogs',
             'submenu'=>[
-                ['text'=> 'Web','url'=> 'admin.config.web'],
+                ['text'=> 'admin/menu.setting.config.web','url'=> 'admin.config.web'],
                 ['text'=> 'Photo','url'=> 'admin.config.photo'],
                 ['text'=> 'Env','url'=> 'admin.config.env'],
             ],

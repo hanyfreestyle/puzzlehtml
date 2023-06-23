@@ -8,6 +8,13 @@ class SettingsController extends Controller
 {
     public function index()
     {
-        return view('admin.setting.settingWeb');
+
+        $pageData =[
+            'ViewType'=>"Page",
+            'TitlePage'=> __('admin/menu.setting.config.web'),
+        ];
+        return view('admin.setting.settingWeb')
+            ->with(compact('pageData'));
+
     }
 }

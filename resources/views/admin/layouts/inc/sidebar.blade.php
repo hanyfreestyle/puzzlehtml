@@ -55,11 +55,7 @@
 
                                     @if(isset($MenuList['icon']))<i class="nav-icon {{$MenuList['icon']}}"></i>@endif
                                     <p>
-                                        @if(isset($MenuList['text']))
-                                            {{$MenuList['text']}}
-                                        @elseif(isset($MenuList['lang']))
-                                            {{__($MenuList['lang'])}}
-                                        @endif
+                                        {{__($MenuList['text'])}}
                                         @if( thisCurrentLocale() == 'ar')
                                             <i class="right fas fa-angle-left"></i>
                                         @else
@@ -72,7 +68,9 @@
                                         <li class="nav-item">
                                             <a href="{{ route($SubMenu['url']) }}" class="nav-link @if(Route::currentRouteName() == $SubMenu['url']) active @endif ">
                                                 @if(isset($SubMenu['icon']))<i class="nav-icon {{$SubMenu['icon']}}"></i>@endif
-                                                <p>{{$SubMenu['text']}}</p>
+                                                <p>
+                                                    {{__($SubMenu['text'])}}
+                                                </p>
                                             </a>
                                         </li>
                                     @endforeach

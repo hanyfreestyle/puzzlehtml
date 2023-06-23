@@ -21,5 +21,6 @@
     padding: .5rem 1rem !important;
 }
 .required_Span{color: red!important; font-weight: bold}
-
+.dir_ar{direction:rtl!important;}
+.dir_en{direction:ltr!important;}
 
