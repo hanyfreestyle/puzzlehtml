@@ -13,6 +13,7 @@ class FormInput extends Component
     public $step, $max, $maxlength, $pattern;
     public $requiredSpan ;
     public $horizontalLabel ;
+    public $colrow;
 
     public function __construct(
         $type = 'text', $id = null, $name = null,
@@ -21,7 +22,8 @@ class FormInput extends Component
         $value = null, $disabled = false, $required = false,
         $step = null, $max = null, $maxlength = null, $pattern = null,
         $requiredSpan = true,
-        $horizontalLabel =true
+        $colrow ="",
+        $horizontalLabel =false
     )
     {
         $this->type = $type;
@@ -40,6 +42,7 @@ class FormInput extends Component
         $this->pattern = $pattern;
         $this->requiredSpan = $requiredSpan;
         $this->horizontalLabel = $horizontalLabel;
+        $this->colrow = $colrow;
     }
 
 

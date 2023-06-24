@@ -1,4 +1,4 @@
-<div class="form-group {{($horizontalLabel) ? 'row' : '' }} {{$topclass}}">
+<div class="form-group {{$colrow}} {{($horizontalLabel) ? 'row' : '' }} {{$topclass}}">
     @if ($label != '')
         <div class="{{($horizontalLabel) ? 'col-sm-5' : '' }}">
             <label class="col-form-label {{($horizontalLabel) ? 'font-weight-normal' : '' }}" for="{{$id}}">{{$label}}

@@ -30,7 +30,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::get('/Page1', [AdminController::class, 'blank'])->name('page1');
         Route::get('/Page2', [AdminController::class, 'blank'])->name('page2');
 
-        Route::get('/config/webConfig', [SettingsController::class, 'index'])->name('config.web');
+        Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('config.web');
+        Route::post('/config/webConfigUpdate', [SettingsController::class, 'webConfigUpdate'])->name('webConfigUpdate');
         Route::get('/Config/Env', [AdminController::class, 'blank'])->name('config.env');
         Route::get('/Config/Photo', [AdminController::class, 'blank'])->name('config.photo');
 

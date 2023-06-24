@@ -1,62 +1,48 @@
 @extends('admin.layouts.app')
 
 @section('content')
+
     <x-breadcrumb-def :pageData="$pageData"/>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <x-ui-card title="{{__('admin.seo_title')}}">
-
-                    <x-form-input type="text"
-                                  label="عربى"
-                                  name="MIN_G_T"
-                                  :horizontalLabel="true"
-                                  :requiredSpan="true"
-                                  value="{{old('MIN_G_T', env('MIN_G_T'))}}" inputclass="dir_ar"/>
-
-                    <x-form-input type="text"
-                                  label="En"
-                                  name="MIN_G_T"
-                                  :horizontalLabel="false"
-                                  :requiredSpan="false"
-                                  value="{{old('MIN_G_T', env('MIN_G_T'))}}" inputclass="dir_en"/>
+    <form action="{{route('admin.webConfigUpdate')}}" method="post">
+        @csrf
 
 
-                    <x-form-textarea
-                        label="hany"
-                    />
-
-
-
-                    <x-form-submit text="Add" />
-                </x-ui-card>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-
-
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h5 class="m-0">Featured</h5>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title">Special title treatment</h6>
-
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <x-ui-card title="{{__('admin/def.web_setting')}}">
 
 
 
 
-                    </div>
+                    </x-ui-card>
+                </div>
+                <div class="col-lg-12">
+                    <x-ui-card title="{{__('admin/def.social_media')}}" :add-form-error="false">
+                        <div class="row">
+
+                            <x-form-input label="Facebook" name="facebook" :requiredSpan="true" colrow="col-lg-6"
+                                          value="{{old('facebook',$setting->facebook)}}" inputclass="dir_en"/>
+
+                            <x-form-input label="Youtube" name="youtube" :requiredSpan="true" colrow="col-lg-6"
+                                          value="{{old('youtube',$setting->youtube)}}" inputclass="dir_en"/>
+
+                            <x-form-input label="Twitter" name="twitter" :requiredSpan="true" colrow="col-lg-6"
+                                          value="{{old('twitter',$setting->twitter)}}" inputclass="dir_en"/>
+
+                            <x-form-input label="Instagram" name="instagram" :requiredSpan="true" colrow="col-lg-6"
+                                          value="{{old('instagram',$setting->instagram)}}" inputclass="dir_en"/>
+
+                            <x-form-input label="Google Api" name="google_api" :requiredSpan="true" colrow="col-lg-12"
+                                          value="{{old('google_api',$setting->google_api)}}" inputclass="dir_en"/>
+
+                        </div>
+                    </x-ui-card>
                 </div>
             </div>
-            <!-- /.col-md-6 -->
         </div>
-        <!-- /.row -->
-    </div>
-
-
+        <div class="container-fluid">
+            <x-form-submit text="Edit" />
+        </div>
+    </form>
 @endsection
