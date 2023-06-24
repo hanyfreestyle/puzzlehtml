@@ -31,7 +31,7 @@
 
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper"><div class="content py-4">
+    <div class="content-wrapper"><div class="content">
         @yield('content')
     </div></div>
 

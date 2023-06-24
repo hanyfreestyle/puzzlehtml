@@ -2,10 +2,10 @@
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>{{$pageData['TitlePage']}}</h1>
+            <h1 class="def_breadcrumb_h1 text-lg font-weight-lighter">{{$pageData['TitlePage']}}</h1>
         </div>
         <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <ol class="breadcrumb float-sm-right text-md">
                 <li class="breadcrumb-item"><a href="{{route('admin.Dashboard')}}">{{__('general.breadcrumb.home')}}</a></li>
                 @if ($pageData['ViewType'] == 'List')
                     <li class="breadcrumb-item active">{{$pageData['ListPageName']}}</li>
