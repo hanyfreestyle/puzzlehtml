@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('web_url')->nullable();
             $table->integer('web_status')->default('1');
             $table->string('logo')->nullable();

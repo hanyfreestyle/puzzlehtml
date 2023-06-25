@@ -24,4 +24,19 @@
 .dir_ar{direction:rtl!important;}
 .dir_en{direction:ltr!important;}
 
+.card-body{padding-top:10px; padding-bottom:30px;}
+
+.form-control.is_invalid_ar {
+  padding-left: 0.75rem!important;
+  padding-right: 2.25rem!important;
+  background-position: right calc(.375em + .1875rem) center!important; 
+}
+
+
+ textarea.form-control.is_invalid_area_en {
+  padding-right: 2.25rem;
+  background-position: top calc(0.375em + 0.1875rem) left calc(0.375em + 0.1875rem)!important; 
+}
+ 
+
 

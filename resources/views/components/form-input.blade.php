@@ -1,7 +1,7 @@
 <div class="form-group {{$colrow}} {{($horizontalLabel) ? 'row' : '' }} {{$topclass}}">
     @if ($label != '')
         <div class="{{($horizontalLabel) ? 'col-sm-5' : '' }}">
-            <label class="col-form-label {{($horizontalLabel) ? 'font-weight-normal' : '' }}" for="{{$id}}">{{$label}}
+            <label class="col-form-label font-weight-light {{($horizontalLabel) ? 'font-weight-normal' : '' }}" for="{{$id}}">{{$label}}
                 @if($requiredSpan)
                     <span class="required_Span">*</span>
                 @endif

@@ -12,15 +12,17 @@ class FormTextarea extends Component
     public $rows;
     public $requiredSpan ;
     public $horizontalLabel ;
+    public $value;
 
     public function __construct(
         $id = null, $name = null,
         $label = 'Input Label', $placeholder = null,
         $topclass = null, $inputclass = null,
         $disabled = false, $required = false,
-        $rows = '10',
-        $requiredSpan = true,
-        $horizontalLabel =true
+        $rows = '5',
+        $requiredSpan = false,
+        $value = null,
+        $horizontalLabel =false
     )
     {
         $this->id = $id;
@@ -34,6 +36,7 @@ class FormTextarea extends Component
         $this->rows = $rows;
         $this->requiredSpan = $requiredSpan;
         $this->horizontalLabel = $horizontalLabel;
+        $this->value = $value;
     }
 
     public function render()
