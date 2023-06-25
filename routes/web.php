@@ -25,6 +25,7 @@ Auth::routes();
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
     Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
+
         Route::get('/', [AdminController::class, 'index'])->name('Dashboard');
         Route::get('/Home', [AdminController::class, 'index'])->name('Dashboard');
         Route::get('/Page1', [AdminController::class, 'blank'])->name('page1');
@@ -32,13 +33,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
 
         Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('config.web');
         Route::post('/config/webConfigUpdate', [SettingsController::class, 'webConfigUpdate'])->name('webConfigUpdate');
-        Route::get('/Config/Env', [AdminController::class, 'blank'])->name('config.env');
-        Route::get('/Config/Photo', [AdminController::class, 'blank'])->name('config.photo');
 
+        Route::get('/Config/photoSize', [AdminController::class, 'blank'])->name('config.photoSize');
+        Route::get('/Config/defPhoto', [AdminController::class, 'blank'])->name('config.defPhoto');
+        Route::get('/Config/metaTags', [AdminController::class, 'blank'])->name('config.metaTags');
 
-        Route::get('/Config/Env2', [AdminController::class, 'blank'])->name('config.env2');
-        Route::get('/Config/Photo2', [AdminController::class, 'blank'])->name('config.photo2');
-        Route::get('/Config/Web2', [AdminController::class, 'blank'])->name('config.web2');
+/*
+ *                 ['text'=> 'admin.menu.setting_web','url'=> 'admin.config.web'],
+                ['text'=> 'admin.menu.setting_photo','url'=> 'admin.'],
+                ['text'=> 'admin.menu.setting_def_photo','url'=> 'admin.'],
+                ['text'=> 'admin.menu.setting_meta_tags','url'=> 'admin.config.'],
+ */
+
 
     });
 });

@@ -16,12 +16,13 @@ return [
         [
             'view'=>true,
             'type'=>'many',
-            'text'=> 'admin/menu.setting.config',
+            'text'=> 'admin.menu.setting',
             'icon'=>'fas fa-cogs',
             'submenu'=>[
-                ['text'=> 'admin/menu.setting.config.web','url'=> 'admin.config.web'],
-                ['text'=> 'Photo','url'=> 'admin.config.photo'],
-                ['text'=> 'Env','url'=> 'admin.config.env'],
+                ['text'=> 'admin.menu.setting_web','url'=> 'admin.config.web'],
+                ['text'=> 'admin.menu.setting_meta_tags','url'=> 'admin.config.metaTags'],
+                ['text'=> 'admin.menu.setting_photo','url'=> 'admin.config.photoSize'],
+                ['text'=> 'admin.menu.setting_def_photo','url'=> 'admin.config.defPhoto'],
             ],
         ],
         [
