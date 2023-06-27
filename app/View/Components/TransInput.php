@@ -15,6 +15,8 @@ class TransInput extends Component
     public $dir ;
     public $newreqname ;
     public $reqspan ;
+    public $placeholder ;
+    public $placeholderPrint ;
     public function __construct(
         $label=null,
         $name,
@@ -22,6 +24,8 @@ class TransInput extends Component
         $value,
         $dir="null",
         $newreqname = "",
+        $placeholderPrint = "",
+        $placeholder = false,
         $reqspan = true,
     )
     {
@@ -31,7 +35,15 @@ class TransInput extends Component
         $this->reqname = $reqname;
         $this->dir = $dir;
         $this->reqspan = $reqspan;
+
         $this->newreqname =  trim(str_replace('_', " ", $this->reqname)) ;
+
+        $this->placeholder = $placeholder;
+        if($this->placeholder == true){
+            $this->placeholderPrint = $this->label;
+        }
+
+
     }
 
     /**

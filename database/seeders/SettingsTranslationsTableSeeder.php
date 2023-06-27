@@ -17,19 +17,19 @@ class SettingsTranslationsTableSeeder extends Seeder
         $setting_ar = [
             'setting_id'=>"1",
             'locale'=>"ar",
-            'name'=>"الاسم",
-            'g_title'=>"العنوان",
-            'g_des'=>"الوصف",
-            'closed_mass'=>"رسالة الاغلاق",
+            'name'=>"اسم الموقع يكتب هنا",
+            'g_title'=>"عنوان الصفحة يكتب هنا",
+            'g_des'=>"وصف الصفحة يكتب هنا",
+            'closed_mass'=>"رسالة الاغلاق تكتب هنا",
         ];
 
         $setting_en = [
             'setting_id'=>"1",
             'locale'=>"en",
-            'name'=>"name",
-            'g_title'=>"g_title",
-            'g_des'=>"g_des",
-            'closed_mass'=>"closed_mass",
+            'name'=>"The name of the site is written here",
+            'g_title'=>"The title of the site is written here",
+            'g_des'=>"The description of the site is written here",
+            'closed_mass'=>"The closed mass of the site is written here ",
         ];
 
         $countSetting =  SettingTranslation::all()->count();
@@ -37,6 +37,5 @@ class SettingsTranslationsTableSeeder extends Seeder
             SettingTranslation::create($setting_ar);
             SettingTranslation::create($setting_en);
         }
-
     }
 }

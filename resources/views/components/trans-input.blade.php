@@ -1,11 +1,14 @@
 <div class="form-group">
-    <label class="col-form-label font-weight-light">{{$label}}
-       @if($reqspan)
-            <span class="required_Span">*</span>
-       @endif
-    </label>
+    @if($placeholder == false)
+        <label class="col-form-label font-weight-light">{{$label}}
+            @if($reqspan)
+                <span class="required_Span">*</span>
+            @endif
+        </label>
+    @endif
     <input type="text" class="form-control dir_{{$dir}} @error($reqname) is-invalid is_invalid_{{$dir}} @enderror"
            name="{{$name}}"
+           placeholder="{{$placeholderPrint}}"
            value="{{$value}}">
 
     @if($errors->has($reqname))

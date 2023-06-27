@@ -26,7 +26,7 @@ class SettingsTableSeeder extends Seeder
             'youtube'=>"#",
             'twitter'=>"#",
             'instagram'=>"#",
-            'google_api'=>"",
+            'google_api'=>"#",
         ];
 
         $countSetting =  Setting::all()->count();

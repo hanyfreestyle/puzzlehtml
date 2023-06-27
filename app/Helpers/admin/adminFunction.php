@@ -100,4 +100,61 @@ if (!function_exists('htmlArDir')) {
         return $sendStyle;
     }
 }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # getButSize
+if (!function_exists('getButSize')) {
+    function getButSize($val)
+    {
+        if($val == 's'){
+            $sendStyle = "btn-sm";
+        }else{
+            $sendStyle = "btn-sm";
+        }
+        return $sendStyle;
+    }
+}
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # getBgColor
+if (!function_exists('getBgColor')) {
+    function getBgColor($val)
+    {
+        switch ($val) {
+            case 'def':
+                $sendColor = "default";
+                break;
+            case 'dark':
+                $sendColor = "dark";
+                break;
+            case 'p':
+                $sendColor = "primary";
+                break;
+            case 'se':
+                $sendColor = "secondary";
+                break;
+            case 's':
+                $sendColor = "success";
+                break;
+            case 'i':
+                $sendColor = "info";
+                break;
+              case 'd':
+                $sendColor = "danger";
+                break;
+            case 'w':
+                $sendColor = "warning";
+                break;
+            case 'l':
+                $sendColor = "light";
+                break;
+            default:
+                $sendColor = "dark";
+        }
+        return $sendColor;
+    }
+}
+
+
 ?>

@@ -15,6 +15,8 @@ class TransTextArea extends Component
     public $dir ;
     public $newreqname ;
     public $reqspan ;
+    public $placeholder ;
+    public $placeholderPrint ;
 
     public function __construct(
         $label=null,
@@ -24,6 +26,8 @@ class TransTextArea extends Component
         $dir="null",
         $newreqname = "",
         $reqspan = true,
+        $placeholderPrint = "",
+        $placeholder = false,
     )
     {
         $this->label = $label;
@@ -33,6 +37,12 @@ class TransTextArea extends Component
         $this->dir = $dir;
         $this->reqspan = $reqspan;
         $this->newreqname =  trim(str_replace('_', " ", $this->reqname)) ;
+
+        $this->placeholder = $placeholder;
+        if($this->placeholder == true){
+            $this->placeholderPrint = $this->label;
+        }
+
     }
 
     /**

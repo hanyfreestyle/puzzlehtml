@@ -33,20 +33,20 @@ class AdminHelper{
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     returnPageDate
-    public static function returnPageDate($controllerName){
+    public static function returnPageDate($controllerName,$prefix='admin.'){
         $data = [];
         $data['ControllerName'] = $controllerName;
-        $data['TitlePage'] = __(ucfirst($controllerName) . '.main.title');
+        $data['TitlePage'] = __($prefix.ucfirst($controllerName) . '.main.title');
 
-        $data['ListPageName'] = __(ucfirst($controllerName) . '.main.listPage');
+        $data['ListPageName'] = __($prefix.ucfirst($controllerName) . '.main.listPage');
         $data['ListPageUrl'] = route(ucfirst($controllerName) . '.index');
 
 
-        $data['AddPageName'] = __(ucfirst($controllerName) . '.main.addPage');
+        $data['AddPageName'] = __($prefix.ucfirst($controllerName) . '.main.addPage');
         $data['AddPageUrl'] = route(ucfirst($controllerName) . '.Create');
 
 
-        $data['EditPageName'] = __(ucfirst($controllerName) . '.main.editPage');
+        $data['EditPageName'] = __($prefix.ucfirst($controllerName) . '.main.editPage');
 
         return $data;
     }

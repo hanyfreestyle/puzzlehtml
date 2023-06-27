@@ -27,3 +27,7 @@ function display_c7(){
     var refresh=1000; // Refresh rate in milli seconds
     mytime=setTimeout('display_ct7()',refresh)
 }
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

@@ -20,9 +20,9 @@ return [
             'icon'=>'fas fa-cogs',
             'submenu'=>[
                 ['text'=> 'admin.menu.setting_web','url'=> 'admin.config.web'],
-                ['text'=> 'admin.menu.setting_meta_tags','url'=> 'admin.config.metaTags'],
-                ['text'=> 'admin.menu.setting_photo','url'=> 'admin.config.photoSize'],
-                ['text'=> 'admin.menu.setting_def_photo','url'=> 'admin.config.defPhoto'],
+                ['text'=> 'admin.menu.setting_meta_tags','url'=> 'Meta.index'],
+               # ['text'=> 'admin.menu.setting_photo','url'=> 'admin.config.photoSize'],
+               # ['text'=> 'admin.menu.setting_def_photo','url'=> 'admin.config.defPhoto'],
             ],
         ],
         [

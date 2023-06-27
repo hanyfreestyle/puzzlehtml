@@ -24,6 +24,28 @@ return [
     ],
 
 
+    'Meta'=>[
+        "main" => [
+            "title" => 'ميتا تاج',
+            "listPage" => 'عرض البيانات',
+            "addPage" =>  'اضافة جديدة',
+            "editPage" => 'تعديل'
+        ],
+    ],
+
+    "metaForm" => [
+        'g_title_ar'=> 'عنوان الصفحة',
+        'g_title_en'=> 'Page Title',
+        'g_des_ar'=> 'وصف الصفحة',
+        'g_des_en'=> 'Page Description',
+        'breadcrumb_ar'=> ' وسام التنقل',
+        'breadcrumb_en'=> 'Breadcrumb ',
+        'bodyH1_ar'=> 'عنوان H1',
+        'bodyH1_en'=> 'H1 Tag ',
+
+    ],
+
+
 
 
 ];

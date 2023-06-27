@@ -31,7 +31,11 @@ return [
     ],
 
     "buttonAction" => [
-        "update" => 'تحديث'
+        "add" => 'اضافة',
+        "edit" => 'تعديل',
+        "delete" => 'حذف',
+        "serach" => 'بحث',
+        "update" => 'تحديث',
     ],
 
     "statusList" => [
