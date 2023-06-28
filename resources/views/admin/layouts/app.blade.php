@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/bs-stepper/css/bs-stepper.min.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/dropzone/min/dropzone.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/admin/') }}">
+
     <link rel="stylesheet" href="{{ defAdminAssets('css/adminlte.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('css/custom_admin.css') }}">
     @if( thisCurrentLocale() == 'ar')
@@ -75,9 +78,9 @@
 <script src="{{defAdminAssets('plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
 <script src="{{defAdminAssets('plugins/bs-stepper/js/bs-stepper.min.js')}}"></script>
 <script src="{{defAdminAssets('plugins/dropzone/min/dropzone.min.js')}}"></script>
+
 <script src="{{defAdminAssets('js/adminlte.min.js')}}"></script>
 <script src="{{defAdminAssets('js/custom_file.js') }}"></script>
-
 
 <script>
     $(function () {

@@ -2,7 +2,6 @@
 
 @section('content')
     <x-breadcrumb-def :pageData="$pageData"/>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12" >
@@ -62,13 +61,7 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="d-flex justify-content-center">
-        {{ $rowData->links('pagination::bootstrap-4') }}
+        {{ $rowData->links() }}
     </div>
-
-
-
 @endsection

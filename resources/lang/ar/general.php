@@ -2,6 +2,8 @@
 return [
 
     'status'=>'الحالة',
+    'icon'=>'Icon',
+    'photo'=>'صورة',
 
     "table" => [
         "action" => 'الاجراء',
@@ -24,6 +26,8 @@ return [
     ],
 
     "form" => [
+        "name_ar" => 'الاسم',
+        "name_en" => 'Name',
         "button_Dir" => 'left',
         "button_Add" => 'اضافة جديدة',
         "button_Submit" => 'اضافة',

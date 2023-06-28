@@ -20,7 +20,7 @@
             <x-form-input label="# CatId" name="cat_id" :requiredSpan="true" colrow="col-lg-4"
                           value="{{old('cat_id',$oldData->cat_id)}}" inputclass="dir_en"/>
 
-            <x-meta-tage-filde :body-h1="false" :breadcrumb="false"  :old-data="$oldData" :placeholder="false" />
+            <x-meta-tage-filde :body-h1="true" :breadcrumb="true"  :old-data="$oldData" :placeholder="false" />
 
             <div class="container-fluid">
                 <x-form-submit text="{{$pageData['ViewType']}}" />

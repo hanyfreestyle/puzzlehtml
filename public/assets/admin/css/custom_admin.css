@@ -37,6 +37,26 @@
   padding-right: 2.25rem;
   background-position: top calc(0.375em + 0.1875rem) left calc(0.375em + 0.1875rem)!important; 
 }
+
+
+
+.popover-body{
+direction:ltr!important
+}
+
+#Hanytarget{
+width:150px;
+font-size:40px;
+padding:0px;
+}
+
+#Hanytarget i{
+margin-right:20px;
+margin-left:20px;
+font-size:35px;
+
+
+}
  
 
 

@@ -3,6 +3,7 @@ return [
     'version' => 'النسخة',
     'copyRight' => 'جميع الحقوق محفوظة',
 
+
     'menu'=>[
         'dashboardMenu' => 'الصفحة الرئيسية',
         'setting'=> 'الاعدادات',
@@ -42,10 +43,16 @@ return [
         'breadcrumb_en'=> 'Breadcrumb ',
         'bodyH1_ar'=> 'عنوان H1',
         'bodyH1_en'=> 'H1 Tag ',
-
     ],
 
-
+    'amenity'=>[
+        "main" => [
+            "title" => 'المميزات',
+            "listPage" => 'عرض البيانات',
+            "addPage" =>  'اضافة جديدة',
+            "editPage" => 'تعديل'
+        ],
+    ],
 
 
 ];

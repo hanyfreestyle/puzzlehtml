@@ -8,13 +8,14 @@ return [
             'icon'=>'fas fa-home'
         ],
         [
+            'view'=>true,
             'type'=>'one',
-            'text'=> 'Page 2',
-            'url'=> 'admin.page2',
+            'text'=> 'Amenitys',
+            'url'=> 'amenity.index',
             'icon'=>'fas fa-tachometer-alt'
         ],
         [
-            'view'=>true,
+            'view'=>false,
             'type'=>'many',
             'text'=> 'admin.menu.setting',
             'icon'=>'fas fa-cogs',

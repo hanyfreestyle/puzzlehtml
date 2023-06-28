@@ -36,17 +36,17 @@ class AdminHelper{
     public static function returnPageDate($controllerName,$prefix='admin.'){
         $data = [];
         $data['ControllerName'] = $controllerName;
-        $data['TitlePage'] = __($prefix.ucfirst($controllerName) . '.main.title');
+        $data['TitlePage'] = __($prefix.($controllerName) . '.main.title');
 
-        $data['ListPageName'] = __($prefix.ucfirst($controllerName) . '.main.listPage');
-        $data['ListPageUrl'] = route(ucfirst($controllerName) . '.index');
-
-
-        $data['AddPageName'] = __($prefix.ucfirst($controllerName) . '.main.addPage');
-        $data['AddPageUrl'] = route(ucfirst($controllerName) . '.Create');
+        $data['ListPageName'] = __($prefix.($controllerName) . '.main.listPage');
+        $data['ListPageUrl'] = route(($controllerName) . '.index');
 
 
-        $data['EditPageName'] = __($prefix.ucfirst($controllerName) . '.main.editPage');
+        $data['AddPageName'] = __($prefix.($controllerName) . '.main.addPage');
+        $data['AddPageUrl'] = route(($controllerName) . '.create');
+
+
+        $data['EditPageName'] = __($prefix.($controllerName) . '.main.editPage');
 
         return $data;
     }
