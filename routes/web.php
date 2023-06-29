@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AmenityController;
+use App\Http\Controllers\admin\DefPhotoController;
 use App\Http\Controllers\admin\MetaTagController;
 use App\Http\Controllers\admin\SettingsController;
 use Illuminate\Support\Facades\Route;
@@ -31,8 +32,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::get('/Home', [AdminController::class, 'index'])->name('admin.Dashboard');
 
 
-       Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('config.web.index');
-       Route::post('/config/webConfigUpdate', [SettingsController::class, 'webConfigUpdate'])->name('admin.webConfigUpdate');
+        Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('config.web.index');
+        Route::post('/config/webConfigUpdate', [SettingsController::class, 'webConfigUpdate'])->name('admin.webConfigUpdate');
 
         Route::get('/metaTags', [MetaTagController::class,'index'])->name('config.meta.index');
         Route::get('/metaTags/create', [MetaTagController::class,'create'])->name('config.meta.create');
@@ -40,6 +41,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::get('/metaTags/edit/{id}', [MetaTagController::class,'edit'])->name('config.meta.edit');
         Route::post('/metaTags/Update/{id}', [MetaTagController::class,'storeUpdate'])->name('config.meta.update');
         Route::delete('/metaTags/delete/{id}', [MetaTagController::class,'delete'])->name('config.meta.destroy');
+
+        Route::get('/defPhotos', [DefPhotoController::class,'index'])->name('config.defPhoto.index');
+        Route::get('/defPhotos/create', [DefPhotoController::class,'create'])->name('config.defPhoto.create');
+        Route::post('/defPhotos/store/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.defPhoto.store');
+        Route::get('/defPhotos/edit/{id}', [DefPhotoController::class,'edit'])->name('config.defPhoto.edit');
+        Route::post('/defPhotos/Update/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.defPhoto.update');
+        Route::delete('/defPhotos/delete/{id}', [DefPhotoController::class,'delete'])->name('config.defPhoto.destroy');
 
 
         Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');

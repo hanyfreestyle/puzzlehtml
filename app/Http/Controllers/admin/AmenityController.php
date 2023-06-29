@@ -6,10 +6,8 @@ use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 use App\Models\admin\Amenity;
 use App\Http\Requests\Admin\AmenityRequest;
-use App\Http\Requests\Admin\UpdateAmenityRequest;
 use App\Models\admin\AmenityTranslation;
-use App\Models\User;
-use Illuminate\Http\Request;
+
 
 class AmenityController extends AdminMainController
 {
