@@ -7,13 +7,22 @@ use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\DefPhotoRequest;
 use App\Models\admin\Amenity;
 use App\Models\admin\DefPhoto;
+use Intervention\Image\Facades\Image;
 
 
 class DefPhotoController extends AdminMainController
 {
     public $controllerName = 'defPhoto';
 
+
+
     public function index()
+    {
+        $photoPath = defAdminAssets('hany.jpg');
+        $img = Image::make($photoPath)->resize(300, 200);
+        return $img->response('jpg');
+    }
+    public function index_xx()
     {
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
         $rowData = DefPhoto::orderBy('id','desc')->paginate(20);
