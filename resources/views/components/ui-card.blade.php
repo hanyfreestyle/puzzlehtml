@@ -51,7 +51,6 @@
                 {{__('general.alertMass.formHasError')}}
             </div>
         @endif
-
         {{$slot}}
     </div>
 

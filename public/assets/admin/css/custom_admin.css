@@ -21,8 +21,12 @@
     padding: .5rem 1rem !important;
 }
 .required_Span{color: red!important; font-weight: bold}
-.dir_ar{direction:rtl!important;}
-.dir_en{direction:ltr!important;}
+.dir_ar{direction:rtl!important;text-align:right}
+.dir_en{direction:ltr!important; text-align:left; width:100%}
+
+.label_ar{direction:rtl!important;text-align:right}
+.label_en{direction:ltr!important; text-align:left; width:100%}
+
 
 .card-bodyX{padding-top:10px; padding-bottom:30px;}
 
@@ -44,19 +48,32 @@
 direction:ltr!important
 }
 
-#Hanytarget{
+#iconpicker_target{
 width:150px;
 font-size:40px;
-padding:0px;
+padding:0px!important
 }
 
-#Hanytarget i{
-margin-right:20px;
-margin-left:20px;
+#iconpicker_target i{
+margin-right:10px;
+margin-left:10px;
 font-size:35px;
-
-
 }
+
+
+.mainForm{
+padding-bottom:50px;
+}
+
+
+
+.table td, .table th {
+  padding: .75rem;
+  vertical-align:middle;
+  border-top: 1px solid #dee2e6;
+}
+
+
  
 
 

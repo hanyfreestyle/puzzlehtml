@@ -23,36 +23,42 @@ Route::get('/', function () {
 
 Auth::routes();
 
-#Route::get('/DashBord', [AdminController::class, 'index'])->name('home');
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
   #  Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
     Route::group(['prefix'=>'admin'],function(){
 
-        Route::get('/', [AdminController::class, 'index'])->name('admin.Dashboard');
         Route::get('/Home', [AdminController::class, 'index'])->name('admin.Dashboard');
+
+
+       Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('admin.config.web');
+       Route::post('/config/webConfigUpdate', [SettingsController::class, 'webConfigUpdate'])->name('admin.webConfigUpdate');
+
+
+/*
+        Route::get('/', [AdminController::class, 'index'])->name('admin.Dashboard');
+
         Route::get('/Page1', [AdminController::class, 'blank'])->name('page1');
         Route::get('/Page2', [AdminController::class, 'blank'])->name('page2');
-
-        Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('admin.config.web');
-        Route::post('/config/webConfigUpdate', [SettingsController::class, 'webConfigUpdate'])->name('admin.webConfigUpdate');
 
         Route::get('/Config/photoSize', [AdminController::class, 'blank'])->name('config.photoSize');
         Route::get('/Config/defPhoto', [AdminController::class, 'blank'])->name('config.defPhoto');
 
+*/
 
+        Route::get('/metaTags', [MetaTagController::class,'index'])->name('meta.index');
+        Route::get('/metaTags/create', [MetaTagController::class,'create'])->name('meta.create');
+        Route::post('/metaTags/store', [MetaTagController::class,'store'])->name('meta.store');
+        Route::get('/metaTags/edit/{id}', [MetaTagController::class,'edit'])->name('meta.edit');
+        Route::post('/metaTags/Update', [MetaTagController::class,'update'])->name('meta.update');
+        Route::get('/metaTags/delete/{id}', [MetaTagController::class,'delete'])->name('meta.delete');
 
-
-        Route::get('/MetaTags', [MetaTagController::class,'index'])->name('Meta.index');
-        Route::get('/MetaTags/Create', [MetaTagController::class,'create'])->name('Meta.create');
-        Route::post('/MetaTags/store', [MetaTagController::class,'store'])->name('Meta.store');
-
-        Route::get('/MetaTags/Edit/{id}', [MetaTagController::class,'edit'])->name('Meta.edit');
-        Route::post('/MetaTags/Update', [MetaTagController::class,'update'])->name('Meta.update');
-
-        Route::get('/MetaTags/Delete/{id}', [MetaTagController::class,'delete'])->name('Meta.delete');
-
-
-        Route::resource('/amenity',AmenityController::class);
+        Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
+        Route::get('/amenity/create',[AmenityController::class,'create'])->name('amenity.create');
+        Route::post('/amenity/store',[AmenityController::class,'storeUpdate'])->name('amenity.store');
+        Route::get('/amenity/edit/{id}',[AmenityController::class,'edit'])->name('amenity.edit');
+        Route::post('/amenity/update/{id}',[AmenityController::class,'storeUpdate'])->name('amenity.update');
+        Route::delete('/amenity/destroy/{id}',[AmenityController::class,'destroy'])->name('amenity.destroy');
+       // Route::resource('/amenity',AmenityController::class);
     });
 });

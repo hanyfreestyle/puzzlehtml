@@ -32,10 +32,10 @@
                                     <td>{{$row->translate(thisCurrentLocale())->body_h1}}</td>
                                     <td>{{$row->translate(thisCurrentLocale())->breadcrumb}}</td>
                                     <td>
-                                        <x-action-button url="{{route('Meta.edit',$row->id)}}" type="edit" :tip="false" />
+                                        <x-action-button url="{{route('meta.edit',$row->id)}}" type="edit" :tip="false" />
                                     </td>
                                     <td>
-                                        <x-action-button url="{{ route('Meta.delete',$row->id) }}" type="delete" :tip="false" />
+                                        <x-action-button url="{{ route('meta.delete',$row->id) }}" type="delete" :tip="false" />
                                     </td>
 
                                 </tr>

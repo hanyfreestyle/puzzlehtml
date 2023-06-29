@@ -13,7 +13,7 @@ use App\Models\User;
 
 class MetaTagController extends AdminMainController
 {
-    public $controllerName = 'Meta';
+    public $controllerName = 'meta';
 
     public function index()
     {

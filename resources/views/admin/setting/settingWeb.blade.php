@@ -36,7 +36,7 @@
                                 <div class="col-lg-6">
 
                                     <x-trans-input
-                                        label="{{__('admin.setting.name')}} {{ strtoupper($key) }}"
+                                        label="{{__('admin.setting.name')}} ({{ $key}})"
                                         name="{{ $key }}[name]"
                                         dir="{{ $key }}"
                                         reqname="{{ $key }}.name"
@@ -44,7 +44,7 @@
                                     />
 
                                     <x-trans-input
-                                        label="{{__('admin.setting.g_titel')}} {{ strtoupper($key) }}"
+                                        label="{{__('admin.setting.g_titel')}} ({{ $key}})"
                                         name="{{ $key }}[g_title]"
                                         dir="{{ $key }}"
                                         reqname="{{ $key }}.g_title"
@@ -52,7 +52,7 @@
                                     />
 
                                     <x-trans-text-area
-                                        label="{{__('admin.setting.g_des')}} {{ strtoupper($key) }}"
+                                        label="{{__('admin.setting.g_des')}} ({{ $key}})"
                                         name="{{ $key }}[g_des]"
                                         dir="{{ $key }}"
                                         reqname="{{ $key }}.g_des"
@@ -60,7 +60,7 @@
                                     />
 
                                     <x-trans-text-area
-                                        label="{{__('admin.setting.closed_mass')}} {{ strtoupper($key) }}"
+                                        label="{{__('admin.setting.closed_mass')}} ({{ $key}})"
                                         name="{{ $key }}[closed_mass]"
                                         dir="{{ $key }}"
                                         reqname="{{ $key }}.closed_mass"

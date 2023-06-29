@@ -34,10 +34,10 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column {{sideBarNavUlStyle()}}" data-widget="treeview" role="menu" data-accordion="false">
                 @foreach( config('adminMenu.menu') as $MenuList )
-                    @if(isset($MenuList['view']) and $MenuList['type'] == true)
+                    @if(isset($MenuList['view']) and $MenuList['view'] == true)
                         @if($MenuList['type'] == 'one')
                             <li class="nav-item">
-                                <a href="{{ route($MenuList['url']) }}" class="nav-link  @if(Route::currentRouteName() == $MenuList['url']) active @endif ">
+                                <a href="{{ route($MenuList['url']) }}" class="nav-link  @if(Route::is($MenuList['sel_routs'].'.*')) active @endif ">
                                     @if(isset($MenuList['icon']))<i class="nav-icon {{$MenuList['icon']}}"></i>@endif
                                     <p>{{$MenuList['text']}}</p>
                                 </a>

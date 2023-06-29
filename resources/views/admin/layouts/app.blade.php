@@ -21,8 +21,9 @@
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/bs-stepper/css/bs-stepper.min.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/dropzone/min/dropzone.min.css') }}">
+    <link rel="stylesheet" href="{{ defAdminAssets('plugins/sweet/sweetalert2.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('assets/admin/') }}">
+
 
     <link rel="stylesheet" href="{{ defAdminAssets('css/adminlte.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('css/custom_admin.css') }}">
@@ -78,6 +79,7 @@
 <script src="{{defAdminAssets('plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
 <script src="{{defAdminAssets('plugins/bs-stepper/js/bs-stepper.min.js')}}"></script>
 <script src="{{defAdminAssets('plugins/dropzone/min/dropzone.min.js')}}"></script>
+<script src="{{defAdminAssets('plugins/sweet/sweetalert2.all.min.js')}}"></script>
 
 <script src="{{defAdminAssets('js/adminlte.min.js')}}"></script>
 <script src="{{defAdminAssets('js/custom_file.js') }}"></script>
@@ -228,7 +230,7 @@
     <script src="{{ defAdminAssets('plugins/pace-progress/pace.min.js') }}"></script>
 @endif
 
-@yield('JsCode')
+@stack('JsCode')
 <script>
     @if( thisCurrentLocale() == 'ar')
     async function loadarfont(){

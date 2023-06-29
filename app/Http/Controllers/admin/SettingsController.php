@@ -14,15 +14,12 @@ class SettingsController extends AdminMainController
     public function webConfigEdit(){
 
         $setting = Setting::findOrFail(1);
-
         $pageData =[
             'ViewType'=>"Page",
             'TitlePage'=> __('admin.menu.setting_web'),
         ];
         return view('admin.setting.settingWeb')
             ->with(compact('pageData','setting'));
-
-
     }
 
     public function webConfigUpdate(SettingFormRequest $request){

@@ -25,7 +25,7 @@ return [
     ],
 
 
-    'Meta'=>[
+    'meta'=>[
         "main" => [
             "title" => 'ميتا تاج',
             "listPage" => 'عرض البيانات',

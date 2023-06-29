@@ -115,7 +115,6 @@ if (!function_exists('getButSize')) {
         return $sendStyle;
     }
 }
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # getBgColor
 if (!function_exists('getBgColor')) {
@@ -153,6 +152,22 @@ if (!function_exists('getBgColor')) {
                 $sendColor = "dark";
         }
         return $sendColor;
+    }
+}
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # getAlign
+if (!function_exists('getAlign')) {
+    function getAlign($val)
+    {
+        $sendStyle = "";
+        if($val == 'c'){
+            $sendStyle = "center";
+        }elseif ($val == 'r'){
+            $sendStyle = "right";
+        }elseif ($val == 'l'){
+            $sendStyle = "left";
+        }
+        return $sendStyle;
     }
 }
 

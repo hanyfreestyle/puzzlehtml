@@ -4,9 +4,9 @@
 
     @php
         if($pageData['ViewType'] == 'Add'){
-            $formRoute = 'Meta.store' ;
+            $formRoute = 'meta.store' ;
         }elseif ($pageData['ViewType'] == 'Edit') {
-            $formRoute = 'Meta.update' ;
+            $formRoute = 'meta.update' ;
         }
     @endphp
 
