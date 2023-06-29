@@ -1,6 +1,6 @@
 <div class="form-group">
     @if($placeholder == false)
-        <label class="font-weight-light " for="">{{$label}}
+        <label class="font-weight-light label_{{$dir}} ">{{$label}}
             @if($reqspan)
                 <span class="required_Span">*</span>
             @endif

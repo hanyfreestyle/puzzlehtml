@@ -43,16 +43,9 @@
                                 </a>
                             </li>
                         @elseif($MenuList['type'] == 'many')
-                            <li class="nav-item
-                        @foreach($MenuList['submenu'] as $SubMenu)
-                            @if( Route::currentRouteName() == $SubMenu['url'] ) menu-open @endif
-                            @endforeach">
+                            <li class="nav-item @if(Route::is($MenuList['sel_routs'].'.*'))  menu-open @endif ">
 
-                                <a href="#" class="nav-link
-                            @foreach($MenuList['submenu'] as $SubMenu)
-                                @if( Route::currentRouteName() == $SubMenu['url'] ) active @endif
-                                @endforeach">
-
+                                <a href="#" class="nav-link @if(Route::is($MenuList['sel_routs'].'.*')) active @endif">
                                     @if(isset($MenuList['icon']))<i class="nav-icon {{$MenuList['icon']}}"></i>@endif
                                     <p>
                                         {{__($MenuList['text'])}}
@@ -66,7 +59,7 @@
                                 <ul class="nav nav-treeview">
                                     @foreach($MenuList['submenu'] as $SubMenu)
                                         <li class="nav-item">
-                                            <a href="{{ route($SubMenu['url']) }}" class="nav-link @if(Route::currentRouteName() == $SubMenu['url']) active @endif ">
+                                            <a href="{{ route($SubMenu['url']) }}" class="nav-link @if(Route::is('*.'. $SubMenu['sel_routs'].'.*')) active @endif ">
                                                 @if(isset($SubMenu['icon']))<i class="nav-icon {{$SubMenu['icon']}}"></i>@endif
                                                 <p>
                                                     {{__($SubMenu['text'])}}

@@ -12,11 +12,13 @@ class AmenitySeeder extends Seeder
     public function run(): void
     {
         $data = [
-            'icon'=>"fa fa-home",
+            'icon'=>"",
         ];
         $countData =  Amenity::all()->count();
         if($countData == '0'){
-            Amenity::create($data);
+            for ($i = 1; $i <=14; $i++) {
+                Amenity::create($data);
+            }
         }
     }
 }

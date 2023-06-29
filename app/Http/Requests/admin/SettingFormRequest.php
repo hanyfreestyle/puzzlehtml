@@ -15,7 +15,6 @@ class SettingFormRequest extends FormRequest
 
 
     public function rules(): array
-
     {
         $rules =[
             'facebook'=> 'exclude_if:facebook,#|required|url',
@@ -31,8 +30,6 @@ class SettingFormRequest extends FormRequest
             $rules[$key.".g_des"] =   'required';
             $rules[$key.".closed_mass"] =   'required';
         }
-
         return $rules;
-
     }
 }

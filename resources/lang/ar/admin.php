@@ -15,10 +15,10 @@ return [
 
     'setting'=>[
         'social_media'=> 'سوشيال ميديا',
-        'name'=> 'اسم الموقع',
-        'g_titel'=> 'عنوان الصفحة',
-        'g_des'=> 'وصف الصفحة',
-        'closed_mass'=> 'رسالة الاغلاق',
+        'website_name_ar'=> 'اسم الموقع',
+        'website_name_en'=> 'Web Site Name',
+        'closed_mass_ar'=> 'رسالة الاغلاق',
+        'closed_mass_en'=> 'Closed Message',
         'web_status'=>'حالة الموقع',
         'phone'=>'رقم الهاتف',
         'whatsapp'=>'رقم الواتساب',

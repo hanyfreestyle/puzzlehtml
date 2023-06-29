@@ -4,19 +4,24 @@
 
     @php
         if($pageData['ViewType'] == 'Add'){
-            $formRoute = 'meta.store' ;
+            $formRoute = 'config.meta.store' ;
         }elseif ($pageData['ViewType'] == 'Edit') {
-            $formRoute = 'meta.update' ;
+            $formRoute = 'config.meta.update' ;
         }
     @endphp
 
     <x-breadcrumb-def :pageData="$pageData"/>
     <x-ui-card title="{{$pageData['AddPageName']}}">
-        <form action="{{route($formRoute)}}" method="post">
+
+        @if(Session::has($pageData['ViewType'].'.Done'))
+            <div class="alert alert-success alert-dismissible">
+                {!! Session::get($pageData['ViewType'].'.Done') !!}
+            </div>
+        @endif
+
+        <form action="{{route($formRoute,intval($oldData->id))}}" method="post">
             @csrf
-            @if($pageData['ViewType'] == 'Edit')
-                <input type="hidden" name="id" value="{{$oldData->id}}">
-            @endif
+
             <x-form-input label="# CatId" name="cat_id" :requiredSpan="true" colrow="col-lg-4"
                           value="{{old('cat_id',$oldData->cat_id)}}" inputclass="dir_en"/>
 

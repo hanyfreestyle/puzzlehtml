@@ -18,7 +18,7 @@ class SettingsController extends AdminMainController
             'ViewType'=>"Page",
             'TitlePage'=> __('admin.menu.setting_web'),
         ];
-        return view('admin.setting.settingWeb')
+        return view('admin.config.settingWeb')
             ->with(compact('pageData','setting'));
     }
 
@@ -35,19 +35,9 @@ class SettingsController extends AdminMainController
         $setting= Setting::findorfail('1');
         $setting->update($request->all());
 
-
-        return redirect(route('admin.config.web'));
+        return  back()->with('Edit.Done',__('general.alertMass.confirmEdit'));
     }
 
 
-    public function index()
-    {
-        $pageData =[
-            'ViewType'=>"Page",
-            'TitlePage'=> __('admin/menu.setting.config.web'),
-        ];
-        return view('admin.setting.settingWeb')
-            ->with(compact('pageData'));
 
-    }
 }

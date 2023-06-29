@@ -12,12 +12,13 @@ return [
 
         [
             'view'=>true,
+            'sel_routs'=>'config',
             'type'=>'many',
             'text'=> 'admin.menu.setting',
             'icon'=>'fas fa-cogs',
             'submenu'=>[
-                ['text'=> 'admin.menu.setting_web','url'=> 'admin.config.web'],
-                ['text'=> 'admin.menu.setting_meta_tags','url'=> 'meta.index'],
+                ['text'=> 'admin.menu.setting_web','url'=> 'config.web.index','sel_routs'=> 'web'],
+                ['text'=> 'admin.menu.setting_meta_tags','url'=> 'config.meta.index','sel_routs'=> 'meta'],
                 # ['text'=> 'admin.menu.setting_photo','url'=> 'admin.config.photoSize'],
                 # ['text'=> 'admin.menu.setting_def_photo','url'=> 'admin.config.defPhoto'],
             ],

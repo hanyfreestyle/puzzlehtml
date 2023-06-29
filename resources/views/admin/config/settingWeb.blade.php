@@ -3,6 +3,13 @@
 @section('content')
 
     <x-breadcrumb-def :pageData="$pageData"/>
+
+    @if(Session::has('Edit.Done'))
+        <div class="alert alert-success alert-dismissible">
+            {!! Session::get('Edit.Done') !!}
+        </div>
+    @endif
+
     <form action="{{route('admin.webConfigUpdate')}}" method="post">
         @csrf
         <div class="container-fluid">
@@ -36,7 +43,7 @@
                                 <div class="col-lg-6">
 
                                     <x-trans-input
-                                        label="{{__('admin.setting.name')}} ({{ $key}})"
+                                        label="{{__('admin.setting.website_name_'.$key)}} ({{ $key}})"
                                         name="{{ $key }}[name]"
                                         dir="{{ $key }}"
                                         reqname="{{ $key }}.name"
@@ -44,7 +51,7 @@
                                     />
 
                                     <x-trans-input
-                                        label="{{__('admin.setting.g_titel')}} ({{ $key}})"
+                                        label="{{__('admin.metaForm.g_title_'.$key)}} ({{ $key}})"
                                         name="{{ $key }}[g_title]"
                                         dir="{{ $key }}"
                                         reqname="{{ $key }}.g_title"
@@ -52,7 +59,7 @@
                                     />
 
                                     <x-trans-text-area
-                                        label="{{__('admin.setting.g_des')}} ({{ $key}})"
+                                        label="{{__('admin.metaForm.g_des_'.$key)}} ({{ $key}})"
                                         name="{{ $key }}[g_des]"
                                         dir="{{ $key }}"
                                         reqname="{{ $key }}.g_des"
@@ -60,7 +67,7 @@
                                     />
 
                                     <x-trans-text-area
-                                        label="{{__('admin.setting.closed_mass')}} ({{ $key}})"
+                                        label="{{__('admin.setting.closed_mass_'.$key)}} ({{ $key}})"
                                         name="{{ $key }}[closed_mass]"
                                         dir="{{ $key }}"
                                         reqname="{{ $key }}.closed_mass"
