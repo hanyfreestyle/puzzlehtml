@@ -1,6 +1,6 @@
 <div class="form-group {{$colrow}} {{($horizontalLabel) ? 'row' : '' }} {{$topclass}}">
     @if ($label != '')
-        <div class="{{($horizontalLabel) ? 'col-sm-5' : '' }}">
+        <div class="{{($horizontalLabel) ? 'col-sm-6' : '' }}">
             <label class="col-form-label font-weight-light {{($horizontalLabel) ? 'font-weight-normal' : '' }}" for="{{$id}}">{{$label}}
                 @if($requiredSpan)
                     <span class="required_Span">*</span>
@@ -9,7 +9,7 @@
         </div>
 
     @endif
-    <div class="{{($horizontalLabel) ? 'col-sm-7' : '' }}">
+    <div class="{{($horizontalLabel) ? 'col-sm-6' : '' }}">
         <input type="{{$type}}" class="{{$inputclass}} form-control @error($name) is-invalid @enderror"
                id="{{$id}}" name="{{$name}}" placeholder="{{$placeholder}}"
                @if(!is_null($step))
@@ -34,8 +34,8 @@
             <strong>{{ \App\Helpers\AdminHelper::error($message,$name,$label) }}</strong>
         </span>
         @enderror
-    </div>
 
+    </div>
 </div>
 
 

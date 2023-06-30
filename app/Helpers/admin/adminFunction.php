@@ -170,6 +170,22 @@ if (!function_exists('getAlign')) {
         return $sendStyle;
     }
 }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   printStateIcon
+
+if (!function_exists('printStateIcon')) {
+    function printStateIcon($chekVal,$sendArr=array())
+    {
+        if($chekVal == '1'){
+            $icon = '<span class="text-success TableIcon"><i class="fas fa-check-square"></i></span>';
+        }else{
+            $icon = '<span class="text-danger TableIcon"><i class="fas fa-times"></i></span></span>';
+        }
+        return $icon ;
+    }
+}
+
+
 
 
 ?>

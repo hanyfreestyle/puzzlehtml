@@ -54,6 +54,7 @@ class AdminHelper{
 #|||||||||||||||||||||||||||||||||||||| #     error
     public static function error($value, $name, $label){
         $newName = trim(str_replace('_', " ", $name));
+
         return str_replace($newName, $label, $value);
     }
 

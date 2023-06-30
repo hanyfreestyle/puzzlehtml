@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\config\AmenityController;
 use App\Http\Controllers\admin\config\DefPhotoController;
 use App\Http\Controllers\admin\config\MetaTagController;
 use App\Http\Controllers\admin\config\SettingsController;
+use App\Http\Controllers\admin\config\UploadFilterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,14 +48,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::post('/defPhotos/store/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.defPhoto.store');
         Route::get('/defPhotos/edit/{id}', [DefPhotoController::class,'edit'])->name('config.defPhoto.edit');
         Route::post('/defPhotos/Update/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.defPhoto.update');
-        Route::delete('/defPhotos/delete/{id}', [DefPhotoController::class,'delete'])->name('config.defPhoto.destroy');
+        Route::delete('/defPhotos/delete/{id}', [DefPhotoController::class,'destroy'])->name('config.defPhoto.destroy');
 
-        Route::get('/upFilter', [DefPhotoController::class,'index'])->name('config.upFilter.index');
-        Route::get('/upFilter/create', [DefPhotoController::class,'create'])->name('config.upFilter.create');
-        Route::post('/upFilter/store/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.upFilter.store');
-        Route::get('/upFilter/edit/{id}', [DefPhotoController::class,'edit'])->name('config.upFilter.edit');
-        Route::post('/upFilter/Update/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.upFilter.update');
-        Route::delete('/upFilter/delete/{id}', [DefPhotoController::class,'delete'])->name('config.upFilter.destroy');
+        Route::get('/upFilter', [UploadFilterController::class,'index'])->name('config.upFilter.index');
+        Route::get('/upFilter/create', [UploadFilterController::class,'create'])->name('config.upFilter.create');
+        Route::post('/upFilter/store/{id}', [UploadFilterController::class,'storeUpdate'])->name('config.upFilter.store');
+        Route::get('/upFilter/edit/{id}', [UploadFilterController::class,'edit'])->name('config.upFilter.edit');
+        Route::post('/upFilter/Update/{id}', [UploadFilterController::class,'storeUpdate'])->name('config.upFilter.update');
+        Route::delete('/upFilter/delete/{id}', [UploadFilterController::class,'destroy'])->name('config.upFilter.destroy');
 
 
         Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');

@@ -74,6 +74,39 @@ padding-bottom:50px;
 }
 
 
+/*
+.custom-select:invalid + .select2 .select2-selection{
+    border-color: #dc3545!important;
+}
+.custom-select:valid + .select2 .select2-selection{
+    border-color: #28a745!important;
+}
+*:focus{
+  outline:0px;
+}
+*/
+
+
+.watermark_imgView{
+    background: #6f6f80;
+    float: right;
+    width: 100%;
+    text-align: center!important;
+    height: 300px;
+}
+
+.watermark_imgView img{
+    max-height: 300px;
+    max-width: 400px;
+}
+
+.bg-whiteBorder{
+    border: 1px solid rgba(0, 0, 0, .1) ;
+}
+
+
+.TableIcon{
+font-size:25px;
  
 
 

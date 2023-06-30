@@ -64,12 +64,55 @@ return [
         ],
     ],
 
-    'uploadFilter'=>[
+    'upFilter'=>[
         "main" => [
-            "title" => 'الصور الافتراضية',
-            "listPage" => 'عرض الصور',
-            "addPage" =>  'اضافة صورة',
+            "title" => 'فلاتر الصور',
+            "listPage" => ' عرض الفلاتر',
+            "addPage" =>  ' اضافة فلتر جديد ',
             "editPage" => 'تعديل'
         ],
+
+        "form" => [
+            'main_setting'=> 'الاعدادات الاساسية',
+            'more_setting'=> 'الاعدادات الاضافة',
+            'text_setting'=> 'اضافة نص للصورة',
+            'watermark_setting'=> 'اعدادات العلامة المائية',
+
+            "name" => 'اسم الفلتر',
+            "type" => 'نوع الفلتر',
+            "convert_state" => 'تحويل الصورة الى webP ',
+            "quality_val" => 'جوده الصورة',
+            "new_w" => 'عرض الصورة',
+            "new_h" => 'ارتفاع الصورة ',
+            "canvas_back" => 'لون الخلفيه',
+
+            "greyscale" => 'تدرج الرمادي ',
+            "flip_state" => 'تغيير اتجاه الصورة',
+            "flip_v" => 'تغيير افقى',
+            "blur" => 'طمس الصورة ',
+            "blur_size" => 'درجة الطمس',
+            "pixelate" => 'اضافة بيكسل',
+            "pixelate_size" => 'حجم البيكسل',
+
+
+            "text_state" => 'طباعة النص على الصورة',
+            "text_print" => 'النص المستخدم ',
+            "font_path" => 'الفونت المستخدم ',
+            "font_size" => 'حجم الخط',
+            "font_color" => 'لون الخط',
+            "font_opacity" => 'درجة الشفافية ',
+            "text_position" => 'مكان طباعة النص ',
+
+            "watermark_state" => 'اضافة العلامة المائية',
+            "watermark_img" => 'الصورة المستخدمة ',
+            "watermark_position" => 'مكان طباعة الصورة',
+
+
+
+
+
+
+        ],
+
     ],
 ];
