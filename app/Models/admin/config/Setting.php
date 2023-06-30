@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\admin;
+namespace App\Models\admin\config;
 
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;

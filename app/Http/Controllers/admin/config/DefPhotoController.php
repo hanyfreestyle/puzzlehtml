@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
-use App\Http\Requests\admin\DefPhotoRequest;
-use App\Models\admin\Amenity;
-use App\Models\admin\DefPhoto;
+use App\Http\Requests\admin\config\DefPhotoRequest;
+use App\Models\admin\config\DefPhoto;
 use Intervention\Image\Facades\Image;
 
 

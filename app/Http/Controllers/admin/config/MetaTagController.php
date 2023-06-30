@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
-use App\Models\admin\MetaTag;
-use App\Http\Requests\admin\StoreMetaTagRequest;
-use App\Http\Requests\admin\MetaTagRequest;
-use App\Models\admin\MetaTagTranslation;
+use App\Models\admin\config\MetaTag;
+
+use App\Http\Requests\admin\config\MetaTagRequest;
+use App\Models\admin\config\MetaTagTranslation;
 
 class MetaTagController extends AdminMainController
 {

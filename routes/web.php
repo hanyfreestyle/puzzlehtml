@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\config\AmenityController;
-use App\Http\Controllers\admin\DefPhotoController;
-use App\Http\Controllers\admin\MetaTagController;
-use App\Http\Controllers\admin\SettingsController;
+use App\Http\Controllers\admin\config\DefPhotoController;
+use App\Http\Controllers\admin\config\MetaTagController;
+use App\Http\Controllers\admin\config\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\config;
 
 use App\Http\Controllers\AdminMainController;
-use App\Http\Requests\admin\SettingFormRequest;
-use App\Models\admin\Setting;
+use App\Http\Requests\admin\config\SettingFormRequest;
+use App\Models\admin\config\Setting;
 
 
 

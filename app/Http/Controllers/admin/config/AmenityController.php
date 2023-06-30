@@ -6,9 +6,9 @@ namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
-use App\Models\admin\Amenity;
-use App\Http\Requests\Admin\AmenityRequest;
-use App\Models\admin\AmenityTranslation;
+use App\Models\admin\config\Amenity;
+use App\Http\Requests\Admin\config\AmenityRequest;
+use App\Models\admin\config\AmenityTranslation;
 
 
 class AmenityController extends AdminMainController

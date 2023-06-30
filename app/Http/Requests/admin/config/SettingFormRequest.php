@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\admin;
+namespace App\Http\Requests\admin\config;
 
 use Astrotomic\Translatable\Validation\RuleFactory;
 use Illuminate\Foundation\Http\FormRequest;
