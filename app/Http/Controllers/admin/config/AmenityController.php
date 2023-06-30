@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+
+
+namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;

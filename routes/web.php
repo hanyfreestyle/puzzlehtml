@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\AmenityController;
+use App\Http\Controllers\admin\config\AmenityController;
 use App\Http\Controllers\admin\DefPhotoController;
 use App\Http\Controllers\admin\MetaTagController;
 use App\Http\Controllers\admin\SettingsController;
@@ -48,6 +48,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::get('/defPhotos/edit/{id}', [DefPhotoController::class,'edit'])->name('config.defPhoto.edit');
         Route::post('/defPhotos/Update/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.defPhoto.update');
         Route::delete('/defPhotos/delete/{id}', [DefPhotoController::class,'delete'])->name('config.defPhoto.destroy');
+
+        Route::get('/upFilter', [DefPhotoController::class,'index'])->name('config.upFilter.index');
+        Route::get('/upFilter/create', [DefPhotoController::class,'create'])->name('config.upFilter.create');
+        Route::post('/upFilter/store/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.upFilter.store');
+        Route::get('/upFilter/edit/{id}', [DefPhotoController::class,'edit'])->name('config.upFilter.edit');
+        Route::post('/upFilter/Update/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.upFilter.update');
+        Route::delete('/upFilter/delete/{id}', [DefPhotoController::class,'delete'])->name('config.upFilter.destroy');
 
 
         Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');

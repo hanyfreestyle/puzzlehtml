@@ -11,6 +11,7 @@ return [
         'setting_photo'=> 'اعدادات الصور',
         'setting_def_photo'=> 'الصور الافتراضية',
         'setting_meta_tags'=> 'ميتا تاج',
+        'uploadFilter'=> 'فلاتر الصور',
     ],
 
     'setting'=>[
@@ -63,4 +64,12 @@ return [
         ],
     ],
 
+    'uploadFilter'=>[
+        "main" => [
+            "title" => 'الصور الافتراضية',
+            "listPage" => 'عرض الصور',
+            "addPage" =>  'اضافة صورة',
+            "editPage" => 'تعديل'
+        ],
+    ],
 ];

@@ -20,6 +20,7 @@ return [
                 ['text'=> 'admin.menu.setting_web','url'=> 'config.web.index','sel_routs'=> 'web'],
                 ['text'=> 'admin.menu.setting_meta_tags','url'=> 'config.meta.index','sel_routs'=> 'meta'],
                 ['text'=> 'admin.menu.setting_def_photo','url'=> 'config.defPhoto.index','sel_routs'=> 'defPhoto'],
+                ['text'=> 'admin.menu.uploadFilter','url'=> 'config.upFilter.index','sel_routs'=> 'upFilter'],
                 # ['text'=> 'admin.menu.setting_photo','url'=> 'admin.config.photoSize'],
 
             ],
