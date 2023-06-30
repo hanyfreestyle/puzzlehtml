@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('def_photos', function (Blueprint $table) {
+        Schema::create('config_def_photos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cat_id');
             $table->string('photo');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('def_photos');
+        Schema::dropIfExists('config_def_photos');
     }
 };

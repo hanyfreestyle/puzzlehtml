@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\config;
 
-use App\Models\admin\AmenityTranslation;
+use App\Models\admin\config\AmenityTranslation;
 use Illuminate\Database\Seeder;
 
 class AmenityTranslationSeeder extends Seeder

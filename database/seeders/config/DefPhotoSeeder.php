@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\config;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UploadFilterSeeder extends Seeder
+class DefPhotoSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class UploadFilter extends Model
 {
     use HasFactory;
+    protected $table = "config_upload_filters";
 }

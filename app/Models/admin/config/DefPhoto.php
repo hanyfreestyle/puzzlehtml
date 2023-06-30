@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class DefPhoto extends Model
 {
     use HasFactory;
+    protected $table = "config_def_photos";
 }

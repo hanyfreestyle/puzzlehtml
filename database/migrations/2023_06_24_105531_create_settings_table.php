@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('config_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('web_url')->nullable();
             $table->integer('web_status')->default('1');
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('config_settings');
     }
 };

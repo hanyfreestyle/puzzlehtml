@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('setting_translations', function (Blueprint $table) {
+        Schema::create('config_setting_translations', function (Blueprint $table) {
 
             $table->increments('id');
             $table->integer('setting_id')->unsigned();
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('closed_mass')->nullable();
 
             $table->unique(['setting_id','locale']);
-            $table->foreign('setting_id')->references('id')->on('settings')->onDelete('cascade');
+            $table->foreign('setting_id')->references('id')->on('config_settings')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('setting_translations');
+        Schema::dropIfExists('config_setting_translations');
     }
 };
