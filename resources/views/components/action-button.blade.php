@@ -6,10 +6,10 @@
 
    class="btn {{$size}} btn-{{$bg}}">
     @if($icon)
-        <i class="fa {{$icon}}"></i>
+    <i class="fa {{$icon}}"></i>&nbsp;
     @endif
     @if(!$tip)
-    {{$lable}}
+     {{$lable}}
     @endif
 
 </a>

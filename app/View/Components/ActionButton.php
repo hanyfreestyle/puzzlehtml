@@ -18,10 +18,10 @@ class ActionButton extends Component
 
     public function __construct(
         $url = "#",
-        $lable = "but",
+        $lable = null,
         $size = "s",
         $bg = "p",
-        $tip = true,
+        $tip = false,
         $icon = null,
         $type = null,
 
@@ -38,11 +38,23 @@ class ActionButton extends Component
 
         if($type){
             switch ($type) {
+                case 'add':
+                    $this->icon = 'fas fa-plus-square';
+                    $this->bg = getBgColor('p');
+                    if($this->lable == null){
+                        $this->lable = __('general.buttonAction.add');
+                    }
+
+                    break;
+
                 case 'edit':
                     $this->icon = 'fas fa-pencil-alt';
                     $this->bg = getBgColor('i');
-                    $this->lable = __('general.buttonAction.edit');
+                    if($this->lable == null){
+                        $this->lable = __('general.buttonAction.edit');
+                    }
                     break;
+
                 case 'delete':
                     $this->icon = 'fas fa-trash';
                     $this->bg = getBgColor('d');

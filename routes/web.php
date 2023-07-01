@@ -45,10 +45,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
 
         Route::get('/defPhotos', [DefPhotoController::class,'index'])->name('config.defPhoto.index');
         Route::get('/defPhotos/create', [DefPhotoController::class,'create'])->name('config.defPhoto.create');
-        Route::post('/defPhotos/store/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.defPhoto.store');
+        Route::post('/defPhotos/store/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.defPhoto.storeUpdate');
         Route::get('/defPhotos/edit/{id}', [DefPhotoController::class,'edit'])->name('config.defPhoto.edit');
-        Route::post('/defPhotos/Update/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.defPhoto.update');
+        Route::post('/defPhotos/Update/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.defPhoto.storeUpdate');
         Route::delete('/defPhotos/delete/{id}', [DefPhotoController::class,'destroy'])->name('config.defPhoto.destroy');
+        Route::get('/defIcon/show', [DefPhotoController::class,'defIconShow'])->name('config.defIcon.show');
 
         Route::get('/upFilter', [UploadFilterController::class,'index'])->name('config.upFilter.index');
         Route::get('/upFilter/create', [UploadFilterController::class,'create'])->name('config.upFilter.create');

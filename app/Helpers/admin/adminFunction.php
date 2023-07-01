@@ -117,10 +117,19 @@ if (!function_exists('htmlArDir')) {
 if (!function_exists('getButSize')) {
     function getButSize($val)
     {
-        if($val == 's'){
-            $sendStyle = "btn-sm";
-        }else{
-            $sendStyle = "btn-sm";
+        switch ($val) {
+            case 's':
+                $sendStyle = "btn-sm";
+                break;
+            case 'm':
+                $sendStyle = "btn-md";
+                break;
+            case 'l':
+                $sendStyle = "btn-lg";
+                break;
+
+            default:
+                $sendStyle = "btn-sm";
         }
         return $sendStyle;
     }

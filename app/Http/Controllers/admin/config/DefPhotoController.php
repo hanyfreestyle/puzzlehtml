@@ -6,7 +6,7 @@ use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\DefPhotoRequest;
 use App\Models\admin\config\DefPhoto;
-use Intervention\Image\Facades\Image;
+use App\Models\admin\config\Setting;
 
 
 class DefPhotoController extends AdminMainController
@@ -14,78 +14,57 @@ class DefPhotoController extends AdminMainController
     public $controllerName = 'defPhoto';
 
 
-
-    public function indexXX()
-    {
-
-
-
-        $photoPath = defAdminAssets('hany.jpg');
-        $img = Image::make($photoPath)->resize(300, 200);
-        return $img->response('jpg');
-    }
-    public function index()
-    {
+    public function index(){
         $defPhoto = glob("Def/*");
-
-
-
-
-        //dd($defPhoto);
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
-        $rowData = DefPhoto::orderBy('id','desc')->paginate(20);
+        $rowData = DefPhoto::orderBy('id','desc')->paginate(16);
         $pageData['ViewType'] = "List";
         return view('admin.config.defphoto_index',compact('pageData','rowData','defPhoto'));
     }
-
-
-    public function create()
-    {
+    public function create(){
         $rowData = DefPhoto::findOrNew(0);
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
         $pageData['ViewType'] = "Add";
         return view('admin.config.defphoto_form',compact('pageData','rowData'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(DefPhotoRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(DefPhoto $defPhoto)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
+    public function edit($id){
         $rowData = DefPhoto::findOrFail($id);
 
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
         $pageData['ViewType'] = "Edit";
         return view('admin.config.defphoto_form',compact('rowData','pageData'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(DefPhotoRequest $request, DefPhoto $defPhoto)
-    {
-        //
+    public function destroy($id){
+        $deleteRow = DefPhoto::where('id',$id);
+        $deleteRow->delete();
+        return redirect(route('config.defPhoto.index'))
+            ->with('confirmDelete',__('general.alertMass.confirmDelete'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(DefPhoto $defPhoto)
-    {
-        //
+    public function defIconShow(){
+
+
+        $pageData =[
+            'ViewType'=>"Page",
+            'TitlePage'=> __('admin.menu.setting_web'),
+        ];
+        return view('admin.config.defIcon_show')
+            ->with(compact('pageData'));
+
+    }
+    public function storeUpdate(DefPhotoRequest $request,$id='0'){
+        $request-> validated();
+
+        $saveData =  DefPhoto::findOrNew($id) ;
+        $saveData->cat_id = $request->input('cat_id');
+        $saveData->photo = $request->input('photo');
+        $saveData->save();
+
+        if($id == '0'){
+            return redirect(route('config.defPhoto.index'))->with('Add.Done',__('general.alertMass.confirmAdd'));
+        }else{
+            return  back()->with('Edit.Done',__('general.alertMass.confirmEdit'));
+        }
+
     }
 }
