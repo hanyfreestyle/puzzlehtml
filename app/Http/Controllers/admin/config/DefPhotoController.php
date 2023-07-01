@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\DefPhotoRequest;
 use App\Models\admin\config\DefPhoto;
 use App\Models\admin\config\Setting;
+use App\Models\admin\config\UploadFilter;
 
 
 class DefPhotoController extends AdminMainController
@@ -24,15 +25,18 @@ class DefPhotoController extends AdminMainController
     public function create(){
         $rowData = DefPhoto::findOrNew(0);
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
+
+        $filterTypes = UploadFilter::all();
         $pageData['ViewType'] = "Add";
-        return view('admin.config.defphoto_form',compact('pageData','rowData'));
+        return view('admin.config.defphoto_form',compact('pageData','rowData','filterTypes'));
     }
     public function edit($id){
         $rowData = DefPhoto::findOrFail($id);
 
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
+        $filterTypes = UploadFilter::all();
         $pageData['ViewType'] = "Edit";
-        return view('admin.config.defphoto_form',compact('rowData','pageData'));
+        return view('admin.config.defphoto_form',compact('rowData','pageData','filterTypes'));
     }
     public function destroy($id){
         $deleteRow = DefPhoto::where('id',$id);
