@@ -17,16 +17,25 @@ class DefPhotoController extends AdminMainController
 
     public function indexXX()
     {
+
+
+
         $photoPath = defAdminAssets('hany.jpg');
         $img = Image::make($photoPath)->resize(300, 200);
         return $img->response('jpg');
     }
     public function index()
     {
+        $defPhoto = glob("Def/*");
+
+
+
+
+        //dd($defPhoto);
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
         $rowData = DefPhoto::orderBy('id','desc')->paginate(20);
         $pageData['ViewType'] = "List";
-        return view('admin.config.defphoto_index',compact('pageData','rowData'));
+        return view('admin.config.defphoto_index',compact('pageData','rowData','defPhoto'));
     }
 
 

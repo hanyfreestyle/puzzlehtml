@@ -13,6 +13,16 @@ if (!function_exists('defAdminAssets')) {
         return app('url')->asset('assets/admin/' . $path, $secure);
     }
 }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #    static_admin_asset
+if (!function_exists('defImagesDir')) {
+    function defImagesDir($path, $secure = null): string
+    {
+        return app('url')->asset( $path, $secure);
+    }
+}
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # mainBodyStyle
 if (!function_exists('mainBodyStyle')) {
