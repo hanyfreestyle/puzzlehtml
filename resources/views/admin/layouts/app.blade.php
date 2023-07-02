@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{config('adminConfig.title')}}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @yield('StyleFile')
     @if(config('adminConfig.pace_progress') == true and config('adminConfig.preloader') == false)

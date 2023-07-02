@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('cat_id');
             $table->string('photo');
+            $table->integer('postion')->default(0);
             $table->timestamps();
         });
     }

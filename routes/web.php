@@ -49,6 +49,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::get('/defPhotos/edit/{id}', [DefPhotoController::class,'edit'])->name('config.defPhoto.edit');
         Route::post('/defPhotos/Update/{id}', [DefPhotoController::class,'storeUpdate'])->name('config.defPhoto.storeUpdate');
         Route::delete('/defPhotos/delete/{id}', [DefPhotoController::class,'destroy'])->name('config.defPhoto.destroy');
+
+        Route::post('/sortDefPhoto/saveSort', [DefPhotoController::class,'sortDefPhotoSave'])->name('config.defPhoto.sortDefPhoto');
+        Route::get('/sortDefPhoto/ListAll', [DefPhotoController::class,'sortDefPhotoList'])->name('config.defPhoto.sortDefPhotoList');
         Route::get('/defIcon/show', [DefPhotoController::class,'defIconShow'])->name('config.defIcon.show');
 
         Route::get('/upFilter', [UploadFilterController::class,'index'])->name('config.upFilter.index');

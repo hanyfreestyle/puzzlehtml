@@ -60,6 +60,16 @@ return [
             "title" => 'الصور الافتراضية',
             "listPage" => 'عرض الصور',
             "addPage" =>  'اضافة صورة',
+            "editPage" => 'تعديل',
+            "sortPhoto" => 'ترتيب'
+        ],
+    ],
+
+    'deficon'=>[
+        "main" => [
+            "title" => 'ايكون ',
+            "listPage" => 'عرض الصور',
+            "addPage" =>  'اضافة صورة',
             "editPage" => 'تعديل'
         ],
     ],
@@ -106,11 +116,6 @@ return [
             "watermark_state" => 'اضافة العلامة المائية',
             "watermark_img" => 'الصورة المستخدمة ',
             "watermark_position" => 'مكان طباعة الصورة',
-
-
-
-
-
 
         ],
 

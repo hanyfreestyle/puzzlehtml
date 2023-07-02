@@ -23,7 +23,7 @@ class DefPhotoRequest extends FormRequest
             ];
         }else{
             $rules =[
-                'cat_id'=> "required|alpha_dash:ascii|min:4|max:50|unique:config_def_photos,cat_id,$id",
+               'cat_id'=> "required|alpha_dash:ascii|min:4|max:50|unique:config_def_photos,cat_id,$id",
             ];
         }
         return $rules;

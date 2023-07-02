@@ -128,13 +128,26 @@ max-height:200px;
 
 
 
-.IconShowDiv{
-
- }
+ 
  .IconShowIcon{
  margin:auto;
  width:90%;
  }
+ 
+ 
+.hanySort{
+padding:10px 20px;
+}
+ 
+.hanySort .ListThisItam{
+margin-bottom:10px;
+} 
+ 
+.hanySort .ListThisItam img{
+max-width:95%;
+max-height:200px;
+ 
 
+}
 
 

@@ -2,7 +2,7 @@
 @section('content')
 
     <x-breadcrumb-def :pageData="$pageData"/>
-    <x-ui-card title="{{__('admin.menu.web_setting')}}" :add-form-error="false"  >
+    <x-ui-card title="{{__('admin.deficon.main.title')}}" :add-form-error="false"  >
 
 
         <div class="row">
@@ -29,7 +29,7 @@
                 arrowClass: 'btn-danger',
                 arrowPrevIconClass: 'fas fa-arrow-right',
                 arrowNextIconClass: 'fas fa-arrow-left',
-                cols: 25,
+                cols: 20,
                 footer: true,
                 header: true,
                 icon: 'fa-bomb',
@@ -37,7 +37,7 @@
                 labelHeader: '{0} of {1} pages',
                 labelFooter: '{0} - {1} of {2} icons',
                 placement: 'bottom', // Only in button tag
-                rows: 40,
+                rows: 10,
                 search: true,
                 searchText: 'Search',
                 selectedClass: 'btn-success',
