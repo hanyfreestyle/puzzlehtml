@@ -37,7 +37,9 @@ return [
         "button_Dir" => 'left',
         "button_Add" => 'اضافة جديدة',
         "button_Submit" => 'اضافة',
-        "button_Edit" => 'تعديل'
+        "button_Edit" => 'تعديل',
+        "fileUpload" => 'تعديل',
+        "fileUploadPhoto" => 'تعديل',
     ],
 
     "buttonAction" => [
