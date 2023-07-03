@@ -15,7 +15,7 @@
             <x-form-input label="# CatId" name="cat_id" :requiredSpan="true" colrow="col-lg-3"
                           value="{{old('cat_id',$rowData->cat_id)}}" inputclass="dir_en"/>
 
-            <x-form-select-arr  label="نوع الفلتر" name="filter_id" colrow="col-lg-6"
+            <x-form-select-arr  label="{{__('admin.upFilter.form.name')}}" name="filter_id" colrow="col-lg-6"
                                 sendvalue="{{old('filter_id',1)}}" :send-arr="$filterTypes"/>
 
 
@@ -25,6 +25,12 @@
                 <div class="col-md-6">
                     <input class="form-control" type="file" name="image" accept="image/*" >
                 </div>
+                <label class="col-md-3 col-form-label">تحديد الصورة</label>
+                <div class="col-md-6">
+
+                     <img src="{{defImagesDir($rowData->photo)}}">
+                </div>
+
             </div>
 
             <!--

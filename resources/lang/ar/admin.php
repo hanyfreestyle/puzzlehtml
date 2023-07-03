@@ -87,10 +87,11 @@ return [
             'more_setting'=> 'الاعدادات الاضافة',
             'text_setting'=> 'اضافة نص للصورة',
             'watermark_setting'=> 'اعدادات العلامة المائية',
+            'add_new_size'=> 'اضافة صورة جديدة',
 
             "name" => 'اسم الفلتر',
             "type" => 'نوع الفلتر',
-            "convert_state" => 'تحويل الصورة الى webP ',
+            "convert_state" => 'تحويل الى webP ',
             "quality_val" => 'جوده الصورة',
             "new_w" => 'عرض الصورة',
             "new_h" => 'ارتفاع الصورة ',

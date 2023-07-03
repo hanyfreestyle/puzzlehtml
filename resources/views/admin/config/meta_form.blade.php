@@ -19,7 +19,7 @@
             </div>
         @endif
 
-        <form action="{{route($formRoute,intval($oldData->id))}}" method="post">
+        <form class="mainForm" action="{{route($formRoute,intval($oldData->id))}}" method="post">
             @csrf
 
             <x-form-input label="# CatId" name="cat_id" :requiredSpan="true" colrow="col-lg-4"

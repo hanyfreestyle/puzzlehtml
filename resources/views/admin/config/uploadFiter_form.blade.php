@@ -19,13 +19,20 @@
         </div>
     @endif
 
-    <form action="{{route('config.upFilter.store',intval($rowData->id))}}" method="post">
+    <form class="mainForm uploadFilterForm" action="{{route('config.upFilter.store',intval($rowData->id))}}" method="post">
         @csrf
         <div class="container-fluid">
             <div class="row">
 
                 <div class="col-lg-6">
                     <x-ui-card title="{{__('admin.upFilter.form.main_setting')}}" :add-form-error="false"   >
+
+                        <div class="row">
+                            <x-form-on-off label="{{__('admin.upFilter.form.convert_state')}}" name="convert_state" value="{{old('convert_state',$rowData->convert_state)}}" colrow="col-lg-7" />
+                            <x-form-input label="{{__('admin.upFilter.form.quality_val')}}" name="quality_val" :horizontal-label="true" :requiredSpan="true" colrow="col-lg-5"
+                                          value="{{old('quality_val',$rowData->quality_val)}}" inputclass="dir_en"/>
+                        </div>
+                        <hr>
                         <div class="row">
                             <x-form-input label="{{__('admin.upFilter.form.name')}}" name="name" :requiredSpan="true"   colrow="col-lg-5"
                                           value="{{old('name',$rowData->name)}}" inputclass="dir_ar"/>
@@ -42,53 +49,12 @@
                                           value="{{old('new_h',$rowData->new_h)}}" inputclass="dir_en"/>
                             <x-form-input-color name="canvas_back" label="{{__('admin.upFilter.form.canvas_back')}}" value="{{old('canvas_back',$rowData->canvas_back)}}" />
                         </div>
-                        <hr>
-                        <div class="row">
-                            <x-form-on-off label="{{__('admin.upFilter.form.convert_state')}}" name="convert_state" value="{{old('convert_state',$rowData->convert_state)}}" colrow="col-lg-7" />
-                            <x-form-input label="{{__('admin.upFilter.form.quality_val')}}" name="quality_val" :horizontal-label="true" :requiredSpan="true" colrow="col-lg-5"
-                                          value="{{old('quality_val',$rowData->quality_val)}}" inputclass="dir_en"/>
-                        </div>
-                    </x-ui-card>
-                    <x-ui-card title="{{__('admin.upFilter.form.watermark_setting')}}" :add-form-error="false"   >
-
-                        <div class="row">
-                            <x-form-select-arr  label="{{__('admin.upFilter.form.watermark_state')}}" name="watermark_state" colrow="col-lg-5"
-                                                sendvalue="{{old('watermark_state',$rowData->watermark_state)}}" :send-arr="config('adminVar.ActiveState')"/>
-                            <x-form-select-arr  label="{{__('admin.upFilter.form.watermark_position')}}" name="watermark_position" colrow="col-lg-7"
-                                                sendvalue="{{old('watermark_position',$rowData->watermark_position)}}" :send-arr="config('adminVar.watermarkPositionArr')"
-                            />
-                        </div>
-                        <hr>
-
-                        <div class="row">
-                            <x-form-select-arr  label="{{__('admin.upFilter.form.watermark_img')}}" name="watermark_img" colrow="col-lg-12" select-type="file"
-                                                sendvalue="{{old('watermark_img',$rowData->watermark_img)}}" :send-arr="config('adminVar.logoFileList')"/>
-                        </div>
-                        <hr>
-                        <div class="form-group row">
-                            <label class="col-md-12 col-form-label">الصورة المستخدمة </label>
-                            <div class="col-md-12">
-                                <div class="watermark_imgView">
-
-                                    <?php
-                                    $watermark_img =old('watermark_img',$rowData->watermark_img);
-                                    if($watermark_img != ''){
-                                        $thisViewImage = app('url')->asset($watermark_img);
-                                    }else{
-                                        $thisViewImage = "";
-                                    }
-                                    ?>
-
-                                    <img id="imageused" class="" src="{{$thisViewImage}}">
-
-
-                                </div>
-                                <input type="hidden" id="app_path" class="form-control force_ltr" value="{{ app('url')->asset("/")}}">
-                            </div>
-                        </div>
 
 
                     </x-ui-card>
+
+                    <hr>
+                    <x-action-button url="" lable="{{__('admin.upFilter.form.add_new_size')}}" size="m" />
                 </div>
 
 
@@ -115,6 +81,42 @@
                             <x-form-input label="{{__('admin.upFilter.form.pixelate_size')}}" name="pixelate_size" :horizontal-label="true" :requiredSpan="true" colrow="col-lg-5"
                                           value="{{old('pixelate_size',$rowData->pixelate_size)}}" inputclass="dir_en"/>
                         </div>
+
+                    </x-ui-card>
+                    <x-ui-card title="{{__('admin.upFilter.form.watermark_setting')}}" :add-form-error="false"   >
+
+                        <div class="row">
+                            <x-form-select-arr  label="{{__('admin.upFilter.form.watermark_state')}}" name="watermark_state" colrow="col-lg-5"
+                                                sendvalue="{{old('watermark_state',$rowData->watermark_state)}}" :send-arr="config('adminVar.ActiveState')"/>
+                            <x-form-select-arr  label="{{__('admin.upFilter.form.watermark_position')}}" name="watermark_position" colrow="col-lg-7"
+                                                sendvalue="{{old('watermark_position',$rowData->watermark_position)}}" :send-arr="config('adminVar.watermarkPositionArr')"
+                            />
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <x-form-select-arr  label="{{__('admin.upFilter.form.watermark_img')}}" name="watermark_img" colrow="col-lg-12" select-type="file"
+                                                sendvalue="{{old('watermark_img',$rowData->watermark_img)}}" :send-arr="config('adminVar.logoFileList')"/>
+                        </div>
+                        <hr>
+                        <div class="form-group row">
+                            <label class="col-md-12 col-form-label">الصورة المستخدمة </label>
+                            <div class="col-md-12">
+                                <div class="watermark_imgView">
+                                    <?php
+                                    $watermark_img =old('watermark_img',$rowData->watermark_img);
+                                    if($watermark_img != ''){
+                                        $thisViewImage = app('url')->asset($watermark_img);
+                                    }else{
+                                        $thisViewImage = "";
+                                    }
+                                    ?>
+                                    <img id="imageused" class="" src="{{$thisViewImage}}">
+                                </div>
+                                <input type="hidden" id="app_path" class="form-control force_ltr" value="{{ app('url')->asset("/")}}">
+                            </div>
+                        </div>
+
 
                     </x-ui-card>
                     <x-ui-card title="{{__('admin.upFilter.form.text_setting')}}" :add-form-error="false"   >
@@ -156,7 +158,6 @@
     </form>
     <br>
     <br>
-
 
 
 @endsection

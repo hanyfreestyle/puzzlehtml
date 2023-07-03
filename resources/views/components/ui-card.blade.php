@@ -8,8 +8,8 @@
 
     @if ($cardHeaderView)
 
-        <div class="card-header" data-card-widget="{{$collapsedStyle}}">
-            <h3 class="card-title pt-2 {{$titleColor}} font-weight-normal ">{{$title}}</h3>
+        <div class="card-header def_card_header" data-card-widget="{{$collapsedStyle}}">
+            <h3 class="card-title {{$titleColor}} font-weight-normal ">{{$title}}</h3>
             <div class="card-tools">
                 @if($collapsed)
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>

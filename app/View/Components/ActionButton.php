@@ -15,6 +15,7 @@ class ActionButton extends Component
     public $url ;
     public $icon ;
     public $type ;
+    public $id;
 
     public function __construct(
         $url = "#",
@@ -24,7 +25,7 @@ class ActionButton extends Component
         $tip = false,
         $icon = null,
         $type = null,
-
+        $id = null,
 
     )
     {
@@ -35,6 +36,7 @@ class ActionButton extends Component
 
         $this->size = getButSize($size);
         $this->bg = getBgColor($bg);
+        $this->id = $id;
 
         if($type){
             switch ($type) {

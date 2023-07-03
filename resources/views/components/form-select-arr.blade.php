@@ -1,6 +1,6 @@
 <div class="{{$colrow}}">
     <div class="form-group">
-        <label class="col-form-label font-weight-light">
+        <label class="def_form_label col-form-label font-weight-light">
             {{$label}}
             @if($requiredSpan)
                 <span class="required_Span">*</span>

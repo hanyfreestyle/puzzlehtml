@@ -8,11 +8,27 @@ use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 
-class AdminImageUpload extends AdminMainController {
+class AdminImageUpload  {
 
 
-    static function UploadOne($request,$sendArr=array()){
 
+    public $size = 20;
+    protected $heghit,$width;
+
+
+    public function getSize($width,$heghit){
+        $this->heghit = $heghit;
+        $this->width = $width;
+    }
+
+
+
+
+
+
+
+     function UploadOne($request,$sendArr=array()){
+        $saveData = [];
         $saveDirIs = AdminHelper::arrIsset($sendArr,'saveDirIs','uploads/album/');
         $fileName = AdminHelper::arrIsset($sendArr,'fileName','image');
         $newName = AdminHelper::arrIsset($sendArr,'newName','');

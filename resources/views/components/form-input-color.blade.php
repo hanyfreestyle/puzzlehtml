@@ -1,5 +1,5 @@
 <div class="form-group col-lg-4">
-    <label class="col-form-label font-weight-light">{{$label}}
+    <label class="def_form_label col-form-label font-weight-light">{{$label}}
         <span class="required_Span">*</span>
     </label>
     <div class="input-group my-colorpicker2">

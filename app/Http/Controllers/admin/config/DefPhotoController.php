@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
 use App\Helpers\AdminImageUpload;
+use App\Helpers\HanyUpload;
 use App\Helpers\ImageFilters;
 use App\Http\Controllers\AdminMainController;
 
@@ -36,6 +37,10 @@ class DefPhotoController extends AdminMainController
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
+    /*
+     * @ to create data
+     * @var hany must be array
+     */
     public function create(){
         $rowData = DefPhoto::findOrNew(0);
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
@@ -73,16 +78,40 @@ class DefPhotoController extends AdminMainController
     public function storeUpdate(DefPhotoRequest $request,$id='0'){
 
         $request-> validated();
-        $sendArr = [
-            "newName"=> 'Hany Darwish',
-            "saveDirIs"=> 'uploads/album/22/',
-        ];
 
+
+
+        $sendArr = [
+            //"newName"=> 'Hany Darwish',
+            //"saveDirIs"=> 'uploads/album/22/',
+        ];
         $saveImgData  = AdminImageUpload::UploadOne($request,$sendArr);
+
+        /*
+        $saveImgData  = new AdminImageUpload();
+        $saveImgData->size = 20;
+            $saveImgData->getSize('20',50);
+
+$saveImgData->UploadOne($request,$sendArr);
+$saveImgData->UploadOne($request,$sendArr);
+$saveImgData->UploadOne($request,$sendArr);
+$saveImgData->UploadOne($request,$sendArr);
+        $saveImgData->size = 40;
+$saveImgData->UploadOne($request,$sendArr);
+*/
+
+
+
 
         $saveData =  DefPhoto::findOrNew($id) ;
         $saveData->cat_id = $request->input('cat_id');
-        $saveData->photo = $saveImgData['file_name'];
+        if(count($saveImgData) != '0'){
+            if(File::exists($saveData->photo)){
+                File::delete($saveData->photo);
+            }
+            $saveData->photo = $saveImgData['file_name'];
+        }
+
 
         $saveData->save();
 

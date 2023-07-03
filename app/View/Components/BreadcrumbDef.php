@@ -6,15 +6,18 @@ use Illuminate\View\Component;
 class BreadcrumbDef extends Component
 {
     public $pageData = array();
+    public $butView ;
 
 
     public function __construct(
 
-        $pageData = array()
+        $pageData = array(),
+        $butView = true ,
 
     )
     {
         $this->pageData = $pageData;
+        $this->butView = $butView ;
 
 
     }
