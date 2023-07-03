@@ -11,7 +11,7 @@ use Intervention\Image\Facades\Image;
 class AdminImageUpload  {
 
 
-
+/*
     public $size = 20;
     protected $heghit,$width;
 
@@ -21,13 +21,11 @@ class AdminImageUpload  {
         $this->width = $width;
     }
 
+*/
 
 
 
-
-
-
-     function UploadOne($request,$sendArr=array()){
+        static function UploadOne($request,$sendArr=array()){
         $saveData = [];
         $saveDirIs = AdminHelper::arrIsset($sendArr,'saveDirIs','uploads/album/');
         $fileName = AdminHelper::arrIsset($sendArr,'fileName','image');

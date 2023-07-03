@@ -24,10 +24,10 @@ return new class extends Migration
             $table->integer('flip_state')->default('0');
             $table->integer('flip_v')->default('0');
             $table->integer('blur')->default('0');
-            $table->string('blur_size')->nullable();
+            $table->string('blur_size')->default('0');
 
             $table->integer('pixelate')->default('0');
-            $table->string('pixelate_size')->nullable();
+            $table->string('pixelate_size')->default('5');
             $table->integer('text_state')->default('0');
             $table->string('text_print')->nullable();
 

@@ -82,23 +82,12 @@ class DefPhotoController extends AdminMainController
 
 
         $sendArr = [
-            //"newName"=> 'Hany Darwish',
+            "newName"=> 'Hany Darwish'.Str::random(10),
             //"saveDirIs"=> 'uploads/album/22/',
         ];
         $saveImgData  = AdminImageUpload::UploadOne($request,$sendArr);
 
-        /*
-        $saveImgData  = new AdminImageUpload();
-        $saveImgData->size = 20;
-            $saveImgData->getSize('20',50);
 
-$saveImgData->UploadOne($request,$sendArr);
-$saveImgData->UploadOne($request,$sendArr);
-$saveImgData->UploadOne($request,$sendArr);
-$saveImgData->UploadOne($request,$sendArr);
-        $saveImgData->size = 40;
-$saveImgData->UploadOne($request,$sendArr);
-*/
 
 
 
