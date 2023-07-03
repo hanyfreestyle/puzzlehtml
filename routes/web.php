@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\config\DefPhotoController;
 use App\Http\Controllers\admin\config\MetaTagController;
 use App\Http\Controllers\admin\config\SettingsController;
 use App\Http\Controllers\admin\config\UploadFilterController;
+use App\Http\Controllers\admin\config\UploadFilterSizeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,7 +60,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::post('/upFilter/store/{id}', [UploadFilterController::class,'storeUpdate'])->name('config.upFilter.store');
         Route::get('/upFilter/edit/{id}', [UploadFilterController::class,'edit'])->name('config.upFilter.edit');
         Route::post('/upFilter/Update/{id}', [UploadFilterController::class,'storeUpdate'])->name('config.upFilter.update');
-        Route::delete('/upFilter/delete/{id}', [UploadFilterController::class,'destroy'])->name('config.upFilter.destroy');
+        Route::get('/upFilter/delete/{id}', [UploadFilterController::class,'destroy'])->name('config.upFilter.destroy');
+
+        Route::get('/upFilterSize/create/{filterId}', [UploadFilterSizeController::class,'create'])->name('config.upFilter.size.create');
+        Route::post('/upFilterSize/store/{id}', [UploadFilterSizeController::class,'storeUpdate'])->name('config.upFilter.size.storeOrUpdate');
+        Route::get('/upFilterSize/edit/{id}', [UploadFilterSizeController::class,'edit'])->name('config.upFilter.size.edit');
+        Route::get('/upFilterSize/delete/{id}', [UploadFilterSizeController::class,'destroy'])->name('config.upFilter.size.destroy');
 
 
         Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');

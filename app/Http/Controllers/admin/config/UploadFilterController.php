@@ -4,9 +4,10 @@ namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
-use App\Models\admin\config\Amenity;
 use App\Models\admin\config\UploadFilter;
 use App\Http\Requests\admin\config\UploadFilterRequest;
+use App\Models\admin\config\UploadFilterSize;
+
 
 
 class UploadFilterController extends AdminMainController
@@ -16,7 +17,7 @@ class UploadFilterController extends AdminMainController
     public function index()
     {
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
-        $rowData = UploadFilter::orderBy('id','desc')->paginate(10);
+        $rowData = UploadFilter::orderBy('id')->paginate(10);
         $pageData['ViewType'] = "List";
         return view('admin.config.uploadFilter_index',compact('pageData','rowData'));
     }
@@ -33,10 +34,11 @@ class UploadFilterController extends AdminMainController
         $rowData['pixelate_size'] = '5';
         $rowData['text_state'] = '0';
         $rowData['watermark_state'] = '0';
+        $rowDataSize = [];
 
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
         $pageData['ViewType'] = "Add";
-        return view('admin.config.uploadFiter_form',compact('pageData','rowData'));
+        return view('admin.config.uploadFiter_form',compact('pageData','rowData','rowDataSize'));
     }
 
     public function edit($id)
@@ -44,8 +46,10 @@ class UploadFilterController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
         $pageData['ViewType'] = "Edit";
 
-        $rowData = UploadFilter::findOrNew($id);
-        return view('admin.config.uploadFiter_form',compact('pageData','rowData'));
+
+        $rowData = UploadFilter::findOrFail($id);
+        $rowDataSize = UploadFilterSize::where('filter_id',$id)->get();
+        return view('admin.config.uploadFiter_form',compact('pageData','rowData','rowDataSize'));
     }
 
 
@@ -61,10 +65,8 @@ class UploadFilterController extends AdminMainController
         $request['blur'] = (isset($request->blur)) ? 1 : 0 ;
         $request['pixelate'] = (isset($request->pixelate)) ? 1 : 0 ;
 
+        $saveData = UploadFilter::findOrNew($id);
 
-
-
-        $saveData =  UploadFilter::findOrNew($id);
         $saveData->name = $request->name;
         $saveData->type = $request->type;
         $saveData->new_w = $request->new_w;

@@ -14,7 +14,7 @@
 
                     @if(count($rowData)>0)
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
+                            <table class="table table-hover text-wrap">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -49,10 +49,11 @@
                                         <td class="text-center">{!! printStateIcon($row->watermark_state) !!}</td>
 
                                         <td>
-                                            <x-action-button url="{{route('config.upFilter.edit',$row->id)}}" type="edit" :tip="false" />
+                                            <x-action-button url="{{route('config.upFilter.edit',$row->id)}}" type="edit" :tip="true" />
                                         </td>
+
                                         <td>
-                                            <x-script.sweet-delete-button route-name="config.upFilter.destroy" :row="$row" />
+                                            <x-action-button url="#" id="{{route('config.upFilter.destroy',$row->id)}}" type="deleteSweet" :tip="true" />
                                         </td>
 
                                     </tr>
@@ -74,5 +75,5 @@
 @endsection
 
 @push('JsCode')
-    <x-script.sweet-delete-js-code/>
+    <x-script.sweet-delete-js-code-no-form/>
 @endpush

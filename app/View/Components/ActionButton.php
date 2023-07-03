@@ -16,6 +16,7 @@ class ActionButton extends Component
     public $icon ;
     public $type ;
     public $id;
+    public $sweetDelClass;
 
     public function __construct(
         $url = "#",
@@ -26,6 +27,7 @@ class ActionButton extends Component
         $icon = null,
         $type = null,
         $id = null,
+        $sweetDelClass = '',
 
     )
     {
@@ -37,6 +39,7 @@ class ActionButton extends Component
         $this->size = getButSize($size);
         $this->bg = getBgColor($bg);
         $this->id = $id;
+        $this->sweetDelClass = $sweetDelClass;
 
         if($type){
             switch ($type) {
@@ -62,6 +65,14 @@ class ActionButton extends Component
                     $this->bg = getBgColor('d');
                     $this->lable = __('general.buttonAction.delete');
                     break;
+
+                case 'deleteSweet':
+                    $this->icon = 'fas fa-trash ';
+                    $this->bg = getBgColor('d');
+                    $this->lable = __('general.buttonAction.delete');
+                    $this->sweetDelClass = ' sweet_daleteBtn_noForm ';
+                    break;
+
             }
         }
 

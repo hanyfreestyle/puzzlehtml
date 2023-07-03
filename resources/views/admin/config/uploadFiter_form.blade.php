@@ -5,11 +5,7 @@
 
     <x-breadcrumb-def :pageData="$pageData"/>
 
-    @if(Session::has($pageData['ViewType'].'.Done'))
-        <div class="alert alert-success alert-dismissible">
-            {!! Session::get($pageData['ViewType'].'.Done') !!}
-        </div>
-    @endif
+    <x-mass.confirm-massage/>
 
     @if($errors->has([]))
         <div class=" col-12">
@@ -53,10 +49,48 @@
 
                     </x-ui-card>
 
-                    <hr>
-                    <x-action-button url="" lable="{{__('admin.upFilter.form.add_new_size')}}" size="m" />
-                </div>
+                    @if(count($rowDataSize) > 0)
+                        <x-ui-card title="{{__('admin.upFilter.form.more_photo')}}" :add-form-error="false">
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-wrap">
+                                    <thead>
+                                    <tr>
+                                        <th>{{__('admin.upFilter.form.type')}}</th>
+                                        <th>{{__('admin.upFilter.form.new_w')}}</th>
+                                        <th>{{__('admin.upFilter.form.new_h')}}</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @php
+                                        $filterTypeArr = config('adminVar.FilterTypeArr');
+                                    @endphp
+                                    @foreach($rowDataSize as $DataSize)
+                                        <tr>
+                                            <td>{{ $filterTypeArr[$DataSize->type]['name']}}</td>
+                                            <td class="text-center">{{$DataSize->new_w}}</td>
+                                            <td class="text-center">{{$DataSize->new_h}}</td>
+                                            <td>
+                                                <x-action-button url="{{route('config.upFilter.size.edit',$DataSize->id)}}" type="edit" :tip="true" />
+                                            </td>
+                                            <td>
+                                                <x-action-button id="{{route('config.upFilter.size.destroy',$DataSize->id)}}" type="deleteSweet" :tip="true" url="#" />
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </x-ui-card>
+                    @endif
 
+                    @if(intval($rowData->id)!= '0')
+                        <hr>
+                        <x-action-button url="{{route('config.upFilter.size.create',$rowData->id)}}" lable="{{__('admin.upFilter.form.add_new_size')}}" size="m" />
+                    @endif
+
+                </div>
 
                 <div class="col-lg-6">
                     <x-ui-card title="{{__('admin.upFilter.form.more_setting')}}" :add-form-error="false"   >
@@ -149,7 +183,6 @@
                     </x-ui-card>
                 </div>
 
-
             </div>
         </div>
         <div class="container-fluid">
@@ -164,6 +197,7 @@
 
 
 @push('JsCode')
+    <x-script.sweet-delete-js-code-no-form/>
     <script>
         $(document).ready(function(){
             $("#watermark_img").change(function(){

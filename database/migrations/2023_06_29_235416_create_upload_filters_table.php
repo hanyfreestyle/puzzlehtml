@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('quality_val')->default('85');
             $table->integer('new_w');
             $table->integer('new_h');
-            $table->string('canvas_back')->nullable();
+            $table->string('canvas_back')->default('#ffffff');
             $table->integer('greyscale')->default('0');
             $table->integer('flip_state')->default('0');
             $table->integer('flip_v')->default('0');
