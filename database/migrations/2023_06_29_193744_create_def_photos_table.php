@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('config_def_photos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cat_id');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->integer('postion')->default(0);
             $table->timestamps();
         });

@@ -11,6 +11,6 @@ class UploadFilter extends Model
     protected $table = "config_upload_filters";
 
     public function FiltersSize(){
-        return $this->hasMany(UploadFilterSize::class,'filter_id','id');
+      //  return $this->hasMany(UploadFilterSize::class,'filter_id','id');
     }
 }

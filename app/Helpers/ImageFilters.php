@@ -8,17 +8,18 @@ use Intervention\Image\Filters\FilterInterface;
 class ImageFilters implements FilterInterface
 {
 
-    private $filterId;
+    private $filterData;
 
-    public function __construct($filterId)
+    public function __construct($filterData)
     {
-        $this->filterId = $filterId;
+        $this->filterData = $filterData;
     }
 
 
     public function applyFilter(Image $image){
 
-        $FilterOption = UploadFilter::find($this->filterId);
+        //$FilterOption = UploadFilter::find($this->filterId);
+        $FilterOption = $this->filterData;
         $newWidth =$FilterOption->new_w;
         $newHeight = $FilterOption->new_h;
         $filterType = $FilterOption->type;
@@ -70,7 +71,9 @@ class ImageFilters implements FilterInterface
             $fontGetColor = AdminHelper::hex2rgb($FilterOption->font_color,$opacity);
 
             $image->text($txt, $text_x, $text_y, function($font) use($FilterOption,$fontGetColor){
-                $font->file(base_path($FilterOption->font_path));
+               // dd(public_path($FilterOption->font_path));
+               // dd($FilterOption->font_path);
+                $font->file(public_path($FilterOption->font_path));
                 $font->size($FilterOption->font_size);
                 $font->color($fontGetColor);
                 $font->align('center');

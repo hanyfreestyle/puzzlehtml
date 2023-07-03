@@ -38,8 +38,8 @@ return [
         "button_Add" => 'اضافة جديدة',
         "button_Submit" => 'اضافة',
         "button_Edit" => 'تعديل',
-        "fileUpload" => 'تعديل',
-        "fileUploadPhoto" => 'تعديل',
+        "PhotoUpload" => 'تحميل صورة',
+        "currentPhoto" => 'الصورة الحالية',
     ],
 
     "buttonAction" => [

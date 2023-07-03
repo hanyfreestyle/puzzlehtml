@@ -18,20 +18,17 @@
             <x-form-select-arr  label="{{__('admin.upFilter.form.name')}}" name="filter_id" colrow="col-lg-6"
                                 sendvalue="{{old('filter_id',1)}}" :send-arr="$filterTypes"/>
 
-<input type="text" name="cat_id" value="{{Str::random(15)}}">
+            <input type="text" name="cat_id" value="{{Str::random(15)}}">
 
-            <div class="form-group">
-                <label class="col-md-3 col-form-label">تحديد الصورة</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="file" name="image" accept="image/*" >
-                </div>
-                <label class="col-md-3 col-form-label">تحديد الصورة</label>
-                <div class="col-md-6">
 
-                     <img src="{{defImagesDir($rowData->photo)}}">
-                </div>
+            <hr>
 
-            </div>
+            <x-form.upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" />
+
+
+
+
+
 
             <div class="container-fluid mb-5 mt-2">
                 <x-form-submit text="{{$pageData['ViewType']}}" />

@@ -82,13 +82,13 @@ class DefPhotoController extends AdminMainController
 
 
         $sendArr = [
-            "newName"=> 'Hany Darwish'.Str::random(10),
+           // "newName"=> 'Hany Darwish',
             //"saveDirIs"=> 'uploads/album/22/',
         ];
         $saveImgData  = AdminImageUpload::UploadOne($request,$sendArr);
 
 
-
+        dd($saveImgData);
 
 
 
@@ -99,6 +99,8 @@ class DefPhotoController extends AdminMainController
                 File::delete($saveData->photo);
             }
             $saveData->photo = $saveImgData['file_name'];
+        }else{
+
         }
 
 
