@@ -26,10 +26,13 @@ class AdminImageUpload  {
 
         $filter_Id = AdminHelper::arrIsset($sendArr,'filter_id',$request->filter_id);
 
+
+
         if (request()->hasFile($fileName)) {
 
             // مكان الحفظ
-            $saveDirIs = AdminImageUpload::createDirectory($saveDirIs);
+           // $saveDirIs = AdminImageUpload::createDirectory($saveDirIs);
+            $saveDirIs = self::createDirectory($saveDirIs);
 
             /// بيانات الفلتر
             $filterData = UploadFilter::find($filter_Id);
@@ -40,13 +43,16 @@ class AdminImageUpload  {
             /// بيانات الملف المرفوع
             $file = $request->file($fileName);
 
-            $FileExtension = AdminImageUpload::getFileExtension($file,$filterData);
+            $FileExtension = self::getFileExtension($file,$filterData);
+
 
             /// الصورة الاصلية
             $saveImage =  Image::make($file);
 
 
-            $newName = AdminImageUpload::getNewName($FileExtension,$saveDirIs,$request,$sendArr);
+            $newName = self::getNewName($FileExtension,$saveDirIs,$request,$sendArr);
+
+
 
             //$saveImage->filter(new ImageFilters($request->filter_id));
             $saveImage->filter(new ImageFilters($filterData));
@@ -60,20 +66,17 @@ class AdminImageUpload  {
                     "file_name"=>$saveDirIs.$saveImage->basename,
                     "extension"=>$saveImage->extension,
                     "type"=>"image",
-                    /*
-                    "file_size"=> $saveImage->filesize(),
-                    "Width"=> $saveImage->getWidth(),
-                    "Height"=> $saveImage->getHeight(),
-*/
                 ],
             ];
 
+//dd($filterData);
+//dd($filterSizeData);
 
             if(count($filterSizeData) > 0){
                 $index = 1;
                 foreach ($filterSizeData as $newFilter ){
-
-                    $newName = AdminImageUpload::getNewName($FileExtension,$saveDirIs,$request,$sendArr);
+                    $saveImage =  Image::make($file);
+                    $newName = self::getNewName($FileExtension,$saveDirIs,$request,$sendArr);
 
                     $saveImage->filter(new ImageFilters($newFilter));
 
@@ -85,11 +88,6 @@ class AdminImageUpload  {
                             "file_name"=>$saveDirIs.$saveImage->basename,
                             "extension"=>$saveImage->extension,
                             "type"=>"image",
-                            /*
-                            "file_size"=> $saveImage->filesize(),
-                            "Width"=> $saveImage->getWidth(),
-                            "Height"=> $saveImage->getHeight(),
-                            */
                         ],
                     ];
 
@@ -110,21 +108,17 @@ class AdminImageUpload  {
         if(!File::isDirectory($fullPath)){
             File::makeDirectory($fullPath, 0777, true, true);
         }
-
         return $uploadDir ;
     }
 
     static function getFileExtension($file,$filterData)
     {
         $soursFileExtension = $file->extension();
-        // $ConvertImage = $filterData->convert_state ;
 
         if( $filterData->convert_state == '1'){
             $soursFileExtension = "webp";
         }
-
         return $soursFileExtension ;
-
     }
 
     static function getNewName($FileExtension,$saveDirIs,$request,$sendArr=array()){

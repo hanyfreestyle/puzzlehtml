@@ -1,6 +1,5 @@
 <?php
 namespace App\Helpers;
-use App\Models\admin\config\UploadFilter;
 use Intervention\Image\Image;
 use Intervention\Image\Filters\FilterInterface;
 
@@ -94,7 +93,7 @@ class ImageFilters implements FilterInterface
 
                 }
 
-                $watermark = NewHelpers::getImageWatermark($FilterOption->watermark_img);
+                $watermark = AdminHelper::getImageWatermark($FilterOption->watermark_img);
 
                 if($FilterOption->watermark_position == 'center') {
                     $watermark->widen($newWidth, function ($constraint) {

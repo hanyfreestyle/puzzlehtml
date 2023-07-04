@@ -3,6 +3,7 @@ namespace App\Helpers;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class AdminHelper{
@@ -311,6 +312,12 @@ class AdminHelper{
         return $uploadDir ;
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #getImageWatermark
+    static function getImageWatermark($path){
+        $img = Image::make(public_path($path));
+        return $img ;
+    }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Text
 
