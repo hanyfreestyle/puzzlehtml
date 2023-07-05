@@ -19,6 +19,11 @@ return new class extends Migration
             $table->integer('new_h');
             $table->string('canvas_back')->nullable();
 
+            $table->integer('get_more_option')->default('0');
+            $table->integer('get_add_text')->default('0');
+            $table->integer('get_watermark')->default('0');
+
+
             $table->foreign('filter_id')->references('id')->on('config_upload_filters')->onDelete('cascade');
         });
     }

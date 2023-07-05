@@ -12,6 +12,7 @@ class ImageFilters implements FilterInterface
     public function __construct($filterData)
     {
         $this->filterData = $filterData;
+
     }
 
 

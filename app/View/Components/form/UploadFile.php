@@ -17,6 +17,8 @@ class UploadFile extends Component
     public $req;
     public $rowData;
     public $fildName;
+    public $multiple;
+    public $acceptFile;
 
     public function __construct(
         $rowCol = 'col-6',
@@ -27,6 +29,8 @@ class UploadFile extends Component
         $req = true ,
         $rowData = array(),
         $fildName = 'photo',
+        $multiple = false,
+        $acceptFile = "image/*",# image/*,.zip
 
     )
     {
@@ -38,6 +42,8 @@ class UploadFile extends Component
         $this->req = $req;
         $this->rowData = $rowData;
         $this->fildName = $fildName;
+        $this->multiple = $multiple;
+        $this->acceptFile = $acceptFile;
 
 
         if($this->viewType == 'Edit'){

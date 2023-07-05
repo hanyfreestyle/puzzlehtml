@@ -25,6 +25,19 @@
                             <x-form-input-color name="canvas_back" label="{{__('admin.upFilter.form.canvas_back')}}" value="{{old('canvas_back',$rowData->canvas_back)}}" />
                         </div>
 
+                        <div class="row">
+                            <x-form-select-arr  label="{{__('admin.upFilter.form.more_setting')}}" name="get_more_option" colrow="col-lg-4"
+                                                sendvalue="{{old('get_more_option',$rowData->get_more_option)}}" :send-arr="config('adminVar.ActiveState')"/>
+
+                            <x-form-select-arr  label="{{__('admin.upFilter.form.text_state')}}" name="get_add_text" colrow="col-lg-4"
+                                                sendvalue="{{old('get_add_text',$rowData->get_add_text)}}" :send-arr="config('adminVar.ActiveState')"/>
+
+                            <x-form-select-arr  label="{{__('admin.upFilter.form.watermark_state')}}" name="get_watermark" colrow="col-lg-4"
+                                                sendvalue="{{old('get_watermark',$rowData->get_watermark)}}" :send-arr="config('adminVar.ActiveState')"/>
+
+
+                        </div>
+
                         <div class="container-fluid">
                             <x-form-submit text="{{$pageData['ViewType']}}" />
                         </div>

@@ -28,7 +28,6 @@ Auth::routes();
 
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
-  #  Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
     Route::group(['prefix'=>'admin'],function(){
 
         Route::get('/Home', [AdminController::class, 'index'])->name('admin.Dashboard');

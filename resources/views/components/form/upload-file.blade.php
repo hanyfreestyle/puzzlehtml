@@ -7,7 +7,7 @@
                 @endif
             </label>
             <div class="col-md-12">
-                <input class="form-control" type="file" name="{{$fileName}}" accept="image/*" >
+                <input class="form-control" type="file" name="{{$fileName}}@if($multiple)[]@endif"  accept="{{$acceptFile}}"  @if($multiple) multiple @endif  >
             </div>
             @if($viewType == 'Edit')
                 @if(isset($rowData->$fildName))

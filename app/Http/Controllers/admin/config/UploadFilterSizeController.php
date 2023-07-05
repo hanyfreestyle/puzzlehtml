@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\UploadFilterSizeRequest;
 use App\Models\admin\config\UploadFilter;
 use App\Models\admin\config\UploadFilterSize;
-use App\Models\User;
-use Illuminate\Http\Request;
 
-class UploadFilterSizeController extends Controller
+
+class UploadFilterSizeController extends AdminMainController
 {
     public $controllerName = 'upFilter';
 
@@ -20,6 +19,9 @@ class UploadFilterSizeController extends Controller
         $rowData['filter_id'] = $filterId;
         $rowData['canvas_back'] = $FilterData->canvas_back;
         $rowData['type'] = $FilterData->type;
+        $rowData['get_more_option'] = '0';
+        $rowData['get_add_text'] = '0';
+        $rowData['get_watermark'] = '0';
 
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
         $pageData['ViewType'] = "Add";
@@ -46,6 +48,12 @@ class UploadFilterSizeController extends Controller
         $saveData->new_w = $request->new_w;
         $saveData->new_h = $request->new_h;
         $saveData->canvas_back = $request->canvas_back;
+
+        $saveData->get_more_option = $request->get_more_option;
+        $saveData->get_add_text = $request->get_add_text;
+        $saveData->get_watermark = $request->get_watermark;
+
+
         $saveData->save();
 
         if($id == '0'){

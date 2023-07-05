@@ -6,6 +6,7 @@ use App\Helpers\AdminHelper;
 use App\Helpers\AdminImageUpload;
 use App\Helpers\HanyUpload;
 use App\Helpers\ImageFilters;
+use App\Helpers\PuzzleImageUpload;
 use App\Http\Controllers\AdminMainController;
 
 use App\Http\Requests\admin\config\DefPhotoRequest;
@@ -18,7 +19,6 @@ use Illuminate\Support\Facades\File;
 
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-use Symfony\Component\Console\Input\Input;
 
 
 
@@ -81,15 +81,26 @@ class DefPhotoController extends AdminMainController
 
 
 
-        $sendArr = [
-            "newName"=> 'Hany',
-            //"saveDirIs"=> 'uploads/album/22/',
-        ];
 
+
+        $saveImgData = new PuzzleImageUpload();
+        //$saveImgData->newFileName = 'hany';
+        $saveImgData->setUploadDirIs('images/hany/');
+        //$saveImgData->UploadMultiple($request);
+        $saveImgData->UploadOne($request);
+
+
+
+        dd($saveImgData);
+
+
+       /*
         $saveImgData  = AdminImageUpload::UploadOne($request,$sendArr);
 
 
         dd($saveImgData);
+*/
+
 
 
 

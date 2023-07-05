@@ -23,7 +23,7 @@
 
             <hr>
 
-            <x-form.upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" />
+            <x-form.upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"    />
 
 
 

@@ -47,6 +47,7 @@ class UploadFilterController extends AdminMainController
         $pageData['ViewType'] = "Edit";
 
 
+        //$rowData = UploadFilter::with('FiltersSize')->findOrFail($id);
         $rowData = UploadFilter::findOrFail($id);
         $rowDataSize = UploadFilterSize::where('filter_id',$id)->get();
         return view('admin.config.uploadFiter_form',compact('pageData','rowData','rowDataSize'));
