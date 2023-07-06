@@ -3,22 +3,13 @@
 namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
-use App\Helpers\AdminImageUpload;
-use App\Helpers\HanyUpload;
-use App\Helpers\ImageFilters;
-use App\Helpers\PuzzleImageUpload;
+use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
-
 use App\Http\Requests\admin\config\DefPhotoRequest;
 use App\Models\admin\config\DefPhoto;
 use App\Models\admin\config\UploadFilter;
-
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
-use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 
 
 
@@ -65,10 +56,9 @@ class DefPhotoController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id){
         $deleteRow = DefPhoto::findOrNew($id);
-        if(File::exists($deleteRow->photo)){
-            File::delete($deleteRow->photo);
-        }
+        $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,3);
         $deleteRow->delete();
+
         return redirect(route('config.defPhoto.index'))
             ->with('confirmDelete',__('general.alertMass.confirmDelete'));
     }
@@ -76,47 +66,21 @@ class DefPhotoController extends AdminMainController
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
     public function storeUpdate(DefPhotoRequest $request,$id='0'){
-
         $request-> validated();
 
-
-
-
-
-        $saveImgData = new PuzzleImageUpload();
-        //$saveImgData->newFileName = 'hany';
-        $saveImgData->setUploadDirIs('images/hany/');
-        //$saveImgData->UploadMultiple($request);
+        $saveImgData = new PuzzleUploadProcess();
+        $saveImgData->setCountOfUpload('2');
+        $saveImgData->setUploadDirIs('puzzle');
+        $saveImgData->setnewFileName($request->cat_id);
         $saveImgData->UploadOne($request);
-
-
-
-        dd($saveImgData);
-
-
-       /*
-        $saveImgData  = AdminImageUpload::UploadOne($request,$sendArr);
-
-
-        dd($saveImgData);
-*/
-
-
-
 
         $saveData =  DefPhoto::findOrNew($id) ;
         $saveData->cat_id = $request->input('cat_id');
-        if(count($saveImgData) != '0'){
-            if(File::exists($saveData->photo)){
-                File::delete($saveData->photo);
-            }
-            $saveData->photo = $saveImgData['file_name'];
-        }else{
 
-        }
-
+        $saveData = AdminHelper::saveAndDeletePhoto($saveData,$saveImgData);
 
         $saveData->save();
+
 
         if($id == '0'){
             return redirect(route('config.defPhoto.index'))->with('Add.Done',__('general.alertMass.confirmAdd'));
@@ -160,69 +124,6 @@ class DefPhotoController extends AdminMainController
         return view('admin.config.defIcon_show')
             ->with(compact('pageData'));
 
-    }
-
-    public function storeUpdateSaveMoreThanImage(DefPhotoRequest $request,$id='0'){
-
-        $filterData = UploadFilter::find($request->filter_id );
-
-        $ConvertImage = $filterData->convert_state ;
-        $ConvertQuality = $filterData->quality_val ;
-
-        $saveDirIs = 'public/uploads/album/';
-
-        if (request()->hasFile('image')) {
-            $images = $request->file('image');
-
-            foreach ($images as $key => $file) {
-
-                $saveImage =  Image::make($file);
-                $soursFileExtension = $file->extension();
-
-                if($ConvertImage == '1'){
-                    $soursFileExtension = "webp";
-                }
-
-                $newName = time()."_".Str::random(15)."_".'.'.$soursFileExtension;
-                $newName =  AdminHelper::file_newname($saveDirIs,$newName);
-                $saveImage->filter(new ImageFilters($request->filter_id));
-
-                if($ConvertImage == '1'){
-                    $saveImage->save(base_path($saveDirIs.$newName), $ConvertQuality, 'webp');
-                }else{
-                    $saveImage->save(base_path($saveDirIs.$newName), $ConvertQuality, $soursFileExtension);
-                }
-
-                $dirPath = 'uploads/album/';
-                $saveData = [
-                    "file_original_name"=>$saveImage->filename,
-                    "file_name"=>$dirPath.$saveImage->basename,
-                    "extension"=>$saveImage->extension,
-                    "type"=>"image",
-                    "file_size"=> $saveImage->filesize(),
-                    "user_id"=>"9",
-                ];
-
-            }
-        }
-
-
-        dd($saveData);
-
-        /*
-        $request-> validated();
-
-        $saveData =  DefPhoto::findOrNew($id) ;
-        $saveData->cat_id = $request->input('cat_id');
-        $saveData->photo = $request->input('photo');
-        $saveData->save();
-
-        if($id == '0'){
-            return redirect(route('config.defPhoto.index'))->with('Add.Done',__('general.alertMass.confirmAdd'));
-        }else{
-            return  back()->with('Edit.Done',__('general.alertMass.confirmEdit'));
-        }
-*/
     }
 
 }

@@ -154,7 +154,7 @@ class AdminHelper{
 #|||||||||||||||||||||||||||||||||||||| #     Url_Slug
     static function Url_Slug($str, $options = array()) {
         // Make sure string is in UTF-8 and strip invalid UTF-8 characters
-        $str = mb_convert_encoding((string)$str, 'UTF-8', mb_list_encodings());
+       // $str = mb_convert_encoding((string)$str, 'UTF-8', mb_list_encodings());
 
         $defaults = array(
             'delimiter' => '-',
@@ -319,10 +319,65 @@ class AdminHelper{
         return $img ;
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     Text
+#|||||||||||||||||||||||||||||||||||||| #     saveAndDeletePhoto
+    static function saveAndDeletePhoto($saveData,$saveImgData){
+
+        if(count( $saveImgData->sendSaveData) != 0){
+
+            if(File::exists($saveData->photo)){
+                File::delete($saveData->photo);
+            }
+            $saveData->photo = $saveImgData->sendSaveData['photo']['file_name'];
+
+            if($saveImgData->setCountOfUpload >= 2){
+                if(File::exists($saveData->photo_thum_1)){
+                    File::delete($saveData->photo_thum_1);
+                }
+                if(isset($saveImgData->sendSaveData['photo_thum_1'])){
+                    $saveData->photo_thum_1 = $saveImgData->sendSaveData['photo_thum_1']['file_name'];
+                }else{
+                    $saveData->photo_thum_1 = null;
+                }
+            }
+
+            if($saveImgData->setCountOfUpload >= 3){
+                if(File::exists($saveData->photo_thum_2)){
+                    File::delete($saveData->photo_thum_2);
+                }
+                if(isset($saveImgData->sendSaveData['photo_thum_2'])){
+                    $saveData->photo_thum_2 = $saveImgData->sendSaveData['photo_thum_2']['file_name'];
+                }else{
+                    $saveData->photo_thum_2 = null;
+                }
+            }
+
+        }
+        return $saveData ;
+
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     Text
+#|||||||||||||||||||||||||||||||||||||| #     onlyDeletePhotos
+    static function onlyDeletePhotos($deleteRow,$Num=2){
+
+        if(File::exists($deleteRow->photo)){
+            File::delete($deleteRow->photo);
+        }
+
+        if( $Num >= 2){
+            if(File::exists($deleteRow->photo_thum_1)){
+                File::delete($deleteRow->photo_thum_1);
+            }
+        }
+
+        if($Num >= 3){
+            if(File::exists($deleteRow->photo_thum_2)){
+                File::delete($deleteRow->photo_thum_2);
+            }
+        }
+
+        return $deleteRow ;
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Text

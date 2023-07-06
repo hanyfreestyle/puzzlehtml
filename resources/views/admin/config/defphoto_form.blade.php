@@ -16,19 +16,11 @@
                           value="{{old('cat_id',$rowData->cat_id)}}" inputclass="dir_en"/>
 
             <x-form-select-arr  label="{{__('admin.upFilter.form.name')}}" name="filter_id" colrow="col-lg-6"
-                                sendvalue="{{old('filter_id',1)}}" :send-arr="$filterTypes"/>
+                                sendvalue="{{old('filter_id')}}" :send-arr="$filterTypes"/>
 
-            <input type="text" name="cat_id" value="{{Str::random(15)}}">
-
-
+            <input type="hidden" name="cat_idXXXXX" value="{{Str::random(15)}}">
             <hr>
-
-            <x-form.upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"    />
-
-
-
-
-
+            <x-form.upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false" />
 
             <div class="container-fluid mb-5 mt-2">
                 <x-form-submit text="{{$pageData['ViewType']}}" />

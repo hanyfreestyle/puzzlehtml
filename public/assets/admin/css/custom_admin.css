@@ -77,8 +77,7 @@
 .card-bodyX{padding-top:10px;padding-bottom:30px}
 
 .popover-body{direction:ltr!important}
-#iconpicker_target{width:150px;font-size:40px;padding:0!important}
-#iconpicker_target i{margin-right:10px;margin-left:10px;font-size:35px}
+
 
 .table td,.table th{padding:.75rem;vertical-align:middle;border-top:1px solid #dee2e6}
 
@@ -100,3 +99,5 @@ max-width:250px;
 }
 
 
+#iconpicker_target{width:150px;font-size:40px;padding:0!important}
+#iconpicker_target i{margin-right:10px;margin-left:10px;font-size:35px}

@@ -7,7 +7,12 @@
                 @endif
             </label>
             <div class="col-md-12">
-                <input class="form-control" type="file" name="{{$fileName}}@if($multiple)[]@endif"  accept="{{$acceptFile}}"  @if($multiple) multiple @endif  >
+                <input class="form-control @error($fileName) is-invalid @enderror" type="file" name="{{$fileName}}@if($multiple)[]@endif"  accept="{{$acceptFile}}"  @if($multiple) multiple @endif >
+                @error($fileName)
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ \App\Helpers\AdminHelper::error($message,$fileName,$label) }}</strong>
+                </span>
+                @enderror
             </div>
             @if($viewType == 'Edit')
                 @if(isset($rowData->$fildName))

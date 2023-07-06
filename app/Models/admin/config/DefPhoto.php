@@ -9,4 +9,5 @@ class DefPhoto extends Model
 {
     use HasFactory;
     protected $table = "config_def_photos";
+    protected $fillable = ['cat_id','photo','postion','created_at','updated_at'];
 }

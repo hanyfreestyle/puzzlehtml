@@ -14,121 +14,69 @@ class PuzzleImageUpload
     public $newFileName ;
     public $fileUploadName ;
     public $sendSaveData ;
+    public $defNameInDB ;
+    public $thumNameInDB ;  # thumPhoto_
+    public $setCountOfUpload ;
 
     public function __construct(
         $UploadDirIs = 'images/',
         $newFileName = null,
         $fileUploadName = 'image',
         $sendSaveData = array(),
+
+        $defNameInDB = 'photo',
+        $thumNameInDB = 'photo_thum_',
+        $setCountOfUpload = '1',
+
     )
     {
         $this->UploadDirIs = $UploadDirIs ;
         $this->newFileName = $newFileName ;
         $this->fileUploadName = $fileUploadName ;
         $this->sendSaveData = $sendSaveData ;
-    }
 
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     UploadImage
-    public function UploadMultiple($request){
-        $saveDataArr = [] ;
-        if (request()->hasFile($this->fileUploadName)){
-            $images = $request->file('image');
-
-            $filter_Id = $request->filter_id ;
-            $index = 1;
-            foreach ($images as $key => $file)
-            {
-                $saveData = self::UploadImage($filter_Id,$file);
-                $saveDataArr += ['fileSave_'.$index =>  $saveData ];
-                $index++;
-            }
-
-        }
-        return  $this->sendSaveData = $saveDataArr;
+        $this->defNameInDB = $defNameInDB ;
+        $this->thumNameInDB = $thumNameInDB ;
+        $this->setCountOfUpload = $setCountOfUpload ;
 
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     UploadImage
-    public function UploadOne($request){
-
-        if (request()->hasFile($this->fileUploadName)) {
-
-            $filter_Id = $request->filter_id ;
-            $file = $request->file($this->fileUploadName);
-
-            $saveData = self::UploadImage($filter_Id,$file);
-
-            return  $this->sendSaveData = $saveData;
-        }
+#|||||||||||||||||||||||||||||||||||||| #     setnewFileName
+    public function setCountOfUpload($setCountOfUpload){
+        $this->setCountOfUpload = $setCountOfUpload;
+        return $this ;
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     UploadImage
-    public function  UploadImage($filter_Id,$file)
+#|||||||||||||||||||||||||||||||||||||| #     setnewFileName
+    public function setnewFileName($newFileName){
+
+        $newFileName = utf8_encode($newFileName);
+        $this->newFileName = $newFileName;
+        return $this ;
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     setUploadDirIs
+    public function setUploadDirIs($UploadDirIs,$defFolder = 'images')   #,$defFolder = 'images/'
     {
-        /// بيانات الفلتر
-        $filterData = UploadFilter::find($filter_Id);
+        $UploadDirIs = trim($UploadDirIs);
+        $lastLetter = substr($UploadDirIs, -1) ;
+        $firstLetter = substr($UploadDirIs, 0, 1) ;
 
-        // بيانات الصور الاضافيه
-        $filterSizeData = UploadFilterSize::where('filter_id',$filter_Id)->get();
+        if($lastLetter != '/' ){ $UploadDirIs = $UploadDirIs.'/'; }
+        if($firstLetter != '/' ){ $UploadDirIs = '/'.$UploadDirIs; }
 
+        $fullPath = public_path($defFolder.$UploadDirIs);
 
-        $FileExtension = self::getFileExtension($file,$filterData);
-
-        /// الصورة الاصلية
-        $saveImage =  Image::make($file);
-
-        $newName = self::getNewName($FileExtension,$this->newFileName,$this->UploadDirIs);
-
-
-        $saveImage->filter(new ImageFilters($filterData));
-
-        $saveImage->save(public_path($this->UploadDirIs.$newName), $filterData->quality_val, $FileExtension);
-
-
-        $saveData = [
-            'defPhoto' => [
-                "file_original_name"=>$saveImage->filename,
-                "file_name"=>$this->UploadDirIs.$saveImage->basename,
-                "extension"=>$saveImage->extension,
-                "type"=>"image",
-            ],
-        ];
-
-
-        if(count($filterSizeData) > 0){
-            $index = 1;
-            foreach ($filterSizeData as $newFilter ){
-
-                $newFilter =  self::mergeOldfilter($filterData,$newFilter);
-
-                $saveImage =  Image::make($file);
-                $newName = self::getNewName($FileExtension,$this->newFileName,$this->UploadDirIs);
-
-                $saveImage->filter(new ImageFilters($newFilter));
-
-                $saveImage->save(public_path($this->UploadDirIs.$newName), $filterData->quality_val, $FileExtension);
-
-                $saveData += [
-                    'thumPhoto_'.$index => [
-                        "file_original_name"=>$saveImage->filename,
-                        "file_name"=>$this->UploadDirIs.$saveImage->basename,
-                        "extension"=>$saveImage->extension,
-                        "type"=>"image",
-                    ],
-                ];
-
-                $index++;
-            }
-
+        if(!File::isDirectory($fullPath)){
+            File::makeDirectory($fullPath, 0777, true, true);
         }
-        return $saveData ;
+        $this->UploadDirIs = $defFolder.$UploadDirIs;
+
+        return $this ;
     }
-
-
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     mergeOldfilter
@@ -169,17 +117,7 @@ class PuzzleImageUpload
         return $newFilter;
     }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     setUploadDirIs
-    public function setUploadDirIs(mixed $UploadDirIs): void
-    {
 
-        $fullPath = public_path($UploadDirIs);
-        if(!File::isDirectory($fullPath)){
-            File::makeDirectory($fullPath, 0777, true, true);
-        }
-        $this->UploadDirIs = $UploadDirIs;
-    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     getFileExtension
@@ -207,3 +145,4 @@ class PuzzleImageUpload
         return $newName ;
     }
 }
+

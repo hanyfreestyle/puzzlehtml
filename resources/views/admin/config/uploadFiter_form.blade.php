@@ -85,7 +85,7 @@
                         </x-ui-card>
                     @endif
 
-                    @if(intval($rowData->id)!= '0')
+                    @if(intval($rowData->id)!= '0' and  count($rowDataSize) < 2 )
                         <hr>
                         <x-action-button url="{{route('config.upFilter.size.create',$rowData->id)}}" lable="{{__('admin.upFilter.form.add_new_size')}}" size="m" />
                     @endif
