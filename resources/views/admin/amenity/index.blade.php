@@ -33,7 +33,7 @@
                                     <tr>
                                         <td>{{$row->id}}</td>
                                         <td>@if($row->icon)<i class="amenity_table_icon bg-primary {{$row->icon}}"></i>@endif</td>
-                                        <td>{!! AdminHelper::printTableImage($row) !!} </td>
+                                        <td>{!! AdminHelper::printTableImage($row,'photo') !!} </td>
                                         <td>{{$row->translate('ar')->name}}</td>
                                         <td>{{$row->translate('en')->name}}</td>
                                         <td></td>

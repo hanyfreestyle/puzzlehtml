@@ -20,12 +20,13 @@ class AmenityRequest extends FormRequest
 
         if($id == '0'){
             $rules =[
+                'image' => 'mimes:jpeg,jpg,png,gif,webp|max:10000|nullable',
                 'filter_id'=> "required_with:image",
-                'image' => 'mimes:jpeg,jpg,png,gif|max:10000',
+
             ];
         }else{
             $rules =[
-                'image' => 'mimes:jpeg,jpg,png,gif|max:10000|nullable',
+                'image' => 'mimes:jpeg,jpg,png,gif,webp|max:10000|nullable',
                 'filter_id'=> "required_with:image",
 
             ];

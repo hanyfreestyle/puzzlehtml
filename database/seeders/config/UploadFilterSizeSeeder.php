@@ -13,10 +13,10 @@ class UploadFilterSizeSeeder extends Seeder
     {
 
         $addData = [
-            ['filter_id'=>"2",'type'=>"4",'new_w'=>"150",'new_h'=>"150"],
-            ['filter_id'=>"3",'type'=>"5",'new_w'=>"800",'new_h'=>"600",'canvas_back'=>'#FFFF00'],
-            ['filter_id'=>"3",'type'=>"5",'new_w'=>"400",'new_h'=>"300",'canvas_back'=>'#07A424'],
-
+            ['filter_id'=>"2",'type'=>"4",'new_w'=>"500",'new_h'=>"335"],
+            ['filter_id'=>"4",'type'=>"4",'new_w'=>"40",'new_h'=>"40"],
+            ['filter_id'=>"5",'type'=>"4",'new_w'=>"800",'new_h'=>"600",'canvas_back'=>'#ffffff'],
+            ['filter_id'=>"5",'type'=>"4",'new_w'=>"320",'new_h'=>"240",'canvas_back'=>'#ffffff'],
         ];
 
 

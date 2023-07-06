@@ -70,7 +70,7 @@ class DefPhotoController extends AdminMainController
 
         $saveImgData = new PuzzleUploadProcess();
         $saveImgData->setCountOfUpload('2');
-        $saveImgData->setUploadDirIs('puzzle');
+        $saveImgData->setUploadDirIs('def-photo');
         $saveImgData->setnewFileName($request->cat_id);
         $saveImgData->UploadOne($request);
 

@@ -12,9 +12,11 @@ class UploadFilterSeeder extends Seeder
     public function run(): void
     {
         $addData = [
-            ['name'=>"favIcon",'new_w'=>"40",'new_h'=>"40",'type'=>'4'],
-            ['name'=>"Logo",'new_w'=>"300",'new_h'=>"300",'type'=>'4'],
-            ['name'=>"PhotoGallery",'new_w'=>"1000",'new_h'=>"800",'type'=>'5','canvas_back'=>'#FF0000'],
+            ['name'=>"NoEdit",'new_w'=>"100",'new_h'=>"100",'type'=>'1','canvas_back'=>'#ffffff'],
+            ['name'=>"DefPhoto",'new_w'=>"800",'new_h'=>"420",'type'=>'4','canvas_back'=>'#ffffff'],
+            ['name'=>"FavIcon",'new_w'=>"40",'new_h'=>"40",'type'=>'4','canvas_back'=>'#ffffff'],
+            ['name'=>"Amenity",'new_w'=>"80",'new_h'=>"80",'type'=>'4','canvas_back'=>'#ffffff'],
+            ['name'=>"PhotoGallery",'new_w'=>"1024",'new_h'=>"768",'type'=>'4','canvas_back'=>'#ffffff'],
         ];
 
         $countData =  UploadFilter::all()->count();

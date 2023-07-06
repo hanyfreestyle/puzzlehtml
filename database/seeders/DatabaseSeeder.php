@@ -8,6 +8,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\config\AmenitySeeder;
 use Database\Seeders\config\AmenityTranslationSeeder;
+use Database\Seeders\config\DefPhotoSeeder;
 use Database\Seeders\config\MetaTagSeeder;
 use Database\Seeders\config\MetaTagTranslationsTableSeeder;
 use Database\Seeders\config\SettingsTableSeeder;
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AmenityTranslationSeeder::class);
         $this->call(UploadFilterSeeder::class);
         $this->call(UploadFilterSizeSeeder::class);
+        $this->call(DefPhotoSeeder::class);
 
     }
 }
