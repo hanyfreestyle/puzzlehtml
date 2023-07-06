@@ -26,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrap();
-        View::share('filterTypes', UploadFilter::all());
+        //View::share('filterTypes', UploadFilter::all());
     }
 }
