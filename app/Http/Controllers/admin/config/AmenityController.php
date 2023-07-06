@@ -11,6 +11,7 @@ use App\Models\admin\config\Amenity;
 use App\Http\Requests\Admin\config\AmenityRequest;
 use App\Models\admin\config\AmenityTranslation;
 use App\Models\admin\config\DefPhoto;
+use App\Models\User;
 
 
 class AmenityController extends AdminMainController
@@ -31,8 +32,6 @@ class AmenityController extends AdminMainController
         $pageData['ViewType'] = "Add";
         return view('admin.amenity.form',compact('pageData','rowData'));
     }
-
-
     public function storeUpdate(AmenityRequest $request, $id=0)
     {
         $request-> validated();
@@ -70,11 +69,6 @@ class AmenityController extends AdminMainController
             return  back()->with('Edit.Done',__('general.alertMass.confirmEdit'));
         }
     }
-
-
-    public function show(Amenity $amenity,$id){}
-
-
     public function edit($id)
     {
         $rowData = Amenity::findOrFail($id);
@@ -84,13 +78,10 @@ class AmenityController extends AdminMainController
         return view('admin.amenity.form',compact('rowData','pageData'));
     }
 
-
-
     public function destroy($id)
     {
-
-       // dd($id);
-        $deleteRow = Amenity::where('id',$id);
+        $deleteRow = Amenity::findOrFail($id);
+        $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,2);
         $deleteRow->delete();
         return redirect(route('amenity.index'))
             ->with('confirmDelete',__('general.alertMass.confirmDelete'));

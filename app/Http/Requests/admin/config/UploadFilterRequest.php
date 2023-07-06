@@ -13,16 +13,9 @@ class UploadFilterRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
+
     public function rules(): array
     {
-
-
-
 
         return [
             'name' => 'required',
@@ -46,10 +39,6 @@ class UploadFilterRequest extends FormRequest
             'watermark_state' => "required",
             "watermark_img" => "required_if:watermark_state,==,1|nullable",
             "watermark_position" => "required_if:watermark_state,==,1|nullable",
-
-
-
-
         ];
     }
 

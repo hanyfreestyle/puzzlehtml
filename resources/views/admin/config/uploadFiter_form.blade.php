@@ -197,7 +197,7 @@
 
 
 @push('JsCode')
-    <x-script.sweet-delete-js-code-no-form/>
+    <x-sweet-delete-js-no-form />
     <script>
         $(document).ready(function(){
             $("#watermark_img").change(function(){

@@ -44,8 +44,7 @@
             <x-form-select-arr  label="{{__('admin.upFilter.form.name')}}" name="filter_id" colrow="col-lg-6"
                                 sendvalue="{{old('filter_id')}}" :send-arr="$filterTypes"/>
 
-            <x-form.upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false" />
-
+            <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"/>
 
             <div class="container-fluid">
                 <x-form-submit text="{{$pageData['ViewType']}}" />

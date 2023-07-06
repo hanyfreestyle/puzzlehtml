@@ -55,7 +55,7 @@ class DefPhotoController extends AdminMainController
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id){
-        $deleteRow = DefPhoto::findOrNew($id);
+        $deleteRow = DefPhoto::findOrFail($id);
         $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,3);
         $deleteRow->delete();
 

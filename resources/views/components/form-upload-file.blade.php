@@ -15,7 +15,7 @@
                 @enderror
             </div>
             @if($viewType == 'Edit')
-                @if(isset($rowData->$fildName))
+                @if(isset($rowData->$fildName) and $rowData->$fildName != '')
                     <label class="col-md-12 col-form-label"> {{ $labelPhoto }}</label>
                     <div class="col-md-12 fileUploadCurrent">
                         <img  class="img-thumbnail rounded" src="{{defImagesDir($rowData->$fildName)}}">

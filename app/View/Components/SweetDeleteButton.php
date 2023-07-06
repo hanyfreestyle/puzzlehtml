@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\script;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 
 class SweetDeleteButton extends Component
 {
+
     public $row ;
     public $routeName ;
     public $sweetOff ;
@@ -28,6 +29,6 @@ class SweetDeleteButton extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.script.sweet-delete-button');
+        return view('components.sweet-delete-button');
     }
 }

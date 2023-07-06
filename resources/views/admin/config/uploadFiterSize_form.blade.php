@@ -9,7 +9,7 @@
 
                 <div class="col-lg-12">
                     <x-ui-card title="{{__('admin.upFilter.form.main_setting')}}" :add-form-error="false">
-                        <input type="text" name="filter_id" value="{{$rowData->filter_id}}">
+                        <input type="hidden" name="filter_id" value="{{$rowData->filter_id}}">
 
                         <div class="row">
                             <x-form-select-arr  label="{{__('admin.upFilter.form.type')}}" name="type" colrow="col-lg-7"

@@ -41,7 +41,7 @@
                                             <x-action-button url="{{route('amenity.edit',$row->id)}}" type="edit" :tip="false" />
                                         </td>
                                         <td>
-                                            <x-script.sweet-delete-button route-name="amenity.destroy" :row="$row" />
+                                            <x-sweet-delete-button route-name="amenity.destroy" :row="$row" />
                                         </td>
 
                                     </tr>
@@ -63,6 +63,6 @@
 @endsection
 
 @push('JsCode')
-    <x-script.sweet-delete-js-code/>
+    <x-sweet-delete-js/>
 @endpush
 

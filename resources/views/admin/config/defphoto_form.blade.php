@@ -20,7 +20,7 @@
 
             <input type="hidden" name="cat_idXXXXX" value="{{Str::random(15)}}">
             <hr>
-            <x-form.upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false" />
+            <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false" />
 
             <div class="container-fluid mb-5 mt-2">
                 <x-form-submit text="{{$pageData['ViewType']}}" />

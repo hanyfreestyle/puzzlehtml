@@ -41,7 +41,7 @@
                                             <x-action-button url="{{route('config.meta.edit',$row->id)}}" type="edit" :tip="false" />
                                         </td>
                                         <td>
-                                            <x-script.sweet-delete-button route-name="config.meta.destroy" :row="$row" />
+                                            <x-sweet-delete-button route-name="config.meta.destroy" :row="$row" />
                                         </td>
 
                                     </tr>
@@ -63,5 +63,5 @@
 @endsection
 
 @push('JsCode')
-    <x-script.sweet-delete-js-code/>
+    <x-sweet-delete-js/>
 @endpush

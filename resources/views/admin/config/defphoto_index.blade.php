@@ -29,7 +29,7 @@
                                     <span class="ml-2">
                                     <x-action-button  url="{{route('config.defPhoto.edit',$row->id)}}"  type="edit" :tip="true" size="s"   />
                                     </span>
-                                            <x-script.sweet-delete-button route-name="config.defPhoto.destroy" :row="$row" />
+                                            <x-sweet-delete-button route-name="config.defPhoto.destroy" :row="$row"/>
                                         </div>
                                     </div>
                                 </div>
@@ -54,5 +54,5 @@
 @endsection
 
 @push('JsCode')
-    <x-script.sweet-delete-js-code/>
+    <x-sweet-delete-js/>
 @endpush

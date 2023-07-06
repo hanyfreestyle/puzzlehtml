@@ -75,5 +75,5 @@
 @endsection
 
 @push('JsCode')
-    <x-script.sweet-delete-js-code-no-form/>
+    <x-sweet-delete-js-no-form />
 @endpush

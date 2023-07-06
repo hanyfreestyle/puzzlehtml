@@ -1,14 +1,13 @@
 <?php
 
-namespace App\View\Components\form;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class UploadFile extends Component
+class FormUploadFile extends Component
 {
-
     public $rowCol;
     public $fileName;
     public $label;
@@ -51,10 +50,11 @@ class UploadFile extends Component
         }
 
     }
-
-
+    /**
+     * Get the view / contents that represent the component.
+     */
     public function render(): View|Closure|string
     {
-        return view('components.form.upload-file');
+        return view('components.form-upload-file');
     }
 }
