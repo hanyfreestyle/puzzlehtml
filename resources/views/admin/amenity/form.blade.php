@@ -12,7 +12,7 @@
             </div>
         @endif
 
-        <form  class="mainForm" action="{{route('amenity.update',intval($rowData->id))}}" method="post">
+        <form  class="mainForm" action="{{route('amenity.update',intval($rowData->id))}}" method="post"  enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="view_type" value="{{$pageData['ViewType']}}">
             <div class="col-lg-12">
@@ -40,6 +40,12 @@
                             data-icon="{{old('icon',$rowData->icon)}}" id="iconpicker_target" role="iconpicker"></button>
                 </div>
             </div>
+            <hr>
+            <x-form-select-arr  label="{{__('admin.upFilter.form.name')}}" name="filter_id" colrow="col-lg-6"
+                                sendvalue="{{old('filter_id')}}" :send-arr="$filterTypes"/>
+
+            <x-form.upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false" />
+
 
             <div class="container-fluid">
                 <x-form-submit text="{{$pageData['ViewType']}}" />

@@ -15,7 +15,7 @@
 
                     @if(count($rowData)>0)
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
+                            <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -32,10 +32,8 @@
                                 @foreach($rowData as $row)
                                     <tr>
                                         <td>{{$row->id}}</td>
-                                        <td>@if($row->icon)<i class="{{$row->icon}}"></i>@endif</td>
-                                        <td>
-                                            <img  width="80" src="{{defAdminAssets('img/UploadPhoto_Admin.png')}}">
-                                        </td>
+                                        <td>@if($row->icon)<i class="amenity_table_icon bg-primary {{$row->icon}}"></i>@endif</td>
+                                        <td>{!! AdminHelper::printTableImage($row) !!} </td>
                                         <td>{{$row->translate('ar')->name}}</td>
                                         <td>{{$row->translate('en')->name}}</td>
                                         <td></td>

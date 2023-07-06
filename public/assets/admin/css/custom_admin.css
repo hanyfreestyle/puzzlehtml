@@ -4,6 +4,8 @@
 .dir_en{direction:ltr!important;text-align:left;width:100%}
 .label_ar{direction:rtl!important;text-align:right}
 .label_en{direction:ltr!important;text-align:left;width:100%}
+.table td,.table th{padding:.75rem;vertical-align:middle;border-top:1px solid #dee2e6}
+
 
 .select2-results__option {font-size: 14px!important;}
 
@@ -79,7 +81,7 @@
 .popover-body{direction:ltr!important}
 
 
-.table td,.table th{padding:.75rem;vertical-align:middle;border-top:1px solid #dee2e6}
+
 
 .bg-whiteBorder{border:1px solid rgba(0,0,0,.1)}
 .TableIcon{font-size:25px}
@@ -101,3 +103,15 @@ max-width:250px;
 
 #iconpicker_target{width:150px;font-size:40px;padding:0!important}
 #iconpicker_target i{margin-right:10px;margin-left:10px;font-size:35px}
+
+
+.amenity_table_icon{
+font-size:30px;
+ 
+color:#FFFFFF;
+padding:10px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+
+}

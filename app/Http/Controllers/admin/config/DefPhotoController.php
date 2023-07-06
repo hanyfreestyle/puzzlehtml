@@ -36,9 +36,9 @@ class DefPhotoController extends AdminMainController
         $rowData = DefPhoto::findOrNew(0);
         $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
 
-        $filterTypes = UploadFilter::all();
+
         $pageData['ViewType'] = "Add";
-        return view('admin.config.defphoto_form',compact('pageData','rowData','filterTypes'));
+        return view('admin.config.defphoto_form',compact('pageData','rowData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

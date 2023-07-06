@@ -15,11 +15,22 @@ class AmenityRequest extends FormRequest
 
     public function rules(): array
     {
-        $rules =[
-           //'dd' => 'required|unique:amenity_translations',
-        ];
-
         $id = $this->route('id');
+
+
+        if($id == '0'){
+            $rules =[
+                'filter_id'=> "required_with:image",
+                'image' => 'mimes:jpeg,jpg,png,gif|max:10000',
+            ];
+        }else{
+            $rules =[
+                'image' => 'mimes:jpeg,jpg,png,gif|max:10000|nullable',
+                'filter_id'=> "required_with:image",
+
+            ];
+        }
+
 
         if($id == '0'){
             foreach(config('app.lang_file') as $key=>$lang){
@@ -30,6 +41,17 @@ class AmenityRequest extends FormRequest
                $rules[$key.".name"] =   "required|unique:amenity_translations,name,$id,amenity_id,locale,$key";
             }
         }
+
         return $rules;
     }
+
+
+    public function messages()
+    {
+        return [
+            'filter_id.required_with' => 'برجاء تحديد الفلتر',
+        ];
+    }
+
+
 }

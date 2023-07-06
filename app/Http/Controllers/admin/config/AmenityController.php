@@ -5,10 +5,12 @@
 namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
+use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Models\admin\config\Amenity;
 use App\Http\Requests\Admin\config\AmenityRequest;
 use App\Models\admin\config\AmenityTranslation;
+use App\Models\admin\config\DefPhoto;
 
 
 class AmenityController extends AdminMainController
@@ -18,7 +20,7 @@ class AmenityController extends AdminMainController
     public function index()
     {
         $pageData = AdminHelper::returnPageDate($this->controllerName);
-        $rowData = Amenity::orderBy('id','desc')->paginate(20);
+        $rowData = Amenity::orderBy('id')->paginate(20);
         $pageData['ViewType'] = "List";
         return view('admin.amenity.index',compact('pageData','rowData'));
     }
@@ -39,8 +41,19 @@ class AmenityController extends AdminMainController
             $request->icon = "";
         }
 
+
+        $saveImgData = new PuzzleUploadProcess();
+        $saveImgData->setCountOfUpload('2');
+        $saveImgData->setUploadDirIs('amenity');
+        $saveImgData->setnewFileName($request->input('en.name'));
+        $saveImgData->UploadOne($request);
+
+
+
+
         $saveData =  Amenity::findOrNew($id);
         $saveData->icon = $request->icon;
+        $saveData = AdminHelper::saveAndDeletePhoto($saveData,$saveImgData);
         $saveData->save();
 
         foreach ( config('app.lang_file') as $key=>$lang) {

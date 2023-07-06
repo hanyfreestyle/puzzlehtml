@@ -6,12 +6,13 @@ return [
     'copyright_start_date'=> '2004',
     'copyright_name'=> 'Freestyle4u',
     'copyright_url'=> 'http://freestyle4u.com/',
+    'textWithLogo'=> 'Real Estate Egypt',
 
 
     'dark-mode'=> false,
     'html_ar_dir' => true ,
     'login_logo_img_view'=> true,
-   // 'login_logo_img' => 'assets/admin/img/login_logo.png' ,
+    'login_logo_img' => 'assets/admin/img/login_logo.png' ,
    // 'login_logo_img' => defAdminAssets('/img/login_logo.png') ,
     'pace_progress'=> true,
     'pace_progress_style'=> 'pace-primary',
@@ -44,7 +45,7 @@ return [
     'sidebar_collapse_hide' => false,
     'sidebar_fixed' => true,
     'sidebar_navbar_search' => false,
-    'sidebar_flat_style' => false,
+    'sidebar_flat_style' => true,
     'sidebar_dark_variants' => 'sidebar-dark-danger', //sidebar-dark-danger
 
 

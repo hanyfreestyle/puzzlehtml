@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\admin\config\UploadFilter;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrap();
+        View::share('filterTypes', UploadFilter::all());
     }
 }

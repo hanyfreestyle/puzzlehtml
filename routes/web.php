@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\config\MetaTagController;
 use App\Http\Controllers\admin\config\SettingsController;
 use App\Http\Controllers\admin\config\UploadFilterController;
 use App\Http\Controllers\admin\config\UploadFilterSizeController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +31,7 @@ Auth::routes();
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
     Route::group(['prefix'=>'admin'],function(){
 
-        Route::get('/Home', [AdminController::class, 'index'])->name('admin.Dashboard');
+        Route::get('/Home', [HomeController::class, 'index'])->name('admin.Dashboard');
 
 
         Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('config.web.index');
