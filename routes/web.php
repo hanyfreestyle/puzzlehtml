@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\config\AmenityController;
 use App\Http\Controllers\admin\config\DefPhotoController;
+use App\Http\Controllers\admin\config\LangFileController;
 use App\Http\Controllers\admin\config\MetaTagController;
 use App\Http\Controllers\admin\config\SettingsController;
 use App\Http\Controllers\admin\config\UploadFilterController;
@@ -32,6 +33,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
     Route::group(['prefix'=>'admin'],function(){
 
         Route::get('/Home', [HomeController::class, 'index'])->name('admin.Dashboard');
+        Route::get('/TestLang', [HomeController::class, 'TestLang'])->name('admin.DashboardXXXX');
 
 
         Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('config.web.index');
@@ -74,6 +76,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::get('/amenity/edit/{id}',[AmenityController::class,'edit'])->name('amenity.edit');
         Route::post('/amenity/update/{id}',[AmenityController::class,'storeUpdate'])->name('amenity.update');
         Route::delete('/amenity/destroy/{id}',[AmenityController::class,'destroy'])->name('amenity.destroy');
+
+
+        Route::get('/langadmin',[LangFileController::class,'index'])->name('langadmin.index');
+        Route::get('/langadmin/create',[LangFileController::class,'create'])->name('langadmin.create');
+        Route::post('/langadmin/store/{id}',[LangFileController::class,'storeUpdate'])->name('langadmin.store');
+        Route::get('/langadmin/edit/{id}',[LangFileController::class,'edit'])->name('langadmin.edit');
+        Route::post('/langadmin/update/{id}',[LangFileController::class,'storeUpdate'])->name('langadmin.update');
+        Route::delete('/langadmin/destroy/{id}',[LangFileController::class,'destroy'])->name('langadmin.destroy');
+
 
     });
 });

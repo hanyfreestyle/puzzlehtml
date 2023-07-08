@@ -1,17 +1,14 @@
 <?php
-
-
-
 namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
 use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
+use App\Http\Requests\admin\config\AmenityRequest;
 use App\Models\admin\config\Amenity;
-use App\Http\Requests\Admin\config\AmenityRequest;
+
 use App\Models\admin\config\AmenityTranslation;
-use App\Models\admin\config\DefPhoto;
-use App\Models\User;
+
 
 
 class AmenityController extends AdminMainController
@@ -32,6 +29,7 @@ class AmenityController extends AdminMainController
         $pageData['ViewType'] = "Add";
         return view('admin.amenity.form',compact('pageData','rowData'));
     }
+
     public function storeUpdate(AmenityRequest $request, $id=0)
     {
         $request-> validated();

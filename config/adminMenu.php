@@ -27,7 +27,14 @@ return [
             'icon'=>'fas fa-swimming-pool'
         ],
 
-
+        [
+            'view'=>true,
+            'sel_routs'=>'langadmin',
+            'type'=>'one',
+            'text'=> 'LangFile',
+            'url'=> 'langadmin.index',
+            'icon'=>'fas fa-language'
+        ],
 
 
     ],
