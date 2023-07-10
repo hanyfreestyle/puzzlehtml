@@ -47,29 +47,28 @@ class ActionButton extends Component
                     $this->icon = 'fas fa-plus-square';
                     $this->bg = getBgColor('p');
                     if($this->lable == null){
-                        $this->lable = __('general.buttonAction.add');
+                        $this->lable = __('admin/form.button_add');
                     }
-
                     break;
 
                 case 'edit':
                     $this->icon = 'fas fa-pencil-alt';
                     $this->bg = getBgColor('i');
                     if($this->lable == null){
-                        $this->lable = __('general.buttonAction.edit');
+                        $this->lable =__('admin/form.button_edit');
                     }
                     break;
 
                 case 'delete':
                     $this->icon = 'fas fa-trash';
                     $this->bg = getBgColor('d');
-                    $this->lable = __('general.buttonAction.delete');
+                    $this->lable =__('admin/form.button_delete');
                     break;
 
                 case 'deleteSweet':
                     $this->icon = 'fas fa-trash ';
                     $this->bg = getBgColor('d');
-                    $this->lable = __('general.buttonAction.delete');
+                    $this->lable = __('admin/form.button_delete');
                     $this->sweetDelClass = ' sweet_daleteBtn_noForm ';
                     break;
 

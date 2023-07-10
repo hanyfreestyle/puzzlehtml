@@ -13,7 +13,17 @@ class UploadFilterSizeController extends AdminMainController
 {
     public $controllerName = 'upFilter';
 
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     create
     public function create($filterId){
+
+        $sendArr = ['TitlePage' => __('admin/menu.uploadFilter') ,'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "Add";
+
+
         $FilterData = UploadFilter::findOrFail($filterId);
         $rowData = UploadFilterSize::findOrNew(0);
         $rowData['filter_id'] = $filterId;
@@ -23,19 +33,23 @@ class UploadFilterSizeController extends AdminMainController
         $rowData['get_add_text'] = '0';
         $rowData['get_watermark'] = '0';
 
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
-        $pageData['ViewType'] = "Add";
         return view('admin.config.uploadFiterSize_form',compact('pageData','rowData'));
     }
 
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     edit
     public function edit($id){
-        $rowData = UploadFilterSize::findOrFail($id);
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
+
+        $sendArr = ['TitlePage' => __('admin/menu.uploadFilter') ,'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
+        $rowData = UploadFilterSize::findOrFail($id);
         return view('admin.config.uploadFiterSize_form',compact('pageData','rowData'));
     }
 
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     storeUpdate
     public function storeUpdate(UploadFilterSizeRequest $request,$id)
     {
 
@@ -53,26 +67,52 @@ class UploadFilterSizeController extends AdminMainController
         $saveData->get_add_text = $request->get_add_text;
         $saveData->get_watermark = $request->get_watermark;
 
-
         $saveData->save();
 
         if($id == '0'){
-            return  redirect(route('config.upFilter.edit',$request->filter_id))->with('Add.Done',__('general.alertMass.confirmAdd'));
+            return  redirect(route('config.upFilter.edit',$request->filter_id))->with('Add.Done','');
         }else{
-            return  redirect(route('config.upFilter.edit',$request->filter_id))->with('Edit.Done',__('general.alertMass.confirmEdit'));
+            return  redirect(route('config.upFilter.edit',$request->filter_id))->with('Edit.Done','');
         }
     }
 
-
-
-
-
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id){
         $deleteRow = UploadFilterSize::findOrFail($id);
         $filterId = $deleteRow->filter_id ;
         $deleteRow->delete();
-        return redirect(route('config.upFilter.edit',$filterId))
-            ->with('confirmDelete',__('general.alertMass.confirmDelete'));
+        return redirect(route('config.upFilter.edit',$filterId))->with('confirmDelete','');
     }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -48,7 +48,7 @@
     <div class="card-body">
         @if($errors->has([]) and $addFormError == true)
             <div class="alert alert-danger alert-dismissible">
-                {{__('general.alertMass.formHasError')}}
+                {{__('admin/alertMass.formHasError')}}
             </div>
         @endif
         {{$slot}}

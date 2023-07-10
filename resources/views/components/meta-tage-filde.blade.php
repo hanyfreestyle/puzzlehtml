@@ -5,7 +5,7 @@
 
 
             <x-trans-input :placeholder="$placeholder"
-                label="{{__('admin.metaForm.g_title_'.$key)}} ({{ ($key) }})"
+                label="{{__('admin/form.meta_g_title_'.$key)}} ({{ ($key) }})"
                 name="{{ $key }}[g_title]"
                 dir="{{ $key }}"
                 reqname="{{ $key }}.g_title"
@@ -14,7 +14,7 @@
             />
 
             <x-trans-text-area :placeholder="$placeholder"
-                label="{{__('admin.metaForm.g_des_'.$key)}} ({{ ($key) }})"
+                label="{{__('admin/form.meta_g_des_'.$key)}} ({{ ($key) }})"
                 name="{{ $key }}[g_des]"
                 dir="{{ $key }}"
                 reqname="{{ $key }}.g_des"
@@ -24,7 +24,7 @@
             @if($bodyH1 == true)
                 <x-trans-input
                     :placeholder="$placeholder"
-                    label="{{__('admin.metaForm.bodyH1_'.$key)}} ({{ ($key) }})"
+                    label="{{__('admin/form.meta_bodyH1_'.$key)}} ({{ ($key) }})"
                     name="{{ $key }}[body_h1]"
                     dir="{{ $key }}"
                     reqname="{{ $key }}.body_h1"
@@ -37,7 +37,7 @@
             @if($breadcrumb == true)
                 <x-trans-input
                     :placeholder="$placeholder"
-                    label="{{__('admin.metaForm.breadcrumb_'.$key)}} ({{ ($key) }})"
+                    label="{{__('admin/form.meta_breadcrumb_'.$key)}} ({{ ($key) }})"
                     name="{{ $key }}[breadcrumb]"
                     dir="{{ $key }}"
                     reqname="{{ $key }}.breadcrumb"

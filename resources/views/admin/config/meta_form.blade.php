@@ -13,11 +13,7 @@
     <x-breadcrumb-def :pageData="$pageData"/>
     <x-ui-card title="{{$pageData['AddPageName']}}">
 
-        @if(Session::has($pageData['ViewType'].'.Done'))
-            <div class="alert alert-success alert-dismissible">
-                {!! Session::get($pageData['ViewType'].'.Done') !!}
-            </div>
-        @endif
+        <x-mass.confirm-massage/>
 
         <form class="mainForm" action="{{route($formRoute,intval($oldData->id))}}" method="post">
             @csrf

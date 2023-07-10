@@ -14,17 +14,27 @@ class UploadFilterController extends AdminMainController
 {
     public $controllerName = 'upFilter';
 
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
     public function index()
     {
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
-        $rowData = UploadFilter::orderBy('id')->paginate(10);
+        $sendArr = ['TitlePage' => __('admin/menu.uploadFilter') ,'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
+
+        $rowData = UploadFilter::orderBy('id')->paginate(10);
+
         return view('admin.config.uploadFilter_index',compact('pageData','rowData'));
     }
-
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     create
     public function create()
     {
+        $sendArr = ['TitlePage' => __('admin/menu.uploadFilter') ,'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "Add";
+
         $rowData = UploadFilter::findOrNew(0);
         $rowData['canvas_back'] = '#FFFFFF';
         $rowData['quality_val'] = '85';
@@ -36,14 +46,14 @@ class UploadFilterController extends AdminMainController
         $rowData['watermark_state'] = '0';
         $rowDataSize = [];
 
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
-        $pageData['ViewType'] = "Add";
         return view('admin.config.uploadFiter_form',compact('pageData','rowData','rowDataSize'));
     }
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     edit
     public function edit($id)
     {
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
+        $sendArr = ['TitlePage' => __('admin/menu.uploadFilter') ,'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
 
@@ -52,6 +62,30 @@ class UploadFilterController extends AdminMainController
         $rowDataSize = UploadFilterSize::where('filter_id',$id)->get();
         return view('admin.config.uploadFiter_form',compact('pageData','rowData','rowDataSize'));
     }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+#
+
+
+
+
+
+
 
 
     public function storeUpdate(UploadFilterRequest $request,$id)

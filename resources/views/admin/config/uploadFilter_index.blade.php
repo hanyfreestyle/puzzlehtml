@@ -18,10 +18,10 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>{{__('admin.upFilter.form.name')}}</th>
-                                    <th>{{__('admin.upFilter.form.type')}}</th>
-                                    <th>{{__('admin.upFilter.form.new_w')}}</th>
-                                    <th>{{__('admin.upFilter.form.new_h')}}</th>
+                                    <th>{{__('admin/config/upFilter.form_name')}}</th>
+                                    <th>{{__('admin/config/upFilter.form_type')}}</th>
+                                    <th>{{__('admin/config/upFilter.form_new_w')}}</th>
+                                    <th>{{__('admin/config/upFilter.form_new_h')}}</th>
                                     <th>WEBP</th>
                                     <th>تدريج رمادى</th>
                                     <th>علامة مائية</th>

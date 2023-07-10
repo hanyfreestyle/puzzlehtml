@@ -53,7 +53,7 @@ class UiCard extends Component
         if($addButtonName){
             $this->addButtonName = $addButtonName;
         }else{
-            $this->addButtonName = __('general.form.button_Add');
+            $this->addButtonName = __('admin/form.button_add');
         }
         if($titleColor){
             $this->titleColor = $titleColor;

@@ -39,7 +39,7 @@
                             <li class="nav-item">
                                 <a href="{{ route($MenuList['url']) }}" class="nav-link  @if(Route::is($MenuList['sel_routs'].'.*')) active @endif ">
                                     @if(isset($MenuList['icon']))<i class="nav-icon {{$MenuList['icon']}}"></i>@endif
-                                    <p>{{$MenuList['text']}}</p>
+                                    <p>{{__($MenuList['text'])}}</p>
                                 </a>
                             </li>
                         @elseif($MenuList['type'] == 'many')

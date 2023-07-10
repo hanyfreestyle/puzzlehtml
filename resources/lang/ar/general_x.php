@@ -5,10 +5,7 @@ return [
     'icon'=>'Icon',
     'photo'=>'صورة',
 
-    'sweet_title'=>'هل انت متاكد',
-    'sweet_text'=>'لن يتم اعادة المحتوى فى حالة الحذف ', # You won't be able to revert this!
-    'sweet_confirmButtonText'=>'نعم ..قم بالحذف ', # Yes, delete it!
-    'sweet_cancelButtonText'=>'الغاء ', # Cancel
+
 
     "table" => [
         "action" => 'الاجراء',
@@ -23,12 +20,7 @@ return [
     ],
 
     "alertMass" => [
-        "confirmAdd" => 'تمت الاضافة بنجاح',
-        "confirmEdit" => 'تم التعديل بنجاح',
-        "confirmDelete" => 'تم الحذف بنجاح',
-        "idError" => 'خطأ فى تحديث البيانات ... رقم السجل غير موجود ',
-        'formHasError'=> 'برجاء التأكد من اضافة البيانات بصورة صحيحة لجميع الحقول المطلوبة ',
-        'noData'=> 'لا يوجد محتوى للعرض',
+
     ],
 
     "form" => [

@@ -32,7 +32,33 @@ class AdminHelper{
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     returnPageDate
-    public static function returnPageDate($controllerName,$prefix='admin.',$selMenu=''){
+    public static function returnPageDate($controllerName,$sendArr=array()){
+
+        $selMenu = AdminHelper::arrIsset($sendArr,'selMenu',"");
+        $prefix = AdminHelper::arrIsset($sendArr,'prefix','admin.');
+        $TitlePage = AdminHelper::arrIsset($sendArr,'TitlePage','');
+        $ListPage = AdminHelper::arrIsset($sendArr,'ListPage',__('admin/page.page_list'));
+        $AddPage = AdminHelper::arrIsset($sendArr,'AddPage',__('admin/page.page_add'));
+        $EditPage = AdminHelper::arrIsset($sendArr,'EditPage',__('admin/page.page_edit'));
+
+        $data = [];
+        $data['ControllerName'] = $controllerName;
+        $data['TitlePage'] = $TitlePage ;
+
+        $data['ListPageName'] = $ListPage ;
+        $data['ListPageUrl'] = route($selMenu. ($controllerName) . '.index');
+
+
+        $data['AddPageName'] = $AddPage;
+        $data['AddPageUrl'] = route($selMenu.($controllerName) . '.create');
+
+
+        $data['EditPageName'] = $EditPage;
+
+        return $data;
+    }
+
+    public static function returnPageDate_old($controllerName,$prefix='admin.',$selMenu=''){
         $data = [];
         $data['ControllerName'] = $controllerName;
         $data['TitlePage'] = __($prefix.($controllerName) . '.main.title');

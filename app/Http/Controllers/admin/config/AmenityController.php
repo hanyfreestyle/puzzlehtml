@@ -14,21 +14,52 @@ use App\Models\admin\config\AmenityTranslation;
 class AmenityController extends AdminMainController
 {
     public $controllerName = 'amenity';
+    public $getPageData ;
 
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
     {
-        $pageData = AdminHelper::returnPageDate($this->controllerName);
-        $rowData = Amenity::orderBy('id')->paginate(20);
+        $sendArr = ['TitlePage' => __('admin/menu.amenity') ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
+
+        $rowData = Amenity::orderBy('id')->paginate(20);
         return view('admin.amenity.index',compact('pageData','rowData'));
     }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     create
     public function create()
     {
-        $rowData = Amenity::findOrNew(0);
-        $pageData = AdminHelper::returnPageDate($this->controllerName);
+        $sendArr = ['TitlePage' => __('admin/menu.amenity') ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Add";
+
+        $rowData = Amenity::findOrNew(0);
         return view('admin.amenity.form',compact('pageData','rowData'));
     }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+    public function edit($id)
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.amenity') ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "Edit";
+
+        $rowData = Amenity::findOrFail($id);
+        return view('admin.amenity.form',compact('rowData','pageData'));
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+
+
 
     public function storeUpdate(AmenityRequest $request, $id=0)
     {
@@ -67,14 +98,7 @@ class AmenityController extends AdminMainController
             return  back()->with('Edit.Done',__('general.alertMass.confirmEdit'));
         }
     }
-    public function edit($id)
-    {
-        $rowData = Amenity::findOrFail($id);
 
-        $pageData = AdminHelper::returnPageDate($this->controllerName);
-        $pageData['ViewType'] = "Edit";
-        return view('admin.amenity.form',compact('rowData','pageData'));
-    }
 
     public function destroy($id)
     {

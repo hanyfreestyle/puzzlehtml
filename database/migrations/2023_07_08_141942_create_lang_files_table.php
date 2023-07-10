@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('config_lang_files', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('group')->nullable();
-            $table->string('sub_dir')->nullable();
+            $table->integer('file_id')->unsigned();
+            $table->string('type');
             $table->string('lang_key');
 
+            $table->foreign('file_id')->references('id')->on('config_lang_paths')->onDelete('cascade');
             $table->timestamps();
         });
     }

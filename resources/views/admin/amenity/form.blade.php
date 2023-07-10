@@ -20,7 +20,8 @@
                     @foreach ( config('app.lang_file') as $key=>$lang )
                         <div class="col-lg-6">
                             <x-trans-input
-                                label="{{__('general.form.name_'.$key)}} ({{ $key}})"
+
+                                label="{{__('admin/def.form_name_'.$key)}} ({{ $key}})"
                                 name="{{ $key }}[name]"
                                 dir="{{ $key }}"
                                 reqname="{{ $key }}.name"
@@ -41,7 +42,7 @@
                 </div>
             </div>
             <hr>
-            <x-form-select-arr  label="{{__('admin.upFilter.form.name')}}" name="filter_id" colrow="col-lg-6"
+            <x-form-select-arr  label="{{__('admin/def.form_selectFilterLable')}}" name="filter_id" colrow="col-lg-6"
                                 sendvalue="{{old('filter_id')}}" :send-arr="$filterTypes"/>
 
             <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"/>

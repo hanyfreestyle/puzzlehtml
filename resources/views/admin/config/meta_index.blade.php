@@ -6,11 +6,8 @@
         <div class="row">
             <div class="col-lg-12" >
                 <x-ui-card title="{{$pageData['ListPageName']}}" addButtonRoute="{!! $pageData['AddPageUrl'] !!}" >
-                    @if(Session::has('confirmDelete'))
-                        <div class="alert alert-success alert-dismissible">
-                            {!! Session::get('confirmDelete') !!}
-                        </div>
-                    @endif
+
+                    <x-mass.confirm-massage/>
 
                     @if(count($rowData)>0)
                         <div class="card-body table-responsive p-0">
@@ -19,10 +16,10 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>CatId</th>
-                                    <th>{{__('admin.metaForm.g_title_'.thisCurrentLocale())}}</th>
-                                    <th>{{__('admin.metaForm.g_des_'.thisCurrentLocale())}}</th>
-                                    <th>{{__('admin.metaForm.bodyH1_'.thisCurrentLocale())}}</th>
-                                    <th>{{__('admin.metaForm.breadcrumb_'.thisCurrentLocale())}}</th>
+                                    <th>{{__('admin/form.meta_g_title_'.thisCurrentLocale())}}</th>
+                                    <th>{{__('admin/form.meta_g_des_'.thisCurrentLocale())}}</th>
+                                    <th>{{__('admin/form.meta_bodyH1_'.thisCurrentLocale())}}</th>
+                                    <th>{{__('admin/form.meta_breadcrumb_'.thisCurrentLocale())}}</th>
                                     <th></th>
                                     <th></th>
 

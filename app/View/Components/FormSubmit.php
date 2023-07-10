@@ -37,13 +37,13 @@ class FormSubmit extends Component{
 
 
         if($text == 'Add') {
-            $this->text = __('general.form.button_Submit');
+            $this->text = __('admin/form.button_add');
         }elseif ($text == 'Edit'){
-            $this->text = __('general.form.button_Edit');
+            $this->text = __('admin/form.button_edit');
+        }elseif ($text == 'Update'){
+            $this->text = __('admin/form.button_update');
         }else{
-
             $this->text = $text;
-
         }
 
         if($outline){

@@ -13,32 +13,43 @@ class MetaTagController extends AdminMainController
 {
     public $controllerName = 'meta';
 
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
     {
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
-        $rowData = MetaTag::orderBy('id','desc')->paginate(10);
+        $sendArr = ['TitlePage' => __('admin/menu.setting_meta_tags') ,'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
+
+        $rowData = MetaTag::orderBy('id','desc')->paginate(10);
         return view('admin.config.meta_index',compact('pageData','rowData'));
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     create
     public function create()
     {
-        $oldData = new MetaTag();
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
+        $sendArr = ['TitlePage' => __('admin/menu.setting_meta_tags') ,'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Add";
+        $oldData = new MetaTag();
         return view('admin.config.meta_form',compact('oldData','pageData'));
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     edit
     public function edit($id)
     {
-
         $oldData = MetaTag::findOrFail($id);
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
+        $sendArr = ['TitlePage' => __('admin/menu.setting_meta_tags') ,'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
         return view('admin.config.meta_form',compact('oldData','pageData'));
-
     }
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     storeUpdate
     public function storeUpdate(MetaTagRequest $request, $id='0')
     {
         $request-> validated();
@@ -59,19 +70,60 @@ class MetaTagController extends AdminMainController
         }
 
         if($id == '0'){
-            return  back()->with('Add.Done',__('general.alertMass.confirmAdd'));
+            return  back()->with('Add.Done'," ");
         }else{
-            return  back()->with('Edit.Done',__('general.alertMass.confirmEdit'));
+            return  back()->with('Edit.Done'," ");
         }
 
     }
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     delete
     public function delete($id)
     {
         MetaTag::findOrFail($id)->delete();
 
-        return redirect(route('config.meta.index'))
-            ->with('confirmDelete',__('general.alertMass.confirmDelete'));
+        return redirect(route('config.meta.index'))->with('confirmDelete','');
     }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

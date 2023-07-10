@@ -5,6 +5,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12" >
+
+
+
                 <x-ui-card title="{{$pageData['ListPageName']}}" addButtonRoute="{!! $pageData['AddPageUrl'] !!}" >
 
                     @if(Session::has('confirmDelete'))
@@ -19,10 +22,10 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>{{__('general.icon')}}</th>
-                                    <th>{{__('general.photo')}}</th>
-                                    <th>{{__('general.form.name_ar')}}</th>
-                                    <th>{{__('general.form.name_en')}}</th>
+                                    <th>{{__('admin/def.icon')}}</th>
+                                    <th>{{__('admin/def.photo')}}</th>
+                                    <th>{{__('admin/def.form_name_ar')}}</th>
+                                    <th>{{__('admin/def.form_name_en')}}</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -41,6 +44,8 @@
                                             <x-action-button url="{{route('amenity.edit',$row->id)}}" type="edit" :tip="false" />
                                         </td>
                                         <td>
+
+
                                             <x-sweet-delete-button route-name="amenity.destroy" :row="$row" />
                                         </td>
 
