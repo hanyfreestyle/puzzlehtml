@@ -15,4 +15,5 @@ return
 	'meta_g_des_en' => 'Page Description',
 	'meta_g_title_ar' => 'عنوان الصفحة',
 	'meta_g_title_en' => 'Page Title',
+	'button_sort' => 'ترتيب',
 ];

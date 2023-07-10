@@ -53,14 +53,6 @@ class AmenityController extends AdminMainController
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-
-
-
-
     public function storeUpdate(AmenityRequest $request, $id=0)
     {
         $request-> validated();
@@ -77,8 +69,6 @@ class AmenityController extends AdminMainController
         $saveImgData->UploadOne($request);
 
 
-
-
         $saveData =  Amenity::findOrNew($id);
         $saveData->icon = $request->icon;
         $saveData = AdminHelper::saveAndDeletePhoto($saveData,$saveImgData);
@@ -93,19 +83,43 @@ class AmenityController extends AdminMainController
         }
 
         if($id == '0'){
-            return  back()->with('Add.Done',__('general.alertMass.confirmAdd'));
+            return  back()->with('Add.Done',"");
         }else{
-            return  back()->with('Edit.Done',__('general.alertMass.confirmEdit'));
+            return  back()->with('Edit.Done',"");
         }
     }
 
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id)
     {
         $deleteRow = Amenity::findOrFail($id);
         $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,2);
         $deleteRow->delete();
-        return redirect(route('amenity.index'))
-            ->with('confirmDelete',__('general.alertMass.confirmDelete'));
+        return redirect(route('amenity.index'))->with('confirmDelete',"");
     }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+
+
+
+
+
+
 }

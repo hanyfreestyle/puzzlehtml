@@ -15,7 +15,7 @@
             <x-form-input label="# CatId" name="cat_id" :requiredSpan="true" colrow="col-lg-3"
                           value="{{old('cat_id',$rowData->cat_id)}}" inputclass="dir_en"/>
 
-            <x-form-select-arr  label="{{__('admin.upFilter.form.name')}}" name="filter_id" colrow="col-lg-6"
+            <x-form-select-arr  label="{{__('admin/def.form_selectFilterLable')}}" name="filter_id" colrow="col-lg-6"
                                 sendvalue="{{old('filter_id')}}" :send-arr="$filterTypes"/>
 
             <input type="hidden" name="cat_idXXXXX" value="{{Str::random(15)}}">

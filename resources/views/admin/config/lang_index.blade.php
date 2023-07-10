@@ -14,11 +14,11 @@
 
             <div class="col-lg-12" >
 
-                <x-ui-card title="{{__('admin/config/langfile.menu')}}" >
+                <x-ui-card title="{{ __('admin/menu.lang_file_admin') }}" >
 
                     <x-mass.confirm-massage/>
                     <form action="">
-                        <x-form-select-arr  name="selectfile" label="{{__('admin/config/langfile.select_file')}}" :send-arr="config('adminLangFile.adminFile')" />
+                        <x-form-select-arr  name="selectfile" label="{{__('admin/config/admin.lang_select_file')}}" :send-arr="config('adminLangFile.adminFile')" />
                     </form>
 
 
@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="row">
-                                <button id="rowAdder" type="button" class="btn btn-dark">{{__('admin/config/langfile.add_new_key')}}</button>
+                                <button id="rowAdder" type="button" class="btn btn-dark">{{__('admin/config/admin.lang_add_new_key')}}</button>
                             </div>
                             <hr>
 

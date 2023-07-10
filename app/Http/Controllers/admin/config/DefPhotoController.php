@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\admin\config;
 
 use App\Helpers\AdminHelper;
@@ -17,39 +16,41 @@ class DefPhotoController extends AdminMainController
 {
     public $controllerName = 'defPhoto';
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
+
     public function index(){
-        $defPhoto = glob("Def/*");
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
-        $rowData = DefPhoto::orderBy('postion')->paginate(16);
+        $sendArr = ['TitlePage' => __('admin/menu.setting_def_photo'),'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
+
+        $defPhoto = glob("Def/*");
+        $rowData = DefPhoto::orderBy('postion')->paginate(16);
         return view('admin.config.defphoto_index',compact('pageData','rowData','defPhoto'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
-    /*
-     * @ to create data
-     * @var hany must be array
-     */
     public function create(){
-        $rowData = DefPhoto::findOrNew(0);
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
-
-
+        $sendArr = ['TitlePage' => __('admin/menu.setting_def_photo'),'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Add";
+
+        $rowData = DefPhoto::findOrNew(0);
         return view('admin.config.defphoto_form',compact('pageData','rowData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
     public function edit($id){
-        $rowData = DefPhoto::findOrFail($id);
 
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
-        $filterTypes = UploadFilter::all();
+        $sendArr = ['TitlePage' => __('admin/menu.setting_def_photo'),'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
-        return view('admin.config.defphoto_form',compact('rowData','pageData','filterTypes'));
+
+        $rowData = DefPhoto::findOrFail($id);
+       // $filterTypes = UploadFilter::all();
+        return view('admin.config.defphoto_form',compact('rowData','pageData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -59,8 +60,7 @@ class DefPhotoController extends AdminMainController
         $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,3);
         $deleteRow->delete();
 
-        return redirect(route('config.defPhoto.index'))
-            ->with('confirmDelete',__('general.alertMass.confirmDelete'));
+        return redirect(route('config.defPhoto.index'))->with('confirmDelete',"");
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -108,7 +108,9 @@ class DefPhotoController extends AdminMainController
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     sortDefPhotoList
     public function sortDefPhotoList(){
-        $pageData = AdminHelper::returnPageDate($this->controllerName,'admin.','config.');
+        $sendArr = ['TitlePage' => __('admin/menu.setting_def_photo'),'selMenu'=> 'config.' ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+
         $rowData = DefPhoto::orderBy('postion')->paginate(50);
         $pageData['ViewType'] = "List";
         return view('admin.config.defphoto_indexSort',compact('pageData','rowData'));
@@ -119,10 +121,10 @@ class DefPhotoController extends AdminMainController
     public function defIconShow(){
         $pageData =[
             'ViewType'=>"Page",
-            'TitlePage'=> __('admin.deficon.main.title'),
+            'TitlePage'=> __('admin/menu.setting_icon'),
         ];
-        return view('admin.config.defIcon_show')
-            ->with(compact('pageData'));
+
+        return view('admin.config.defIcon_show')->with(compact('pageData'));
 
     }
 

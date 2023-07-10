@@ -64,30 +64,16 @@ class UploadFilterController extends AdminMainController
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
+#|||||||||||||||||||||||||||||||||||||| #     destroy
+    public function destroy($id)
+    {
+        $deleteRow = UploadFilter::where('id',$id);
+        $deleteRow->delete();
+        return redirect(route('config.upFilter.index'))->with('confirmDelete',"");
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-#
-
-
-
-
-
-
-
-
+#|||||||||||||||||||||||||||||||||||||| #     storeUpdate
     public function storeUpdate(UploadFilterRequest $request,$id)
     {
 
@@ -133,19 +119,25 @@ class UploadFilterController extends AdminMainController
         $saveData->save();
 
         if($id == '0'){
-            return  back()->with('Add.Done',__('general.alertMass.confirmAdd'));
+            return  back()->with('Add.Done','');
         }else{
-            return  back()->with('Edit.Done',__('general.alertMass.confirmEdit'));
+            return  back()->with('Edit.Done','');
         }
     }
 
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
 
-    public function destroy($id)
-    {
-        $deleteRow = UploadFilter::where('id',$id);
-        $deleteRow->delete();
-        return redirect(route('config.upFilter.index'))
-            ->with('confirmDelete',__('general.alertMass.confirmDelete'));
-    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+#
+
+
+
+
 }

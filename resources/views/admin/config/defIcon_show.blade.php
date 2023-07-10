@@ -2,7 +2,7 @@
 @section('content')
 
     <x-breadcrumb-def :pageData="$pageData"/>
-    <x-ui-card title="{{__('admin.deficon.main.title')}}" :add-form-error="false"  >
+    <x-ui-card title="{{__('admin/menu.setting_icon')}}" :add-form-error="false"  >
 
 
         <div class="row">

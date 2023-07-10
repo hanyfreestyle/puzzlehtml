@@ -11,17 +11,20 @@ use App\Models\admin\config\Setting;
 class SettingsController extends AdminMainController
 {
 
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   webConfigEdit
     public function webConfigEdit(){
 
         $setting = Setting::findOrFail(1);
         $pageData =[
             'ViewType'=>"Page",
-            'TitlePage'=> __('admin.menu.setting_web'),
+            'TitlePage'=>__('admin/menu.setting_web'),
         ];
-        return view('admin.config.settingWeb')
-            ->with(compact('pageData','setting'));
+        return view('admin.config.settingWeb')->with(compact('pageData','setting'));
     }
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     webConfigUpdate
     public function webConfigUpdate(SettingFormRequest $request){
         $request-> validated();
         if(isset($request->web_status)){
@@ -35,8 +38,21 @@ class SettingsController extends AdminMainController
         $setting= Setting::findorfail('1');
         $setting->update($request->all());
 
-        return  back()->with('Edit.Done',__('general.alertMass.confirmEdit'));
+        return  back()->with('Edit.Done',"");
     }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+
+
+
+
 
 
 
