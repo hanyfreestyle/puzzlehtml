@@ -17,9 +17,10 @@
 
         <form class="mainForm" action="{{route($formRoute,intval($oldData->id))}}" method="post">
             @csrf
-
+            <div class="row">
             <x-form-input label="# CatId" name="cat_id" :requiredSpan="true" colrow="col-lg-4"
                           value="{{old('cat_id',$oldData->cat_id)}}" inputclass="dir_en"/>
+            </div>
 
             <x-meta-tage-filde :body-h1="true" :breadcrumb="true"  :old-data="$oldData" :placeholder="false" />
 

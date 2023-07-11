@@ -3,7 +3,7 @@
     <x-breadcrumb-def :pageData="$pageData"/>
 
     <form class="mainForm uploadFilterForm" action="{{route('config.upFilter.size.storeOrUpdate',intval($rowData->id))}}" method="post">
-    @csrf
+        @csrf
         <div class="container-fluid">
             <div class="row">
 
@@ -13,7 +13,7 @@
 
                         <div class="row">
                             <x-form-select-arr  label="{{__('admin/config/upFilter.form_type')}}" name="type" colrow="col-lg-7"
-                                                sendvalue="{{old('type',$rowData->type)}}" :send-arr="config('adminVar.FilterTypeArr')"
+                                                sendvalue="{{old('type',$rowData->type)}}" :send-arr="$filterTypeArr"
                             />
                         </div>
 
@@ -27,14 +27,13 @@
 
                         <div class="row">
                             <x-form-select-arr  label="{{__('admin/config/upFilter.form_more_setting')}}" name="get_more_option" colrow="col-lg-4"
-                                                sendvalue="{{old('get_more_option',$rowData->get_more_option)}}" :send-arr="config('adminVar.ActiveState')"/>
+                                                sendvalue="{{old('get_more_option',$rowData->get_more_option)}}" select-type="selActive" />
 
                             <x-form-select-arr  label="{{__('admin/config/upFilter.form_text_state')}}" name="get_add_text" colrow="col-lg-4"
-                                                sendvalue="{{old('get_add_text',$rowData->get_add_text)}}" :send-arr="config('adminVar.ActiveState')"/>
+                                                sendvalue="{{old('get_add_text',$rowData->get_add_text)}}" select-type="selActive"/>
 
                             <x-form-select-arr  label="{{__('admin/config/upFilter.form_watermark_state')}}" name="get_watermark" colrow="col-lg-4"
-                                                sendvalue="{{old('get_watermark',$rowData->get_watermark)}}" :send-arr="config('adminVar.ActiveState')"/>
-
+                                                sendvalue="{{old('get_watermark',$rowData->get_watermark)}}" select-type="selActive"/>
 
                         </div>
 
@@ -43,12 +42,8 @@
                         </div>
                     </x-ui-card>
 
-
-
                 </div>
-
             </div>
         </div>
     </form>
-
 @endsection

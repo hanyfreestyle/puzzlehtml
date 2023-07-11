@@ -4,7 +4,7 @@
     <x-breadcrumb-def :pageData="$pageData"/>
     <x-mass.confirm-massage />
 
-    <form action="{{route('admin.webConfigUpdate')}}" method="post">
+    <form class="mainForm" action="{{route('admin.webConfigUpdate')}}" method="post">
         @csrf
         <div class="container-fluid">
             <div class="row">
@@ -33,7 +33,7 @@
 
                         <div class="row">
                             @foreach ( config('app.lang_file') as $key=>$lang )
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 {{getColDir($key)}}">
 
                                     <x-trans-input
                                         label="{{__('admin/config/admin.config_website_name_'.$key)}} ({{ $key}})"

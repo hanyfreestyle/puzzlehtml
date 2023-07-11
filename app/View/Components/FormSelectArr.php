@@ -16,6 +16,7 @@ class FormSelectArr extends Component
     public $colrow;
     public $sendArr ;
     public $selectType ;
+    public $printValName ;
 
     public function __construct(
         $name ="",
@@ -25,6 +26,7 @@ class FormSelectArr extends Component
         $colrow = "col-lg-4",
         $sendArr = array(),
         $selectType = 'normal',
+        $printValName = 'name',
 
     )
     {
@@ -35,6 +37,7 @@ class FormSelectArr extends Component
         $this->colrow = $colrow;
         $this->sendArr = $sendArr;
         $this->selectType = $selectType;
+        $this->printValName = $printValName;
     }
 
 

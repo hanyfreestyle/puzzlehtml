@@ -13,4 +13,6 @@ return
 	'icon' => 'Icon',
 	'photo' => 'Photo',
 	'status' => 'Status',
+	'status_active' => 'Active',
+	'status_unactive' => 'UnActive',
 ];

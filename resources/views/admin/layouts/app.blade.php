@@ -6,7 +6,7 @@
     <title>{{config('adminConfig.title')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @yield('StyleFile')
+
     @if(config('adminConfig.pace_progress') == true and config('adminConfig.preloader') == false)
         <link rel="stylesheet" href="{{ defAdminAssets('plugins/pace-progress/themes/black/pace-theme-flat-top.css') }}">
     @endif
@@ -25,14 +25,17 @@
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/sweet/sweetalert2.min.css') }}">
 
 
-
     <link rel="stylesheet" href="{{ defAdminAssets('css/adminlte.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('css/custom_admin.css') }}">
     @if( thisCurrentLocale() == 'ar')
         <link rel="stylesheet" href="{{ defAdminAssets('rtl/css/adminlte-rtl.css') }}">
         <link rel="stylesheet" href="{{ defAdminAssets('rtl/css/custom.css') }}">
-        <link rel="stylesheet" href="{{ defAdminAssets('rtl/css/custom_ar.css') }}">
+        <link rel="stylesheet" href="{{ defAdminAssets('css/custom_ar.css') }}">
+    @elseif( thisCurrentLocale() == 'en')
+        <link rel="stylesheet" href="{{ defAdminAssets('css/custom_en.css') }}">
     @endif
+
+    @yield('StyleFile')
 </head>
 
 <body class="hold-transition {{ mainBodyStyle() }}">
@@ -233,7 +236,7 @@
 
 @stack('JsCode')
 <script>
-    @if( thisCurrentLocale() == 'ar')
+
     async function loadarfont(){
         const font_ar = new FontFace('Tajawal','url({{ defAdminAssets('fonts/Ar/TajawalRegular.woff2') }}');
         await font_ar.load();
@@ -241,7 +244,16 @@
         document.body.classList.add('Tajawal');
     };
     loadarfont();
-    @endif
+
+    async function loadarfont_en(){
+        const font_en = new FontFace('Poppins','url({{ defAdminAssets('fonts/En/Poppins-Regular.woff2') }}');
+        await font_en.load();
+        document.fonts.add(font_en);
+        document.body.classList.add('Poppins');
+    };
+    loadarfont_en();
+
+
     display_c7();
 
 </script>

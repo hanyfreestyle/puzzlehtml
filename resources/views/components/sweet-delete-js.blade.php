@@ -14,13 +14,13 @@
             /// alert(formid);
             Swal.fire({
                 title: '{{__('admin/alertMass.sweet_title') }}',
-                text: "{!! __('admin/alertMass.sweet_text') !!}",
+                text: "{!! htmlspecialchars_decode(__('admin/alertMass.sweet_text')) !!}",
                 icon: 'error',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: '{{__('admin/alertMass.sweet_confirmButtonText')}}',
-                cancelButtonText: '{{__('admin/alertMass.sweet_cancelButtonText')}}'
+                confirmButtonText: '{!! __('admin/alertMass.sweet_confirmButtonText') !!}',
+                cancelButtonText: '{!! __('admin/alertMass.sweet_cancelButtonText') !!}'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $('#thisForId_'+formid).submit();

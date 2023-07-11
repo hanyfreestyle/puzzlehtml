@@ -5,12 +5,9 @@
     <x-breadcrumb-def :pageData="$pageData"/>
 
     <x-ui-card title="{{$pageData[$pageData['ViewType'].'PageName']}}">
+        <x-mass.confirm-massage />
 
-        @if(Session::has($pageData['ViewType'].'.Done'))
-            <div class="alert alert-success alert-dismissible">
-                {!! Session::get($pageData['ViewType'].'.Done') !!}
-            </div>
-        @endif
+
 
         <form  class="mainForm" action="{{route('amenity.update',intval($rowData->id))}}" method="post"  enctype="multipart/form-data">
             @csrf
@@ -18,7 +15,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     @foreach ( config('app.lang_file') as $key=>$lang )
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 {{getColDir($key)}}">
                             <x-trans-input
 
                                 label="{{__('admin/def.form_name_'.$key)}} ({{ $key}})"

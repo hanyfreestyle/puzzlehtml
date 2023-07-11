@@ -1,117 +1,42 @@
-.back-to-top{bottom:2.7rem!important}.liveClock_span{color:rgba(255,255,255,.75)!important;padding:.5rem 1rem!important}
-.main-footer{background-color:#343a40;border-color:#4b545c}
+.main-footer{background-color:#343a40;border-color:#4b545c}.required_Span{color:red!important;font-weight:700}.back-to-top{bottom:2.7rem!important}.liveClock_span{color:rgba(255,255,255,.75)!important;padding:.5rem 1rem!important}.select2-results__option {font-size: 14px!important;}
 .dir_ar{direction:rtl!important;text-align:right}
 .dir_en{direction:ltr!important;text-align:left;width:100%}
-.label_ar{direction:rtl!important;text-align:right}
-.label_en{direction:ltr!important;text-align:left;width:100%}
-.table td,.table th{padding:.75rem;vertical-align:middle;border-top:1px solid #dee2e6}
 
+.TD_20{width:20px!important;}.TD_30{width:30px!important}.TD_40{width:40px!important}.TD_50{width:50px!important}.TD_60{width:60px!important}.TD_70{width:70px!important}
+.TD_80{width:80px!important}.TD_90{width:90px!important}.TD_100{width:100px!important}.TD_110{width:110px!important}.TD_120{width:120px!important}.TD_130{width:130px!important}
+.TD_140{width:140px!important}.TD_150{width:150px!important}.TD_160{width:160px!important}.TD_170{width:170px!important}.TD_180{width:180px!important}
+.TD_190{width:190px!important}.TD_200{width:200px!important}.TD_250{width:250px!important}.TD_300{width:300px!important}.TD_350{width:350px!important}
+.Td_Count{font-size:22px!important;}
+.BB_Number{font-size:22px!important;}
 
-.select2-results__option {font-size: 14px!important;}
-
-
-.required_Span{color:red!important;font-weight:700}
-
+ 
 .mainForm{padding-bottom:50px;}
+.mainForm .def_form_label{font-size:15px!important;margin-bottom:0!important;padding-top:8px;padding-bottom:7px;font-weight:700!important;color:rgba(0,0,0,.8)!important}
 
-.mainForm .form-control.is_invalid_ar{padding-left:.75rem!important;padding-right:2.25rem!important;background-position:right calc(.375em + .1875rem) center!important}
-.mainForm textarea.form-control.is_invalid_area_en{padding-right:2.25rem;background-position:top calc(0.375em + 0.1875rem) left calc(0.375em + 0.1875rem)!important}
-
-.def_card_header .card-title{
-    font-size:16px!important;
-    font-weight:bold!important;
-}
-
-.mainForm .def_form_label{
-    font-size:15px!important;
-    margin-bottom:0px!important;
-    padding-top: 8px;
-    padding-bottom: 7px;
-    font-weight:bold!important;
-    color:rgba(0,0,0,.8)!important;
-}
-
-.uploadFilterForm .form-control{
-    padding:10px!important;
-    font-size:14px;
-    height:40px;
-}
+.table td,.table th{padding:.75rem;vertical-align:middle;border-top:1px solid #dee2e6}
+.table .tbutaction{ text-align:center;}
+.TableIcon{font-size:20px}
 
 
-.uploadFilterForm .select2-container--default .select2-selection--single {
-    border: 1px solid #ced4da;
-    height:40px;
-    padding:10px!important;
-    font-size:14px;
-}
+.def_card_header .card-title{font-size:16px!important;font-weight:700!important;line-height:30px}
+.div_data{padding:0 10px}
 
 
-
-
-.uploadFilterForm .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #444;
-    line-height:22px!important;
-}
-
-
-
-
-
-.uploadFilterForm  hr {
-
-    margin-top: .7rem;
-    margin-bottom: .7rem;
-
-}
-
-.uploadFilterForm .form-group {
-    margin-bottom: .2rem;
-}
+.amenity_table_icon{font-size:30px;color:#FFF;padding:10px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;min-width:60px;text-align:center}
+.popover-body{direction:ltr!important}
+#iconpicker_target{width:150px;font-size:40px;padding:0!important}
+#iconpicker_target i{margin-right:10px;margin-left:10px;font-size:35px}
 
 
 .watermark_imgView{background:#6f6f80;float:right;width:100%;text-align:center!important;height:300px}
 .watermark_imgView img{max-height:300px;max-width:400px}
 
-/*
-
-
-
-.card-bodyX{padding-top:10px;padding-bottom:30px}
-
-.popover-body{direction:ltr!important}
-
-
-
-
-.bg-whiteBorder{border:1px solid rgba(0,0,0,.1)}
-.TableIcon{font-size:25px}
-
-.IconShowIcon{margin:auto;width:90%}
-.hanySort{padding:10px 20px}
-.hanySort .ListThisItam{margin-bottom:10px}
-.hanySort .ListThisItam img{max-width:95%;max-height:200px}
-
-*/
-
 .PhotoImageCard{text-align:center;width:100%;height:200px;background-color:rgba(0,0,0,.3)}
 .PhotoImageCard img{max-width:95%;max-height:200px}
 
-.fileUploadCurrent img {
-max-width:250px;
-}
-
-
-#iconpicker_target{width:150px;font-size:40px;padding:0!important}
-#iconpicker_target i{margin-right:10px;margin-left:10px;font-size:35px}
-
-
-.amenity_table_icon{
-font-size:30px;
- 
-color:#FFFFFF;
-padding:10px;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
-
-}
+.uploadFilterForm .form-control{padding:10px!important;font-size:14px;height:40px}
+.uploadFilterForm .select2-container--default .select2-selection--single{border:1px solid #ced4da;height:40px;padding:10px!important;font-size:14px}
+.uploadFilterForm .select2-container--default .select2-selection--single .select2-selection__rendered{color:#444;line-height:22px!important}
+.uploadFilterForm hr{margin-top:.7rem;margin-bottom:.7rem}
+.uploadFilterForm .form-group{margin-bottom:.2rem}
+.fileUploadCurrent img {max-width:250px;}

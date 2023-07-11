@@ -13,4 +13,6 @@ return
 	'icon' => 'Icon',
 	'photo' => 'صورة',
 	'status' => 'الحالة',
+	'status_active' => 'فعال',
+	'status_unactive' => 'غير فعال',
 ];

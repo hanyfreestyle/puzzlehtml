@@ -1,20 +1,14 @@
 <?php
-return [
-    'ActiveState'=>[
-        "1"=> ['id'=>'0','name'=>"غير فعال"],
-        "2"=> ['id'=>'1','name'=>"فعال"],
-    ],
 
+return [
+ /*
+    'ActiveState'=>[
+        "1"=> ['id'=>'0','name'=> "UnActive",'name_ar'=>"غير فعال"],
+        "2"=> ['id'=>'1','name'=> "Active",'name_ar'=>"فعال"],
+    ],
+*/
     "fontFileList" => glob("assets/admin/intervention/font/*.ttf"),
     "logoFileList" => glob('assets/admin/intervention/watermark/*.png'),
-
-    'FilterTypeArr'=>[
-        "1"=> ['id'=>'1','name'=>"لا تقوم بالتعديل اثناء الرفع"],
-        "2"=> ['id'=>'2','name'=>"التصغير وفقا للعرض"],
-        "3"=> ['id'=>'3','name'=>"التصغير وفقا للطول"],
-        "4"=> ['id'=>'4','name'=>"قص الصورة وفقا للطول والعرض"],
-        "5"=> ['id'=>'5','name'=>"ضبط ابعاد الصورة وفقا للطول والعرض مع اضافة خلفية"],
-    ],
 
     "textPositionArr" => [
         "1"=> ['id'=>'top','name'=>"Top"],

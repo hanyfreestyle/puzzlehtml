@@ -8,10 +8,10 @@
    @endif
    class="btn {{$size}} btn-{{$bg}} {{$sweetDelClass}}">
     @if($icon)
-    <i class="fa {{$icon}}"></i> @if(!$tip) &nbsp @endif
+        <i class="fa {{$icon}}"></i> @if(!$tip) @endif
     @endif
     @if(!$tip)
-     {{$lable}}
+        {{$lable}}
     @endif
 </a>
 

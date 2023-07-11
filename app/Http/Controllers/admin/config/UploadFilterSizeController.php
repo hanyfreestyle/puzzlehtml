@@ -7,13 +7,25 @@ use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\UploadFilterSizeRequest;
 use App\Models\admin\config\UploadFilter;
 use App\Models\admin\config\UploadFilterSize;
+use Illuminate\Support\Facades\View;
 
 
 class UploadFilterSizeController extends AdminMainController
 {
     public $controllerName = 'upFilter';
 
+public function __construct()
+{
+    $FilterTypeArr = [
+        "1"=> ['id'=>'1','name'=>__('admin/config/upFilter.filter_action_1')],
+        "2"=> ['id'=>'2','name'=>__('admin/config/upFilter.filter_action_2')],
+        "3"=> ['id'=>'3','name'=>__('admin/config/upFilter.filter_action_3')],
+        "4"=> ['id'=>'4','name'=>__('admin/config/upFilter.filter_action_4')],
+        "5"=> ['id'=>'5','name'=>__('admin/config/upFilter.filter_action_5')],
+    ];
 
+    View::share('filterTypeArr', $FilterTypeArr);
+}
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create

@@ -406,7 +406,7 @@ class AdminHelper{
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     Text
+#|||||||||||||||||||||||||||||||||||||| #     printTableImage
     static  function printTableImage($row,$fildeName='photo_thum_1'){
         if($row->$fildeName){
             $sendImg = '<img  width="60" src="'.defImagesDir($row->$fildeName).'">';

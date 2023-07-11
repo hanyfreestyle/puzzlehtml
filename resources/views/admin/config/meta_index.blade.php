@@ -11,17 +11,17 @@
 
                     @if(count($rowData)>0)
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
+                            <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>CatId</th>
                                     <th>{{__('admin/form.meta_g_title_'.thisCurrentLocale())}}</th>
-                                    <th>{{__('admin/form.meta_g_des_'.thisCurrentLocale())}}</th>
+                                    <th width="40%">{{__('admin/form.meta_g_des_'.thisCurrentLocale())}}</th>
                                     <th>{{__('admin/form.meta_bodyH1_'.thisCurrentLocale())}}</th>
                                     <th>{{__('admin/form.meta_breadcrumb_'.thisCurrentLocale())}}</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th class="text-center"></th>
+                                    <th class="text-center"></th>
 
                                 </tr>
                                 </thead>
@@ -31,13 +31,13 @@
                                         <td>{{$row->id}}</td>
                                         <td>{{$row->cat_id}}</td>
                                         <td>{{$row->translate(thisCurrentLocale())->g_title}}</td>
-                                        <td>{{$row->translate(thisCurrentLocale())->g_des}}</td>
+                                        <td>{{ Str::limit($row->translate(thisCurrentLocale())->g_des,200) }}</td>
                                         <td>{{$row->translate(thisCurrentLocale())->body_h1}}</td>
                                         <td>{{$row->translate(thisCurrentLocale())->breadcrumb}}</td>
-                                        <td>
+                                        <td class="text-center" >
                                             <x-action-button url="{{route('config.meta.edit',$row->id)}}" type="edit" :tip="false" />
                                         </td>
-                                        <td>
+                                        <td class="text-center" >
                                             <x-sweet-delete-button route-name="config.meta.destroy" :row="$row" />
                                         </td>
 

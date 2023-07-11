@@ -1,30 +1,4 @@
-/*!
- *   AdminLTE RTL v3.x (RTL fix just for sample pages not real project)
- *   Author: Ali Shareei <https://github.com/alishareei>
- *   License: Open source - MIT <https://opensource.org/licenses/MIT>
- */
 
-/*
-|--------------------------------------------------------------------------
-| Do not use this styles for the real project!
-|--------------------------------------------------------------------------
-|
-| In this file, we try to adapt the original example pages with the RTL mode.
-| In a real project, appropriate classes should be used.
-| For example "float-right" class for sorting an element on the right side.
-| But here we did not want to copy and modify all the sample pages for RTL version.
-|
-| So we reversed some classes like the following:
-| 1. float-right / float-left
-| 2. text-right / text-left
-| 3. pos-right / pos-left
-| 4. float-sm-right / float-sm-left
-| 5. dropdown-menu-right
-| 6. ml-auto / mr-auto,
-| 7. mr-{x} / ml-{x}
-| and ...
-|
-*/
 
 /* --------------------------- Header & Footer --------------------------- */
 /* --- Header: navbar --- */

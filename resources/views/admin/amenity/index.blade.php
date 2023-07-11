@@ -2,19 +2,16 @@
 
 @section('content')
     <x-breadcrumb-def :pageData="$pageData"/>
+    <section class="div_data">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12" >
-
+            <div class="col-lg-12">
 
 
                 <x-ui-card title="{{$pageData['ListPageName']}}" addButtonRoute="{!! $pageData['AddPageUrl'] !!}" >
+                    <x-mass.confirm-massage/>
 
-                    @if(Session::has('confirmDelete'))
-                        <div class="alert alert-success alert-dismissible">
-                            {!! Session::get('confirmDelete') !!}
-                        </div>
-                    @endif
+
 
                     @if(count($rowData)>0)
                         <div class="card-body table-responsive p-0">
@@ -27,8 +24,8 @@
                                     <th>{{__('admin/def.form_name_ar')}}</th>
                                     <th>{{__('admin/def.form_name_en')}}</th>
                                     <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th class="tbutaction TD_120" ></th>
+                                    <th class="tbutaction TD_120" ></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -43,9 +40,7 @@
                                         <td>
                                             <x-action-button url="{{route('amenity.edit',$row->id)}}" type="edit" :tip="false" />
                                         </td>
-                                        <td>
-
-
+                                        <td >
                                             <x-sweet-delete-button route-name="amenity.destroy" :row="$row" />
                                         </td>
 
@@ -65,6 +60,7 @@
     <div class="d-flex justify-content-center">
         {{ $rowData->links() }}
     </div>
+    </section>
 @endsection
 
 @push('JsCode')

@@ -1,7 +1,7 @@
-<div class="row">
+<div class="row ">
 
     @foreach ( config('app.lang_file') as $key=>$lang )
-        <div class="col-lg-6">
+        <div class="col-lg-6 {{getColDir($key)}}">
 
 
             <x-trans-input :placeholder="$placeholder"

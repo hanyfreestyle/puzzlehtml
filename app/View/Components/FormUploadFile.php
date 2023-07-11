@@ -35,7 +35,7 @@ class FormUploadFile extends Component
     {
         $this->rowCol = $rowCol;
         $this->fileName = $fileName;
-        $this->labelPhoto = __('general.form.currentPhoto');
+        $this->labelPhoto = __('admin/def.form_currentPhoto');
         $this->label = __('admin/def.form_PhotoUpload');
         $this->viewType = $viewType;
         $this->req = $req;
