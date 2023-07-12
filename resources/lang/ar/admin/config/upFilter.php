@@ -37,8 +37,4 @@ return
 	'form_watermark_position' => 'مكان طباعة الصورة',
 	'form_watermark_setting' => 'اعدادات العلامة المائية',
 	'form_watermark_state' => 'اضافة العلامة المائية',
-	'main_addPage' => 'اضافة فلتر جديد',
-	'main_editPage' => 'تعديل',
-	'main_listPage' => 'عرض الفلاتر',
-	'main_title' => 'فلاتر الصور',
 ];

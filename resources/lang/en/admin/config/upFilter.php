@@ -37,8 +37,4 @@ return
 	'form_watermark_position' => 'Watermark Position',
 	'form_watermark_setting' => 'Watermark Setting',
 	'form_watermark_state' => 'Watermark Status',
-	'main_addPage' => '',
-	'main_editPage' => '',
-	'main_listPage' => '',
-	'main_title' => '',
 ];

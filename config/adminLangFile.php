@@ -9,11 +9,7 @@ return [
        '5'=> ['id'=> '5' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'page','name'=>'الصفحات' ],
        '6'=> ['id'=> '6' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'admin','name'=>'AdminFile' ],
        '7'=> ['id'=> '7' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'upFilter','name'=>'فلاتر الصور' ],
-       /*
-       '1'=> ['id'=> '1' , 'group'=>null , 'sub_dir'=> null , 'file_name'=> 'defVal','name'=>'defVal' ],
-       '2'=> ['id'=> '2' , 'group'=>null , 'sub_dir'=> null , 'file_name'=> 'general','name'=>'general' ],
-       '3'=> ['id'=> '3' , 'group'=>null , 'sub_dir'=> null , 'file_name'=> 'hany','name'=>'hany' ],
+       '8'=> ['id'=> '8' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'roles','name'=>'الصلاحيات' ],
 
-       */
     ],
 ];

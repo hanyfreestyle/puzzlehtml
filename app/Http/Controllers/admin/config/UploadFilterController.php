@@ -19,6 +19,7 @@ class UploadFilterController extends AdminMainController
 
     )
     {
+        parent::__construct();
         $FilterTypeArr = [
         "1"=> ['id'=>'1','name'=>__('admin/config/upFilter.filter_action_1')],
         "2"=> ['id'=>'2','name'=>__('admin/config/upFilter.filter_action_2')],
