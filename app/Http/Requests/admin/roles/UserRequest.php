@@ -4,7 +4,7 @@ namespace App\Http\Requests\admin\roles;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminRoleRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,11 +21,13 @@ class AdminRoleRequest extends FormRequest
 
         if($id == '0'){
             $rules =[
-                'name'=> "required|alpha_dash:ascii|min:4|max:50|unique:roles",
+                //'name'=> "required|alpha_dash:ascii|min:4|max:50|unique:roles",
+                'name'=> "required",
             ];
         }else{
             $rules =[
-                'name'=> "required|alpha_dash:ascii|min:4|max:50|unique:roles,name,$id",
+                'name'=> "required",
+               // 'name'=> "required|alpha_dash:ascii|min:4|max:50|unique:roles,name,$id",
             ];
         }
 

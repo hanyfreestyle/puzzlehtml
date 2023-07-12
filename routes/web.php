@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\config\UploadFilterController;
 use App\Http\Controllers\admin\config\UploadFilterSizeController;
 use App\Http\Controllers\admin\roles\AdminPermissionController;
 use App\Http\Controllers\admin\roles\AdminRoleController;
+use App\Http\Controllers\admin\roles\UserController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -85,12 +86,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
 
 
 
-        Route::get('/Users', [MetaTagController::class,'index'])->name('users.users.index');
-        Route::get('/Users/create', [MetaTagController::class,'create'])->name('users.users.create');
-        Route::post('/Users/store/{id}', [MetaTagController::class,'storeUpdate'])->name('users.users.store');
-        Route::get('/Users/edit/{id}', [MetaTagController::class,'edit'])->name('users.users.edit');
-        Route::post('/Users/Update/{id}', [MetaTagController::class,'storeUpdate'])->name('users.users.update');
-        Route::get('/Users/delete/{id}', [MetaTagController::class,'delete'])->name('users.users.destroy');
+        Route::get('/Users', [UserController::class,'index'])->name('users.users.index');
+        Route::get('/Users/create', [UserController::class,'create'])->name('users.users.create');
+        Route::post('/Users/store/{id}', [UserController::class,'storeUpdate'])->name('users.users.store');
+        Route::get('/Users/edit/{id}', [UserController::class,'edit'])->name('users.users.edit');
+        Route::post('/Users/Update/{id}', [UserController::class,'storeUpdate'])->name('users.users.update');
+        Route::get('/Users/delete/{id}', [UserController::class,'destroy'])->name('users.users.destroy');
 
 
         Route::get('/Roles', [AdminRoleController::class,'index'])->name('users.roles.index');
@@ -98,15 +99,22 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::post('/Roles/store/{id}', [AdminRoleController::class,'storeUpdate'])->name('users.roles.store');
         Route::get('/Roles/edit/{id}', [AdminRoleController::class,'edit'])->name('users.roles.edit');
         Route::post('/Roles/Update/{id}', [AdminRoleController::class,'storeUpdate'])->name('users.roles.update');
-        Route::get('/Roles/delete/{id}', [AdminRoleController::class,'delete'])->name('users.roles.destroy');
+        Route::get('/Roles/delete/{id}', [AdminRoleController::class,'destroy'])->name('users.roles.destroy');
+
+        Route::post('/Roles/{role}/permissions/', [AdminRoleController::class,'givePermission'])->name('users.roles.permission');
+        Route::delete('/Roles/{role}/permissions/{permission}', [AdminRoleController::class,'removePermission'])
+            ->name('users.roles.permission.remove');
 
         Route::get('/Permissions', [AdminPermissionController::class,'index'])->name('users.permissions.index');
         Route::get('/Permissions/create', [AdminPermissionController::class,'create'])->name('users.permissions.create');
         Route::post('/Permissions/store/{id}', [AdminPermissionController::class,'storeUpdate'])->name('users.permissions.store');
         Route::get('/Permissions/edit/{id}', [AdminPermissionController::class,'edit'])->name('users.permissions.edit');
         Route::post('/Permissions/Update/{id}', [AdminPermissionController::class,'storeUpdate'])->name('users.permissions.update');
-        Route::get('/Permissions/delete/{id}', [AdminPermissionController::class,'delete'])->name('users.permissions.destroy');
+        Route::get('/Permissions/delete/{id}', [AdminPermissionController::class,'destroy'])->name('users.permissions.destroy');
 
+        Route::post('/Permissions/{permission}/roles', [AdminPermissionController::class,'assignRole'])->name('users.permission.roles');
+        Route::delete('/Permissions/{permission}/roles/{role}', [AdminPermissionController::class,'removeRole'])->name
+        ('users.permission.roles.remove');
 
     });
 });

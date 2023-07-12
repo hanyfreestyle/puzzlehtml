@@ -17,6 +17,8 @@
                                     <th>{{__('admin/def.form_name_ar')}}</th>
                                     <th>{{__('admin/def.form_name_en')}}</th>
                                     <th></th>
+                                    <th></th>
+                                    <th></th>
 
                                 </tr>
                                 </thead>
@@ -27,14 +29,17 @@
                                     <tr>
                                         <td >{{$row->id}}</td>
                                         <td>{{$row->name}}</td>
+                                        <td>{{$row->email}}</td>
+
+                                        <td>{!! AdminHelper::printTableImage($row,'photo') !!} </td>
 
 
                                         <td class="text-center">
-                                            <x-action-button url="{{route('users.permissions.edit',$row->id)}}" type="edit" />
+                                            <x-action-button url="{{route('users.users.edit',$row->id)}}" type="edit" />
                                         </td >
 
                                         <td class="text-center">
-                                            <x-action-button url="#" id="{{route('users.permissions.destroy',$row->id)}}" type="deleteSweet"  />
+                                            <x-action-button url="#" id="{{route('users.users.destroy',$row->id)}}" type="deleteSweet"  />
                                         </td>
 
                                     </tr>

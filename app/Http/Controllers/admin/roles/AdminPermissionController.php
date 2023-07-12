@@ -6,10 +6,12 @@ use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\config\AmenityRequest;
+use App\Http\Requests\admin\roles\AdminPermissionRequest;
 use App\Models\admin\config\Amenity;
 use App\Models\admin\config\AmenityTranslation;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AdminPermissionController extends AdminMainController
 {
@@ -35,9 +37,9 @@ class AdminPermissionController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Add";
 
-        //$rowData = User::findOrNew(0);
-        $rowData = array();
-        return view('admin.amenity.form',compact('pageData','rowData'));
+        $rowData = Permission::findOrNew(0);
+        $roles = Role::all();
+       return view('admin.role.permission_form',compact('pageData','rowData','roles'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
@@ -47,45 +49,50 @@ class AdminPermissionController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-        //$rowData = User::findOrFail($id);
-        $rowData = array();
-        return view('admin.amenity.form',compact('rowData','pageData'));
+        $rowData = Permission::findOrFail($id);
+        $roles = Role::all();
+        return view('admin.role.permission_form',compact('rowData','pageData','roles'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(AmenityRequest $request, $id=0)
+    public function storeUpdate(AdminPermissionRequest $request, $id=0)
     {
         $request-> validated();
-
-        $saveData =  Amenity::findOrNew($id);
-        $saveData->icon = $request->icon;
-
+        $saveData =  Permission::findOrNew($id);
+        $saveData->name = $request->name;
         $saveData->save();
 
-        foreach ( config('app.lang_file') as $key=>$lang) {
-            $saveTranslation = AmenityTranslation::where('amenity_id',$saveData->id)->where('locale',$key)->firstOrNew();
-            $saveTranslation->amenity_id = $saveData->id;
-            $saveTranslation->locale = $key;
-            $saveTranslation->name = $request->input($key.'.name');
-            $saveTranslation->save();
-        }
-
         if($id == '0'){
-            return  back()->with('Add.Done',"");
+            return redirect(route('users.permissions.index'))->with('Add.Done',"");
         }else{
-            return  back()->with('Edit.Done',"");
+            return redirect(route('users.permissions.index'))->with('Edit.Done',"");
         }
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id)
     {
-        $deleteRow = Amenity::findOrFail($id);
-        $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,2);
+        $deleteRow = Permission::findOrFail($id);
         $deleteRow->delete();
-        return redirect(route('amenity.index'))->with('confirmDelete',"");
+        return redirect(route('users.permissions.index'))->with('confirmDelete',"");
     }
 
+    public function assignRole(Request $request , Permission $permission){
 
+        if($permission->hasRole($request->role)){
+            return back()->with('mass','موجوده');
+        }
+        $permission->assignRole($request->role);
+        return back()->with('mass2','موجوده');
+
+    }
+
+    public function removeRole(Permission $permission , Role $role){
+        if($permission->hasRole($role)){
+            $permission->removeRole($role);
+            return back()->with('mass9','موجوده');
+        }
+
+    }
 
 }

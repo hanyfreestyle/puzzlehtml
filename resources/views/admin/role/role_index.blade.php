@@ -33,11 +33,11 @@
                                         <td>{!! AdminHelper::printTableImage($row,'photo') !!} </td>
 
                                         <td class="text-center">
-                                            <x-action-button url="{{route('config.upFilter.edit',$row->id)}}" type="edit" />
+                                            <x-action-button url="{{route('users.roles.edit',$row->id)}}" type="edit" />
                                         </td >
 
                                         <td class="text-center">
-                                            <x-action-button url="#" id="{{route('config.upFilter.destroy',$row->id)}}" type="deleteSweet"  />
+                                            <x-action-button url="#" id="{{route('users.roles.destroy',$row->id)}}" type="deleteSweet"  />
                                         </td>
 
                                     </tr>

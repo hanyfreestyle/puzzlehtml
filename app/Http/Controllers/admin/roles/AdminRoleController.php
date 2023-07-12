@@ -5,9 +5,11 @@ namespace App\Http\Controllers\admin\roles;
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 
-use App\Http\Requests\admin\config\AmenityRequest;
-use App\Models\admin\config\Amenity;
-use App\Models\admin\config\AmenityTranslation;
+
+use App\Http\Requests\admin\roles\AdminRoleRequest;
+
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 
@@ -19,11 +21,9 @@ class AdminRoleController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
     {
-
         $sendArr = ['TitlePage' => __('admin/menu.roles_role') ,'selMenu'=> 'users.' ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
-
 
         $rowData = Role::orderBy('id')->paginate(10);
         return view('admin.role.role_index',compact('pageData','rowData'));
@@ -36,9 +36,8 @@ class AdminRoleController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Add";
 
-        //$rowData = User::findOrNew(0);
-        $rowData = array();
-        return view('admin.amenity.form',compact('pageData','rowData'));
+       $rowData = Role::findOrNew(0);
+        return view('admin.role.role_form',compact('pageData','rowData'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
@@ -48,42 +47,52 @@ class AdminRoleController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-        //$rowData = User::findOrFail($id);
-        $rowData = array();
-        return view('admin.amenity.form',compact('rowData','pageData'));
+        $rowData = Role::findOrFail($id);
+        $permissions = Permission::all();
+
+        return view('admin.role.role_form',compact('rowData','pageData',"permissions"));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(AmenityRequest $request, $id=0)
+    public function storeUpdate(AdminRoleRequest $request, $id=0)
     {
         $request-> validated();
 
-        $saveData =  Amenity::findOrNew($id);
-        $saveData->icon = $request->icon;
-
+        $saveData =  Role::findOrNew($id);
+        $saveData->name = $request->name;
         $saveData->save();
 
-        foreach ( config('app.lang_file') as $key=>$lang) {
-            $saveTranslation = AmenityTranslation::where('amenity_id',$saveData->id)->where('locale',$key)->firstOrNew();
-            $saveTranslation->amenity_id = $saveData->id;
-            $saveTranslation->locale = $key;
-            $saveTranslation->name = $request->input($key.'.name');
-            $saveTranslation->save();
-        }
-
         if($id == '0'){
-            return  back()->with('Add.Done',"");
+            return redirect(route('users.roles.index'))->with('Add.Done',"");
         }else{
-            return  back()->with('Edit.Done',"");
+            return redirect(route('users.roles.index'))->with('Edit.Done',"");
         }
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id)
     {
-        $deleteRow = Amenity::findOrFail($id);
-        $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,2);
+        $deleteRow = Role::findOrFail($id);
         $deleteRow->delete();
-        return redirect(route('amenity.index'))->with('confirmDelete',"");
+        return redirect(route('users.roles.index'))->with('confirmDelete',"");
+    }
+
+
+    public function givePermission(Request $request , Role $role){
+
+        if($role->hasPermissionTo($request->permission)){
+            return back()->with('mass','موجوده');
+        }
+        $role->givePermissionTo($request->permission);
+        return back()->with('mass2','موجوده');
+    }
+
+
+    public function removePermission(Role $role , Permission $permission){
+        if($role->hasPermissionTo($permission)){
+            $role->revokePermissionTo($permission);
+
+            return back()->with('mass9','موجوده');
+        }
     }
 }

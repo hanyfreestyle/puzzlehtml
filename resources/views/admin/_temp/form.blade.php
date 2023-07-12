@@ -29,15 +29,7 @@
                 </div>
             </div>
 
-            <div class="form-group col-lg-4" style="direction: ltr!important;">
-                <label class="col-form-label font-weight-light " for="">Icon</label>
-                <div class="" style="direction: ltr!important;">
-                    <input type="hidden" name="icon" id="icon_hidden_filde" value="{{old('icon',$rowData->icon)}}"  >
-                    <button class="btn btn-primary"
-                            data-align="center"
-                            data-icon="{{old('icon',$rowData->icon)}}" id="iconpicker_target" role="iconpicker"></button>
-                </div>
-            </div>
+
             <hr>
             <x-form-select-arr  label="{{__('admin/def.form_selectFilterLable')}}" name="filter_id" colrow="col-lg-6"
                                 sendvalue="{{old('filter_id')}}" :send-arr="$filterTypes"/>
@@ -54,12 +46,7 @@
 
 
 @push('JsCode')
-    <script src="{{defAdminAssets('plugins/bootstrap-iconpicker/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
-    <script>
-        $('#iconpicker_target').on('change', function(e) {
-            $("#icon_hidden_filde").val(e.icon);
-        });
-    </script>
+
 @endpush
 
 

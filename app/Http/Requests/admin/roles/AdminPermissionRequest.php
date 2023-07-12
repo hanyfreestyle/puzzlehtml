@@ -11,7 +11,7 @@ class AdminPermissionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,18 @@ class AdminPermissionRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $id = $this->route('id');
+
+        if($id == '0'){
+            $rules =[
+                'name'=> "required|alpha_dash:ascii|min:4|max:50|unique:permissions",
+            ];
+        }else{
+            $rules =[
+                'name'=> "required|alpha_dash:ascii|min:4|max:50|unique:permissions,name,$id",
+            ];
+        }
+
+        return $rules;
     }
 }
