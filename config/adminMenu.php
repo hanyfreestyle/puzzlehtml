@@ -43,15 +43,15 @@ return [
             'icon'=>'fas fa-unlock-alt',
             'submenu'=>[
 /*
-                ['text'=> 'Users','url'=> 'users.users.index','sel_routs'=> 'users','icon'=>'fab fa-html5'],
-                ['text'=> 'Roles','url'=> 'users.roles.index','sel_routs'=> 'roles','icon'=>'fab fa-html5'],
-                ['text'=> 'Permissions','url'=> 'users.permissions.index','sel_routs'=> 'permissions','icon'=>'fas fa-cog'],
+                ['text'=> 'Users','url'=> ,'sel_routs'=> 'users','icon'=>'fab fa-html5'],
+                ['text'=> 'Roles','url'=>,'sel_routs'=> 'roles','icon'=>'fab fa-html5'],
+                ['text'=> 'Permissions','url'=> ,'sel_routs'=> 'permissions','icon'=>'fas fa-cog'],
 
 __()
 */
-                ['text'=> 'admin/menu.roles_users' ,'url'=> 'adminlang.index','sel_routs'=> 'users','icon'=>'fas fa-users'],
-                ['text'=> 'admin/menu.roles_role','url'=> 'adminlang.index','sel_routs'=> 'roles','icon'=>'fas fa-traffic-light'],
-                ['text'=> 'admin/menu.roles_permissions' ,'url'=> 'adminlang.index','sel_routs'=> 'permissions','icon'=>'fas fa-user-shield'],
+                ['text'=> 'admin/menu.roles_users' ,'url'=> 'users.users.index','sel_routs'=> 'users','icon'=>'fas fa-users'],
+                ['text'=> 'admin/menu.roles_role','url'=>  'users.roles.index','sel_routs'=> 'roles','icon'=>'fas fa-traffic-light'],
+                ['text'=> 'admin/menu.roles_permissions' ,'url'=> 'users.permissions.index','sel_routs'=> 'permissions','icon'=>'fas fa-user-shield'],
             ],
 
         ],

@@ -31,7 +31,7 @@ class AlertMassage extends Component
             switch ($type) {
                 case 'nodata':
                     $this->bg = getBgColor('d');
-                    $this->mass = __('general.alertMass.noData');
+                    $this->mass = __('admin/alertMass.noData');
                     /*
                     $this->icon = 'fas fa-pencil-alt';
                     $this->bg = getBgColor('i');
