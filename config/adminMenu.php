@@ -15,7 +15,6 @@ return [
                 ['text'=> 'admin/menu.uploadFilter','url'=> 'config.upFilter.index','sel_routs'=> 'upFilter','icon'=>'fas fa-filter'],
                 ['text'=> 'admin/menu.setting_icon','url'=> 'config.defIcon.show','sel_routs'=> 'defIcon','icon'=>'fab fa-fonticons'],
             ],
-
         ],
 
         [
@@ -33,10 +32,29 @@ return [
             'type'=>'one',
             'text'=> 'admin/menu.lang_file_admin',
             'url'=> 'adminlang.index',
-            'icon'=>'fas fa-swimming-pool'
+            'icon'=>'fas fa-globe-africa'
         ],
 
+        [
+            'view'=>true,
+            'sel_routs'=>'users',
+            'type'=>'many',
+            'text'=> 'admin/menu.roles',
+            'icon'=>'fas fa-unlock-alt',
+            'submenu'=>[
+/*
+                ['text'=> 'Users','url'=> 'users.users.index','sel_routs'=> 'users','icon'=>'fab fa-html5'],
+                ['text'=> 'Roles','url'=> 'users.roles.index','sel_routs'=> 'roles','icon'=>'fab fa-html5'],
+                ['text'=> 'Permissions','url'=> 'users.permissions.index','sel_routs'=> 'permissions','icon'=>'fas fa-cog'],
 
+__()
+*/
+                ['text'=> 'admin/menu.roles_users' ,'url'=> 'adminlang.index','sel_routs'=> 'users','icon'=>'fas fa-users'],
+                ['text'=> 'admin/menu.roles_role','url'=> 'adminlang.index','sel_routs'=> 'roles','icon'=>'fas fa-traffic-light'],
+                ['text'=> 'admin/menu.roles_permissions' ,'url'=> 'adminlang.index','sel_routs'=> 'permissions','icon'=>'fas fa-user-shield'],
+            ],
+
+        ],
 
     ],
 

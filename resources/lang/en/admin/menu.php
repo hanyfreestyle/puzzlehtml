@@ -4,6 +4,8 @@ return
 [
 	'amenity' => 'Amenity',
 	'dashboard' => 'Home Pgae',
+	'lang_file_admin' => 'Admin Lang File',
+	'roles' => 'Users &amp; Permissions',
 	'setting' => 'Settings',
 	'setting_def_photo' => 'Defult Photos',
 	'setting_icon' => 'Icons',
@@ -11,5 +13,7 @@ return
 	'setting_photo' => 'Photo Settings',
 	'setting_web' => 'Web Settings',
 	'uploadFilter' => 'Upload Filters',
-	'lang_file_admin' => 'Admin Lang File',
+	'roles_role' => 'Roles',
+	'roles_permissions' => 'Permissions',
+	'roles_users' => 'Users',
 ];

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 
-
+use Database\Seeders\admin\RoleSeeder;
 use Database\Seeders\config\AmenitySeeder;
 use Database\Seeders\config\AmenityTranslationSeeder;
 use Database\Seeders\config\DefPhotoSeeder;
@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SettingsTableSeeder::class);
         $this->call(SettingsTranslationsTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
         $this->call(MetaTagSeeder::class);
         $this->call(MetaTagTranslationsTableSeeder::class);
         $this->call(AmenitySeeder::class);
@@ -34,6 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UploadFilterSeeder::class);
         $this->call(UploadFilterSizeSeeder::class);
         $this->call(DefPhotoSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(UsersTableSeeder::class);
 
     }
 }
