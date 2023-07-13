@@ -422,12 +422,18 @@ class AdminHelper{
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     onlyDeletePhotos
-    static function DeleteAllPhotos($deleteRow,$Names=['photo','photo_thum_1','photo_thum_1']){
+    static function DeleteAllPhotos($deleteRow,$emptyTable=false,$Names=['photo','photo_thum_1','photo_thum_1']){
 
         foreach ($Names as $name){
+
             if(File::exists($deleteRow->$name)){
                 File::delete($deleteRow->$name);
             }
+
+            if($emptyTable){
+                $deleteRow->$name  = '';
+            }
+
         }
         return $deleteRow ;
     }
@@ -436,9 +442,9 @@ class AdminHelper{
 #|||||||||||||||||||||||||||||||||||||| #     printTableImage
     static  function printTableImage($row,$fildeName='photo_thum_1'){
         if($row->$fildeName){
-            $sendImg = '<img  width="60" src="'.defImagesDir($row->$fildeName).'">';
+            $sendImg = '<img  width="60" class="img-circle elevation-2" src="'.defImagesDir($row->$fildeName).'">';
         }else{
-            $sendImg = '<img  width="60" src="'.defAdminAssets('img/default-150x150.png').'">';
+            $sendImg = '<img  width="60"  class="img-rounded elevation-1" src="'.defAdminAssets('img/default-150x150.png').'">';
         }
 
         return $sendImg ;

@@ -30,7 +30,7 @@
                                         <td >{{$row->id}}</td>
                                         <td>{{$row->name}}</td>
 
-                                        <td>{!! AdminHelper::printTableImage($row,'photo') !!} </td>
+                                        <td>{!! \App\Helpers\AdminHelper::printTableImage($row,'photo') !!} </td>
 
                                         <td class="text-center">
                                             <x-action-button url="{{route('users.roles.edit',$row->id)}}" type="edit" />

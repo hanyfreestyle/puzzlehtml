@@ -38,7 +38,7 @@
                                       value="{{old('user_password_confirmation')}}" type="password" inputclass="dir_en"/>
                 </div>
                 <hr>
-                    <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"/>
+                    <x-form-upload-file  view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"/>
             </div>
 
 

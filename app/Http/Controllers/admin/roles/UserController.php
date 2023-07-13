@@ -117,4 +117,17 @@ class UserController extends AdminMainController
             return response()->json(['success'=>$userId]);
         }
     }
+
+    public function emptyPhoto($id){
+        $rowData = User::findOrFail($id);
+        $rowData = AdminHelper::DeleteAllPhotos($rowData,true);
+        $rowData->save();
+        return back();
+
+    }
+
+
 }
+
+
+

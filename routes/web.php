@@ -13,6 +13,8 @@ use App\Http\Controllers\admin\roles\AdminRoleController;
 use App\Http\Controllers\admin\roles\UserController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController ;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,16 @@ Auth::routes([
 ]);
 Auth::viaRemember();
 //Auth::logoutOtherDevices('password');
+
+
+Route::group(['middleware' => ['auth']], function() {
+/*
+    Route::resource('/roles','RoleController');
+
+    Route::resource('/users','UserController');
+*/
+});
+
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
     Route::group(['prefix'=>'admin'],function(){
@@ -100,6 +112,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::get('/Users/delete/{id}', [UserController::class,'destroy'])->name('users.users.destroy');
         Route::post('/Users/updateStatus', [UserController::class,'updateStatus'])->name('users.users.updateStatus');
 
+       Route::get('/Users/emptyPhoto/{id}', [UserController::class,'emptyPhoto'])->name('users.users.emptyPhoto');
+
+
 
         Route::get('/Roles', [AdminRoleController::class,'index'])->name('users.roles.index');
         Route::get('/Roles/create', [AdminRoleController::class,'create'])->name('users.roles.create');
@@ -123,7 +138,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::delete('/Permissions/{permission}/roles/{role}', [AdminPermissionController::class,'removeRole'])->name
         ('users.permission.roles.remove');
 
+
+
     });
+
+
 });
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
