@@ -11,7 +11,7 @@
     @endif
     <div class="{{($horizontalLabel) ? 'col-sm-6' : '' }}">
         <input type="{{$type}}" class="{{$inputclass}} form-control @error($name) is-invalid @enderror"
-               id="{{$id}}" name="{{$name}}" placeholder="{{$placeholder}}"
+               id="{{$name}}" name="{{$name}}" placeholder="{{$placeholder}}"
                @if(!is_null($step))
                step="{{$step}}"
                @endif
@@ -28,6 +28,9 @@
                {{($required) ? 'required' : '' }}
                {{($disabled) ? 'disabled' : '' }}
                dir="auto"
+               @if($type == 'password')
+               autocomplete="off" readonly onfocus="this.removeAttribute('readonly');"
+               @endif
         >
         @error($name)
         <span class="invalid-feedback" role="alert">

@@ -114,12 +114,12 @@
         @if(config('adminConfig.top_navbar_user_menu') == true )
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{ defAdminAssets('img/user_avatar.jpg') }}" class="user-image img-circle" alt="User Image">
+                        <img src="{!! \App\Helpers\AdminHelper::printUserPhoto() !!}" class="user-image img-circle" alt="User Image">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <!-- User image -->
                     <li class="user-header bg-primary">
-                        <img src="{{ defAdminAssets('img/user_avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{!! \App\Helpers\AdminHelper::printUserPhoto() !!}" class="img-circle elevation-2" alt="User Image">
                         <p>
                             {{ Auth::user()->name }}
                             <small>Member since Nov. 2012</small>

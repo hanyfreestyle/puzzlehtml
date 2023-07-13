@@ -114,6 +114,13 @@ return  [
     'url'                  => 'صيغة الرابط :attribute غير صحيحة.',
     'uuid'                 => ':attribute يجب أن يكون بصيغة UUID سليمة.',
 
+
+    'password.mixed' => ' :attribute يجب أن يحتوي على حرف كبير واحد على الأقل وحرف صغير واحد.',
+    'password.letters' => 'The :attribute must contain at least one letter.',
+    'password.symbols' => ':attribute يجب أن يحتوي على رمز واحد على الأقل.',
+    'password.numbers' => ' :attribute يجب أن يحتوي على رقم واحد على الأقل.',
+    'password.uncompromised' => ':attribute ضعيفة ويمكن توقعها ',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

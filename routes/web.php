@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
+
 use App\Http\Controllers\admin\config\AmenityController;
 use App\Http\Controllers\admin\config\DefPhotoController;
 use App\Http\Controllers\admin\config\LangFileController;
@@ -29,8 +29,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
+//Auth::routes();
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
+Auth::viaRemember();
+//Auth::logoutOtherDevices('password');
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
     Route::group(['prefix'=>'admin'],function(){
@@ -92,6 +98,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::get('/Users/edit/{id}', [UserController::class,'edit'])->name('users.users.edit');
         Route::post('/Users/Update/{id}', [UserController::class,'storeUpdate'])->name('users.users.update');
         Route::get('/Users/delete/{id}', [UserController::class,'destroy'])->name('users.users.destroy');
+        Route::post('/Users/updateStatus', [UserController::class,'updateStatus'])->name('users.users.updateStatus');
 
 
         Route::get('/Roles', [AdminRoleController::class,'index'])->name('users.roles.index');

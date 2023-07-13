@@ -19,6 +19,7 @@ class ImageFilters implements FilterInterface
     public function applyFilter(Image $image){
 
         //$FilterOption = UploadFilter::find($this->filterId);
+
         $FilterOption = $this->filterData;
         $newWidth =$FilterOption->new_w;
         $newHeight = $FilterOption->new_h;

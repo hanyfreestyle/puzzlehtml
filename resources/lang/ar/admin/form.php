@@ -6,6 +6,7 @@ return
 	'button_delete' => 'حذف',
 	'button_edit' => 'تعديل',
 	'button_serach' => 'بحث',
+	'button_sort' => 'ترتيب',
 	'button_update' => 'تحديث',
 	'meta_bodyH1_ar' => 'عنوان H1',
 	'meta_bodyH1_en' => 'H1 Tag',
@@ -15,5 +16,6 @@ return
 	'meta_g_des_en' => 'Page Description',
 	'meta_g_title_ar' => 'عنوان الصفحة',
 	'meta_g_title_en' => 'Page Title',
-	'button_sort' => 'ترتيب',
+	'password' => 'كلمة المرور',
+	'password_confirm' => 'تاكيد كلمة المرور',
 ];

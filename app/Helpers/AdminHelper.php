@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -181,6 +182,8 @@ class AdminHelper{
     static function Url_Slug($str, $options = array()) {
         // Make sure string is in UTF-8 and strip invalid UTF-8 characters
        // $str = mb_convert_encoding((string)$str, 'UTF-8', mb_list_encodings());
+        $str = mb_convert_encoding((string)$str, 'UTF-8');
+
 
         $defaults = array(
             'delimiter' => '-',
@@ -383,6 +386,18 @@ class AdminHelper{
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     saveAndDeletePhoto
+    static function saveAndDeletePhotoByOne($saveData,$saveImgData,$FildName){
+        if(File::exists($saveData->$FildName)){
+            File::delete($saveData->$FildName);
+        }
+        $saveData->$FildName = $saveImgData->sendSaveData['photo']['file_name'];
+        return $saveData ;
+    }
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     onlyDeletePhotos
     static function onlyDeletePhotos($deleteRow,$Num=2){
 
@@ -406,6 +421,18 @@ class AdminHelper{
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     onlyDeletePhotos
+    static function DeleteAllPhotos($deleteRow,$Names=['photo','photo_thum_1','photo_thum_1']){
+
+        foreach ($Names as $name){
+            if(File::exists($deleteRow->$name)){
+                File::delete($deleteRow->$name);
+            }
+        }
+        return $deleteRow ;
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     printTableImage
     static  function printTableImage($row,$fildeName='photo_thum_1'){
         if($row->$fildeName){
@@ -417,6 +444,16 @@ class AdminHelper{
         return $sendImg ;
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     printTableImage
+    static  function printUserPhoto($fildeName='photo_thum_1'){
+        if(Auth::user()->$fildeName){
+            $sendImg = defImagesDir(Auth::user()->$fildeName) ;
+        }else{
+            $sendImg = defAdminAssets('img/user_avatar.jpg');
+        }
+        return $sendImg ;
+    }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Text
 

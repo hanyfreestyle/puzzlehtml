@@ -51,8 +51,6 @@ class PuzzleImageUpload
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     setnewFileName
     public function setnewFileName($newFileName){
-
-        $newFileName = utf8_encode($newFileName);
         $this->newFileName = $newFileName;
         return $this ;
     }
@@ -125,7 +123,7 @@ class PuzzleImageUpload
     {
         $soursFileExtension = $file->extension();
 
-        if( $filterData->convert_state == '1'){
+        if( isset($filterData->convert_state) and $filterData->convert_state == 1 ){
             $soursFileExtension = "webp";
         }
         return $soursFileExtension ;
@@ -139,7 +137,8 @@ class PuzzleImageUpload
             $newName = time()."_".Str::random(15)."_".'.'.$FileExtension;
         }else{
             // Str::random(10);
-            $newName = AdminHelper::Url_Slug($newName).'.'.$FileExtension;
+            $newName = AdminHelper::Url_Slug($newName)."-".Str::random(10).'.'.$FileExtension;
+
         }
         $newName =  AdminHelper::file_newname($UploadDirIs,$newName);
         return $newName ;

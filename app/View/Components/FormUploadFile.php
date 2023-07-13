@@ -27,7 +27,7 @@ class FormUploadFile extends Component
         $viewType = null ,
         $req = true ,
         $rowData = array(),
-        $fildName = 'photo',
+        $fildName = 'photo_thum_1',
         $multiple = false,
         $acceptFile = "image/*",# image/*,.zip
 

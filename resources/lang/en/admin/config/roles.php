@@ -2,8 +2,15 @@
 
 return
 [
-	'permission_title' => 'Permissions',
 	'permission_frname' => 'Role Name',
-	'role_title' => 'Roles',
+	'permission_title' => 'Permissions',
 	'role_frname' => 'Group Name',
+	'role_title' => 'Roles',
+	'users_fr_email' => 'Email Address',
+	'users_fr_name' => 'User Name',
+	'users_fr_role' => 'User Role',
+	'users_fr_status' => 'User Status',
+	'users_list' => 'Users List',
+	'users_title' => 'Users',
+	'users_fr_phone' => 'Phone Number',
 ];
