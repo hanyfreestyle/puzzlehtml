@@ -23,8 +23,11 @@
                         </button>
                     @endif
                 @else
+
                     @if($addButtonRoute != '#')
-                        <a href="{{$addButtonRoute}}" class="btn btn-sm btn-primary">{{$addButtonName}}</a>
+                        @can($sendRole)
+                            <a href="{{$addButtonRoute}}" class="btn btn-sm btn-primary">{{$addButtonName}}</a>
+                        @endcan
                     @endif
 
                     @if($showIcon)
@@ -49,6 +52,7 @@
         @if($errors->has([]) and $addFormError == true)
             <div class="alert alert-danger alert-dismissible">
                 {{__('admin/alertMass.formHasError')}}
+                {{$errors}}
             </div>
         @endif
         {{$slot}}

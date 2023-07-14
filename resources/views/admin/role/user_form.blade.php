@@ -4,9 +4,9 @@
 
     <x-breadcrumb-def :pageData="$pageData"/>
 
-    <x-ui-card title="{{$pageData[$pageData['ViewType'].'PageName']}}">
+    <x-ui-card title="{{$pageData[$pageData['ViewType'].'PageName']}}" can="hhhhh" >
         <x-mass.confirm-massage />
-        <form  autocomplete="off" class="mainForm pb-0" action="{{route('users.users.update',intval($rowData->id))}}" method="post"  enctype="multipart/form-data">
+        <form  data-parsley-validate class="mainForm pb-0" action="{{route('users.users.update',intval($rowData->id))}}" method="post"  enctype="multipart/form-data">
             @csrf
             <div class="col-lg-12">
 
@@ -31,14 +31,35 @@
 
 
 
-                        <x-form-input label="{{__('admin/form.password')}}" name="user_password" :requiredSpan="$passReq" colrow="col-lg-4"
-                                      value="{{ old('user_password','') }}" type="password" inputclass="dir_en"/>
+                    <x-form-input label="{{__('admin/form.password')}}" name="user_password" :requiredSpan="$passReq" colrow="col-lg-4"
+                                  value="{{ old('user_password') }}" type="password" inputclass="dir_en"/>
 
-                        <x-form-input label="{{__('admin/form.password_confirm')}}" name="user_password_confirmation" :requiredSpan="$passReq" colrow="col-lg-4"
-                                      value="{{old('user_password_confirmation')}}" type="password" inputclass="dir_en"/>
+                    <x-form-input label="{{__('admin/form.password_confirm')}}" name="user_password_confirmation" :requiredSpan="$passReq" colrow="col-lg-4"
+                                  value="{{old('user_password_confirmation')}}" type="password" inputclass="dir_en"/>
                 </div>
                 <hr>
-                    <x-form-upload-file  view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"/>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{__('admin/config/roles.users_fr_role')}}</label>
+                            @php
+                                $printName = getRoleName();
+                            @endphp
+                            <select class="select2  @error('roles') is-invalid @enderror" name="roles[]" multiple="multiple" data-placeholder="{{__('admin/config/roles.users_fr_role_selone')}}" style="width: 100%;"  data-parsley-required="true" >
+                                @foreach($roles as $role)
+                                    <option value="{{$role->name}}" @if(isset($userRole[$role->id])) selected @endif >{{ $role->$printName }}</option>
+                                @endforeach
+                            </select>
+                            <span class="invalid-feedback" role="alert">
+                              <strong>{{ \App\Helpers\AdminHelper::error($errors->first('roles'),'roles',"hany") }}</strong>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <x-form-upload-file  view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"/>
             </div>
 
 
@@ -52,13 +73,7 @@
 
 
 @push('JsCode')
-    <script type="text/javascript">
 
-
-        $(window).load(function() {
-            $("input[type=password]").val('');
-        });
-    </script>
 @endpush
 
 

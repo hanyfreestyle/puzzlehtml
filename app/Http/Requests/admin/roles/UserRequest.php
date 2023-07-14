@@ -24,6 +24,7 @@ class UserRequest extends FormRequest
             $rules =[
                 //'name'=> "required|alpha_dash:ascii|min:4|max:50|unique:roles",
                 'name'=> "required|min:4|max:50",
+                'roles' => 'required',
                 'email'=> "required|email|unique:users",
                 'phone'=> "numeric|nullable",
                 'user_password'=> "required|confirmed|min:8",
@@ -41,6 +42,7 @@ class UserRequest extends FormRequest
         }else{
             $rules =[
                 'name'=> "required|min:4|max:50",
+                'roles' => 'required',
                 'email'=> "required|email|unique:users,email,$id",
                 'phone'=> "numeric|nullable",
                 'user_password'=> "confirmed|min:8|nullable",
@@ -50,6 +52,12 @@ class UserRequest extends FormRequest
         }
 
         return $rules;
+    }
+    public function messages()
+    {
+        return [
+            'roles.required' => __('admin/config/roles.users_fr_role_selone'),
+        ];
     }
 
 }

@@ -24,3 +24,10 @@ body{font-family: 'Tajawal', sans-serif!important;}
 .mainForm .form-control.is_invalid_ar{padding-left:.75rem!important;padding-right:2.25rem!important;background-position:right calc(.375em + .1875rem) center!important}
 .mainForm textarea.form-control.is_invalid_area_en{padding-right:2.25rem;background-position:top calc(0.375em + 0.1875rem) left calc(0.375em + 0.1875rem)!important}
 
+
+
+.select2-container .select2-selection--multiple .select2-selection__choice__remove {
+  float: right;
+  margin-right: -2px;
+  margin-left: 7px!important;
+}

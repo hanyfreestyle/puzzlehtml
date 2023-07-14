@@ -87,7 +87,7 @@
 
 <script src="{{defAdminAssets('js/adminlte.min.js')}}"></script>
 <script src="{{defAdminAssets('js/custom_file.js') }}"></script>
-
+<script src="{{defAdminAssets('parsley/parsley.js')}}"></script>
 <script>
     $(function () {
         //Initialize Select2 Elements

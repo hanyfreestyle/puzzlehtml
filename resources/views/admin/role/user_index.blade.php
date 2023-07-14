@@ -5,7 +5,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12" >
-                <x-ui-card title="{{$pageData['ListPageName']}}" addButtonRoute="{!! $pageData['AddPageUrl'] !!}" >
+
+                <x-ui-card :page-data="$pageData">
+
                     <x-mass.confirm-massage />
 
                     @if(count($rowData)>0)
@@ -40,10 +42,15 @@
                                         <td>{!! \App\Helpers\AdminHelper::printTableImage($row,'photo') !!} </td>
 
                                         <td class="text-center">
+                                            @can("users_edit")
                                             <x-action-button url="{{route('users.users.edit',$row->id)}}" type="edit" />
+                                            @endcan
+
                                         </td >
                                         <td class="text-center">
+                                            @can("users_delete")
                                             <x-action-button url="#" id="{{route('users.users.destroy',$row->id)}}" type="deleteSweet"  />
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

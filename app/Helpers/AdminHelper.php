@@ -55,6 +55,7 @@ class AdminHelper{
 
 
         $data['EditPageName'] = $EditPage;
+        $data['AddRole'] = $controllerName."_add" ;
 
         return $data;
     }

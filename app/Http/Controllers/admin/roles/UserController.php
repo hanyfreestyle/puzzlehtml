@@ -7,13 +7,29 @@ use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\roles\UserRequest;
 use App\Models\User;
-use Auth;
+
+use DB;
 use Illuminate\Http\Request;
+
+
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends AdminMainController
 {
-    public $controllerName = 'users';
+    public $controllerName ;
+
+    function __construct(
+        $controllerName = 'users',
+    )
+    {
+        $this->controllerName = $controllerName;
+        $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
+        $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);
+        $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit','updateStatus']]);
+        $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
+
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
@@ -21,6 +37,8 @@ class UserController extends AdminMainController
     {
         $sendArr = ['TitlePage' => __('admin/config/roles.users_title') ,'ListPage'=>__('admin/config/roles.users_list'),'selMenu'=> 'users.'];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+
+
         $pageData['ViewType'] = "List";
 
         $rowData = User::orderBy('id')->paginate(10);
@@ -35,7 +53,8 @@ class UserController extends AdminMainController
         $pageData['ViewType'] = "Add";
 
         $rowData = User::findOrNew(0);
-        return view('admin.role.user_form',compact('pageData','rowData'));
+        $roles = Role::all();
+        return view('admin.role.user_form',compact('pageData','rowData','roles'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
@@ -46,12 +65,17 @@ class UserController extends AdminMainController
         $pageData['ViewType'] = "Edit";
 
         $rowData = User::findOrFail($id);
-        return view('admin.role.user_form',compact('rowData','pageData'));
+        $roles = Role::all();
+        $userRole = $rowData->roles->pluck('name','id')->all();
+        return view('admin.role.user_form',compact('rowData','pageData','roles','userRole'));
+
     }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
     public function storeUpdate(UserRequest $request, $id=0)
     {
+
 
         $request-> validated();
 
@@ -74,7 +98,11 @@ class UserController extends AdminMainController
         $saveData = AdminHelper::saveAndDeletePhotoByOne($saveData,$saveImgData,'photo_thum_1');
 
 
-       // Auth::logoutOtherDevices($saveData->password);
+        $saveData->roles_name = $request->input('roles');
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        $saveData->assignRole($request->input('roles'));
+
+
         $saveData->save();
 
         if($id == '0'){

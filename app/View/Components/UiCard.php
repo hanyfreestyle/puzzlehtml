@@ -17,9 +17,11 @@ class UiCard extends Component
     public $addButtonName ;
     public $addFormError ;
     public $titleColor ;
+    public $sendRole ;
+    public $pageData ;
 
     public function __construct(
-        $title,
+        $title=null,
         $bg = "primary",
         $collapsed = false, $removable = false,
         $maximizable = false, $disabled = false,
@@ -30,7 +32,9 @@ class UiCard extends Component
         $addButtonRoute = '#',
         $addButtonName= null,
         $titleColor= null,
-        $addFormError = true
+        $addFormError = true,
+        $sendRole = '',
+        $pageData = array(),
     )
     {
         $this->bg = $bg;
@@ -44,6 +48,9 @@ class UiCard extends Component
         $this->addFormError = $addFormError ;
         $this->cardHeaderView = $cardHeaderView;
         $this->showIcon = $showIcon;
+        $this->sendRole = $sendRole;
+        $this->pageData = $pageData;
+
         if($showIcon){
             $this->collapsedStyle = $collapsedStyle;
         }else{
@@ -63,14 +70,30 @@ class UiCard extends Component
             }else{
                 $this->titleColor = 'text-'.$bg;
             }
+        }
+
+        if($title == null){
+            $this->title = $pageData['ListPageName'];
+        }
 
 
+        if(isset($pageData['AddPageUrl'])){
+            $this->addButtonRoute = $pageData['AddPageUrl'] ;
+        }
+
+        if(isset($pageData['AddRole'])){
+            $this->sendRole = $pageData['AddRole'] ;
         }
 
 
 
 
-        $this->addButtonRoute = $addButtonRoute;
+
+
+
+
+
+
 
     }
 
