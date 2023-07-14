@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12" >
-                <x-ui-card title="{{$pageData['ListPageName']}}" addButtonRoute="{!! $pageData['AddPageUrl'] !!}" >
+                <x-ui-card :page-data="$pageData" >
                     <x-mass.confirm-massage />
 
                     @if(count($rowData)>0)
@@ -15,7 +15,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>{{__('admin/def.form_name_ar')}}</th>
-                                    <th>{{__('admin/def.form_name_en')}}</th>
+
 
                                     <th></th>
                                     <th></th>
@@ -24,20 +24,25 @@
                                 </thead>
                                 <tbody>
 
-                                @foreach($rowData as $row)
+                                @foreach($rowData as $role)
 
                                     <tr>
-                                        <td >{{$row->id}}</td>
-                                        <td>{{$row->name}}</td>
+                                        <td >{{$role->id}}</td>
+                                        <td>{{$role->name_ar}}</td>
 
-                                        <td>{!! \App\Helpers\AdminHelper::printTableImage($row,'photo') !!} </td>
 
                                         <td class="text-center">
-                                            <x-action-button url="{{route('users.roles.edit',$row->id)}}" type="edit" />
+                                            <x-action-button url="{{route('users.roles.editRoleToPermission',$role->id)}}"   icon="fas fa-user-shield" print-lable="تعديل الصلاحيات" bg="p"  />
                                         </td >
 
                                         <td class="text-center">
-                                            <x-action-button url="#" id="{{route('users.roles.destroy',$row->id)}}" type="deleteSweet"  />
+                                            <x-action-button url="{{route('users.roles.edit',$role->id)}}" type="edit" />
+                                        </td >
+
+
+
+                                        <td class="text-center">
+                                            <x-action-button url="#" id="{{route('users.roles.destroy',$role->id)}}" type="deleteSweet"  />
                                         </td>
 
                                     </tr>

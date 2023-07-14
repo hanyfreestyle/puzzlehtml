@@ -8,6 +8,7 @@ return [
             'type'=>'many',
             'text'=> 'admin/menu.setting',
             'icon'=>'fas fa-cogs',
+            'roleView'=>'',
             'submenu'=>[
                 ['text'=> 'admin/menu.setting_web','url'=> 'config.web.index','sel_routs'=> 'web','icon'=>'fas fa-cog'],
                 ['text'=> 'admin/menu.setting_meta_tags','url'=> 'config.meta.index','sel_routs'=> 'meta','icon'=>'fab fa-html5'],
@@ -23,7 +24,8 @@ return [
             'type'=>'one',
             'text'=> 'admin/menu.amenity',
             'url'=> 'amenity.index',
-            'icon'=>'fas fa-swimming-pool'
+            'icon'=>'fas fa-swimming-pool',
+            'roleView'=>'amenity_view',
         ],
 
         [
@@ -32,7 +34,8 @@ return [
             'type'=>'one',
             'text'=> 'admin/menu.lang_file_admin',
             'url'=> 'adminlang.index',
-            'icon'=>'fas fa-globe-africa'
+            'icon'=>'fas fa-globe-africa',
+            'roleView'=>'',
         ],
 
         [
@@ -41,14 +44,9 @@ return [
             'type'=>'many',
             'text'=> 'admin/menu.roles',
             'icon'=>'fas fa-unlock-alt',
+            'roleView'=>'users_view',
             'submenu'=>[
-/*
-                ['text'=> 'Users','url'=> ,'sel_routs'=> 'users','icon'=>'fab fa-html5'],
-                ['text'=> 'Roles','url'=>,'sel_routs'=> 'roles','icon'=>'fab fa-html5'],
-                ['text'=> 'Permissions','url'=> ,'sel_routs'=> 'permissions','icon'=>'fas fa-cog'],
 
-__()
-*/
                 ['text'=> 'admin/menu.roles_users' ,'url'=> 'users.users.index','sel_routs'=> 'users','icon'=>'fas fa-users'],
                 ['text'=> 'admin/menu.roles_role','url'=>  'users.roles.index','sel_routs'=> 'roles','icon'=>'fas fa-traffic-light'],
                 ['text'=> 'admin/menu.roles_permissions' ,'url'=> 'users.permissions.index','sel_routs'=> 'permissions','icon'=>'fas fa-user-shield'],

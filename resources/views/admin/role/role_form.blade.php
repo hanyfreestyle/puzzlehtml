@@ -29,14 +29,14 @@
             </div>
         @endif
 
-        <form  class="mainForm" action="{{route('users.roles.update',intval($rowData->id))}}" method="post"  enctype="multipart/form-data">
+        <form  class="mainForm" action="{{route('users.roles.update',intval($role->id))}}" method="post"  enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="view_type" value="{{$pageData['ViewType']}}">
             <div class="col-lg-12">
 
                 <div class="row">
                     <x-form-input label="{{__('admin/config/roles.role_frname')}}" name="name" :requiredSpan="true" colrow="col-lg-4"
-                                  value="{{old('name',$rowData->name)}}" inputclass="dir_en"/>
+                                  value="{{old('name',$role->name)}}" inputclass="dir_en"/>
                 </div>
 
             </div>
@@ -50,10 +50,12 @@
         <h1>Role Permission</h1>
         <div class="row">
 
-            @if($rowData->permissions)
-                @foreach($rowData->permissions as $role_permission )
-                    <form action="{{route('users.roles.permission.remove',[$rowData->id,$role_permission->id])}}"
-                          method="post" onsubmit="return confirm('are you sure ?')" >
+
+            @if($role->permissions)
+                @foreach($role->permissions as $role_permission )
+                    <form action="{{route('users.roles.permission.remove',[$role->id,$role_permission->id])}}"
+                          method="post"  >
+
                         @csrf
                         @method('DELETE')
                         <button type="submit">{{ $role_permission->name_ar }}</button>
@@ -68,34 +70,29 @@
         </div>
         <hr>
 
-        <form  class="mainForm" action="{{route('users.roles.permission',intval($rowData->id))}}" method="post"  enctype="multipart/form-data">
-            @csrf
+        <h1>Role Permission</h1>
+        <div class="row">
+        @foreach($permissions as $permission)
+             @if( !$role->hasPermissionTo($permission) )
 
-            <div class="col-lg-12">
+                <form action="{{route('users.roles.permission',intval($role->id))}}"
+                      method="post"  >
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
+                    @csrf
 
-                            <select class="form-control select2"  name="permission" style="width: 100%;">
-                                @foreach($permissions as $permission)
-                                    <option value="{{$permission->name}}">{{$permission->name}}</option>
-                                @endforeach
+                    <input type="hidden" name="permission" value="{{$permission->name}}">
+                    <button class="btn btn-secondary mr-1 ml-1" type="submit">{{$permission->name_ar}}</button>
 
-
-                            </select>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
+                </form>
 
 
-            <div class="container-fluid">
-                <x-form-submit text="{{$pageData['ViewType']}}" />
-            </div>
-        </form>
+
+             @endif
+
+        @endforeach
+
+        </div>
+
 
 
     </x-ui-card>

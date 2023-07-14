@@ -17,10 +17,11 @@ class ActionButton extends Component
     public $type ;
     public $id;
     public $sweetDelClass;
+    public $printLable;
 
     public function __construct(
         $url = "#",
-        $lable = null,
+        $lable = "",
         $size = "s",
         $bg = "p",
         $tip = false,
@@ -28,9 +29,12 @@ class ActionButton extends Component
         $type = null,
         $id = null,
         $sweetDelClass = '',
+        $printLable = ''
 
     )
     {
+       //  dd($printLable);
+        $this->printLable = $printLable;
         $this->lable = $lable;
         $this->tip = $tip;
         $this->url = $url;
@@ -46,33 +50,33 @@ class ActionButton extends Component
                 case 'add':
                     $this->icon = 'fas fa-plus-square';
                     $this->bg = getBgColor('p');
-                    if($this->lable == null){
-                        $this->lable = __('admin/form.button_add');
-                    }
+                    $this->printLable = __('admin/form.button_add');
                     break;
 
                 case 'edit':
                     $this->icon = 'fas fa-pencil-alt';
                     $this->bg = getBgColor('i');
-                    if($this->lable == null){
-                        $this->lable =__('admin/form.button_edit');
-                    }
+                    $this->printLable =__('admin/form.button_edit');
                     break;
 
                 case 'delete':
                     $this->icon = 'fas fa-trash';
                     $this->bg = getBgColor('d');
-                    $this->lable =__('admin/form.button_delete');
+                    $this->printLable =__('admin/form.button_delete');
                     break;
 
                 case 'deleteSweet':
                     $this->icon = 'fas fa-trash ';
                     $this->bg = getBgColor('d');
-                    $this->lable = __('admin/form.button_delete');
+                    $this->printLable = __('admin/form.button_delete');
                     $this->sweetDelClass = ' sweet_daleteBtn_noForm ';
                     break;
 
+                default:
+
             }
+        }else{
+           // $this->lable = $lable;
         }
 
 

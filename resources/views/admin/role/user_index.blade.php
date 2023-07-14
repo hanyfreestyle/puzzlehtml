@@ -10,7 +10,7 @@
 
                     <x-mass.confirm-massage />
 
-                    @if(count($rowData)>0)
+                    @if(count($users)>0)
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover">
                                 <thead>
@@ -22,36 +22,31 @@
                                     <th>{{ __('admin/config/roles.users_fr_status') }}</th>
                                     <th>{{ __('admin/config/roles.users_fr_role') }}</th>
                                     <th></th>
-                                    <th></th>
-                                    <th></th>
-
+                                    @can("users_add")<th></th>@endcan
+                                    @can("users_edit")<th></th>@endcan
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                @foreach($rowData as $row)
-
+                                @foreach($users as $user)
                                     <tr>
-                                        <td >{{$row->id}}</td>
-                                        <td>{{$row->name}}</td>
-                                        <td>{{$row->email}}</td>
-                                        <td>{{$row->phone}}</td>
-                                        <td> <input type="checkbox" class="status_but" thisid="{{$row->id}}" name="status" @if($row->status == '1') checked @endif data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->phone }}</td>
+                                        <td> <input type="checkbox" class="status_but" thisid="{{$user->id}}" name="status" @if($user->status == '1') checked @endif data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
                                         <td></td>
 
-                                        <td>{!! \App\Helpers\AdminHelper::printTableImage($row,'photo') !!} </td>
+                                        <td>{!! \App\Helpers\AdminHelper::printTableImage($user,'photo') !!} </td>
 
-                                        <td class="text-center">
-                                            @can("users_edit")
-                                            <x-action-button url="{{route('users.users.edit',$row->id)}}" type="edit" />
-                                            @endcan
+                                        @can("users_edit")
+                                            <td class="text-center"><x-action-button url="{{route('users.users.edit',$user->id)}}" type="edit" /></td>
+                                        @endcan
 
-                                        </td >
-                                        <td class="text-center">
-                                            @can("users_delete")
-                                            <x-action-button url="#" id="{{route('users.users.destroy',$row->id)}}" type="deleteSweet"  />
-                                            @endcan
-                                        </td>
+                                        @can("users_delete")
+                                            <td class="text-center"><x-action-button url="#" id="{{route('users.users.destroy',$user->id)}}" type="deleteSweet"  /></td>
+                                        @endcan
+
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -66,14 +61,13 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        {{ $rowData->links() }}
+        {{ $users->links() }}
     </div>
 @endsection
 
 @push('JsCode')
     <x-sweet-delete-js-no-form />
     <script>
-        //alert(inputId);
         $(".status_but").bootstrapSwitch({
             'size': 'mini',
             'onSwitchChange': function(event, state){

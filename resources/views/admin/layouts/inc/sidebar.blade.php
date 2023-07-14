@@ -36,39 +36,42 @@
                 @foreach( config('adminMenu.menu') as $MenuList )
                     @if(isset($MenuList['view']) and $MenuList['view'] == true)
                         @if($MenuList['type'] == 'one')
+                            @can($MenuList['roleView'])
                             <li class="nav-item">
                                 <a href="{{ route($MenuList['url']) }}" class="nav-link  @if(Route::is($MenuList['sel_routs'].'.*')) active @endif ">
                                     @if(isset($MenuList['icon']))<i class="nav-icon {{$MenuList['icon']}}"></i>@endif
                                     <p>{{__($MenuList['text'])}}</p>
                                 </a>
                             </li>
+                            @endcan
                         @elseif($MenuList['type'] == 'many')
-                            <li class="nav-item @if(Route::is($MenuList['sel_routs'].'.*'))  menu-open @endif ">
-
-                                <a href="#" class="nav-link @if(Route::is($MenuList['sel_routs'].'.*')) active @endif">
-                                    @if(isset($MenuList['icon']))<i class="nav-icon {{$MenuList['icon']}}"></i>@endif
-                                    <p>
-                                        {{__($MenuList['text'])}}
-                                        @if( thisCurrentLocale() == 'ar')
-                                            <i class="right fas fa-angle-left"></i>
-                                        @else
-                                            <i class="right fas fa-angle-right"></i>
-                                        @endif
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    @foreach($MenuList['submenu'] as $SubMenu)
-                                        <li class="nav-item">
-                                            <a href="{{ route($SubMenu['url']) }}" class="nav-link @if(Route::is('*.'. $SubMenu['sel_routs'].'.*')) active @endif ">
-                                                @if(isset($SubMenu['icon']))<i class="nav-icon {{$SubMenu['icon']}}"></i>@endif
-                                                <p>
-                                                    {{__($SubMenu['text'])}}
-                                                </p>
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
+                            @can($MenuList['roleView'])
+                                <li class="nav-item @if(Route::is($MenuList['sel_routs'].'.*'))  menu-open @endif ">
+                                    <a href="#" class="nav-link @if(Route::is($MenuList['sel_routs'].'.*')) active @endif">
+                                        @if(isset($MenuList['icon']))<i class="nav-icon {{$MenuList['icon']}}"></i>@endif
+                                        <p>
+                                            {{__($MenuList['text'])}}
+                                            @if( thisCurrentLocale() == 'ar')
+                                                <i class="right fas fa-angle-left"></i>
+                                            @else
+                                                <i class="right fas fa-angle-right"></i>
+                                            @endif
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        @foreach($MenuList['submenu'] as $SubMenu)
+                                            <li class="nav-item">
+                                                <a href="{{ route($SubMenu['url']) }}" class="nav-link @if(Route::is('*.'. $SubMenu['sel_routs'].'.*')) active @endif ">
+                                                    @if(isset($SubMenu['icon']))<i class="nav-icon {{$SubMenu['icon']}}"></i>@endif
+                                                    <p>
+                                                        {{__($SubMenu['text'])}}
+                                                    </p>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endcan
                         @endif
                     @endif
                 @endforeach

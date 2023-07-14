@@ -47,34 +47,11 @@ class AdminRoleController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-        $role = Role::findOrFail($id);
+        $rowData = Role::findOrFail($id);
         $permissions = Permission::all();
 
-
-
-        return view('admin.role.role_form',compact('role','pageData',"permissions"));
+        return view('admin.role.role_form',compact('rowData','pageData',"permissions"));
     }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     editRoleToPermission
-    public function editRoleToPermission($id)
-    {
-        $sendArr = ['TitlePage' => __('admin/menu.roles_role'),'selMenu'=> 'users.' ];
-        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
-        $pageData['ViewType'] = "Edit";
-
-        $role = Role::findOrFail($id);
-        $permissions = Permission::all();
-
-
-
-        return view('admin.role.role_editRoleToPermission',compact('role','pageData',"permissions"));
-    }
-
-
-
-
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
     public function storeUpdate(AdminRoleRequest $request, $id=0)
@@ -122,20 +99,10 @@ class AdminRoleController extends AdminMainController
     }
 
 
-    public function givePermissionNew(Request $request , Role $role , Permission $permission){
 
-        $role_id  = $request->role_id;
-        $permissionName = $request->permissionName;
 
-        $role = Role::findOrFail($role_id);
 
-        if($role->hasPermissionTo($permissionName)){
-            $role->revokePermissionTo($permissionName);
-        }else{
-            $role->givePermissionTo($permissionName);
-        }
-           return response()->json(['role_id'=>$role->name]);
-    }
+
 
 
 }

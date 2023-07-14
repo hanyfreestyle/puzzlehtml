@@ -7,10 +7,8 @@ use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\roles\UserRequest;
 use App\Models\User;
-
 use DB;
 use Illuminate\Http\Request;
-
 
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -19,9 +17,7 @@ class UserController extends AdminMainController
 {
     public $controllerName ;
 
-    function __construct(
-        $controllerName = 'users',
-    )
+    function __construct($controllerName = 'users')
     {
         $this->controllerName = $controllerName;
         $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
@@ -37,12 +33,10 @@ class UserController extends AdminMainController
     {
         $sendArr = ['TitlePage' => __('admin/config/roles.users_title') ,'ListPage'=>__('admin/config/roles.users_list'),'selMenu'=> 'users.'];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
-
-
         $pageData['ViewType'] = "List";
 
-        $rowData = User::orderBy('id')->paginate(10);
-        return view('admin.role.user_index',compact('pageData','rowData'));
+        $users = User::orderBy('id')->paginate(10);
+        return view('admin.role.user_index',compact('pageData','users'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create

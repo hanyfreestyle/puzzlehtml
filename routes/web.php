@@ -113,10 +113,15 @@ Route::group(['middleware' => ['auth','status']], function() {
             Route::get('/Roles/create', [AdminRoleController::class,'create'])->name('users.roles.create');
             Route::post('/Roles/store/{id}', [AdminRoleController::class,'storeUpdate'])->name('users.roles.store');
             Route::get('/Roles/edit/{id}', [AdminRoleController::class,'edit'])->name('users.roles.edit');
+            Route::get('/Roles/editRoleToPermission/{id}', [AdminRoleController::class,'editRoleToPermission'])->name('users.roles.editRoleToPermission');
+
             Route::post('/Roles/Update/{id}', [AdminRoleController::class,'storeUpdate'])->name('users.roles.update');
             Route::get('/Roles/delete/{id}', [AdminRoleController::class,'destroy'])->name('users.roles.destroy');
 
             Route::post('/Roles/{role}/permissions/', [AdminRoleController::class,'givePermission'])->name('users.roles.permission');
+
+            Route::post('/Roles/givePermission9999', [AdminRoleController::class,'givePermissionNew'])->name('users.roles.givePermission9999');
+
             Route::delete('/Roles/{role}/permissions/{permission}', [AdminRoleController::class,'removePermission'])
                 ->name('users.roles.permission.remove');
 
