@@ -56,7 +56,7 @@
                           method="post" onsubmit="return confirm('are you sure ?')" >
                         @csrf
                         @method('DELETE')
-                        <button type="submit">{{ $role_permission->name }}</button>
+                        <button type="submit">{{ $role_permission->name_ar }}</button>
 
                     </form>
 

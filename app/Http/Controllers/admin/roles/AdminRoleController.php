@@ -60,6 +60,8 @@ class AdminRoleController extends AdminMainController
 
         $saveData =  Role::findOrNew($id);
         $saveData->name = $request->name;
+
+
         $saveData->save();
 
         if($id == '0'){

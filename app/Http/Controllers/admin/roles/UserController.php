@@ -7,8 +7,8 @@ use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\roles\UserRequest;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends AdminMainController
@@ -64,10 +64,8 @@ class UserController extends AdminMainController
             $saveData->password = Hash::make($request->user_password);
         }
 
-
         $saveImgData = new PuzzleUploadProcess();
         $saveImgData->setUploadDirIs('user-profile')->setnewFileName($request->input('name'));
-
 
         $saveImgData->UploadOneNofilter($request,'4',300,300);
         $saveData = AdminHelper::saveAndDeletePhotoByOne($saveData,$saveImgData,'photo');
@@ -76,9 +74,7 @@ class UserController extends AdminMainController
         $saveData = AdminHelper::saveAndDeletePhotoByOne($saveData,$saveImgData,'photo_thum_1');
 
 
-
-
-
+       // Auth::logoutOtherDevices($saveData->password);
         $saveData->save();
 
         if($id == '0'){
@@ -113,7 +109,9 @@ class UserController extends AdminMainController
             }else{
                 $updateData->status = '1';
             }
+
             $updateData->save();
+
             return response()->json(['success'=>$userId]);
         }
     }

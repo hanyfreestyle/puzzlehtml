@@ -60,6 +60,10 @@ class AdminPermissionController extends AdminMainController
         $request-> validated();
         $saveData =  Permission::findOrNew($id);
         $saveData->name = $request->name;
+
+        $saveData->name_ar =  $request->name_ar;
+        $saveData->name_en =  $request->name_en;
+
         $saveData->save();
 
         if($id == '0'){

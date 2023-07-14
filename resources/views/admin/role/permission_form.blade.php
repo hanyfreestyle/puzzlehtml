@@ -37,6 +37,12 @@
                 <div class="row">
                     <x-form-input label="{{__('admin/config/roles.permission_frname')}}" name="name" :requiredSpan="true" colrow="col-lg-4"
                                   value="{{old('name',$rowData->name)}}" inputclass="dir_en"/>
+
+                    <x-form-input label="{{__('admin/config/roles.permission_frname')}}" name="name_ar" :requiredSpan="true" colrow="col-lg-4"
+                                  value="{{old('name_ar',$rowData->name_ar)}}" inputclass="dir_ar"/>
+
+                    <x-form-input label="{{__('admin/config/roles.permission_frname')}}" name="name_en" :requiredSpan="true" colrow="col-lg-4"
+                                  value="{{old('name_en',$rowData->name_en)}}" inputclass="dir_en"/>
                 </div>
 
             </div>

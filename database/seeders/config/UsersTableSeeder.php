@@ -16,26 +16,20 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Hany Darwish ',
-                'email' => 'test@test.com',
-                'password' => Hash::make('01221563252'),
-            ],
-            [
                 'name' => 'Sub Admin  ',
                 'email' => 'subadmin@test.com',
                 'password' => Hash::make('01221563252'),
-            ],
 
+            ],
             [
                 'name' => 'User',
                 'email' => 'user@test.com',
                 'password' => Hash::make('01221563252'),
+                'roles_name' => "['editor']",
             ],
-
-
         ];
         $userCount = User::all()->count();
-        if($userCount == '0'){
+        if($userCount == '1'){
             foreach ($users as $key => $value){
                 User::create($value);
             }

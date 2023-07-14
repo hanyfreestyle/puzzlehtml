@@ -41,14 +41,7 @@ Auth::viaRemember();
 //Auth::logoutOtherDevices('password');
 
 
-Route::group(['middleware' => ['auth']], function() {
-/*
-    Route::resource('/roles','RoleController');
-
-    Route::resource('/users','UserController');
-*/
-});
-
+Route::group(['middleware' => ['auth','status']], function() {
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
     Route::group(['prefix'=>'admin'],function(){
@@ -142,6 +135,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
 
     });
 
+
+});
 
 });
 
