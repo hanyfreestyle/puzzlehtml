@@ -19,7 +19,7 @@ class AdminUserSeeder extends Seeder
             'name' => 'Hany Darwish ',
             'email' => 'test@test.com',
             'password' => Hash::make('01221563252'),
-            'roles_name' => "['admin']",
+            'roles_name' => ['admin'],
         ]);
 
         $role = Role::create(['name' => 'admin','name_ar'=>'ادمن كامل الصلاحيات','name_en'=>'Full Admin Permission ']);

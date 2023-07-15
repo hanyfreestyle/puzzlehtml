@@ -21,14 +21,14 @@
 
                     @elseif($pageData['ViewType'] == 'Add')
                         @if($butView)
-                            <x-action-button  url="{{$pageData['ListPageUrl']}}" lable="{{$pageData['ListPageName']}}" size="s"  bg="p"   />
+                            <x-action-button  url="{{$pageData['ListPageUrl']}}" print-lable="{{$pageData['ListPageName']}}" size="s"  bg="p"   />
                         @else
                             <li class="breadcrumb-item"><a href="{{$pageData['ListPageUrl']}}">{{$pageData['ListPageName']}}</a></li>
                             <li class="breadcrumb-item active">{{$pageData['AddPageName']}}</li>
                         @endif
                     @elseif($pageData['ViewType'] == 'Edit')
                         @if($butView)
-                            <x-action-button  url="{{$pageData['ListPageUrl']}}" lable="{{$pageData['ListPageName']}}" size="s"  bg="p"   />
+                            <x-action-button  url="{{$pageData['ListPageUrl']}}" print-lable="{{$pageData['ListPageName']}}" size="s"  bg="p"   />
                         @else
                             <li class="breadcrumb-item"><a href="{{$pageData['ListPageUrl']}}">{{$pageData['ListPageName']}}</a></li>
                             <li class="breadcrumb-item active">{{$pageData['EditPageName']}}</li>

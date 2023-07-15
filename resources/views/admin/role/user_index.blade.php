@@ -18,7 +18,6 @@
                                     <th>ID</th>
                                     <th>{{__('admin/config/roles.users_fr_name')}}</th>
                                     <th>{{__('admin/config/roles.users_fr_email')}}</th>
-                                    <th>{{__('admin/config/roles.users_fr_phone')}}</th>
                                     <th>{{ __('admin/config/roles.users_fr_status') }}</th>
                                     <th>{{ __('admin/config/roles.users_fr_role') }}</th>
                                     <th></th>
@@ -33,10 +32,19 @@
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->phone }}</td>
-                                        <td> <input type="checkbox" class="status_but" thisid="{{$user->id}}" name="status" @if($user->status == '1') checked @endif data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
-                                        <td></td>
+                                        @can("users_edit")
+                                            <td> <input type="checkbox" class="status_but" thisid="{{$user->id}}" name="status" @if($user->status == '1') checked @endif data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                                        @else
+                                            <td class="text-center">{!! printStateIcon($user->status) !!}</td>
+                                        @endcan
 
+                                        <td>
+                                            @foreach($roles as $role)
+                                                @if($user->hasRole($role->name))
+                                                    <x-action-button print-lable="{{$role->name_ar}}"/>
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td>{!! \App\Helpers\AdminHelper::printTableImage($user,'photo') !!} </td>
 
                                         @can("users_edit")

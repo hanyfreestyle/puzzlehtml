@@ -9,8 +9,7 @@ use App\Http\Controllers\admin\config\SettingsController;
 use App\Http\Controllers\admin\config\UploadFilterController;
 use App\Http\Controllers\admin\config\UploadFilterSizeController;
 use App\Http\Controllers\admin\roles\AdminPermissionController;
-use App\Http\Controllers\admin\roles\PermissionController;
-use App\Http\Controllers\admin\roles\RoleController;
+use App\Http\Controllers\admin\roles\AdminRoleController;
 use App\Http\Controllers\admin\roles\UserController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +46,6 @@ Route::group(['middleware' => ['auth','status']], function() {
     Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::group(['prefix'=>'admin'],function(){
 
-            Route::get('/', [HomeController::class, 'index'])->name('admin.Dashboard');
             Route::get('/Home', [HomeController::class, 'index'])->name('admin.Dashboard');
             Route::get('/TestLang', [HomeController::class, 'TestLang'])->name('admin.DashboardXXXX');
 
@@ -106,25 +104,37 @@ Route::group(['middleware' => ['auth','status']], function() {
             Route::post('/Users/Update/{id}', [UserController::class,'storeUpdate'])->name('users.users.update');
             Route::get('/Users/delete/{id}', [UserController::class,'destroy'])->name('users.users.destroy');
             Route::post('/Users/updateStatus', [UserController::class,'updateStatus'])->name('users.users.updateStatus');
+
             Route::get('/Users/emptyPhoto/{id}', [UserController::class,'emptyPhoto'])->name('users.users.emptyPhoto');
 
 
 
-            Route::get('/Roles', [RoleController::class,'index'])->name('users.roles.index');
-            Route::get('/Roles/create', [RoleController::class,'create'])->name('users.roles.create');
-            Route::get('/Roles/edit/{id}', [RoleController::class,'edit'])->name('users.roles.edit');
-            Route::get('/Roles/delete/{id}', [RoleController::class,'destroy'])->name('users.roles.destroy');
-            Route::post('/Roles/Update/{id}', [RoleController::class,'storeUpdate'])->name('users.roles.update');
-            Route::get('/Roles/editRoleToPermission/{id}', [RoleController::class,'editRoleToPermission'])->name('users.roles.editRoleToPermission');
-            Route::post('/Roles/givePermission', [RoleController::class,'givePermission'])->name('users.roles.givePermission');
+            Route::get('/Roles', [AdminRoleController::class,'index'])->name('users.roles.index');
+            Route::get('/Roles/create', [AdminRoleController::class,'create'])->name('users.roles.create');
+            Route::post('/Roles/store/{id}', [AdminRoleController::class,'storeUpdate'])->name('users.roles.store');
+            Route::get('/Roles/edit/{id}', [AdminRoleController::class,'edit'])->name('users.roles.edit');
+            Route::get('/Roles/editRoleToPermission/{id}', [AdminRoleController::class,'editRoleToPermission'])->name('users.roles.editRoleToPermission');
 
+            Route::post('/Roles/Update/{id}', [AdminRoleController::class,'storeUpdate'])->name('users.roles.update');
+            Route::get('/Roles/delete/{id}', [AdminRoleController::class,'destroy'])->name('users.roles.destroy');
 
+            Route::post('/Roles/{role}/permissions/', [AdminRoleController::class,'givePermission'])->name('users.roles.permission');
 
-            Route::get('/Permissions', [PermissionController::class,'index'])->name('users.permissions.index');
-            Route::get('/Permissions/create', [PermissionController::class,'create'])->name('users.permissions.create');
-            Route::get('/Permissions/edit/{id}', [PermissionController::class,'edit'])->name('users.permissions.edit');
-            Route::get('/Permissions/delete/{id}', [PermissionController::class,'destroy'])->name('users.permissions.destroy');
-            Route::post('/Permissions/Update/{id}', [PermissionController::class,'storeUpdate'])->name('users.permissions.update');
+            Route::post('/Roles/givePermission9999', [AdminRoleController::class,'givePermissionNew'])->name('users.roles.givePermission9999');
+
+            Route::delete('/Roles/{role}/permissions/{permission}', [AdminRoleController::class,'removePermission'])
+                ->name('users.roles.permission.remove');
+
+            Route::get('/Permissions', [AdminPermissionController::class,'index'])->name('users.permissions.index');
+            Route::get('/Permissions/create', [AdminPermissionController::class,'create'])->name('users.permissions.create');
+            Route::post('/Permissions/store/{id}', [AdminPermissionController::class,'storeUpdate'])->name('users.permissions.store');
+            Route::get('/Permissions/edit/{id}', [AdminPermissionController::class,'edit'])->name('users.permissions.edit');
+            Route::post('/Permissions/Update/{id}', [AdminPermissionController::class,'storeUpdate'])->name('users.permissions.update');
+            Route::get('/Permissions/delete/{id}', [AdminPermissionController::class,'destroy'])->name('users.permissions.destroy');
+
+            Route::post('/Permissions/{permission}/roles', [AdminPermissionController::class,'assignRole'])->name('users.permission.roles');
+            Route::delete('/Permissions/{permission}/roles/{role}', [AdminPermissionController::class,'removeRole'])->name
+            ('users.permission.roles.remove');
 
         });
     });

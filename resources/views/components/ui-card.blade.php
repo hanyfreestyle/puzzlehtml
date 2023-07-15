@@ -52,7 +52,6 @@
         @if($errors->has([]) and $addFormError == true)
             <div class="alert alert-danger alert-dismissible">
                 {{__('admin/alertMass.formHasError')}}
-                {{$errors}}
             </div>
         @endif
         {{$slot}}

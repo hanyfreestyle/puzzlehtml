@@ -22,10 +22,14 @@ class AdminRoleRequest extends FormRequest
         if($id == '0'){
             $rules =[
                 'name'=> "required|alpha_dash:ascii|min:4|max:50|unique:roles",
+                'name_ar'=> "required|min:4|max:50",
+                'name_en'=> "required|min:4|max:50",
             ];
         }else{
             $rules =[
                 'name'=> "required|alpha_dash:ascii|min:4|max:50|unique:roles,name,$id",
+                'name_ar'=> "required|min:4|max:50",
+                'name_en'=> "required|min:4|max:50",
             ];
         }
 

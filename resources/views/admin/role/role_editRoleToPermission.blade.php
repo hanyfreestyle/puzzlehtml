@@ -4,42 +4,47 @@
 
     <x-breadcrumb-def :pageData="$pageData"/>
 
-    <x-ui-card :page-data="$pageData" >
-        <x-mass.confirm-massage />
-        <h1> {{$role->name}}</h1>
-        <hr>
+    <x-ui-card :page-data="$pageData" title="{{$role->name_ar}}" >
 
-
-
-
-        <h1>Role Permission</h1>
         <div class="row">
-            @foreach($permissions as $permission)
-                @if( !$role->hasPermissionTo($permission) )
+           @foreach($permissionsGroup  as $groupIndex => $permissions)
+                <div class="col-lg-12 mb-3"><div class="row">
 
-                    <div class="col-lg-3">
-                        <label for="">{{$permission->name_ar}}</label>
-                    <div class="form-group">
-                    <input type="checkbox" class="status_but"
-                           role_id="{{$role->id}}" permissionName="{{$permission->name}}" name="status"
-                           data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                <div class="col-lg-12">
+                    <div class="alert alert-dark alert-dismissible">
+                        {{$modelsNameArr[$groupIndex]['name'] }}
                     </div>
-                    </div>
+                </div>
 
-                @else
-                    <div class="col-lg-3">
-                        <label for="">{{$permission->name_ar}}</label>
-                        <div class="form-group">
-                            <input type="checkbox" checked class="status_but"
-                                   role_id="{{$role->id}}" permissionName="{{$permission->name}}" name="status"
-                                   data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                @foreach($permissions as $permission)
+                    @if( !$role->hasPermissionTo($permission) )
+
+                        <div class="col-lg-2">
+                            <label class="font-weight-light">{{$permission->name_ar}}</label>
+                            <div class="form-group">
+                                <input type="checkbox" class="status_but"
+                                       role_id="{{$role->id}}" permissionName="{{$permission->name}}" name="status"
+                                       data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            </div>
                         </div>
-                    </div>
 
-                @endif
+                    @else
+                        <div class="col-lg-2">
+                            <label for="">{{$permission->name_ar}}</label>
+                            <div class="form-group">
+                                <input type="checkbox" checked class="status_but"
+                                       role_id="{{$role->id}}" permissionName="{{$permission->name}}" name="status"
+                                       data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            </div>
+                        </div>
+
+                    @endif
+
+                @endforeach
+                    </div> </div>
             @endforeach
-
         </div>
+
 
 
 
@@ -54,12 +59,12 @@
             'onSwitchChange': function(event, state){
                 var role_id = $(this).attr('role_id');
                 var permissionName = $(this).attr('permissionName');
-                 //alert(inputId);
+                //alert(inputId);
 
 
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    url: '{{ route('users.roles.givePermission9999') }}',
+                    url: '{{ route('users.roles.givePermission') }}',
                     type: 'POST',
                     dataType: 'text',
                     data: {

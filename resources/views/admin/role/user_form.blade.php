@@ -6,19 +6,19 @@
 
     <x-ui-card title="{{$pageData[$pageData['ViewType'].'PageName']}}" can="hhhhh" >
         <x-mass.confirm-massage />
-        <form  data-parsley-validate class="mainForm pb-0" action="{{route('users.users.update',intval($rowData->id))}}" method="post"  enctype="multipart/form-data">
+        <form  data-parsley-validate class="mainForm pb-0" action="{{route('users.users.update',intval($users->id))}}" method="post"  enctype="multipart/form-data">
             @csrf
             <div class="col-lg-12">
 
                 <div class="row">
                     <x-form-input label="{{__('admin/config/roles.users_fr_name')}}" name="name" :requiredSpan="true" colrow="col-lg-4"
-                                  value="{{old('name',$rowData->name)}}" inputclass="dir_en"/>
+                                  value="{{old('name',$users->name)}}" inputclass="dir_en"/>
 
                     <x-form-input label="{{__('admin/config/roles.users_fr_email')}}" name="email" :requiredSpan="true" colrow="col-lg-4"
-                                  value="{{old('email',$rowData->email)}}" inputclass="dir_en"/>
+                                  value="{{old('email',$users->email)}}" inputclass="dir_en"/>
 
                     <x-form-input label="{{__('admin/config/roles.users_fr_phone')}}" name="phone" :requiredSpan="true" colrow="col-lg-4"
-                                  value="{{old('phone',$rowData->phone)}}" inputclass="dir_en"/>
+                                  value="{{old('phone',$users->phone)}}" inputclass="dir_en"/>
 
                     @php
                         if($pageData['ViewType'] == 'Add'){
@@ -59,7 +59,7 @@
                 </div>
 
                 <hr>
-                <x-form-upload-file  view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"/>
+                <x-form-upload-file  view-type="{{$pageData['ViewType']}}" :row-data="$users" :multiple="false"/>
             </div>
 
 
@@ -70,11 +70,4 @@
 
     </x-ui-card>
 @endsection
-
-
-@push('JsCode')
-
-@endpush
-
-
 

@@ -12,21 +12,26 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['name' => 'users_view','name_ar'=>'عرض المستخدمين','name_en'=>'User View'],
-            ['name' => 'users_add','name_ar'=>'اضافة مستخدم جديد','name_en'=>'User Add'],
-            ['name' => 'users_edit','name_ar'=>'تعديل على مستخدم حالى','name_en'=>'User Edit'],
-            ['name' => 'users_delete','name_ar'=>'حذف مستخدم','name_en'=>'User Delete'],
+            ['cat_id'=> '1', 'name' => 'users_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '1', 'name' => 'users_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '1', 'name' => 'users_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '1', 'name' => 'users_delete','name_ar'=>'حذف','name_en'=>'Delete'],
 
-            ['name' => 'roles_view','name_ar'=>'عرض  مجموعات الصلاحيات','name_en'=>'Roles View'],
-            ['name' => 'roles_add','name_ar'=>'اضافة مجموعة صلاحيات','name_en'=>'Roles Add'],
-            ['name' => 'roles_edit','name_ar'=>'تعديل مجموعة صلاحيات','name_en'=>'Roles Edit'],
-            ['name' => 'roles_delete','name_ar'=>'حذف مجموعة صلاحيات','name_en'=>'Roles Delete'],
+            ['cat_id'=> '2', 'name' => 'roles_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '2', 'name' => 'roles_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '2', 'name' => 'roles_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '2', 'name' => 'roles_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+            ['cat_id'=> '2', 'name' => 'roles_update_permissions','name_ar'=>'تعديل صلاحيات المجموعة','name_en'=>'Roles Update Permissions'],
 
+            ['cat_id'=> '3', 'name' => 'permissions_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '3', 'name' => 'permissions_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '3', 'name' => 'permissions_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '3', 'name' => 'permissions_delete','name_ar'=>'حذف','name_en'=>'Delete'],
 
-            ['name' => 'amenity_view','name_ar'=>'عرض الخصائص','name_en'=>'Amenity View'],
-            ['name' => 'amenity_add','name_ar'=>'اضافة الخصائص','name_en'=>'Amenity Add '],
-            ['name' => 'amenity_edit','name_ar'=>'تعديل الخصائص','name_en'=>'Amenity Edit'],
-            ['name' => 'amenity_delete','name_ar'=>'حذف الخصائص','name_en'=>'Amenity Delete'],
+            ['cat_id'=> '4', 'name' => 'amenity_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '4', 'name' => 'amenity_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '4', 'name' => 'amenity_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '4', 'name' => 'amenity_delete','name_ar'=>'حذف','name_en'=>'Delete'],
 
 
         ];

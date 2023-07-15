@@ -22,7 +22,7 @@ class UserController extends AdminMainController
         $this->controllerName = $controllerName;
         $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
         $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);
-        $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit','updateStatus']]);
+        $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit','updateStatus','emptyPhoto']]);
         $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
 
     }
@@ -36,7 +36,8 @@ class UserController extends AdminMainController
         $pageData['ViewType'] = "List";
 
         $users = User::orderBy('id')->paginate(10);
-        return view('admin.role.user_index',compact('pageData','users'));
+        $roles = Role::all();
+        return view('admin.role.user_index',compact('pageData','users','roles'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
@@ -46,9 +47,9 @@ class UserController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Add";
 
-        $rowData = User::findOrNew(0);
+        $users = User::findOrNew(0);
         $roles = Role::all();
-        return view('admin.role.user_form',compact('pageData','rowData','roles'));
+        return view('admin.role.user_form',compact('pageData','users','roles'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
@@ -58,10 +59,10 @@ class UserController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-        $rowData = User::findOrFail($id);
+        $users = User::findOrFail($id);
         $roles = Role::all();
-        $userRole = $rowData->roles->pluck('name','id')->all();
-        return view('admin.role.user_form',compact('rowData','pageData','roles','userRole'));
+        $userRole = $users->roles->pluck('name','id')->all();
+        return view('admin.role.user_form',compact('users','pageData','roles','userRole'));
 
     }
 

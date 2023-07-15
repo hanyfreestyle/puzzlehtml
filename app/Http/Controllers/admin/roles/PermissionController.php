@@ -4,18 +4,26 @@ namespace App\Http\Controllers\admin\roles;
 
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\config\AmenityRequest;
 use App\Http\Requests\admin\roles\AdminPermissionRequest;
-use App\Models\admin\config\Amenity;
-use App\Models\admin\config\AmenityTranslation;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
-class AdminPermissionController extends AdminMainController
+
+class PermissionController extends AdminMainController
 {
-    public $controllerName = 'permissions';
+    public $controllerName ;
+
+    function __construct($controllerName = 'permissions')
+    {
+        parent::__construct();
+        $this->controllerName = $controllerName;
+        $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
+        $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);
+        $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit']]);
+        $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
+    }
+
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
@@ -26,9 +34,10 @@ class AdminPermissionController extends AdminMainController
         $pageData['ViewType'] = "List";
 
 
-        $rowData = Permission::orderBy('id')->paginate(10);
-        return view('admin.role.permission_index',compact('pageData','rowData'));
+        $permissions = Permission::orderBy('id')->paginate(20);
+        return view('admin.role.permission_index',compact('pageData','permissions'));
     }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
     public function create()
@@ -37,10 +46,10 @@ class AdminPermissionController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Add";
 
-        $rowData = Permission::findOrNew(0);
-        $roles = Role::all();
-       return view('admin.role.permission_form',compact('pageData','rowData','roles'));
+        $permission = Permission::findOrNew(0);
+        return view('admin.role.permission_form',compact('pageData','permission'));
     }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
     public function edit($id)
@@ -49,10 +58,11 @@ class AdminPermissionController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-        $rowData = Permission::findOrFail($id);
-        $roles = Role::all();
-        return view('admin.role.permission_form',compact('rowData','pageData','roles'));
+        $permission = Permission::findOrFail($id);
+
+        return view('admin.role.permission_form',compact('permission','pageData'));
     }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
     public function storeUpdate(AdminPermissionRequest $request, $id=0)
@@ -60,9 +70,9 @@ class AdminPermissionController extends AdminMainController
         $request-> validated();
         $saveData =  Permission::findOrNew($id);
         $saveData->name = $request->name;
-
         $saveData->name_ar =  $request->name_ar;
         $saveData->name_en =  $request->name_en;
+        $saveData->cat_id =  $request->cat_id;
 
         $saveData->save();
 
@@ -72,6 +82,7 @@ class AdminPermissionController extends AdminMainController
             return redirect(route('users.permissions.index'))->with('Edit.Done',"");
         }
     }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id)
@@ -81,27 +92,20 @@ class AdminPermissionController extends AdminMainController
         return redirect(route('users.permissions.index'))->with('confirmDelete',"");
     }
 
-    public function assignRole(Request $request , Permission $permission){
-
-        if($permission->hasRole($request->role)){
-            return back()->with('mass','موجوده');
-        }
-        $permission->assignRole($request->role);
-        return back()->with('mass2','موجوده');
-
-    }
-
-    public function removeRole(Permission $permission , Role $role){
-        if($permission->hasRole($role)){
-            $permission->removeRole($role);
-            return back()->with('mass9','موجوده');
-        }
-
-    }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Text
 
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Text
 
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Text
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Text
 
 
 }
