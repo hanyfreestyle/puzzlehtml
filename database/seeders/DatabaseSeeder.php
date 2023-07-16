@@ -39,6 +39,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminUserSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(CategoryTranslationSeeder::class);
 
     }
 }

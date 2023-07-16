@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('g_des')->nullable();
             $table->string('body_h1')->nullable();
             $table->string('breadcrumb')->nullable();
+            $table->softDeletes();
 
             $table->unique(['category_id','locale']);
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
