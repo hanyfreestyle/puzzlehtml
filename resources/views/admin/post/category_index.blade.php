@@ -32,7 +32,7 @@
                                     @foreach($Categories as $row)
                                         <tr>
                                             <td>{{$row->id}}</td>
-                                           
+
                                             <td>{!! AdminHelper::printTableImage($row,'photo') !!} </td>
                                             <td>{{$row->translate('ar')->name}}</td>
                                             <td>{{$row->translate('en')->name}}</td>
