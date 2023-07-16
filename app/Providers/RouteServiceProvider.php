@@ -38,7 +38,24 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
 
- /*
+            Route::group(['middleware' => ['auth','status']], function() {
+                Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
+                    Route::group(['prefix'=>'admin'],function(){
+                        Route::middleware('web')
+                            ->group(base_path('routes/admin_roles.php'));
+                    });
+                });
+            });
+
+            Route::group(['middleware' => ['auth','status']], function() {
+                Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
+                    Route::group(['prefix'=>'admin'],function(){
+                        Route::middleware('web')
+                            ->group(base_path('routes/admin_config.php'));
+                    });
+                });
+            });
+
             Route::group(['middleware' => ['auth','status']], function() {
                 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
                     Route::group(['prefix'=>'admin'],function(){
@@ -47,7 +64,8 @@ class RouteServiceProvider extends ServiceProvider
                     });
                 });
             });
-*/
+
+
         });
 
 

@@ -1,6 +1,6 @@
 <?php
 return [
-   'editkeys' => true ,
+
    'adminFile' => [
        '1'=> ['id'=> '1' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'def','name'=>'المتغيرات الاساسية' ],
        '2'=> ['id'=> '2' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'alertMass','name'=>'الرسائل' ],

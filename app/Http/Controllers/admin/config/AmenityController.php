@@ -6,15 +6,24 @@ use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\AmenityRequest;
 use App\Models\admin\config\Amenity;
-
 use App\Models\admin\config\AmenityTranslation;
 
 
 
 class AmenityController extends AdminMainController
 {
-    public $controllerName = 'amenity';
-    public $getPageData ;
+
+    public $controllerName ;
+
+    function __construct($controllerName = 'amenity')
+    {
+        parent::__construct();
+        $this->controllerName = $controllerName;
+        $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
+        $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);
+        $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit']]);
+        $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
+    }
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

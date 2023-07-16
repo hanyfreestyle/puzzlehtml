@@ -8,10 +8,8 @@ use App\Http\Controllers\admin\config\MetaTagController;
 use App\Http\Controllers\admin\config\SettingsController;
 use App\Http\Controllers\admin\config\UploadFilterController;
 use App\Http\Controllers\admin\config\UploadFilterSizeController;
-use App\Http\Controllers\admin\roles\AdminPermissionController;
-use App\Http\Controllers\admin\roles\PermissionController;
-use App\Http\Controllers\admin\roles\RoleController;
-use App\Http\Controllers\admin\roles\UserController;
+
+
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,8 +50,6 @@ Route::group(['middleware' => ['auth','status']], function() {
             Route::get('/TestLang', [HomeController::class, 'TestLang'])->name('admin.DashboardXXXX');
 
 
-            Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('config.web.index');
-            Route::post('/config/webConfigUpdate', [SettingsController::class, 'webConfigUpdate'])->name('admin.webConfigUpdate');
 
             Route::get('/metaTags', [MetaTagController::class,'index'])->name('config.meta.index');
             Route::get('/metaTags/create', [MetaTagController::class,'create'])->name('config.meta.create');
@@ -85,46 +81,6 @@ Route::group(['middleware' => ['auth','status']], function() {
             Route::get('/upFilterSize/edit/{id}', [UploadFilterSizeController::class,'edit'])->name('config.upFilter.size.edit');
             Route::get('/upFilterSize/delete/{id}', [UploadFilterSizeController::class,'destroy'])->name('config.upFilter.size.destroy');
 
-
-            Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
-            Route::get('/amenity/create',[AmenityController::class,'create'])->name('amenity.create');
-            Route::post('/amenity/store/{id}',[AmenityController::class,'storeUpdate'])->name('amenity.store');
-            Route::get('/amenity/edit/{id}',[AmenityController::class,'edit'])->name('amenity.edit');
-            Route::post('/amenity/update/{id}',[AmenityController::class,'storeUpdate'])->name('amenity.update');
-            Route::delete('/amenity/destroy/{id}',[AmenityController::class,'destroy'])->name('amenity.destroy');
-
-
-            Route::get('/adminlang',[LangFileController::class,'index'])->name('adminlang.index');
-            Route::post('/adminlang/updateFile',[LangFileController::class,'updateFile'])->name('adminlang.updateFile');
-
-
-
-            Route::get('/Users', [UserController::class,'index'])->name('users.users.index');
-            Route::get('/Users/create', [UserController::class,'create'])->name('users.users.create');
-            Route::post('/Users/store/{id}', [UserController::class,'storeUpdate'])->name('users.users.store');
-            Route::get('/Users/edit/{id}', [UserController::class,'edit'])->name('users.users.edit');
-            Route::post('/Users/Update/{id}', [UserController::class,'storeUpdate'])->name('users.users.update');
-            Route::get('/Users/delete/{id}', [UserController::class,'destroy'])->name('users.users.destroy');
-            Route::post('/Users/updateStatus', [UserController::class,'updateStatus'])->name('users.users.updateStatus');
-            Route::get('/Users/emptyPhoto/{id}', [UserController::class,'emptyPhoto'])->name('users.users.emptyPhoto');
-
-
-
-            Route::get('/Roles', [RoleController::class,'index'])->name('users.roles.index');
-            Route::get('/Roles/create', [RoleController::class,'create'])->name('users.roles.create');
-            Route::get('/Roles/edit/{id}', [RoleController::class,'edit'])->name('users.roles.edit');
-            Route::get('/Roles/delete/{id}', [RoleController::class,'destroy'])->name('users.roles.destroy');
-            Route::post('/Roles/Update/{id}', [RoleController::class,'storeUpdate'])->name('users.roles.update');
-            Route::get('/Roles/editRoleToPermission/{id}', [RoleController::class,'editRoleToPermission'])->name('users.roles.editRoleToPermission');
-            Route::post('/Roles/givePermission', [RoleController::class,'givePermission'])->name('users.roles.givePermission');
-
-
-
-            Route::get('/Permissions', [PermissionController::class,'index'])->name('users.permissions.index');
-            Route::get('/Permissions/create', [PermissionController::class,'create'])->name('users.permissions.create');
-            Route::get('/Permissions/edit/{id}', [PermissionController::class,'edit'])->name('users.permissions.edit');
-            Route::get('/Permissions/delete/{id}', [PermissionController::class,'destroy'])->name('users.permissions.destroy');
-            Route::post('/Permissions/Update/{id}', [PermissionController::class,'storeUpdate'])->name('users.permissions.update');
 
         });
     });

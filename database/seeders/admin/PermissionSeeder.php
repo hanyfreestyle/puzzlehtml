@@ -33,6 +33,28 @@ class PermissionSeeder extends Seeder
             ['cat_id'=> '4', 'name' => 'amenity_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
             ['cat_id'=> '4', 'name' => 'amenity_delete','name_ar'=>'حذف','name_en'=>'Delete'],
 
+            ['cat_id'=> '5', 'name' => 'adminlang_view','name_ar'=>'عرض ملفات لغة التحكم','name_en'=>'View Admin Lang'],
+            ['cat_id'=> '5', 'name' => 'adminlang_edit','name_ar'=>'تعديل ملفات لغة التحكم','name_en'=>'Edit Admin Lang'],
+            ['cat_id'=> '5', 'name' => 'weblang_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '5', 'name' => 'weblang_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+
+            ['cat_id'=> '6', 'name' => 'config_section','name_ar'=>'عرض الاعدادات','name_en'=>'Setting View'],
+            ['cat_id'=> '6', 'name' => 'website_config','name_ar'=>'اعدادات الموقع','name_en'=>'Web Site Setting'],
+
+            ['cat_id'=> '7', 'name' => 'meta_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '7', 'name' => 'meta_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '7', 'name' => 'meta_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '7', 'name' => 'meta_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+
+            ['cat_id'=> '8', 'name' => 'defPhoto_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '8', 'name' => 'defPhoto_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '8', 'name' => 'defPhoto_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '8', 'name' => 'defPhoto_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+
+            ['cat_id'=> '9', 'name' => 'upFilter_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '9', 'name' => 'upFilter_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '9', 'name' => 'upFilter_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '9', 'name' => 'upFilter_delete','name_ar'=>'حذف','name_en'=>'Delete'],
 
         ];
 

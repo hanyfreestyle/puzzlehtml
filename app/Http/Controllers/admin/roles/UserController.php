@@ -19,6 +19,7 @@ class UserController extends AdminMainController
 
     function __construct($controllerName = 'users')
     {
+        parent::__construct();
         $this->controllerName = $controllerName;
         $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
         $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);

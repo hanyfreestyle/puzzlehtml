@@ -2,36 +2,42 @@
 
 namespace App\Http\Controllers\admin\config;
 
-use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\LangFileRequest;
-use App\Models\admin\config\Amenity;
-use App\Models\admin\config\LangFile;
-use App\Models\admin\config\LangFileTranslation;
-use App\Models\admin\config\LangPath;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Lang;
+
 
 class LangFileController extends AdminMainController
 {
-    public $controllerName = 'adminlang';
+    public $controllerName ;
+
+    function __construct($controllerName = 'adminlang')
+    {
+        parent::__construct();
+
+        $this->controllerName = $controllerName;
+        $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
+        $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['updateFile']]);
+
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
     {
-        #$pageData = AdminHelper::returnPageDate($this->controllerName);
-       # $pageData['ViewType'] = "List";
+        $listFile =  config('adminLangFile.adminFile');
         $pageData = "";
         $mergeData = [];
         $allData = [];
         $prefixCopy = "";
+        $ViewData = 0;
 
-        if(isset($_GET['id']) and intval($_GET['id']) != '0'){
 
+        if(isset($_GET['id']) and intval($_GET['id']) != '0' and intval($_GET['id']) <= count($listFile) ){
+            $ViewData = '1';
             $id = intval($_GET['id']);
-            $listFile =  config('adminLangFile.adminFile');
+
             $selFileIs =  $listFile[$id]['file_name'];
             $prefixCopy = LangFileController::getPrefixCopy($listFile[$id]);
 
@@ -60,8 +66,8 @@ class LangFileController extends AdminMainController
             }
         }
         ksort($mergeData);
-        //dd($mergeData);
-        return view('admin.config.lang_index',compact('pageData','mergeData','allData','prefixCopy'));
+
+        return view('admin.config.lang_index',compact('pageData','mergeData','allData','prefixCopy','ViewData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -84,9 +90,7 @@ class LangFileController extends AdminMainController
             foreach ($request->key as $keyfromrequest ){
                 if(trim($keyfromrequest) != ''){
                     $contentAsArr += [$keyfromrequest => $request->$key[$index]];
-                   /// $content .= "\t'".$keyfromrequest."' => '".$request->$key[$index]."',\n";
                     $content .= "\t'".$keyfromrequest."' => '".htmlentities($request->$key[$index])."',\n";
-
                 }
                 $index++ ;
             }
@@ -97,20 +101,6 @@ class LangFileController extends AdminMainController
         return  back()->with('Update.Done','');
 
     }
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     getFullPathToFileArr

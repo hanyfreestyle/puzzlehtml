@@ -1,5 +1,6 @@
 <?php
-return [
+
+ return [
     'menu' => [
 
         [
@@ -8,13 +9,13 @@ return [
             'type'=>'many',
             'text'=> 'admin/menu.setting',
             'icon'=>'fas fa-cogs',
-            'roleView'=>'',
+            'roleView'=>'config_section',
             'submenu'=>[
-                ['text'=> 'admin/menu.setting_web','url'=> 'config.web.index','sel_routs'=> 'web','icon'=>'fas fa-cog'],
-                ['text'=> 'admin/menu.setting_meta_tags','url'=> 'config.meta.index','sel_routs'=> 'meta','icon'=>'fab fa-html5'],
-                ['text'=> 'admin/menu.setting_def_photo','url'=> 'config.defPhoto.index','sel_routs'=> 'defPhoto','icon'=>'fas fa-image'],
-                ['text'=> 'admin/menu.uploadFilter','url'=> 'config.upFilter.index','sel_routs'=> 'upFilter','icon'=>'fas fa-filter'],
-                ['text'=> 'admin/menu.setting_icon','url'=> 'config.defIcon.show','sel_routs'=> 'defIcon','icon'=>'fab fa-fonticons'],
+                ['roleView'=>'website_config','text'=> 'admin/menu.setting_web','url'=> 'config.web.index','sel_routs'=> 'web','icon'=>'fas fa-cog'],
+                ['roleView'=>'meta_view','text'=> 'admin/menu.setting_meta_tags','url'=> 'config.meta.index','sel_routs'=> 'meta','icon'=>'fab fa-html5'],
+                ['roleView'=>'defPhoto_view','text'=> 'admin/menu.setting_def_photo','url'=> 'config.defPhoto.index','sel_routs'=> 'defPhoto','icon'=>'fas fa-image'],
+                ['roleView'=>'upFilter_view','text'=> 'admin/menu.uploadFilter','url'=> 'config.upFilter.index','sel_routs'=> 'upFilter','icon'=>'fas fa-filter'],
+                ['roleView'=>'config_section','text'=> 'admin/menu.setting_icon','url'=> 'config.defIcon.show','sel_routs'=> 'defIcon','icon'=>'fab fa-fonticons'],
             ],
         ],
 
@@ -35,7 +36,7 @@ return [
             'text'=> 'admin/menu.lang_file_admin',
             'url'=> 'adminlang.index',
             'icon'=>'fas fa-globe-africa',
-            'roleView'=>'',
+            'roleView'=>'adminlang_view',
         ],
 
         [

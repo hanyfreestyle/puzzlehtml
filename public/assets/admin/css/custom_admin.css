@@ -9,7 +9,7 @@
 .Td_Count{font-size:22px!important;}
 .BB_Number{font-size:22px!important;}
 
- 
+
 .mainForm{padding-bottom:50px;}
 .mainForm .def_form_label{font-size:15px!important;margin-bottom:0!important;padding-top:8px;padding-bottom:7px;font-weight:700!important;color:rgba(0,0,0,.8)!important}
 
@@ -76,3 +76,22 @@ textarea.parsley-error {
 .parsley-errors-list.filled {
   opacity: 1;
 }
+
+fieldset {
+
+    border: 2px solid #1F497D;
+    border-radius: 5px;
+    padding: 15px;
+    width: 100%;
+}
+
+fieldset legend {
+    background: #1F497D;
+    color: #fff;
+    padding: 5px 10px ;
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px #ddd;
+    margin-left: 20px;
+}
+

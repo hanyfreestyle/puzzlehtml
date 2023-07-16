@@ -15,12 +15,14 @@ class PermissionController extends AdminMainController
 
     function __construct($controllerName = 'permissions')
     {
+        if(config('app.development')){ $stopAdd = '';}else{ $stopAdd = 'stop';}
+
         parent::__construct();
         $this->controllerName = $controllerName;
         $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
-        $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);
+        $this->middleware('permission:'.$controllerName.'_add'.$stopAdd, ['only' => ['create']]);
         $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit']]);
-        $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
+        $this->middleware('permission:'.$controllerName.'_delete'.$stopAdd, ['only' => ['destroy']]);
     }
 
 
@@ -34,7 +36,7 @@ class PermissionController extends AdminMainController
         $pageData['ViewType'] = "List";
 
 
-        $permissions = Permission::orderBy('id')->paginate(20);
+        $permissions = Permission::orderBy('id','desc')->paginate(20);
         return view('admin.role.permission_index',compact('pageData','permissions'));
     }
 

@@ -3,9 +3,20 @@
 return
 [
 	'model_1' => 'Manage Users',
+	'model_10' => '',
+	'model_11' => '',
+	'model_12' => '',
+	'model_13' => '',
+	'model_14' => '',
 	'model_2' => 'Manage Roles',
 	'model_3' => 'Manage Permissions',
 	'model_4' => 'Manage Amenity',
+	'model_5' => 'Lang File',
+	'model_6' => 'Settings',
+	'model_7' => 'Meta Tags',
+	'model_8' => 'Defult Photos',
+	'model_9' => 'Upload Filters',
+	'model_name' => 'Group Name',
 	'permission_frname' => 'Role Name',
 	'permission_title' => 'Permissions',
 	'role_frname' => 'Group Name',
@@ -18,5 +29,4 @@ return
 	'users_fr_status' => 'User Status',
 	'users_list' => 'Users List',
 	'users_title' => 'Users',
-	'model_name' => 'Group Name',
 ];

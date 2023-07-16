@@ -72,7 +72,7 @@ class UiCard extends Component
             }
         }
 
-        if($title == null){
+        if($title == null and isset($pageData['ListPageName'])){
             $this->title = $pageData['ListPageName'];
         }
 

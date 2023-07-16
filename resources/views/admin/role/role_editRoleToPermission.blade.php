@@ -8,6 +8,9 @@
 
         <div class="row">
            @foreach($permissionsGroup  as $groupIndex => $permissions)
+
+
+
                 <div class="col-lg-12 mb-3"><div class="row">
 
                 <div class="col-lg-12">

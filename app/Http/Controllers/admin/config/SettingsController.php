@@ -49,11 +49,4 @@ class SettingsController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     text
 
 
-
-
-
-
-
-
-
 }

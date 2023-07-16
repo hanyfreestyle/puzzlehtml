@@ -193,4 +193,10 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
     ])->toArray(),
 
+
+
+
+    //'development' => env('APP_DEVELOPMENT'),
+    'development' => true,
+
 ];
