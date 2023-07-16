@@ -3,10 +3,21 @@
 @section('content')
     <x-breadcrumb-def :pageData="$pageData"/>
 
-    <div class="content mb-3"><div class="container-fluid"><div class="row"><div class="col-12 text-left">
-                    <x-action-button  url="{{route('config.defPhoto.create')}}"  type="add" size="m"   />
-                    <x-action-button  url="{{route('config.defPhoto.sortDefPhotoList')}}" lable="{{__('admin/form.button_sort')}}" size="m"  bg="i" icon="fas fa-sort-amount-up"  />
-                </div></div></div></div>
+    <div class="content mb-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-left">
+                    @can('defPhoto_add')
+                        <x-action-button  url="{{route('config.defPhoto.create')}}"  type="add" size="m"   />
+                    @endcan
+                    @can('defPhoto_edit')
+                        <x-action-button  url="{{route('config.defPhoto.sortDefPhotoList')}}" print-lable="{{__('admin/form.button_sort')}}" size="m"  bg="i" icon="fas fa-sort-amount-up"  />
+                    @endcan
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="content">
         <div class="container-fluid">

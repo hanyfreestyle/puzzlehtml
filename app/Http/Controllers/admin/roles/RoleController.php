@@ -16,15 +16,11 @@ class RoleController extends AdminMainController
     function __construct($controllerName = 'roles')
     {
         parent::__construct();
-
-
-
         $this->controllerName = $controllerName;
         $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
         $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);
         $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit','editRoleToPermission']]);
         $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
-
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index

@@ -12,20 +12,18 @@ use Illuminate\Support\Facades\View;
 
 class UploadFilterSizeController extends AdminMainController
 {
-    public $controllerName = 'upFilter';
 
-public function __construct()
-{
-    $FilterTypeArr = [
-        "1"=> ['id'=>'1','name'=>__('admin/config/upFilter.filter_action_1')],
-        "2"=> ['id'=>'2','name'=>__('admin/config/upFilter.filter_action_2')],
-        "3"=> ['id'=>'3','name'=>__('admin/config/upFilter.filter_action_3')],
-        "4"=> ['id'=>'4','name'=>__('admin/config/upFilter.filter_action_4')],
-        "5"=> ['id'=>'5','name'=>__('admin/config/upFilter.filter_action_5')],
-    ];
+    public $controllerName ;
 
-    View::share('filterTypeArr', $FilterTypeArr);
-}
+    function __construct($controllerName = 'upFilter')
+    {
+        parent::__construct();
+        $this->controllerName = $controllerName;
+        $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
+        $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);
+        $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit']]);
+        $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
@@ -109,22 +107,5 @@ public function __construct()
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

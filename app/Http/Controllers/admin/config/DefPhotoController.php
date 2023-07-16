@@ -6,7 +6,6 @@ use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\DefPhotoRequest;
 use App\Models\admin\config\DefPhoto;
-use App\Models\admin\config\UploadFilter;
 use Illuminate\Http\Request;
 
 
@@ -14,11 +13,21 @@ use Illuminate\Http\Request;
 
 class DefPhotoController extends AdminMainController
 {
-    public $controllerName = 'defPhoto';
+
+    public $controllerName ;
+
+    function __construct($controllerName = 'defPhoto')
+    {
+        parent::__construct();
+        $this->controllerName = $controllerName;
+        $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
+        $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);
+        $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit','sortDefPhotoList']]);
+        $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
-
     public function index(){
         $sendArr = ['TitlePage' => __('admin/menu.setting_def_photo'),'selMenu'=> 'config.' ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
@@ -114,18 +123,6 @@ class DefPhotoController extends AdminMainController
         $rowData = DefPhoto::orderBy('postion')->paginate(50);
         $pageData['ViewType'] = "List";
         return view('admin.config.defphoto_indexSort',compact('pageData','rowData'));
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     defIconShow
-    public function defIconShow(){
-        $pageData =[
-            'ViewType'=>"Page",
-            'TitlePage'=> __('admin/menu.setting_icon'),
-        ];
-
-        return view('admin.config.defIcon_show')->with(compact('pageData'));
-
     }
 
 }

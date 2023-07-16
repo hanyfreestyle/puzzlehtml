@@ -10,7 +10,10 @@ use App\Models\admin\config\Setting;
 
 class SettingsController extends AdminMainController
 {
-
+    function __construct()
+    {
+        $this->middleware('permission:website_config', ['only' => ['webConfigEdit','webConfigUpdate']]);
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   webConfigEdit
@@ -41,7 +44,17 @@ class SettingsController extends AdminMainController
         return  back()->with('Edit.Done',"");
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     defIconShow
+    public function defIconShow(){
+        $pageData =[
+            'ViewType'=>"Page",
+            'TitlePage'=> __('admin/menu.setting_icon'),
+        ];
 
+        return view('admin.config.defIcon_show')->with(compact('pageData'));
+
+    }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
 

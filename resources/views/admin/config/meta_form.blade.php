@@ -2,20 +2,12 @@
 
 @section('content')
 
-    @php
-        if($pageData['ViewType'] == 'Add'){
-            $formRoute = 'config.meta.store' ;
-        }elseif ($pageData['ViewType'] == 'Edit') {
-            $formRoute = 'config.meta.update' ;
-        }
-    @endphp
-
     <x-breadcrumb-def :pageData="$pageData"/>
-    <x-ui-card title="{{$pageData['AddPageName']}}">
+    <x-ui-card :page-data="$pageData">
 
         <x-mass.confirm-massage/>
 
-        <form class="mainForm" action="{{route($formRoute,intval($oldData->id))}}" method="post">
+        <form class="mainForm" action="{{route('config.meta.update',intval($oldData->id))}}" method="post">
             @csrf
             <div class="row">
             <x-form-input label="# CatId" name="cat_id" :requiredSpan="true" colrow="col-lg-4"

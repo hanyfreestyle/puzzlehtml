@@ -34,8 +34,17 @@ class AdminMainController extends Controller
             "13"=> ['id'=>'13','name'=>__('admin/config/roles.model_13')],
             "14"=> ['id'=>'14','name'=>__('admin/config/roles.model_14')],
         ];
-
         View::share('modelsNameArr', $modelsNameArr);
+
+        $FilterTypeArr = [
+            "1"=> ['id'=>'1','name'=>__('admin/config/upFilter.filter_action_1')],
+            "2"=> ['id'=>'2','name'=>__('admin/config/upFilter.filter_action_2')],
+            "3"=> ['id'=>'3','name'=>__('admin/config/upFilter.filter_action_3')],
+            "4"=> ['id'=>'4','name'=>__('admin/config/upFilter.filter_action_4')],
+            "5"=> ['id'=>'5','name'=>__('admin/config/upFilter.filter_action_5')],
+        ];
+        View::share('filterTypeArr', $FilterTypeArr);
+
     }
 
 

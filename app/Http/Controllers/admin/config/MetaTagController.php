@@ -11,9 +11,17 @@ use App\Models\admin\config\MetaTagTranslation;
 
 class MetaTagController extends AdminMainController
 {
-    public $controllerName = 'meta';
 
-
+    public $controllerName ;
+    function __construct($controllerName = 'meta')
+    {
+        parent::__construct();
+        $this->controllerName = $controllerName;
+        $this->middleware('permission:'.$controllerName.'_view', ['only' => ['index']]);
+        $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);
+        $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit']]);
+        $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['delete']]);
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
@@ -70,9 +78,9 @@ class MetaTagController extends AdminMainController
         }
 
         if($id == '0'){
-            return  back()->with('Add.Done'," ");
+            return redirect(route('config.meta.index'))->with('Add.Done',"");
         }else{
-            return  back()->with('Edit.Done'," ");
+            return redirect(route('config.meta.index'))->with('Edit.Done',"");
         }
 
     }
@@ -94,36 +102,6 @@ class MetaTagController extends AdminMainController
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
-
-
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

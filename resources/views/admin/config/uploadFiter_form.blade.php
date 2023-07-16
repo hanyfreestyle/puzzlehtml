@@ -1,28 +1,12 @@
 @extends('admin.layouts.app')
 
 @section('content')
-
-
     <x-breadcrumb-def :pageData="$pageData"/>
-
     <x-mass.confirm-massage/>
-
-    @if($errors->has([]))
-        <div class=" col-12">
-            <div class="alert alert-danger alert-dismissible">
-                {{__('general.alertMass.formHasError')}}
-            </div>
-        </div>
-    @endif
-
     <form class="mainForm uploadFilterForm" action="{{route('config.upFilter.store',intval($rowData->id))}}" method="post">
         @csrf
-
-
-
         <div class="container-fluid">
             <div class="row">
-
                 <div class="col-lg-6">
                     <x-ui-card title="{{__('admin/config/upFilter.form_main_setting')}}" :add-form-error="false"   >
 
@@ -62,8 +46,13 @@
                                         <th>{{__('admin/config/upFilter.form_type')}}</th>
                                         <th>{{__('admin/config/upFilter.form_new_w')}}</th>
                                         <th>{{__('admin/config/upFilter.form_new_h')}}</th>
-                                        <th></th>
-                                        <th></th>
+                                        @can('upFilter_edit')
+                                            <th></th>
+                                        @endcan
+                                        @can('upFilter_delete')
+                                            <th></th>
+                                        @endcan
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -73,12 +62,15 @@
                                             <td>{{ $filterTypeArr[$DataSize->type]['name']}}</td>
                                             <td class="text-center">{{$DataSize->new_w}}</td>
                                             <td class="text-center">{{$DataSize->new_h}}</td>
-                                            <td>
-                                                <x-action-button url="{{route('config.upFilter.size.edit',$DataSize->id)}}" type="edit" :tip="true" />
-                                            </td>
-                                            <td>
-                                                <x-action-button id="{{route('config.upFilter.size.destroy',$DataSize->id)}}" type="deleteSweet" :tip="true" url="#" />
-                                            </td>
+                                            @can('upFilter_edit')
+                                                <td><x-action-button url="{{route('config.upFilter.size.edit',$DataSize->id)}}" type="edit" :tip="true" /></td>
+                                            @endcan
+                                            @can('upFilter_delete')
+                                                <td><x-action-button id="{{route('config.upFilter.size.destroy',$DataSize->id)}}" type="deleteSweet" :tip="true" url="#" /></td>
+                                            @endcan
+
+
+
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -86,12 +78,14 @@
                             </div>
                         </x-ui-card>
                     @endif
+                    @can('upFilter_add')
+                        @if(intval($rowData->id)!= '0' and  count($rowDataSize) < 2 )
+                            <hr>
+                            <x-action-button url="{{route('config.upFilter.size.create',$rowData->id)}}" print-lable="{{__('admin/config/upFilter.form_add_new_size')}}" size="m" />
+                            <hr>
+                        @endif
+                    @endcan
 
-                    @if(intval($rowData->id)!= '0' and  count($rowDataSize) < 2 )
-                        <hr>
-                        <x-action-button url="{{route('config.upFilter.size.create',$rowData->id)}}" lable="{{__('admin/config/upFilter.form_add_new_size')}}" size="m" />
-                        <hr>
-                    @endif
 
                     <x-ui-card title="{{__('admin/config/upFilter.form_watermark_setting')}}" :add-form-error="false"   >
 
@@ -129,7 +123,7 @@
                                     }
                                     ?>
 
-                                      <img id="imageused" class="" src="{{$thisViewImage}}">
+                                    <img id="imageused" class="" src="{{$thisViewImage}}">
 
                                 </div>
                                 <input type="hidden" id="app_path" class="form-control force_ltr" value="{{ app('url')->asset("/")}}">
@@ -196,7 +190,6 @@
 
                     </x-ui-card>
                 </div>
-
             </div>
         </div>
         <div class="container-fluid">
