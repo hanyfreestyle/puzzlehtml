@@ -24,16 +24,5 @@
     </div>
 @endif
 
-@if($errors->has([]))
-    <div class=" col-12">
-        <div class="alert alert-danger alert-dismissible">
-            {{__('admin/alertMass.formHasError')}}
-        </div>
-    </div>
-@endif
-
-
-
-
 
 

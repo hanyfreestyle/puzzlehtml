@@ -9,10 +9,16 @@
 
 
 
-        <form  class="mainForm" action="{{route('amenity.update',intval($rowData->id))}}" method="post"  enctype="multipart/form-data">
+        <form  class="mainForm" action="{{route('category.update',intval($Category->id))}}" method="post"  enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="view_type" value="{{$pageData['ViewType']}}">
             <div class="col-lg-12">
+                <div class="row">
+                <x-form-input label="Slug" name="slug" :requiredSpan="true" colrow="col-lg-12"
+                              value="{{old('slug',$Category->slug)}}" inputclass="dir_en"/>
+
+                </div>
+
                 <div class="row">
                     @foreach ( config('app.lang_file') as $key=>$lang )
                         <div class="col-lg-6 {{getColDir($key)}}">
@@ -22,27 +28,20 @@
                                 name="{{ $key }}[name]"
                                 dir="{{ $key }}"
                                 reqname="{{ $key }}.name"
-                                value="{{old($key.'.name',$rowData->translateOrNew($key)->name)}}"
+                                value="{{old($key.'.name',$Category->translateOrNew($key)->name)}}"
                             />
                         </div>
                     @endforeach
                 </div>
             </div>
 
-            <div class="form-group col-lg-4" style="direction: ltr!important;">
-                <label class="col-form-label font-weight-light " for="">Icon</label>
-                <div class="" style="direction: ltr!important;">
-                    <input type="hidden" name="icon" id="icon_hidden_filde" value="{{old('icon',$rowData->icon)}}"  >
-                    <button class="btn btn-primary"
-                            data-align="center"
-                            data-icon="{{old('icon',$rowData->icon)}}" id="iconpicker_target" role="iconpicker"></button>
-                </div>
-            </div>
+            <x-meta-tage-filde :body-h1="true" :breadcrumb="true"  :old-data="$Category" :placeholder="false" />
+
             <hr>
             <x-form-select-arr  label="{{__('admin/def.form_selectFilterLable')}}" name="filter_id" colrow="col-lg-6"
                                 sendvalue="{{old('filter_id')}}" :send-arr="$filterTypes"/>
 
-            <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"/>
+            <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$Category" :multiple="false"/>
 
             <div class="container-fluid">
                 <x-form-submit text="{{$pageData['ViewType']}}" />
@@ -54,12 +53,7 @@
 
 
 @push('JsCode')
-    <script src="{{defAdminAssets('plugins/bootstrap-iconpicker/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
-    <script>
-        $('#iconpicker_target').on('change', function(e) {
-            $("#icon_hidden_filde").val(e.icon);
-        });
-    </script>
+
 @endpush
 
 

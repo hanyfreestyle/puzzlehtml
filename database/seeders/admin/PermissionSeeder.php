@@ -56,6 +56,16 @@ class PermissionSeeder extends Seeder
             ['cat_id'=> '9', 'name' => 'upFilter_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
             ['cat_id'=> '9', 'name' => 'upFilter_delete','name_ar'=>'حذف','name_en'=>'Delete'],
 
+            ['cat_id'=> '10', 'name' => 'category_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '10', 'name' => 'category_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '10', 'name' => 'category_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '10', 'name' => 'category_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+
+            ['cat_id'=> '11', 'name' => 'post_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '11', 'name' => 'post_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '11', 'name' => 'post_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '11', 'name' => 'post_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+
         ];
 
         $countData =  Permission::all()->count();

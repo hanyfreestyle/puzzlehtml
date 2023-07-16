@@ -55,6 +55,17 @@
 
         ],
 
+        [
+            'view'=>true,
+            'sel_routs'=>'category',
+            'type'=>'one',
+            'text'=> 'admin/menu.category',
+            'url'=> 'category.index',
+            'icon'=>'fas fa-sitemap',
+            'roleView'=>'category_view',
+        ],
+
+
     ],
 
 ];

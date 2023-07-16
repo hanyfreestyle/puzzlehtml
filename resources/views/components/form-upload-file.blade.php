@@ -21,7 +21,6 @@
                         <img  class="img-thumbnail rounded" src="{{defImagesDir($rowData->$fildName)}}">
                     </div>
                 <div class="row mt-3 mr-2 ml-2">
-
                     <x-action-button url="{{route('users.users.emptyPhoto',$rowData->id)}}" type="delete" :tip="true"/>
                 </div>
 
