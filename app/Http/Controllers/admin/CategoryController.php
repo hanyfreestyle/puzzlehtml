@@ -12,6 +12,7 @@ use App\Models\admin\CategoryTranslation;
 use App\Models\admin\config\Amenity;
 use App\Models\admin\config\AmenityTranslation;
 use Illuminate\Http\Request;
+use Str;
 
 class CategoryController extends AdminMainController
 {
@@ -73,7 +74,7 @@ class CategoryController extends AdminMainController
         $saveImgData->UploadOne($request);
 
         $saveData =  Category::findOrNew($id);
-        $saveData->slug = $request->slug;
+        $saveData->slug = AdminHelper::Url_Slug($request->slug)  ;
         $saveData = AdminHelper::saveAndDeletePhoto($saveData,$saveImgData);
         $saveData->save();
 
@@ -92,7 +93,8 @@ class CategoryController extends AdminMainController
         if($id == '0'){
             return redirect(route('category.index'))->with('Add.Done',"");
         }else{
-            return redirect(route('category.index'))->with('Edit.Done',"");
+            return back();
+            ////return redirect(route('category.index'))->with('Edit.Done',"");
         }
     }
 

@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\admin;
 
+use App\Helpers\AdminHelper;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
+use Str;
 
 class CategoryRequest extends FormRequest
 {
@@ -13,8 +16,17 @@ class CategoryRequest extends FormRequest
     }
 
 
-    public function rules(): array
+    public function rules(Request $request): array
     {
+
+       //// $request->slug = Str::slug($request->slug);
+        $request->slug = AdminHelper::Url_Slug($request->slug) ;
+
+        //$idcustom = Str::slug($request->custom);
+       //dd($request->slug);
+       // $this->request('slug');
+       # $this->request ;
+      #  $request->slug = 'eslam';
         $id = $this->route('id');
 
         if($id == '0'){
