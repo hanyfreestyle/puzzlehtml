@@ -59,7 +59,7 @@
                 </div>
 
                 <hr>
-                <x-form-upload-file  view-type="{{$pageData['ViewType']}}" :row-data="$users" :multiple="false"/>
+                <x-form-upload-file  view-type="{{$pageData['ViewType']}}" :row-data="$users" thisfilterid="1" emptyphotourl="users.users.emptyPhoto" :multiple="false"/>
             </div>
 
 

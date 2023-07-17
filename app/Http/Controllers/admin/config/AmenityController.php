@@ -5,6 +5,7 @@ use App\Helpers\AdminHelper;
 use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\AmenityRequest;
+use App\Models\admin\Category;
 use App\Models\admin\config\Amenity;
 use App\Models\admin\config\AmenityTranslation;
 
@@ -24,8 +25,6 @@ class AmenityController extends AdminMainController
         $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit']]);
         $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
     }
-
-
 
 
 
@@ -110,6 +109,15 @@ class AmenityController extends AdminMainController
         $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,2);
         $deleteRow->delete();
         return redirect(route('amenity.index'))->with('confirmDelete',"");
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     EmptyPhoto
+    public function emptyPhoto($id){
+        $rowData = Amenity::findOrFail($id);
+        $rowData = AdminHelper::DeleteAllPhotos($rowData,true);
+        $rowData->save();
+        return back();
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

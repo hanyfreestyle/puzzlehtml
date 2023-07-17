@@ -10,7 +10,7 @@ Route::post('/amenity/store/{id}',[AmenityController::class,'storeUpdate'])->nam
 Route::get('/amenity/edit/{id}',[AmenityController::class,'edit'])->name('amenity.edit');
 Route::post('/amenity/update/{id}',[AmenityController::class,'storeUpdate'])->name('amenity.update');
 Route::delete('/amenity/destroy/{id}',[AmenityController::class,'destroy'])->name('amenity.destroy');
-
+Route::get('/amenity/emptyPhoto/{id}', [AmenityController::class,'emptyPhoto'])->name('amenity.emptyPhoto');
 
 Route::get('/Category',[CategoryController::class,'index'])->name('category.index');
 Route::get('/Category/create',[CategoryController::class,'create'])->name('category.create');
