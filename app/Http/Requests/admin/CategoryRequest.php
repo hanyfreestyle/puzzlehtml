@@ -19,23 +19,20 @@ class CategoryRequest extends FormRequest
     public function rules(Request $request): array
     {
 
-       //// $request->slug = Str::slug($request->slug);
-        $request->slug = AdminHelper::Url_Slug($request->slug) ;
+       $request->slug = AdminHelper::Url_Slug($request->slug) ;
 
-        //$idcustom = Str::slug($request->custom);
-       //dd($request->slug);
-       // $this->request('slug');
-       # $this->request ;
-      #  $request->slug = 'eslam';
+
         $id = $this->route('id');
 
         if($id == '0'){
             $rules =[
                 'slug'=> "required|unique:categories",
+                //'is_active'=> "required",
             ];
         }else{
             $rules =[
                 'slug'=> "required|unique:categories,slug,$id",
+                //'is_active'=> "required",
             ];
         }
 

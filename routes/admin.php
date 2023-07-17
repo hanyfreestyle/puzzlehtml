@@ -17,4 +17,10 @@ Route::get('/Category/create',[CategoryController::class,'create'])->name('categ
 Route::post('/Category/store/{id}',[CategoryController::class,'storeUpdate'])->name('category.store');
 Route::get('/Category/edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
 Route::post('/Category/update/{id}',[CategoryController::class,'storeUpdate'])->name('category.update');
-Route::delete('/Category/destroy/{id}',[CategoryController::class,'destroy'])->name('category.destroy');
+Route::get('/Category/destroy/{id}',[CategoryController::class,'destroy'])->name('category.destroy');
+
+Route::post('/Category/updateStatus', [CategoryController::class,'updateStatus'])->name('category.updateStatus');
+Route::get('/Category/emptyPhoto/{id}', [CategoryController::class,'emptyPhoto'])->name('category.emptyPhoto');
+Route::get('/Category/SoftDelete/',[CategoryController::class,'SoftDeletes'])->name('category.SoftDelete');
+Route::get('/Category/restore/{id}',[CategoryController::class,'Restore'])->name('category.restore');
+Route::get('/Category/force/{id}',[CategoryController::class,'ForceDeletes'])->name('category.force');

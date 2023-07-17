@@ -55,10 +55,6 @@
                                             <td class="text-center"><x-action-button url="#" id="{{route('config.upFilter.destroy',$row->id)}}" type="deleteSweet" :tip="true" /></td>
                                         @endcan
 
-
-
-
-
                                     </tr>
                                 @endforeach
                                 </tbody>

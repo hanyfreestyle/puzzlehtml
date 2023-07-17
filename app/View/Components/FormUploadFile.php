@@ -18,6 +18,8 @@ class FormUploadFile extends Component
     public $fildName;
     public $multiple;
     public $acceptFile;
+    public $thisfilterid;
+    public $emptyphotourl;
 
     public function __construct(
         $rowCol = 'col-6',
@@ -30,6 +32,8 @@ class FormUploadFile extends Component
         $fildName = 'photo_thum_1',
         $multiple = false,
         $acceptFile = "image/*",# image/*,.zip
+        $thisfilterid = '',
+        $emptyphotourl = '#',
 
     )
     {
@@ -43,6 +47,8 @@ class FormUploadFile extends Component
         $this->fildName = $fildName;
         $this->multiple = $multiple;
         $this->acceptFile = $acceptFile;
+        $this->thisfilterid = $thisfilterid;
+        $this->emptyphotourl = $emptyphotourl;
 
 
         if($this->viewType == 'Edit'){

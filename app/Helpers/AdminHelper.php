@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 
+use App\Models\admin\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -41,6 +42,7 @@ class AdminHelper{
         $ListPage = AdminHelper::arrIsset($sendArr,'ListPage',__('admin/page.page_list'));
         $AddPage = AdminHelper::arrIsset($sendArr,'AddPage',__('admin/page.page_add'));
         $EditPage = AdminHelper::arrIsset($sendArr,'EditPage',__('admin/page.page_edit'));
+        $restore = AdminHelper::arrIsset($sendArr,'restore','0');
 
         $data = [];
         $data['ControllerName'] = $controllerName;
@@ -56,6 +58,11 @@ class AdminHelper{
 
         $data['EditPageName'] = $EditPage;
         $data['AddRole'] = $controllerName."_add" ;
+
+        if($restore == 1){
+            $data['RestoreRole'] = $controllerName."_restore" ;
+            $data['RestoreUrl'] = route($selMenu.($controllerName) . '.SoftDelete');
+        }
 
         return $data;
     }

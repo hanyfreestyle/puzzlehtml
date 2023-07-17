@@ -13,4 +13,5 @@ return
 	'sweet_confirmButtonText' => 'Sure Delete',
 	'sweet_text' => 'You wont&#039;t  be able to revert this !',
 	'sweet_title' => 'Are You Sure',
+	'confirmRestore' => 'The content has been restored successfully',
 ];

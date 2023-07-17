@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\admin;
 
+
 use App\Helpers\AdminHelper;
 use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
-
 use App\Http\Requests\admin\CategoryRequest;
 use App\Models\admin\Category;
 use App\Models\admin\CategoryTranslation;
-use App\Models\admin\config\Amenity;
-use App\Models\admin\config\AmenityTranslation;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Str;
+
 
 class CategoryController extends AdminMainController
 {
@@ -25,19 +24,35 @@ class CategoryController extends AdminMainController
         $this->middleware('permission:'.$controllerName.'_add', ['only' => ['create']]);
         $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit']]);
         $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
+        $this->middleware('permission:'.$controllerName.'_restore', ['only' => ['SoftDeletes','Restore','ForceDeletes']]);
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
     {
-        $sendArr = ['TitlePage' => __('admin/menu.category') ];
+        $sendArr = ['TitlePage' => __('admin/menu.category'),'restore'=> 1 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Category::onlyTrashed()->count();
 
         $Categories  = Category::orderBy('id')->paginate(20);
         return view('admin.post.category_index',compact('pageData','Categories'));
     }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     SoftDeletes
+    public function SoftDeletes()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.category') ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "deleteList";
+        $Categories  = Category::onlyTrashed()->paginate(20);
+
+
+        return view('admin.post.category_index',compact('pageData','Categories'));
+    }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
     public function create()
@@ -65,7 +80,6 @@ class CategoryController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
     public function storeUpdate(CategoryRequest $request, $id=0)
     {
-        $request-> validated();
 
         $saveImgData = new PuzzleUploadProcess();
         $saveImgData->setCountOfUpload('2');
@@ -74,8 +88,11 @@ class CategoryController extends AdminMainController
         $saveImgData->UploadOne($request);
 
         $saveData =  Category::findOrNew($id);
-        $saveData->slug = AdminHelper::Url_Slug($request->slug)  ;
+        $saveData->slug = AdminHelper::Url_Slug($request->slug);
+        $saveData->setActive((bool) request('is_active', false));
         $saveData = AdminHelper::saveAndDeletePhoto($saveData,$saveImgData);
+
+
         $saveData->save();
 
         foreach ( config('app.lang_file') as $key=>$lang) {
@@ -104,17 +121,54 @@ class CategoryController extends AdminMainController
     public function destroy($id)
     {
         $deleteRow = Category::findOrFail($id);
-        $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,2);
         $deleteRow->delete();
         return redirect(route('category.index'))->with('confirmDelete',"");
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
+#|||||||||||||||||||||||||||||||||||||| #     Restore
+    public function Restore($id)
+    {
+        Category::onlyTrashed()->where('id',$id)->restore();
+        return back()->with('restore',"");
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     ForceDeletes
+    public function ForceDeletes($id)
+    {
+        $deleteRow =  Category::onlyTrashed()->where('id',$id)->first();
+        $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
+        $deleteRow->forceDelete();
+        return back()->with('confirmDelete',"");
+    }
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
+#|||||||||||||||||||||||||||||||||||||| #  updateStatus
+    public function updateStatus(Request $request ){
+        $thisId  = $request->send_id;
+        $updateData = Category::findOrFail($thisId);
+        if($updateData->is_active == '1'){
+            $updateData->is_active = '0';
+        }else{
+            $updateData->is_active = '1';
+        }
+        $updateData->save();
+        return response()->json(['success'=>$thisId]);
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     EmptyPhoto
+    public function emptyPhoto($id){
+        $rowData = Category::findOrFail($id);
+        $rowData = AdminHelper::DeleteAllPhotos($rowData,true);
+        $rowData->save();
+        return back();
+    }
+
+
+
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

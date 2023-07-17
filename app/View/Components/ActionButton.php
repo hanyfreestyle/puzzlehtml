@@ -72,6 +72,18 @@ class ActionButton extends Component
                     $this->sweetDelClass = ' sweet_daleteBtn_noForm ';
                     break;
 
+                case 'force':
+                    $this->icon = 'fas fa-trash';
+                    $this->bg = getBgColor('d');
+                    $this->printLable =__('admin/page.del_force');
+                    break;
+
+                case 'restor':
+                    $this->icon = 'fas fa-redo';
+                    $this->bg = getBgColor('p');
+                    $this->printLable =__('admin/page.del_restor');
+                    break;
+
                 default:
 
             }

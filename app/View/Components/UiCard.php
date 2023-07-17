@@ -18,6 +18,7 @@ class UiCard extends Component
     public $addFormError ;
     public $titleColor ;
     public $sendRole ;
+    public $RestoreRole ;
     public $pageData ;
 
     public function __construct(
@@ -34,6 +35,7 @@ class UiCard extends Component
         $titleColor= null,
         $addFormError = true,
         $sendRole = '',
+        $RestoreRole = '',
         $pageData = array(),
     )
     {
@@ -49,6 +51,7 @@ class UiCard extends Component
         $this->cardHeaderView = $cardHeaderView;
         $this->showIcon = $showIcon;
         $this->sendRole = $sendRole;
+        $this->RestoreRole = $RestoreRole;
         $this->pageData = $pageData;
 
         if($showIcon){
@@ -85,6 +88,9 @@ class UiCard extends Component
             $this->sendRole = $pageData['AddRole'] ;
         }
 
+        if(isset($pageData['RestoreRole'])){
+            $this->RestoreRole = $pageData['RestoreRole'] ;
+        }
 
 
 

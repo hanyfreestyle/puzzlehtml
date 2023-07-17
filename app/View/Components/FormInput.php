@@ -14,6 +14,7 @@ class FormInput extends Component
     public $requiredSpan ;
     public $horizontalLabel ;
     public $colrow;
+    public $dir;
 
     public function __construct(
         $type = 'text', $id = null, $name = null,
@@ -23,7 +24,8 @@ class FormInput extends Component
         $step = null, $max = null, $maxlength = null, $pattern = null,
         $requiredSpan = true,
         $colrow ="",
-        $horizontalLabel =false
+        $horizontalLabel =false,
+        $dir ="",
     )
     {
         $this->type = $type;
@@ -43,6 +45,7 @@ class FormInput extends Component
         $this->requiredSpan = $requiredSpan;
         $this->horizontalLabel = $horizontalLabel;
         $this->colrow = $colrow;
+        $this->dir = $dir;
     }
 
 

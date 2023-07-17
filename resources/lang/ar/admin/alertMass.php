@@ -13,4 +13,5 @@ return
 	'sweet_confirmButtonText' => 'نعم ..قم بالحذف',
 	'sweet_text' => 'لن يتم اعادة المحتوى فى حالة الحذف',
 	'sweet_title' => 'هل انت متاكد',
+	'confirmRestore' => 'تم استعادة المحتوى بنجاح',
 ];

@@ -1,3 +1,11 @@
+@if(intval($thisfilterid)==0)
+    <div class="row">
+        <x-form-select-arr  label="{{__('admin/def.form_selectFilterLable')}}" name="filter_id" colrow="col-lg-6"
+                            sendvalue="{{old('filter_id')}}" :send-arr="$filterTypes"/>
+    </div>
+@else
+    <input type="hidden" name="filter_id" value="{{ $thisfilterid }}">
+@endif
 <div class="row">
     <div class="{{$rowCol}}">
         <div class="form-group">
@@ -20,9 +28,12 @@
                     <div class="col-md-12 fileUploadCurrent">
                         <img  class="img-thumbnail rounded" src="{{defImagesDir($rowData->$fildName)}}">
                     </div>
-                <div class="row mt-3 mr-2 ml-2">
-                    <x-action-button url="{{route('users.users.emptyPhoto',$rowData->id)}}" type="delete" :tip="true"/>
-                </div>
+
+                    @if($emptyphotourl != '#' )
+                        <div class="row mt-3 mr-2 ml-2">
+                            <x-action-button url="{{route($emptyphotourl,$rowData->id)}}" type="delete" :tip="true"/>
+                        </div>
+                    @endif
 
                 @endif
             @endif

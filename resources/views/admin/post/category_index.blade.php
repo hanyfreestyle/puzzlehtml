@@ -16,32 +16,48 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-
-                                        <th>{{__('admin/def.photo')}}</th>
                                         <th>{{__('admin/def.form_name_ar')}}</th>
                                         <th>{{__('admin/def.form_name_en')}}</th>
-                                        @can('category_edit')
-                                            <th class="tbutaction TD_120" ></th>
-                                        @endcan
-                                        @can('category_delete')
-                                            <th class="tbutaction TD_120" ></th>
-                                        @endcan
+
+                                        @if($pageData['ViewType'] == 'deleteList')
+                                            <th>{{ __('admin/page.del_date') }}</th>
+                                            <th></th>
+                                            <th></th>
+                                        @else
+                                            <th>{{__('admin/def.status')}}</th>
+                                            <th>{{__('admin/def.photo')}}</th>
+                                            @can('category_edit')
+                                                <th class="tbutaction TD_120" ></th>
+                                            @endcan
+                                            @can('category_delete')
+                                                <th class="tbutaction TD_120" ></th>
+                                            @endcan
+                                        @endif
+
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($Categories as $row)
                                         <tr>
                                             <td>{{$row->id}}</td>
-
-                                            <td>{!! AdminHelper::printTableImage($row,'photo') !!} </td>
                                             <td>{{$row->translate('ar')->name}}</td>
                                             <td>{{$row->translate('en')->name}}</td>
-                                            @can('category_edit')
-                                                <td><x-action-button url="{{route('category.edit',$row->id)}}" type="edit" :tip="false" /></td>
-                                            @endcan
-                                            @can('category_delete')
-                                                <td ><x-sweet-delete-button route-name="category.destroy" :row="$row" /></td>
-                                            @endcan
+
+                                            @if($pageData['ViewType'] == 'deleteList')
+                                                <td>{{$row->deleted_at}}</td>
+                                                <td><x-action-button url="{{route('category.restore',$row->id)}}" type="restor" /></td>
+                                                <td><x-action-button url="#" id="{{route('category.force',$row->id)}}" type="deleteSweet"/></td>
+                                            @else
+                                                <td> <x-ajax-update-status-but :row="$row" role="category_edit" /> </td>
+                                                <td>{!! AdminHelper::printTableImage($row,'photo') !!} </td>
+                                                @can('category_edit')
+                                                    <td><x-action-button url="{{route('category.edit',$row->id)}}" type="edit" :tip="false" /></td>
+                                                @endcan
+                                                @can('category_delete')
+                                                    <td><x-action-button url="#" id="{{route('category.destroy',$row->id)}}" type="deleteSweet"/></td>
+                                                @endcan
+                                            @endif
+
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -61,6 +77,7 @@
 @endsection
 
 @push('JsCode')
-    <x-sweet-delete-js/>
+    <x-sweet-delete-js-no-form/>
+    <x-ajax-update-status-js-code url="{{ route('category.updateStatus') }}"/>
 @endpush
 
