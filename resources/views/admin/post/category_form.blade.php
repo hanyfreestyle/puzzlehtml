@@ -46,7 +46,10 @@
 
 
             <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$Category"
-                                :multiple="false"  thisfilterid="2" emptyphotourl="category.emptyPhoto"  />
+                                :multiple="false"
+                                thisfilterid="{{ \App\Helpers\AdminHelper::arrIsset($modelSettings,'category_filterId',0) }}"
+                                emptyphotourl="category.emptyPhoto"  />
+
 
             <div class="container-fluid">
                 <x-form-submit text="{{$pageData['ViewType']}}" />

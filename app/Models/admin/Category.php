@@ -25,4 +25,10 @@ class Category extends Model implements TranslatableContract
     {
         return $this->setAttribute('is_active', $status);
     }
+
+    public function hanydarwish(){
+        return self::orderBy('id')->get();
+
+    }
+
 }

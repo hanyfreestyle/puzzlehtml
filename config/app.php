@@ -198,5 +198,6 @@ return [
 
     //'development' => env('APP_DEVELOPMENT'),
     'development' => true,
+    'model_settings_name' => 'model_settings.json',
 
 ];

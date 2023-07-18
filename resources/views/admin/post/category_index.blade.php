@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
+
     <x-breadcrumb-def :pageData="$pageData"/>
     <section class="div_data">
         <div class="container-fluid">
@@ -71,8 +72,13 @@
             </div>
         </div>
         <div class="d-flex justify-content-center">
-            {{ $Categories->links() }}
+            @if($Categories instanceof \Illuminate\Pagination\AbstractPaginator)
+                {{ $Categories->links() }}
+            @endif
+
         </div>
+
+
     </section>
 @endsection
 

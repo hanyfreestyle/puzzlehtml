@@ -3,8 +3,10 @@
 return
 [
 	'amenity' => 'الخصائص والمميزات',
+	'category' => 'المجموعات',
 	'dashboard' => 'الصفحة الرئيسية',
 	'lang_file_admin' => 'ملفات اللغة لوحة التحكم',
+	'post' => 'المقالات',
 	'roles' => 'الاعضاء والصلاحيات',
 	'roles_permissions' => 'الاصلاحيات',
 	'roles_role' => 'مجموعات الصلاحيات',
@@ -16,6 +18,5 @@ return
 	'setting_photo' => 'اعدادات الصور',
 	'setting_web' => 'الاعدادات العامة',
 	'uploadFilter' => 'فلاتر الصور',
-	'category' => 'المجموعات',
-	'post' => 'المقالات',
+	'setting_model' => 'اعدادات الاقسام',
 ];

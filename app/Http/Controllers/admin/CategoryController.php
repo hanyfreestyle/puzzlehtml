@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\admin;
 
-
 use App\Helpers\AdminHelper;
 use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\CategoryRequest;
 use App\Models\admin\Category;
 use App\Models\admin\CategoryTranslation;
-use App\Models\User;
+
 use Illuminate\Http\Request;
 
 
 class CategoryController extends AdminMainController
 {
     public $controllerName ;
+
     function __construct($controllerName = 'category')
     {
         parent::__construct();
@@ -36,7 +36,7 @@ class CategoryController extends AdminMainController
         $pageData['ViewType'] = "List";
         $pageData['Trashed'] = Category::onlyTrashed()->count();
 
-        $Categories  = Category::orderBy('id')->paginate(20);
+        $Categories = self::getSelectQuery(Category::query());
         return view('admin.post.category_index',compact('pageData','Categories'));
     }
 
@@ -47,8 +47,8 @@ class CategoryController extends AdminMainController
         $sendArr = ['TitlePage' => __('admin/menu.category') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "deleteList";
-        $Categories  = Category::onlyTrashed()->paginate(20);
-
+        //$Categories  = Category::onlyTrashed()->orderBy('id','desc')->paginate(20);
+        $Categories = self::getSelectQuery(Category::onlyTrashed());
 
         return view('admin.post.category_index',compact('pageData','Categories'));
     }

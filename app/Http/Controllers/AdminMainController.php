@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Helpers\AdminHelper;
 use App\Models\admin\config\UploadFilter;
 use Illuminate\Support\Facades\View;
+use Spatie\Valuestore\Valuestore;
 
 class AdminMainController extends Controller
 {
 
+    public $modelSettings;
 
     public function __construct(
 
@@ -18,6 +20,7 @@ class AdminMainController extends Controller
 
 
         View::share('filterTypes', UploadFilter::all());
+
         $modelsNameArr = [
             "1"=> ['id'=>'1','name'=>__('admin/config/roles.model_1')],
             "2"=> ['id'=>'2','name'=>__('admin/config/roles.model_2')],
@@ -45,7 +48,76 @@ class AdminMainController extends Controller
         ];
         View::share('filterTypeArr', $FilterTypeArr);
 
+        $OrderByArr = [
+            "1"=> ['id'=>'1','name'=> __('admin/config/settings.sort_id_DESC')],
+            "2"=> ['id'=>'2','name'=> __('admin/config/settings.sort_id_ASC')],
+            "3"=> ['id'=>'3','name'=> __('admin/config/settings.sort_name_DESC')],
+            "4"=> ['id'=>'4','name'=> __('admin/config/settings.sort_name_ASC')],
+        ];
+        View::share('OrderByArr', $OrderByArr);
+
+
+        $modelSettings = Valuestore::make(config_path(config('app.model_settings_name')));
+        $modelSettings = $modelSettings->all();
+        $this->modelSettings = $modelSettings ;
+        View::share('modelSettings', $modelSettings);
+
     }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     getDefSetting
+    public function getDefSetting($controllerName,$key,$def){
+        if(isset($this->modelSettings[$controllerName.$key])){
+            return $this->modelSettings[$controllerName.$key];
+        }else{
+            return $def;
+        }
+    }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     getSelect
+    public function getSelectQuery($query){
+        $controllerName = $this->controllerName;
+
+        $perPage = self::getDefSetting($controllerName,'_perpage','5');
+        $dataTable =  self::getDefSetting($controllerName,'_datatable','0');
+        $orderBy =  self::getDefSetting($controllerName,'_orderby','1');
+
+        switch ($orderBy){
+            case 1:
+                $query->orderBy('id','DESC');
+                break;
+            case 2:
+                $query->orderBy('id','ASC');
+                break;
+            case 3:
+                $query->orderByTranslation('name','DESC');
+                break;
+            case 4:
+                $query->orderByTranslation('name','ASC');
+                break;
+            default:
+        }
+        if($dataTable == '1'){
+            return $query->get();
+        }else{
+            return $query->paginate($perPage);
+        }
+    }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     text
+
+
+
+
+
+
+
 
 
 

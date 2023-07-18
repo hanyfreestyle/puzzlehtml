@@ -3,7 +3,7 @@
 @section('content')
     <x-breadcrumb-def :pageData="$pageData"/>
     <x-mass.confirm-massage/>
-    <form class="mainForm uploadFilterForm" action="{{route('config.upFilter.store',intval($rowData->id))}}" method="post">
+    <form class="mainForm uploadFilterForm" action="{{route('config.upFilter.update',intval($rowData->id))}}" method="post">
         @csrf
         <div class="container-fluid">
             <div class="row">

@@ -11,7 +11,7 @@
 
 
 .mainForm{padding-bottom:50px;}
-.mainForm .def_form_label{font-size:15px!important;margin-bottom:0!important;padding-top:8px;padding-bottom:7px;font-weight:700!important;color:rgba(0,0,0,.8)!important}
+.mainForm .def_form_label{font-size:15px!important;margin-bottom:0!important;padding-top:8px;padding-bottom:7px;font-weight:700!important;color:rgba(0,0,0,.8)!important; width:100%}
 
 .table td,.table th{padding:.75rem;vertical-align:middle;border-top:1px solid #dee2e6}
 .table .tbutaction{ text-align:center;}
@@ -76,4 +76,8 @@ textarea.parsley-error {
 .parsley-errors-list.filled {
   opacity: 1;
 }
+
+
+ 
+ 
 

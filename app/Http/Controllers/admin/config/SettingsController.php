@@ -5,13 +5,15 @@ namespace App\Http\Controllers\admin\config;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\SettingFormRequest;
 use App\Models\admin\config\Setting;
-
+use Illuminate\Http\Request;
+use Spatie\Valuestore\Valuestore;
 
 
 class SettingsController extends AdminMainController
 {
     function __construct()
     {
+        parent::__construct();
         $this->middleware('permission:website_config', ['only' => ['webConfigEdit','webConfigUpdate']]);
     }
 
@@ -35,12 +37,8 @@ class SettingsController extends AdminMainController
         }else{
             $request['web_status'] = '0';
         }
-
-        #dd($request->all());
-
         $setting= Setting::findorfail('1');
         $setting->update($request->all());
-
         return  back()->with('Edit.Done',"");
     }
 
@@ -56,10 +54,47 @@ class SettingsController extends AdminMainController
 
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
+#|||||||||||||||||||||||||||||||||||||| #     webConfigModel
+public function webConfigModel(){
 
+    // $valuestore = Valuestore::make(config_path(config('app.model_settings_name')));
+   // $valuestore->put('facebook', 'www.facebook.com');
+   // $setting =  $valuestore->all();
+
+
+    $pageData =[
+        'ViewType'=>"Page",
+        'TitlePage'=>__('admin/menu.setting_model'),
+    ];
+    return view('admin.config.settingModel')->with(compact('pageData'));
+}
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
+#|||||||||||||||||||||||||||||||||||||| #   webConfigModelUpdate
+    public function webConfigModelUpdate(Request $request){
+
+
+        $model_id = $request->input('model_id')."_";
+
+        $this->validate($request, [
+            $model_id.'perpage' => 'sometimes|required|integer|between:1,100',
+            $model_id.'datatable' => 'sometimes|required',
+            $model_id.'filterid' => 'sometimes|required',
+            $model_id.'orderby' => 'sometimes|required',
+        ]);
+
+
+
+        $valuestore = Valuestore::make(config_path(config('app.model_settings_name')));
+        foreach ($request->all()  as $key => $value){
+            $valuestore->put($key, $value);
+        }
+        $valuestore->forget('_token');
+        $valuestore->forget('B1');
+        $valuestore->forget('model_id');
+
+        return back();
+
+    }
 
 
 }

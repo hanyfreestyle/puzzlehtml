@@ -11,6 +11,9 @@ Route::get('/adminlang',[LangFileController::class,'index'])->name('adminlang.in
 Route::post('/adminlang/updateFile',[LangFileController::class,'updateFile'])->name('adminlang.updateFile');
 
 Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('config.web.index');
+Route::get('/config/model', [SettingsController::class, 'webConfigModel'])->name('config.model.index');
+Route::post('/config/model/update', [SettingsController::class, 'webConfigModelUpdate'])->name('config.model.update');
+
 Route::post('/config/webConfigUpdate', [SettingsController::class, 'webConfigUpdate'])->name('admin.webConfigUpdate');
 Route::get('/config/show', [SettingsController::class,'defIconShow'])->name('config.defIcon.show');
 
@@ -33,6 +36,8 @@ Route::get('/upFilter', [UploadFilterController::class,'index'])->name('config.u
 Route::get('/upFilter/create', [UploadFilterController::class,'create'])->name('config.upFilter.create');
 Route::get('/upFilter/edit/{id}', [UploadFilterController::class,'edit'])->name('config.upFilter.edit');
 Route::get('/upFilter/delete/{id}', [UploadFilterController::class,'destroy'])->name('config.upFilter.destroy');
+//Route::post('/upFilter/delete/{id}', [UploadFilterController::class,'destroy'])->name('config.upFilter.destroy');
+Route::post('/upFilter/Update/{id}', [UploadFilterController::class,'storeUpdate'])->name('config.upFilter.update');
 
 Route::get('/upFilterSize/create/{filterId}', [UploadFilterSizeController::class,'create'])->name('config.upFilter.size.create');
 Route::get('/upFilterSize/edit/{id}', [UploadFilterSizeController::class,'edit'])->name('config.upFilter.size.edit');

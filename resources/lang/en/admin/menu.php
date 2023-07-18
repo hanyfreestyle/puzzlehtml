@@ -3,8 +3,10 @@
 return
 [
 	'amenity' => 'Amenity',
+	'category' => 'Categories',
 	'dashboard' => 'Home Pgae',
 	'lang_file_admin' => 'Admin Lang File',
+	'post' => 'Posts',
 	'roles' => 'Users &amp; Permissions',
 	'roles_permissions' => 'Permissions',
 	'roles_role' => 'Roles',
@@ -16,6 +18,5 @@ return
 	'setting_photo' => 'Photo Settings',
 	'setting_web' => 'Web Settings',
 	'uploadFilter' => 'Upload Filters',
-	'category' => 'Categories',
-	'post' => 'Posts',
+	'setting_model' => 'Model Settings',
 ];
