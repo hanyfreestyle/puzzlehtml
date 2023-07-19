@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\config\AmenityController;
+use App\Http\Controllers\admin\LocationController;
 
 Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
 Route::get('/amenity/create',[AmenityController::class,'create'])->name('amenity.create');
@@ -25,4 +26,16 @@ Route::get('/Category/SoftDelete/',[CategoryController::class,'SoftDeletes'])->n
 Route::get('/Category/restore/{id}',[CategoryController::class,'Restore'])->name('category.restore');
 Route::get('/Category/force/{id}',[CategoryController::class,'ForceDeletes'])->name('category.force');
 
-Route::get('/Category/DataTable',[CategoryController::class,'DataTable'])->name('category.force');
+
+Route::get('/location',[LocationController::class,'index'])->name('location.index');
+Route::get('/location/create',[LocationController::class,'create'])->name('location.create');
+Route::post('/location/store/{id}',[LocationController::class,'storeUpdate'])->name('location.store');
+Route::get('/location/edit/{id}',[LocationController::class,'edit'])->name('location.edit');
+Route::post('/location/update/{id}',[LocationController::class,'storeUpdate'])->name('location.update');
+Route::get('/location/destroy/{id}',[LocationController::class,'destroy'])->name('location.destroy');
+
+Route::post('/location/updateStatus', [LocationController::class,'updateStatus'])->name('location.updateStatus');
+Route::get('/location/emptyPhoto/{id}', [LocationController::class,'emptyPhoto'])->name('location.emptyPhoto');
+Route::get('/location/SoftDelete/',[LocationController::class,'SoftDeletes'])->name('location.SoftDelete');
+Route::get('/location/restore/{id}',[LocationController::class,'Restore'])->name('location.restore');
+Route::get('/location/force/{id}',[LocationController::class,'ForceDeletes'])->name('location.force');

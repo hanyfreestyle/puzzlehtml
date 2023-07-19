@@ -5,9 +5,13 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 
-use Database\Seeders\admin\AdminUserSeeder;
-use Database\Seeders\admin\PermissionSeeder;
-use Database\Seeders\admin\RoleSeeder;
+use Database\Seeders\admin\CategorySeeder;
+use Database\Seeders\admin\CategoryTranslationSeeder;
+use Database\Seeders\admin\LocationSeeder;
+use Database\Seeders\admin\LocationTranslationSeeder;
+use Database\Seeders\roles\AdminUserSeeder;
+use Database\Seeders\roles\PermissionSeeder;
+use Database\Seeders\roles\RoleSeeder;
 use Database\Seeders\config\AmenitySeeder;
 use Database\Seeders\config\AmenityTranslationSeeder;
 use Database\Seeders\config\DefPhotoSeeder;
@@ -25,6 +29,10 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+        $this->call(PermissionSeeder::class);
+        $this->call(AdminUserSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(UsersTableSeeder::class);
 
         $this->call(SettingsTableSeeder::class);
         $this->call(SettingsTranslationsTableSeeder::class);
@@ -35,12 +43,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UploadFilterSeeder::class);
         $this->call(UploadFilterSizeSeeder::class);
         $this->call(DefPhotoSeeder::class);
-        $this->call(PermissionSeeder::class);
-        $this->call(AdminUserSeeder::class);
-        $this->call(RoleSeeder::class);
-        $this->call(UsersTableSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(CategoryTranslationSeeder::class);
+        $this->call(LocationSeeder::class);
+        $this->call(LocationTranslationSeeder::class);
 
     }
 }

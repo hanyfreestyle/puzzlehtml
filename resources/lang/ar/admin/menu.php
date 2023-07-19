@@ -15,8 +15,9 @@ return
 	'setting_def_photo' => 'الصور الافتراضية',
 	'setting_icon' => 'الايكون',
 	'setting_meta_tags' => 'ميتا تاج',
+	'setting_model' => 'اعدادات الاقسام',
 	'setting_photo' => 'اعدادات الصور',
 	'setting_web' => 'الاعدادات العامة',
 	'uploadFilter' => 'فلاتر الصور',
-	'setting_model' => 'اعدادات الاقسام',
+	'location' => 'المناطق',
 ];

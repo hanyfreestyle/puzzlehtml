@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\admin;
+namespace Database\Seeders\roles;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -66,6 +66,13 @@ class PermissionSeeder extends Seeder
             ['cat_id'=> '11', 'name' => 'post_add','name_ar'=>'اضافة','name_en'=>'Add'],
             ['cat_id'=> '11', 'name' => 'post_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
             ['cat_id'=> '11', 'name' => 'post_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+
+            ['cat_id'=> '12', 'name' => 'location_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '12', 'name' => 'location_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '12', 'name' => 'location_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '12', 'name' => 'location_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+            ['cat_id'=> '12', 'name' => 'location_restore','name_ar'=>'استعادة المحذوف','name_en'=>'Restore'],
+
 
         ];
 

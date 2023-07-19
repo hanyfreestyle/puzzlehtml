@@ -13,6 +13,7 @@ class FormCheckActive extends Component
     public $lable ;
     public $row ;
     public $pageView ;
+    public $defstatus ;
 
     public function __construct(
         $col = 'col-lg-3',
@@ -20,6 +21,7 @@ class FormCheckActive extends Component
         $lable = null,
         $row = array(),
         $pageView = '',
+        $defstatus = true,
     )
     {
             $this->col = $col ;
@@ -27,6 +29,7 @@ class FormCheckActive extends Component
             $this->lable = $lable ;
             $this->row = $row ;
             $this->pageView = $pageView ;
+            $this->defstatus = $defstatus ;
 
             if(!$lable){
                 $this->lable = __('admin/def.status') ;

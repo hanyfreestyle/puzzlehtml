@@ -15,8 +15,8 @@ class Category extends Model implements TranslatableContract
     use SoftDeletes;
     use Translatable;
 
-    public $translatedAttributes = ['name'];
-    protected $fillable = ['photo','photo_thum_1'];
+    public $translatedAttributes = ['name','g_title','g_des','body_h1','breadcrumb'];
+    protected $fillable = ['slug','photo','photo_thum_1','is_active'];
     protected $table = "categories";
     protected $primaryKey = 'id';
 
@@ -24,11 +24,6 @@ class Category extends Model implements TranslatableContract
     public function setActive(bool $status = true): self
     {
         return $this->setAttribute('is_active', $status);
-    }
-
-    public function hanydarwish(){
-        return self::orderBy('id')->get();
-
     }
 
 }

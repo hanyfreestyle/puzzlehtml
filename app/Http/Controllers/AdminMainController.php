@@ -62,6 +62,14 @@ class AdminMainController extends Controller
         $this->modelSettings = $modelSettings ;
         View::share('modelSettings', $modelSettings);
 
+        $ProjectsTypeArr = [
+            "1"=> ['id'=>'compound','name'=> 'Compounds' ],
+            "2"=> ['id'=>'village','name'=> 'Villages' ],
+            "3"=> ['id'=>'resort','name'=> 'Resorts' ],
+        ];
+        View::share('ProjectsTypeArr', $ProjectsTypeArr);
+
+
     }
 
 

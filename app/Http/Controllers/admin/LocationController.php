@@ -5,18 +5,17 @@ namespace App\Http\Controllers\admin;
 use App\Helpers\AdminHelper;
 use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
-use App\Http\Requests\admin\CategoryRequest;
-use App\Models\admin\Category;
-use App\Models\admin\CategoryTranslation;
-
+use App\Http\Requests\admin\LocationRequest;
+use App\Models\admin\Location;
+use App\Models\admin\LocationTranslation;
+use DB;
 use Illuminate\Http\Request;
 
-
-class CategoryController extends AdminMainController
+class LocationController extends AdminMainController
 {
     public $controllerName ;
 
-    function __construct($controllerName = 'category')
+    function __construct($controllerName = 'location')
     {
         parent::__construct();
         $this->controllerName = $controllerName;
@@ -31,75 +30,91 @@ class CategoryController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
     {
-        $sendArr = ['TitlePage' => __('admin/menu.category'),'restore'=> 1 ];
+
+        $sendArr = ['TitlePage' => __('admin/menu.location'),'restore'=> 1 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
-        $pageData['Trashed'] = Category::onlyTrashed()->count();
-
-        $Categories = self::getSelectQuery(Category::query());
-        return view('admin.post.category_index',compact('pageData','Categories'));
+        $pageData['Trashed'] = Location::onlyTrashed()->count();
+/*
+        $locations = Location::where('id','!=','0')
+            ->orderby('id','desc')
+            ->with('parentName')
+            ->get();
+*/
+        $locations = self::getSelectQuery(Location::query()->with('parentName'));
+        return view('admin.location.index',compact('pageData','locations'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     SoftDeletes
     public function SoftDeletes()
     {
-        $sendArr = ['TitlePage' => __('admin/menu.category') ];
+        $sendArr = ['TitlePage' => __('admin/menu.location') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "deleteList";
-        //$Categories  = Category::onlyTrashed()->orderBy('id','desc')->paginate(20);
-        $Categories = self::getSelectQuery(Category::onlyTrashed());
 
-        return view('admin.post.category_index',compact('pageData','Categories'));
+        $locations = self::getSelectQuery(Location::onlyTrashed());
+
+        return view('admin.location.index',compact('pageData','locations'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
     public function create()
     {
-        $sendArr = ['TitlePage' => __('admin/menu.category') ];
+        $sendArr = ['TitlePage' => __('admin/menu.location') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Add";
 
-        $Category = Category::findOrNew(0);
-        return view('admin.post.category_form',compact('pageData','Category'));
+        $locationList = Location::all();
+        $location = Location::findOrNew(0);
+        return view('admin.location.form',compact('pageData','location','locationList'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
     public function edit($id)
     {
-        $sendArr = ['TitlePage' => __('admin/menu.category') ];
+        $sendArr = ['TitlePage' => __('admin/menu.location') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-        $Category = Category::findOrFail($id);
-        return view('admin.post.category_form',compact('Category','pageData'));
+        $location = Location::findOrFail($id);
+        $locationList = Location::where('id','!=' ,$id)->get();
+
+        return view('admin.location.form',compact('location','pageData','locationList'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(CategoryRequest $request, $id=0)
+    public function storeUpdate(LocationRequest $request, $id=0)
     {
 
         $saveImgData = new PuzzleUploadProcess();
         $saveImgData->setCountOfUpload('2');
-        $saveImgData->setUploadDirIs('blog');
+        $saveImgData->setUploadDirIs('location');
         $saveImgData->setnewFileName($request->input('slug'));
         $saveImgData->UploadOne($request);
 
-        $saveData =  Category::findOrNew($id);
+        $saveData =  Location::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
         $saveData->setActive((bool) request('is_active', false));
+        $saveData->setSearchable((bool) request('is_searchable', false));
+        $saveData->projects_type = $request->projects_type ;
+        $saveData->latitude = $request->latitude ;
+        $saveData->longitude  = $request->longitude  ;
+        $saveData->parent_id  = $request->parent_id  ;
+
         $saveData = AdminHelper::saveAndDeletePhoto($saveData,$saveImgData);
 
 
         $saveData->save();
 
         foreach ( config('app.lang_file') as $key=>$lang) {
-            $saveTranslation = CategoryTranslation::where('category_id',$saveData->id)->where('locale',$key)->firstOrNew();
-            $saveTranslation->category_id = $saveData->id;
+            $saveTranslation = LocationTranslation::where('location_id',$saveData->id)->where('locale',$key)->firstOrNew();
+            $saveTranslation->location_id = $saveData->id;
             $saveTranslation->locale = $key;
             $saveTranslation->name = $request->input($key.'.name');
+            $saveTranslation->des = $request->input($key.'.des');
             $saveTranslation->g_title = $request->input($key.'.g_title');
             $saveTranslation->g_des = $request->input($key.'.g_des');
             $saveTranslation->body_h1 = $request->input($key.'.body_h1');
@@ -108,7 +123,7 @@ class CategoryController extends AdminMainController
         }
 
         if($id == '0'){
-            return redirect(route('category.index'))->with('Add.Done',"");
+            return redirect(route('location.index'))->with('Add.Done',"");
         }else{
             return back();
             ////return redirect(route('category.index'))->with('Edit.Done',"");
@@ -119,16 +134,16 @@ class CategoryController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id)
     {
-        $deleteRow = Category::findOrFail($id);
+        $deleteRow = Location::findOrFail($id);
         $deleteRow->delete();
-        return redirect(route('category.index'))->with('confirmDelete',"");
+        return redirect(route('location.index'))->with('confirmDelete',"");
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Restore
     public function Restore($id)
     {
-        Category::onlyTrashed()->where('id',$id)->restore();
+        Location::onlyTrashed()->where('id',$id)->restore();
         return back()->with('restore',"");
     }
 
@@ -136,7 +151,7 @@ class CategoryController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     ForceDeletes
     public function ForceDeletes($id)
     {
-        $deleteRow =  Category::onlyTrashed()->where('id',$id)->first();
+        $deleteRow =  Location::onlyTrashed()->where('id',$id)->first();
         $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
         $deleteRow->forceDelete();
         return back()->with('confirmDelete',"");
@@ -146,7 +161,7 @@ class CategoryController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #  updateStatus
     public function updateStatus(Request $request ){
         $thisId  = $request->send_id;
-        $updateData = Category::findOrFail($thisId);
+        $updateData = Location::findOrFail($thisId);
         if($updateData->is_active == '1'){
             $updateData->is_active = '0';
         }else{
@@ -159,7 +174,7 @@ class CategoryController extends AdminMainController
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     EmptyPhoto
     public function emptyPhoto($id){
-        $rowData = Category::findOrFail($id);
+        $rowData = Location::findOrFail($id);
         $rowData = AdminHelper::DeleteAllPhotos($rowData,true);
         $rowData->save();
         return back();
@@ -175,10 +190,6 @@ class CategoryController extends AdminMainController
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
-
-
-
-
 
 
 

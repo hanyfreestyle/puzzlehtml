@@ -3,7 +3,7 @@
     <div class="form-group clearfix">
         <div class="icheck-primary d-inline">
             @if($pageView == "Add")
-                <input name="{{$name}}" id="{{$name}}" class="icheck-primary d-inline"  type="checkbox" checked="">
+                <input name="{{$name}}" id="{{$name}}" class="icheck-primary d-inline"  type="checkbox" @if($defstatus) checked="" @endif  >
             @else
                 <input name="{{$name}}" id="{{$name}}" class="icheck-primary d-inline" type="checkbox" @if($row->$name) checked="" @endif>
             @endif

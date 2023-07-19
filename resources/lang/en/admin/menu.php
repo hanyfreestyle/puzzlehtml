@@ -15,8 +15,9 @@ return
 	'setting_def_photo' => 'Defult Photos',
 	'setting_icon' => 'Icons',
 	'setting_meta_tags' => 'Meta Tags',
+	'setting_model' => 'Model Settings',
 	'setting_photo' => 'Photo Settings',
 	'setting_web' => 'Web Settings',
 	'uploadFilter' => 'Upload Filters',
-	'setting_model' => 'Model Settings',
+	'location' => 'Locations',
 ];

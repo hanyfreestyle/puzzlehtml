@@ -66,6 +66,15 @@
             'roleView'=>'category_view',
         ],
 
+        [
+            'view'=>true,
+            'sel_routs'=>'location',
+            'type'=>'one',
+            'text'=> 'admin/menu.location',
+            'url'=> 'location.index',
+            'icon'=>'fas fa-map-marker-alt',
+            'roleView'=>'location_view',
+        ],
 
     ],
 
