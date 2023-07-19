@@ -4,7 +4,7 @@
                             sendvalue="{{old('filter_id')}}" :send-arr="$filterTypes"/>
     </div>
 @else
-    <input type="text" name="filter_id" value="{{ $thisfilterid }}">
+    <input type="hidden" name="filter_id" value="{{ $thisfilterid }}">
 @endif
 <div class="row">
     <div class="{{$rowCol}}">

@@ -1,7 +1,7 @@
 .main-footer{background-color:#343a40;border-color:#4b545c}.required_Span{color:red!important;font-weight:700}.back-to-top{bottom:2.7rem!important}.liveClock_span{color:rgba(255,255,255,.75)!important;padding:.5rem 1rem!important}.select2-results__option {font-size: 14px!important;}
 .dir_ar{direction:rtl!important;text-align:right}
 .dir_en{direction:ltr!important;text-align:left;width:100%}
-
+.tc{text-align: center!important}
 .TD_20{width:20px!important;}.TD_30{width:30px!important}.TD_40{width:40px!important}.TD_50{width:50px!important}.TD_60{width:60px!important}.TD_70{width:70px!important}
 .TD_80{width:80px!important}.TD_90{width:90px!important}.TD_100{width:100px!important}.TD_110{width:110px!important}.TD_120{width:120px!important}.TD_130{width:130px!important}
 .TD_140{width:140px!important}.TD_150{width:150px!important}.TD_160{width:160px!important}.TD_170{width:170px!important}.TD_180{width:180px!important}
@@ -78,6 +78,11 @@ textarea.parsley-error {
 }
 
 
- 
- 
+div.dataTables_wrapper div.dataTables_filter input {
+    width: 350px;
+}
+
+
+
+
 

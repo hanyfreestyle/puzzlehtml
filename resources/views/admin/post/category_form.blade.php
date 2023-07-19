@@ -47,7 +47,7 @@
 
             <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$Category"
                                 :multiple="false"
-                                thisfilterid="{{ \App\Helpers\AdminHelper::arrIsset($modelSettings,'category_filterId',0) }}"
+                                thisfilterid="{{ \App\Helpers\AdminHelper::arrIsset($modelSettings,'category_filterid',0) }}"
                                 emptyphotourl="category.emptyPhoto"  />
 
 

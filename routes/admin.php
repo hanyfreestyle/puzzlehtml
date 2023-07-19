@@ -24,3 +24,5 @@ Route::get('/Category/emptyPhoto/{id}', [CategoryController::class,'emptyPhoto']
 Route::get('/Category/SoftDelete/',[CategoryController::class,'SoftDeletes'])->name('category.SoftDelete');
 Route::get('/Category/restore/{id}',[CategoryController::class,'Restore'])->name('category.restore');
 Route::get('/Category/force/{id}',[CategoryController::class,'ForceDeletes'])->name('category.force');
+
+Route::get('/Category/DataTable',[CategoryController::class,'DataTable'])->name('category.force');

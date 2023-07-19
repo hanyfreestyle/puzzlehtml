@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/sweet/sweetalert2.min.css') }}">
 
 
+
+
+    @yield('StyleFile')
+
     <link rel="stylesheet" href="{{ defAdminAssets('css/adminlte.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('css/custom_admin.css') }}">
     @if( thisCurrentLocale() == 'ar')
@@ -34,8 +38,6 @@
     @elseif( thisCurrentLocale() == 'en')
         <link rel="stylesheet" href="{{ defAdminAssets('css/custom_en.css') }}">
     @endif
-
-    @yield('StyleFile')
 </head>
 
 <body class="hold-transition {{ mainBodyStyle() }}">

@@ -1,6 +1,23 @@
 @extends('admin.layouts.app')
+@php
+    $viewDataTable = \App\Helpers\AdminHelper::arrIsset($modelSettings,'category_datatable',0) ;
+    if($viewDataTable){
+        $tableHeader = ' id="MainDataTable" class="table table-bordered table-hover" ';
+    }else{
+        $tableHeader = ' class="table table-hover" ';
+    }
+@endphp
+
+@section('StyleFile')
+    @if($viewDataTable)
+        <x-data-table-plugins :style="true"/>
+    @endif
+
+@endsection
 
 @section('content')
+
+
 
     <x-breadcrumb-def :pageData="$pageData"/>
     <section class="div_data">
@@ -13,10 +30,10 @@
 
                         @if(count($Categories)>0)
                             <div class="card-body table-responsive p-0">
-                                <table class="table table-hover">
+                                <table {!! $tableHeader !!} >
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th class="TD_20">#</th>
                                         <th>{{__('admin/def.form_name_ar')}}</th>
                                         <th>{{__('admin/def.form_name_en')}}</th>
 
@@ -28,10 +45,10 @@
                                             <th>{{__('admin/def.status')}}</th>
                                             <th>{{__('admin/def.photo')}}</th>
                                             @can('category_edit')
-                                                <th class="tbutaction TD_120" ></th>
+                                                <th class="tbutaction"></th>
                                             @endcan
                                             @can('category_delete')
-                                                <th class="tbutaction TD_120" ></th>
+                                                <th class="tbutaction"></th>
                                             @endcan
                                         @endif
 
@@ -46,16 +63,16 @@
 
                                             @if($pageData['ViewType'] == 'deleteList')
                                                 <td>{{$row->deleted_at}}</td>
-                                                <td><x-action-button url="{{route('category.restore',$row->id)}}" type="restor" /></td>
-                                                <td><x-action-button url="#" id="{{route('category.force',$row->id)}}" type="deleteSweet"/></td>
+                                                <td class="tc"><x-action-button url="{{route('category.restore',$row->id)}}" type="restor" /></td>
+                                                <td class="tc"><x-action-button url="#" id="{{route('category.force',$row->id)}}" type="deleteSweet"/></td>
                                             @else
-                                                <td> <x-ajax-update-status-but :row="$row" role="category_edit" /> </td>
-                                                <td>{!! AdminHelper::printTableImage($row,'photo') !!} </td>
+                                                <td class="tc" > <x-ajax-update-status-but :row="$row" role="category_edit" /> </td>
+                                                <td class="tc">{!! AdminHelper::printTableImage($row,'photo') !!} </td>
                                                 @can('category_edit')
-                                                    <td><x-action-button url="{{route('category.edit',$row->id)}}" type="edit" :tip="false" /></td>
+                                                    <td class="tc"><x-action-button url="{{route('category.edit',$row->id)}}" type="edit" :tip="false" /></td>
                                                 @endcan
                                                 @can('category_delete')
-                                                    <td><x-action-button url="#" id="{{route('category.destroy',$row->id)}}" type="deleteSweet"/></td>
+                                                    <td class="tc"><x-action-button url="#" id="{{route('category.destroy',$row->id)}}" type="deleteSweet"/></td>
                                                 @endcan
                                             @endif
 
@@ -85,5 +102,10 @@
 @push('JsCode')
     <x-sweet-delete-js-no-form/>
     <x-ajax-update-status-js-code url="{{ route('category.updateStatus') }}"/>
+    @if($viewDataTable)
+        <x-data-table-plugins :jscode="true" />
+    @endif
+
+
 @endpush
 
