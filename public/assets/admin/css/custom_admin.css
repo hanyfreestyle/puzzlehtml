@@ -8,7 +8,7 @@
 .TD_190{width:190px!important}.TD_200{width:200px!important}.TD_250{width:250px!important}.TD_300{width:300px!important}.TD_350{width:350px!important}
 .Td_Count{font-size:22px!important;}
 .BB_Number{font-size:22px!important;}
-
+.tableImg{ max-width: 80px; max-height: 80px;}
 
 .mainForm{padding-bottom:50px;}
 .mainForm .def_form_label{font-size:15px!important;margin-bottom:0!important;padding-top:8px;padding-bottom:7px;font-weight:700!important;color:rgba(0,0,0,.8)!important; width:100%}

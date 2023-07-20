@@ -35,12 +35,6 @@ class LocationController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
         $pageData['Trashed'] = Location::onlyTrashed()->count();
-/*
-        $locations = Location::where('id','!=','0')
-            ->orderby('id','desc')
-            ->with('parentName')
-            ->get();
-*/
         $locations = self::getSelectQuery(Location::query()->with('parentName'));
         return view('admin.location.index',compact('pageData','locations'));
     }

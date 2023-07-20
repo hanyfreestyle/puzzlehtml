@@ -452,9 +452,9 @@ class AdminHelper{
 #|||||||||||||||||||||||||||||||||||||| #     printTableImage
     static  function printTableImage($row,$fildeName='photo_thum_1'){
         if($row->$fildeName){
-            $sendImg = '<img  width="60" class="img-rounded elevation-1" src="'.defImagesDir($row->$fildeName).'">';
+            $sendImg = '<img  class="tableImg img-rounded elevation-1" src="'.defImagesDir($row->$fildeName).'">';
         }else{
-            $sendImg = '<img  width="60"  class="img-rounded elevation-1" src="'.defAdminAssets('img/default-150x150.png').'">';
+            $sendImg = '<img  class="tableImg img-rounded elevation-1" src="'.defAdminAssets('img/default-150x150.png').'">';
         }
 
         return $sendImg ;

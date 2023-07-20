@@ -15,10 +15,8 @@
             </div>
 
             <div class="row">
-                <x-form-select-arr name="parent_id" label="loction" :sendvalue="old('parent_id',$location->parent_id)" :required-span="false" colrow="col-lg-3 " :send-arr="$locationList"/>
-
-                <x-form-select-arr name="projects_type" label="Projects Type" :sendvalue="old('projects_type',$location->projects_type)" :required-span="false" colrow="col-lg-3 " :send-arr="$ProjectsTypeArr"/>
-
+                <x-form-select-arr name="parent_id" label="{{__('admin/project.loction')}}" :sendvalue="old('parent_id',$location->parent_id)" :required-span="false" colrow="col-lg-3 " :send-arr="$locationList"/>
+                <x-form-select-arr name="projects_type" label="{{__('admin/project.type')}}" :sendvalue="old('projects_type',$location->projects_type)" :required-span="false" colrow="col-lg-3 " :send-arr="$ProjectsTypeArr"/>
 
                 <x-form-input label="Latitude" name="latitude" :requiredSpan="true" colrow="col-lg-3 {{getColDir('en')}}"
                               value="{{old('latitude',$location->latitude)}}"  dir="en" :required-span="false" inputclass="dir_en"/>
@@ -39,9 +37,8 @@
                             reqname="{{ $key }}.name"
                             value="{{old($key.'.name',$location->translateOrNew($key)->name)}}"
                         />
-
                     <x-trans-text-area
-                                       label="{{__('admin/form.meta_g_des_'.$key)}} ({{ ($key) }})"
+                                       label="{{ __('admin/form.des_'.$key)}} ({{ ($key) }})"
                                        name="{{ $key }}[des]"
                                        dir="{{ $key }}"
                                        reqname="{{ $key }}.des"
@@ -57,13 +54,11 @@
 
             <div class="row">
                 <x-form-check-active :row="$location" name="is_active" page-view="{{$pageData['ViewType']}}"/>
-                <x-form-check-active :row="$location" name="is_searchable" :defstatus="false" lable="hany" page-view="{{$pageData['ViewType']}}"/>
+                <x-form-check-active :row="$location" name="is_searchable" :defstatus="false" lable="{{ __('admin/project.searchable') }}" page-view="{{$pageData['ViewType']}}"/>
 
             </div>
 
             <hr>
-
-
             <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$location"
                                 :multiple="false"
                                 thisfilterid="{{ \App\Helpers\AdminHelper::arrIsset($modelSettings,'location_filterid',0) }}"

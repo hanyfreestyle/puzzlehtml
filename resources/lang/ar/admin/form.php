@@ -18,4 +18,6 @@ return
 	'meta_g_title_en' => 'Page Title',
 	'password' => 'كلمة المرور',
 	'password_confirm' => 'تاكيد كلمة المرور',
+	'des_ar' => 'الوصف',
+	'des_en' => 'Description',
 ];

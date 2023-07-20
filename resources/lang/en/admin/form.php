@@ -18,4 +18,6 @@ return
 	'meta_g_title_en' => 'Page Title',
 	'password' => 'Password',
 	'password_confirm' => 'Confirm Password',
+	'des_ar' => 'Description',
+	'des_en' => 'Description',
 ];

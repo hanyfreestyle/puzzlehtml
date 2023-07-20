@@ -43,7 +43,7 @@
                                             <th></th>
                                             <th></th>
                                         @else
-                                            <th>{{__('admin/def.status')}}</th>
+                                            {{-- <th>{{__('admin/def.status')}}</th>--}}
                                             <th>{{__('admin/def.photo')}}</th>
                                             @can('location_edit')
                                                 <th class="tbutaction"></th>
@@ -71,8 +71,8 @@
                                                 <td class="tc"><x-action-button url="{{route('location.restore',$row->id)}}" type="restor" /></td>
                                                 <td class="tc"><x-action-button url="#" id="{{route('location.force',$row->id)}}" type="deleteSweet"/></td>
                                             @else
-                                                <td class="tc" > <x-ajax-update-status-but :row="$row" role="location_edit" /> </td>
-                                                <td class="tc">{!! AdminHelper::printTableImage($row,'photo') !!} </td>
+                                                {{-- <td class="tc" > <x-ajax-update-status-but :row="$row" role="location_edit" /> </td>--}}
+                                                <td class="tc">{!! \App\Helpers\AdminHelper::printTableImage($row,'photo') !!} </td>
                                                 @can('location_edit')
                                                     <td class="tc"><x-action-button url="{{route('location.edit',$row->id)}}" type="edit" :tip="false" /></td>
                                                 @endcan
