@@ -12,11 +12,8 @@
 
 
             <div class="row">
-
-
                 <x-form-input label="Slug" name="slug" :requiredSpan="true" colrow="col-lg-12 {{getColDir('en')}}"
                               value="{{old('slug',$Category->slug)}}"  dir="en" inputclass="dir_en"/>
-
             </div>
 
             <div class="row">
@@ -39,17 +36,14 @@
 
             <div class="row">
                 <x-form-check-active :row="$Category" name="is_active" page-view="{{$pageData['ViewType']}}"/>
-
             </div>
 
             <hr>
-
 
             <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$Category"
                                 :multiple="false"
                                 thisfilterid="{{ \App\Helpers\AdminHelper::arrIsset($modelSettings,'category_filterid',0) }}"
                                 emptyphotourl="category.emptyPhoto"  />
-
 
             <div class="container-fluid">
                 <x-form-submit text="{{$pageData['ViewType']}}" />
@@ -63,6 +57,3 @@
 @push('JsCode')
 
 @endpush
-
-
-

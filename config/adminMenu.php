@@ -76,6 +76,18 @@
             'roleView'=>'location_view',
         ],
 
+        [
+            'view'=>true,
+            'sel_routs'=>'developer',
+            'type'=>'one',
+            'text'=> 'admin/menu.developer',
+            'url'=> 'developer.index',
+            'icon'=>'fas fa-truck-monster',
+            'roleView'=>'developer_view',
+        ],
+
+
+
     ],
 
 ];

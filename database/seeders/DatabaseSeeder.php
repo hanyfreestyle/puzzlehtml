@@ -7,6 +7,8 @@ namespace Database\Seeders;
 
 use Database\Seeders\admin\CategorySeeder;
 use Database\Seeders\admin\CategoryTranslationSeeder;
+use Database\Seeders\admin\DeveloperSeeder;
+use Database\Seeders\admin\DeveloperTranslationSeeder;
 use Database\Seeders\admin\LocationSeeder;
 use Database\Seeders\admin\LocationTranslationSeeder;
 use Database\Seeders\roles\AdminUserSeeder;
@@ -48,5 +50,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LocationSeeder::class);
         $this->call(LocationTranslationSeeder::class);
 
+         $this->call(DeveloperSeeder::class);
+         $this->call(DeveloperTranslationSeeder::class);
     }
 }

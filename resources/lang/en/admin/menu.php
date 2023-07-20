@@ -6,6 +6,7 @@ return
 	'category' => 'Categories',
 	'dashboard' => 'Home Pgae',
 	'lang_file_admin' => 'Admin Lang File',
+	'location' => 'Locations',
 	'post' => 'Posts',
 	'roles' => 'Users &amp; Permissions',
 	'roles_permissions' => 'Permissions',
@@ -19,5 +20,5 @@ return
 	'setting_photo' => 'Photo Settings',
 	'setting_web' => 'Web Settings',
 	'uploadFilter' => 'Upload Filters',
-	'location' => 'Locations',
+	'developer' => 'Developer',
 ];

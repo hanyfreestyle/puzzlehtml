@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\config\AmenityController;
+use App\Http\Controllers\admin\DeveloperController;
 use App\Http\Controllers\admin\LocationController;
 
 Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
@@ -39,3 +40,19 @@ Route::get('/location/emptyPhoto/{id}', [LocationController::class,'emptyPhoto']
 Route::get('/location/SoftDelete/',[LocationController::class,'SoftDeletes'])->name('location.SoftDelete');
 Route::get('/location/restore/{id}',[LocationController::class,'Restore'])->name('location.restore');
 Route::get('/location/force/{id}',[LocationController::class,'ForceDeletes'])->name('location.force');
+
+
+//Route::get('/developer',[DeveloperController::class,'index'])->name('developer.index');
+Route::get('/developer/sliderGet',[DeveloperController::class,'sliderGet'])->name('location.sliderGet');
+Route::get('/developer',[DeveloperController::class,'index'])->name('developer.index');
+Route::get('/developer/create',[DeveloperController::class,'create'])->name('developer.create');
+Route::post('/developer/store/{id}',[DeveloperController::class,'storeUpdate'])->name('developer.store');
+Route::get('/developer/edit/{id}',[DeveloperController::class,'edit'])->name('developer.edit');
+Route::post('/developer/update/{id}',[DeveloperController::class,'storeUpdate'])->name('developer.update');
+Route::get('/developer/destroy/{id}',[DeveloperController::class,'destroy'])->name('developer.destroy');
+
+Route::post('/developer/updateStatus', [DeveloperController::class,'updateStatus'])->name('developer.updateStatus');
+Route::get('/developer/emptyPhoto/{id}', [DeveloperController::class,'emptyPhoto'])->name('developer.emptyPhoto');
+Route::get('/developer/SoftDelete/',[DeveloperController::class,'SoftDeletes'])->name('developer.SoftDelete');
+Route::get('/developer/restore/{id}',[DeveloperController::class,'Restore'])->name('developer.restore');
+Route::get('/developer/force/{id}',[DeveloperController::class,'ForceDeletes'])->name('developer.force');

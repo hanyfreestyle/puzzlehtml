@@ -43,6 +43,16 @@
                                 </div>
 
 
+                                <div class="col-lg-12 pt-3">
+                                    <div class="alert alert-dark alert-dismissible">
+                                        {{ __('admin/menu.developer') }}
+                                    </div>
+                                    <x-def-settings modelname="developer">
+                                    </x-def-settings>
+                                </div>
+
+
+
                             </div>
 
 

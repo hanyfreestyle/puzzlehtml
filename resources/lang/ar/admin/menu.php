@@ -6,6 +6,7 @@ return
 	'category' => 'المجموعات',
 	'dashboard' => 'الصفحة الرئيسية',
 	'lang_file_admin' => 'ملفات اللغة لوحة التحكم',
+	'location' => 'المناطق',
 	'post' => 'المقالات',
 	'roles' => 'الاعضاء والصلاحيات',
 	'roles_permissions' => 'الاصلاحيات',
@@ -19,5 +20,5 @@ return
 	'setting_photo' => 'اعدادات الصور',
 	'setting_web' => 'الاعدادات العامة',
 	'uploadFilter' => 'فلاتر الصور',
-	'location' => 'المناطق',
+	'developer' => 'المطورين',
 ];
