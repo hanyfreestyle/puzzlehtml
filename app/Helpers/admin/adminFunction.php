@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\File;
+
 if (!function_exists('getTrans')) {
     function getTrans($name)
     {
@@ -256,6 +259,15 @@ if (!function_exists('getRoleName')) {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Text
+if (!function_exists('echobr')) {
+    function echobr($text=""){
+        if($text ==  "hr"){
+            $text = '<hr/>';
+        }
+        echo  $text."<br/>";
+       // return $sendName;
+    }
+}
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Text
@@ -271,7 +283,28 @@ if (!function_exists('getRoleName')) {
 
 
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Text
+if (!function_exists('Update_createDirectory')) {
+    function Update_createDirectory($uploadDir){
+       // $fullPath = public_path($uploadDir);
+        $fullPath = $uploadDir;
+        if(!File::isDirectory($fullPath)){
+            File::makeDirectory($fullPath, 0777, true, true);
+        }
+        return $uploadDir ;
+    }
+}
 
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #    static_admin_asset
+if (!function_exists('Update_defImagesDir')) {
+    function Update_defImagesDir($path, $secure = null): string
+    {
+        return app('url')->asset( "ckfinder/userfiles/".$path, $secure);
+    }
+}
 
 
 

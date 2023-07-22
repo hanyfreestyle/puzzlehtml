@@ -24,4 +24,10 @@ class Developer extends Model implements TranslatableContract
     {
         return $this->setAttribute('is_active', $status);
     }
+
+
+    public function getMorePhoto(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(DeveloperPhoto::class,'developer_id','id');
+    }
 }

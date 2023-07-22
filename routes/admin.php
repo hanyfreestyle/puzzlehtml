@@ -56,3 +56,6 @@ Route::get('/developer/emptyPhoto/{id}', [DeveloperController::class,'emptyPhoto
 Route::get('/developer/SoftDelete/',[DeveloperController::class,'SoftDeletes'])->name('developer.SoftDelete');
 Route::get('/developer/restore/{id}',[DeveloperController::class,'Restore'])->name('developer.restore');
 Route::get('/developer/force/{id}',[DeveloperController::class,'ForceDeletes'])->name('developer.force');
+
+Route::get('/developer/photos/{id}',[DeveloperController::class,'ListMorePhoto'])->name('developer.photos');
+Route::post('/developer/saveSort', [DeveloperController::class,'sortPhotoSave'])->name('developer.sortPhotoSave');

@@ -6,9 +6,12 @@ use App\Helpers\AdminHelper;
 use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\DeveloperRequest;
+use App\Models\admin\config\DefPhoto;
 use App\Models\admin\Developer;
+use App\Models\admin\DeveloperPhoto;
 use App\Models\admin\DeveloperTranslation;
 use App\Models\admin\Location;
+use DB;
 use File;
 use Illuminate\Http\Request;
 
@@ -78,13 +81,59 @@ class DeveloperController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     sliderGet
     public function sliderGet()
     {
-        $sendArr = ['TitlePage' => __('admin/menu.developer'),'restore'=> 1 ];
-        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
-        $pageData['ViewType'] = "List";
-        $pageData['Trashed'] = Developer::onlyTrashed()->count();
-
        // $Developers = self::getSelectQuery(Developer::query());
-        $Developers = Developer::where('slider_images_dir','!=',null)->get();
+        $Developers = Developer::where('slider_images_dir','!=',null)
+            ->where('slider_get',"=","2")
+            ->where('id','!=',"191")
+            ->paginate(100);
+
+        $foreign_name = "developer_id";
+        $save_table_name = "developer_photos";
+
+
+        foreach ($Developers as $developer){
+
+            $oldPath = public_path("ckfinder/userfiles_old/".$developer->slider_images_dir);
+            $newPath =  public_path("ckfinder/userfiles/".$developer->slider_images_dir) ;
+
+            if(File::exists($oldPath)){
+                Update_createDirectory($newPath);
+
+                if(File::exists($newPath)){
+                    $files = File::files($oldPath);
+                    if( count( $files) >0 ) {
+                        foreach ($files as $file){
+                              $filename = File::name($file).".".File::extension($file);
+                              $OldFileWillCopyFrom = $oldPath."/".$filename;
+                              $newFileWillCopy = $newPath."/".$filename;
+
+                              if(!File::exists($newFileWillCopy)){
+
+                                  File::copy($OldFileWillCopyFrom,$newFileWillCopy);
+                                  DB::connection('mysql2')->table($save_table_name)->insert([
+                                       $foreign_name => $developer->id,
+                                      'photo' => $developer->slider_images_dir."/".$filename ,
+                                      'file_extension' =>  File::extension($file),
+                                      'file_size' => File::size($file),
+
+                                  ]);
+
+                                  $developer->slider_get = 1 ;
+                                  $developer->save();
+
+                                  echobr("save");
+                              }
+                        }
+                    }
+                }
+            }else{
+                $developer->slider_get = 2 ;
+                $developer->save();
+               echobr("Error");
+           }
+        }
+
+
 
         dd(count($Developers));
         return view('admin.developer.index',compact('pageData','Developers'));
@@ -100,7 +149,18 @@ class DeveloperController extends AdminMainController
         $pageData['ViewType'] = "List";
         $pageData['Trashed'] = Developer::onlyTrashed()->count();
 
-        $Developers = self::getSelectQuery(Developer::query());
+      //  $Developers = self::getSelectQuery( Developer::where('id',"!=","0")->with('getMorePhoto'));
+
+         $Developers = Developer::where('id',"!=","0")->with('getMorePhoto')->paginate(50);
+
+
+
+
+//        foreach ($Developers as $developer){
+//            dd($developer->getMorePhoto);
+//        }
+
+        #dd($Developers);
         return view('admin.developer.index',compact('pageData','Developers'));
     }
 
@@ -231,11 +291,34 @@ class DeveloperController extends AdminMainController
 
 
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     edit
+    public function ListMorePhoto($id)
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.developer') ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "Edit";
+
+        #$Developer = Developer::findOrFail($id);
+
+        $DeveloperPhotos = DeveloperPhoto::where('developer_id','=',$id)->orderBy('position')->get();
+        return view('admin.developer.photos',compact('DeveloperPhotos','pageData'));
+    }
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
+#|||||||||||||||||||||||||||||||||||||| #     sortDefPhotoList
+    public function sortPhotoSave(Request $request){
+        $positions = $request->positions;
+        foreach($positions as $position) {
+            $id = $position[0];
+            $newPosition = $position[1];
+            $saveData =  DeveloperPhoto::findOrFail($id) ;
+            $saveData->position = $newPosition;
+            $saveData->save();
+        }
+        return response()->json(['success'=>$positions]);
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text

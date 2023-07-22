@@ -43,7 +43,8 @@
                                             <th></th>
                                         @else
 {{--                                            <th>{{__('admin/def.status')}}</th>--}}
-                                            <th>{{__('admin/def.photo')}}</th>
+                                            <th></th>
+                                            <th class="tc">{{__('admin/def.photo')}}</th>
                                             @can('developer_edit')
                                                 <th class="tbutaction"></th>
                                             @endcan
@@ -68,6 +69,9 @@
                                                 <td class="tc"><x-action-button url="{{route('developer.restore',$row->id)}}" type="restor" /></td>
                                                 <td class="tc"><x-action-button url="#" id="{{route('developer.force',$row->id)}}" type="deleteSweet"/></td>
                                             @else
+                                                <td>{{ count($row->getMorePhoto) }}
+                                                    <x-action-button url="{{route('developer.photos',$row->id)}}" type="edit" :tip="true" />
+                                                </td>
                                                 {{--<td class="tc"> <x-ajax-update-status-but :row="$row" role="developer_edit" /> </td>--}}
                                                 <td class="tc">{!! \App\Helpers\AdminHelper::printTableImage($row,'photo') !!} </td>
                                                 @can('developer_edit')
