@@ -42,7 +42,7 @@ Route::get('/location/restore/{id}',[LocationController::class,'Restore'])->name
 Route::get('/location/force/{id}',[LocationController::class,'ForceDeletes'])->name('location.force');
 
 
-//Route::get('/developer',[DeveloperController::class,'index'])->name('developer.index');
+
 Route::get('/developer/sliderGet',[DeveloperController::class,'sliderGet'])->name('location.sliderGet');
 Route::get('/developer',[DeveloperController::class,'index'])->name('developer.index');
 Route::get('/developer/create',[DeveloperController::class,'create'])->name('developer.create');
@@ -57,5 +57,10 @@ Route::get('/developer/SoftDelete/',[DeveloperController::class,'SoftDeletes'])-
 Route::get('/developer/restore/{id}',[DeveloperController::class,'Restore'])->name('developer.restore');
 Route::get('/developer/force/{id}',[DeveloperController::class,'ForceDeletes'])->name('developer.force');
 
-Route::get('/developer/photos/{id}',[DeveloperController::class,'ListMorePhoto'])->name('developer.photos');
+Route::get('/developer/photos/{id}',[DeveloperController::class,'ListMorePhoto'])->name('developer.More_Photos');
+
 Route::post('/developer/saveSort', [DeveloperController::class,'sortPhotoSave'])->name('developer.sortPhotoSave');
+Route::post('/developer/AddMore',[DeveloperController::class,'AddMorePhotos'])->name('developer.More_PhotosAdd');
+
+Route::get('/developer/PhotoDel/{id}',[DeveloperController::class,'More_PhotosDestroy'])->name('developer.More_PhotosDestroy');
+

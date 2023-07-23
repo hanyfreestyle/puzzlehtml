@@ -3,40 +3,36 @@
 @section('content')
 
     <x-breadcrumb-def :pageData="$pageData"/>
+    <x-mass.confirm-massage />
+
     <div class="content mb-3">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 text-left">
-                    @can('defPhoto_add')
-                        <x-action-button  url="{{route('config.defPhoto.create')}}"  type="add" size="m"   />
-                    @endcan
-                    @can('defPhoto_edit')
-                        <x-action-button  url="{{route('config.defPhoto.sortDefPhotoList')}}" print-lable="{{__('admin/form.button_sort')}}" size="m"  bg="i" icon="fas fa-sort-amount-up"  />
-                    @endcan
+                <div class="col-9">
+                    <h1 class="def_h1">{{ $Developer->translate()->name }}</h1>
+                </div>
+                <div class="col-3 text-left">
+                    <x-action-button  url="{{route('developer.edit', $Developer->id)}}" print-lable="{{__('admin/form.button_back')}}" size="s"  bg="dark" icon="fas fa-hand-point-left"  />
                 </div>
             </div>
         </div>
     </div>
-
 
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 @if(count($DeveloperPhotos)>0)
                     <div class="row col-lg-12 hanySort">
-
                         @foreach($DeveloperPhotos as $Photo)
                             <div class="col-lg-2 ListThisItam"  data-index="{{$Photo->id}}" data-position="{{$Photo->postion}}" >
-                                <p class="PhotoImageCard"><img src="{{ Update_defImagesDir($Photo->photo) }}"></p>
+                                <p class="PhotoImageCard"><img src="{{ defImagesDir($Photo->photo) }}"></p>
+                                <div class="buttons mb-3" >
+                                    @can('developer_delete')
+                                        <td class="tc"><x-action-button url="#" id="{{route('developer.More_PhotosDestroy',$Photo->id)}}"  type="deleteSweet"/></td>
+                                    @endcan
+                                </div>
                             </div>
                         @endforeach
-
-
-{{--                        @foreach($Developer->getMorePhoto as $onePhoto)--}}
-{{--                            <div class="col-lg-2 ListThisItam"  data-index="{{$onePhoto->id}}" data-position="{{$onePhoto->postion}}" >--}}
-{{--                                <p class="PhotoImageCard"><img src="{{ Update_defImagesDir($onePhoto->photo) }}"></p>--}}
-{{--                            </div>--}}
-{{--                        @endforeach--}}
                     </div>
                 @else
                     <div class="col-lg-12">
@@ -48,12 +44,39 @@
     </div>
 
 
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <form  class="mainForm" action="{{route('developer.More_PhotosAdd')}}" method="post"  enctype="multipart/form-data">
+                        @csrf
+
+                        <input type="hidden" name="developer_id" value="{{intval($Developer->id)}}">
+                        <input type="hidden" name="name" value="{{$Developer->translate('en')->name}}">
+                        <x-form-upload-file view-type="Add" :row-data="$Developer"
+                                            :multiple="true"
+                                            thisfilterid="4"
+                        />
+                        <div class="container-fluid">
+                            <x-form-submit text="Add" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 
 @endsection
 
 
 @push('JsCode')
+    <x-sweet-delete-js-no-form/>
 
     <script src="{{defAdminAssets('plugins/bootstrap/js/jquery-ui.min.js')}}"></script>
 

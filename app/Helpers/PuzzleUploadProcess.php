@@ -172,10 +172,16 @@ class PuzzleUploadProcess extends PuzzleImageUpload
             $images = $request->file('image');
 
             $filter_Id = $request->filter_id ;
+
+            /// بيانات الفلتر
+            $filterData = UploadFilter::findorNew($filter_Id);
+
+            $filterSizeData = UploadFilterSize::where('filter_id',$filter_Id)->get();
+
             $index = 1;
             foreach ($images as $key => $file)
             {
-                $saveData = self::UploadImage($filter_Id,$file);
+                $saveData = self::UploadImage($filterData,$filterSizeData,$file);
                 $saveDataArr += ['fileSave_'.$index =>  $saveData ];
                 $index++;
             }

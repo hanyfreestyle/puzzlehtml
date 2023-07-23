@@ -2,9 +2,28 @@
 
 @section('content')
 
-    <x-breadcrumb-def :pageData="$pageData"/>
+    <x-breadcrumb-def :pageData="$pageData"  />
 
-    <x-ui-card :page-data="$pageData">
+
+    @if($pageData['ViewType'] == 'Edit')
+        <div class="content mb-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-9">
+                        <h1 class="def_h1">{{ $Developer->translate('ar')->name }}</h1>
+                    </div>
+                    <div class="col-3 text-left">
+                        <x-action-button url="{{route('developer.More_Photos',$Developer->id)}}" type="morePhoto" :tip="false" bg="dark" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
+
+
+    <x-ui-card :page-data="$pageData"  >
         <x-mass.confirm-massage />
 
         <form  class="mainForm" action="{{route('developer.update',intval($Developer->id))}}" method="post"  enctype="multipart/form-data">

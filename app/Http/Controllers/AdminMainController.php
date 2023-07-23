@@ -84,16 +84,14 @@ class AdminMainController extends Controller
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     getSelect
-    public function getSelectQuery($query,$relation=null){
+    public function getSelectQuery($query){
         $controllerName = $this->controllerName;
 
         $perPage = self::getDefSetting($controllerName,'_perpage','5');
         $dataTable =  self::getDefSetting($controllerName,'_datatable','0');
         $orderBy =  self::getDefSetting($controllerName,'_orderby','1');
 
-        if($relation){
-            $query->with($relation);
-        }
+
 
         switch ($orderBy){
             case 1:

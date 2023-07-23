@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <x-ui-card  :page-data="$pageData" >
+                    <x-ui-card  :page-data="$pageData" title="" >
                         <x-mass.confirm-massage/>
 
                         @if(count($Developers)>0)
@@ -69,8 +69,13 @@
                                                 <td class="tc"><x-action-button url="{{route('developer.restore',$row->id)}}" type="restor" /></td>
                                                 <td class="tc"><x-action-button url="#" id="{{route('developer.force',$row->id)}}" type="deleteSweet"/></td>
                                             @else
-                                                <td>{{ count($row->getMorePhoto) }}
-                                                    <x-action-button url="{{route('developer.photos',$row->id)}}" type="edit" :tip="true" />
+                                                <td>
+                                                    @if(count($row->getMorePhoto) == '0')
+                                                        <x-action-button url="{{route('developer.More_Photos',$row->id)}}" type="morePhoto" :tip="true" bg="dark" />
+                                                    @else
+                                                        <x-action-button url="{{route('developer.More_Photos',$row->id)}}" type="morePhoto" :tip="true" />
+                                                    @endif
+
                                                 </td>
                                                 {{--<td class="tc"> <x-ajax-update-status-but :row="$row" role="developer_edit" /> </td>--}}
                                                 <td class="tc">{!! \App\Helpers\AdminHelper::printTableImage($row,'photo') !!} </td>

@@ -4,12 +4,12 @@
 {{$full ? 'bg-'.$bg : ''}} ">
 
     @php
-    @endphp
+        @endphp
 
     @if ($cardHeaderView)
 
         <div class="card-header def_card_header" data-card-widget="{{$collapsedStyle}}">
-{{--            <h3 class="card-title {{$titleColor}} font-weight-normal ">{{$title}}</h3>--}}
+                        <h3 class="card-title {{$titleColor}} font-weight-normal ">{{$title}}</h3>
             <div class="card-tools">
                 @if($collapsed)
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
@@ -24,17 +24,21 @@
                     @endif
                 @else
 
-                    @if($addButtonRoute != '#')
-                        @can($sendRole)
-                            <a href="{{$addButtonRoute}}" class="btn btn-sm btn-primary">{{$addButtonName}}</a>
+                    @if( isset($pageData['ViewType']) and $pageData['ViewType'] == 'List' )
+                        @if($addButtonRoute != '#')
+                            @can($sendRole)
+                                <a href="{{$addButtonRoute}}" class="btn btn-sm btn-primary">{{$addButtonName}}</a>
+                            @endcan
+                        @endif
+                    @endif
+                    @if( isset($pageData['Trashed']) and  $pageData['Trashed'] > 0)
+                        @can($pageData['RestoreRole'])
+                            <a href="{{$pageData['RestoreUrl']}}" class="btn btn-sm btn-danger">{{ __('admin/page.del_restor_but') }}</a>
                         @endcan
                     @endif
 
-                    @if( isset($pageData['Trashed']) and  $pageData['Trashed'] > 0)
-                           @can($pageData['RestoreRole'])
-                                <a href="{{$pageData['RestoreUrl']}}" class="btn btn-sm btn-danger">{{ __('admin/page.del_restor_but') }}</a>
-                           @endcan
-                    @endif
+
+
 
 
                     @if($showIcon)
@@ -42,7 +46,7 @@
                         </button>
                     @endif
 
-                   @if($removable)
+                    @if($removable)
                         <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
                         </button>
                     @endif

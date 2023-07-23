@@ -76,7 +76,7 @@ class UiCard extends Component
         }
 
         if($title == null and isset($pageData['ListPageName'])){
-            $this->title = $pageData['ListPageName'];
+          //  $this->title = $pageData['ListPageName'];
         }
 
 
@@ -92,14 +92,15 @@ class UiCard extends Component
             $this->RestoreRole = $pageData['RestoreRole'] ;
         }
 
-
-
-
-
-
-
-
-
+        if(!isset( $this->title)){
+            if($pageData['ViewType'] == 'Add'){
+                $this->title = __('admin/page.page_add');
+            }elseif($pageData['ViewType'] == 'Edit'){
+                $this->title = __('admin/page.page_edit');
+            }elseif($pageData['ViewType'] == 'List'){
+                $this->title = __('admin/page.page_list');
+            }
+        }
 
     }
 

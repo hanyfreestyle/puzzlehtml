@@ -9,7 +9,8 @@
 .Td_Count{font-size:22px!important;}
 .BB_Number{font-size:22px!important;}
 .tableImg{ max-width: 80px; max-height: 80px;}
-
+.hidediv{display: none!important;}
+.def_h1{font-size: 20px; line-height: 25px}
 .mainForm{padding-bottom:50px;}
 .mainForm .def_form_label{font-size:15px!important;margin-bottom:0!important;padding-top:8px;padding-bottom:7px;font-weight:700!important;color:rgba(0,0,0,.8)!important; width:100%}
 

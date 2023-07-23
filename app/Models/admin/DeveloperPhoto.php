@@ -14,4 +14,8 @@ class DeveloperPhoto extends Model
 
 
 
+    public function developerName(){
+        return $this->belongsTo(Developer::class,"developer_id");
+    }
+
 }
