@@ -3,14 +3,19 @@
 return
 [
 	'button_add' => 'Add',
+	'button_back' => 'Back',
 	'button_delete' => 'Delete',
 	'button_edit' => 'Edit',
 	'button_more_photo' => 'More Photo',
 	'button_serach' => 'Search',
 	'button_sort' => 'Sort',
 	'button_update' => 'Update',
+	'category' => 'Category',
+	'content_ar' => 'Content',
+	'content_en' => 'Content',
 	'des_ar' => 'Description',
 	'des_en' => 'Description',
+	'developer' => 'Developer',
 	'meta_bodyH1_ar' => 'H1 Text',
 	'meta_bodyH1_en' => 'H1 Tag',
 	'meta_breadcrumb_ar' => 'Breadcrumb',
@@ -21,5 +26,7 @@ return
 	'meta_g_title_en' => 'Page Title',
 	'password' => 'Password',
 	'password_confirm' => 'Confirm Password',
-	'button_back' => 'Back',
+	'title_ar' => 'Title',
+	'title_en' => 'Title',
+	'is_published' => 'Published',
 ];

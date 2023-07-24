@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\DeveloperRequest;
 use App\Http\Requests\admin\PostRequest;
+use App\Models\admin\Category;
 use App\Models\admin\Developer;
 use App\Models\admin\DeveloperPhoto;
 use App\Models\admin\DeveloperTranslation;
@@ -70,7 +71,9 @@ class PostController extends AdminMainController
         $pageData['ViewType'] = "Add";
 
         $Post = Post::findOrNew(0);
-        return view('admin.post.post_form',compact('pageData','Post'));
+        $Developers = Developer::all();
+        $Categories = Category::all();
+        return view('admin.post.post_form',compact('pageData','Post','Developers','Categories'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -82,7 +85,9 @@ class PostController extends AdminMainController
         $pageData['ViewType'] = "Edit";
 
         $Post = Post::findOrFail($id);
-        return view('admin.post.post_form',compact('Post','pageData'));
+        $Developers = Developer::all();
+        $Categories = Category::all();
+        return view('admin.post.post_form',compact('pageData','Post','Developers','Categories'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -93,7 +98,9 @@ class PostController extends AdminMainController
 
         $saveData =  Post::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
-       // $saveData->setActive((bool) request('is_active', false));
+        $saveData->category_id = $request->input('category_id');
+        $saveData->developer_id = $request->input('developer_id');
+        $saveData->setPublished((bool) request('is_published', false));
         $saveData->save();
 
         $saveImgData = new PuzzleUploadProcess();
@@ -122,7 +129,7 @@ class PostController extends AdminMainController
             return redirect(route('post.index'))->with('Add.Done',"");
         }else{
             return back();
-            ////return redirect(route('category.index'))->with('Edit.Done',"");
+            ////return redirect(route('post.index'))->with('Edit.Done',"");
         }
     }
 

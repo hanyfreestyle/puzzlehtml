@@ -51,18 +51,14 @@ Route::post('/developer/store/{id}',[DeveloperController::class,'storeUpdate'])-
 Route::get('/developer/edit/{id}',[DeveloperController::class,'edit'])->name('developer.edit');
 Route::post('/developer/update/{id}',[DeveloperController::class,'storeUpdate'])->name('developer.update');
 Route::get('/developer/destroy/{id}',[DeveloperController::class,'destroy'])->name('developer.destroy');
-
 Route::post('/developer/updateStatus', [DeveloperController::class,'updateStatus'])->name('developer.updateStatus');
 Route::get('/developer/emptyPhoto/{id}', [DeveloperController::class,'emptyPhoto'])->name('developer.emptyPhoto');
 Route::get('/developer/SoftDelete/',[DeveloperController::class,'SoftDeletes'])->name('developer.SoftDelete');
 Route::get('/developer/restore/{id}',[DeveloperController::class,'Restore'])->name('developer.restore');
 Route::get('/developer/force/{id}',[DeveloperController::class,'ForceDeletes'])->name('developer.force');
-
 Route::get('/developer/photos/{id}',[DeveloperController::class,'ListMorePhoto'])->name('developer.More_Photos');
-
 Route::post('/developer/saveSort', [DeveloperController::class,'sortPhotoSave'])->name('developer.sortPhotoSave');
 Route::post('/developer/AddMore',[DeveloperController::class,'AddMorePhotos'])->name('developer.More_PhotosAdd');
-
 Route::get('/developer/PhotoDel/{id}',[DeveloperController::class,'More_PhotosDestroy'])->name('developer.More_PhotosDestroy');
 
 
@@ -77,16 +73,12 @@ Route::post('/post/store/{id}',[PostController::class,'storeUpdate'])->name('pos
 Route::get('/post/edit/{id}',[PostController::class,'edit'])->name('post.edit');
 Route::post('/post/update/{id}',[PostController::class,'storeUpdate'])->name('post.update');
 Route::get('/post/destroy/{id}',[PostController::class,'destroy'])->name('post.destroy');
-
 Route::post('/post/updateStatus', [PostController::class,'updateStatus'])->name('post.updateStatus');
 Route::get('/post/emptyPhoto/{id}', [PostController::class,'emptyPhoto'])->name('post.emptyPhoto');
 Route::get('/post/SoftDelete/',[PostController::class,'SoftDeletes'])->name('post.SoftDelete');
 Route::get('/post/restore/{id}',[PostController::class,'Restore'])->name('post.restore');
 Route::get('/post/force/{id}',[PostController::class,'ForceDeletes'])->name('post.force');
-
 Route::get('/post/photos/{id}',[PostController::class,'ListMorePhoto'])->name('post.More_Photos');
-
 Route::post('/post/saveSort', [PostController::class,'sortPhotoSave'])->name('post.sortPhotoSave');
 Route::post('/post/AddMore',[PostController::class,'AddMorePhotos'])->name('post.More_PhotosAdd');
-
 Route::get('/post/PhotoDel/{id}',[PostController::class,'More_PhotosDestroy'])->name('post.More_PhotosDestroy');

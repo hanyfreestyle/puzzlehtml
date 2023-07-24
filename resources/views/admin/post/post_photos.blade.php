@@ -53,7 +53,7 @@
                         @csrf
 
                         <input type="hidden" name="post_id" value="{{intval($Post->id)}}">
-                        <input type="hidden" name="name" value="{{$Post->translate('en')->name}}">
+                        <input type="hidden" name="name" value="{{optional($Post->translate('en'))->name}}">
                         <x-form-upload-file view-type="Add" :row-data="$Post"
                                             :multiple="true"
                                             thisfilterid="4"

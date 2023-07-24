@@ -25,4 +25,10 @@ class Post extends Model implements TranslatableContract
         return $this->hasMany(PostPhoto::class,'post_id','id');
     }
 
+
+    public function setPublished(bool $status = true): self
+    {
+        return $this->setAttribute('is_published', $status);
+    }
+
 }

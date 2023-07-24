@@ -3,14 +3,19 @@
 return
 [
 	'button_add' => 'اضافة',
+	'button_back' => 'للخلف',
 	'button_delete' => 'حذف',
 	'button_edit' => 'تعديل',
 	'button_more_photo' => 'المزيد من الصور',
 	'button_serach' => 'بحث',
 	'button_sort' => 'ترتيب',
 	'button_update' => 'تحديث',
+	'category' => 'القسم',
+	'content_ar' => 'المحتوى',
+	'content_en' => 'Content',
 	'des_ar' => 'الوصف',
 	'des_en' => 'Description',
+	'developer' => 'المطورين',
 	'meta_bodyH1_ar' => 'عنوان H1',
 	'meta_bodyH1_en' => 'H1 Tag',
 	'meta_breadcrumb_ar' => 'وسام التنقل',
@@ -21,5 +26,7 @@ return
 	'meta_g_title_en' => 'Page Title',
 	'password' => 'كلمة المرور',
 	'password_confirm' => 'تاكيد كلمة المرور',
-	'button_back' => 'للخلف',
+	'title_ar' => 'العنوان',
+	'title_en' => 'Title',
+	'is_published' => 'منشور',
 ];

@@ -24,10 +24,12 @@ class PostRequest extends FormRequest
         if($id == '0'){
             $rules =[
                 'slug'=> "required|unique:posts",
+
             ];
         }else{
             $rules =[
                 'slug'=> "required|unique:posts,slug,$id",
+
             ];
         }
 
@@ -35,6 +37,7 @@ class PostRequest extends FormRequest
             $rules[$key.".name"] =   'required';
             $rules[$key.".g_title"] =   'required';
             $rules[$key.".g_des"] =   'required';
+            $rules[$key.".des"] =   'required';
         }
 
         return $rules;

@@ -29,17 +29,23 @@
             </div>
 
             <div class="row">
+                <x-form-select-arr name="developer_id" label="{{__('admin/form.developer')}}" :sendvalue="old('developer_id',$Post->developer_id)" :required-span="false" colrow="col-lg-3 " :send-arr="$Developers"/>
+                <x-form-select-arr name="category_id" label="{{__('admin/form.category')}}" :sendvalue="old('category_id',$Post->category_id)" :required-span="false" colrow="col-lg-3 " :send-arr="$Categories"/>
+            </div>
+
+
+            <div class="row">
                 @foreach ( config('app.lang_file') as $key=>$lang )
                     <div class="col-lg-6 {{getColDir($key)}}">
                         <x-trans-input
-                            label="{{__('admin/def.form_name_'.$key)}} ({{ $key}})"
+                            label="{{__('admin/form.title_'.$key)}} ({{ $key}})"
                             name="{{ $key }}[name]"
                             dir="{{ $key }}"
                             reqname="{{ $key }}.name"
                             value="{{old($key.'.name',$Post->translateOrNew($key)->name)}}"
                         />
                         <x-trans-text-area
-                            label="{{ __('admin/form.des_'.$key)}} ({{ ($key) }})"
+                            label="{{ __('admin/form.content_'.$key)}} ({{ ($key) }})"
                             name="{{ $key }}[des]"
                             dir="{{ $key }}"
                             reqname="{{ $key }}.des"
@@ -55,7 +61,7 @@
             <hr>
 
             <div class="row">
-                <x-form-check-active :row="$Post" name="is_active" page-view="{{$pageData['ViewType']}}"/>
+                <x-form-check-active :row="$Post" lable="{{__('admin/form.is_published')}}" name="is_published" page-view="{{$pageData['ViewType']}}"/>
             </div>
 
             <hr>
@@ -75,14 +81,14 @@
 
 
 @push('JsCode')
-    {{--    <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>--}}
-    {{--    <script>--}}
-    {{--        CKEDITOR.config.height = 450;--}}
-    {{--        //  CKEDITOR.config.contentsCss = "https://realestate.eg/css/bootstrap.min.css";--}}
-    {{--        CKEDITOR.replace('en[des]');--}}
-    {{--        CKEDITOR.replace('ar[des]', {--}}
-    {{--            contentsLangDirection: 'rtl',--}}
-    {{--        });--}}
-    {{--    </script>--}}
+        <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+        <script>
+            CKEDITOR.config.height = 450;
+            //  CKEDITOR.config.contentsCss = "https://realestate.eg/css/bootstrap.min.css";
+            CKEDITOR.replace('en[des]');
+            CKEDITOR.replace('ar[des]', {
+                contentsLangDirection: 'rtl',
+            });
+        </script>
 
 @endpush
