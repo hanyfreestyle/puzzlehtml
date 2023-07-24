@@ -5,6 +5,7 @@ namespace Database\Seeders\admin;
 use App\Models\admin\Developer;
 use App\Models\admin\DeveloperTranslation;
 use App\Models\admin\Location;
+use App\Models\admin\Post;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use DB;
 use Illuminate\Database\Seeder;
@@ -14,6 +15,8 @@ class DeveloperSeeder extends Seeder
 
     public function run(): void
     {
+
+        /*
         $old_Developer = DB::connection('mysql2')->table('developers')->get();
         foreach ($old_Developer as $oneDeveloper)
         {
@@ -44,6 +47,26 @@ class DeveloperSeeder extends Seeder
                 $Update->photo_thum_1 = $old_Developer->first()->thumb_url;
                 $Update->save();
             }
+        }
+*/
+
+
+        $old_developers = DB::connection('mysql2')->table('backup_developers')->get();
+        foreach ($old_developers as $oneDeveloper)
+        {
+            $data = [
+                'id'=>$oneDeveloper->id ,
+                'slug'=>$oneDeveloper->slug ,
+                'slider_images_dir'=>$oneDeveloper->slider_images_dir ,
+                'projects_count'=>$oneDeveloper->projects_count ,
+                'photo'=>$oneDeveloper->photo ,
+                'photo_thum_1'=>$oneDeveloper->photo_thum_1 ,
+                'is_active'=>$oneDeveloper->is_active ,
+                'created_at'=>$oneDeveloper->created_at ,
+                'deleted_at'=>$oneDeveloper->deleted_at ,
+                'updated_at'=>$oneDeveloper->updated_at  ,
+            ];
+            Developer::create($data);
         }
 
 

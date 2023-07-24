@@ -8,10 +8,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-9">
-                        <h1 class="def_h1">{{ $Developer->translate('ar')->name }}</h1>
+                        <h1 class="def_h1">{{ $Post->translate('ar')->name }}</h1>
                     </div>
                     <div class="col-3 text-left">
-                        <x-action-button url="{{route('developer.More_Photos',$Developer->id)}}" type="morePhoto" :tip="false" bg="dark" />
+                        <x-action-button url="{{route('post.More_Photos',$Post->id)}}" type="morePhoto" :tip="false" bg="dark" />
                     </div>
                 </div>
             </div>
@@ -21,11 +21,11 @@
     <x-ui-card :page-data="$pageData"  >
         <x-mass.confirm-massage />
 
-        <form  class="mainForm" action="{{route('developer.update',intval($Developer->id))}}" method="post"  enctype="multipart/form-data">
+        <form  class="mainForm" action="{{route('post.update',intval($Post->id))}}" method="post"  enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <x-form-input label="Slug" name="slug" :requiredSpan="true" colrow="col-lg-12 {{getColDir('en')}}"
-                              value="{{old('slug',$Developer->slug)}}"  dir="en" inputclass="dir_en"/>
+                              value="{{old('slug',$Post->slug)}}"  dir="en" inputclass="dir_en"/>
             </div>
 
             <div class="row">
@@ -36,34 +36,34 @@
                             name="{{ $key }}[name]"
                             dir="{{ $key }}"
                             reqname="{{ $key }}.name"
-                            value="{{old($key.'.name',$Developer->translateOrNew($key)->name)}}"
+                            value="{{old($key.'.name',$Post->translateOrNew($key)->name)}}"
                         />
                         <x-trans-text-area
                             label="{{ __('admin/form.des_'.$key)}} ({{ ($key) }})"
                             name="{{ $key }}[des]"
                             dir="{{ $key }}"
                             reqname="{{ $key }}.des"
-                            value="{!! old($key.'.des',$Developer->translateOrNew($key)->des) !!}"
+                            value="{!! old($key.'.des',$Post->translateOrNew($key)->des) !!}"
                         />
 
                     </div>
                 @endforeach
             </div>
 
-            <x-meta-tage-filde :body-h1="true" :breadcrumb="true"  :old-data="$Developer" :placeholder="false" />
+            <x-meta-tage-filde :body-h1="true" :breadcrumb="true"  :old-data="$Post" :placeholder="false" />
 
             <hr>
 
             <div class="row">
-                <x-form-check-active :row="$Developer" name="is_active" page-view="{{$pageData['ViewType']}}"/>
+                <x-form-check-active :row="$Post" name="is_active" page-view="{{$pageData['ViewType']}}"/>
             </div>
 
             <hr>
 
-            <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$Developer"
+            <x-form-upload-file view-type="{{$pageData['ViewType']}}" :row-data="$Post"
                                 :multiple="false"
-                                thisfilterid="{{ \App\Helpers\AdminHelper::arrIsset($modelSettings,'developer_filterid',0) }}"
-                                emptyphotourl="developer.emptyPhoto"  />
+                                thisfilterid="{{ \App\Helpers\AdminHelper::arrIsset($modelSettings,'post_filterid',0) }}"
+                                emptyphotourl="post.emptyPhoto"  />
 
             <div class="container-fluid">
                 <x-form-submit text="{{$pageData['ViewType']}}" />
@@ -75,14 +75,14 @@
 
 
 @push('JsCode')
-{{--    <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>--}}
-{{--    <script>--}}
-{{--        CKEDITOR.config.height = 450;--}}
-{{--        //  CKEDITOR.config.contentsCss = "https://realestate.eg/css/bootstrap.min.css";--}}
-{{--        CKEDITOR.replace('en[des]');--}}
-{{--        CKEDITOR.replace('ar[des]', {--}}
-{{--            contentsLangDirection: 'rtl',--}}
-{{--        });--}}
-{{--    </script>--}}
+    {{--    <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>--}}
+    {{--    <script>--}}
+    {{--        CKEDITOR.config.height = 450;--}}
+    {{--        //  CKEDITOR.config.contentsCss = "https://realestate.eg/css/bootstrap.min.css";--}}
+    {{--        CKEDITOR.replace('en[des]');--}}
+    {{--        CKEDITOR.replace('ar[des]', {--}}
+    {{--            contentsLangDirection: 'rtl',--}}
+    {{--        });--}}
+    {{--    </script>--}}
 
 @endpush

@@ -31,6 +31,7 @@
                             @endcan
                         @endif
                     @endif
+
                     @if( isset($pageData['Trashed']) and  $pageData['Trashed'] > 0)
                         @can($pageData['RestoreRole'])
                             <a href="{{$pageData['RestoreUrl']}}" class="btn btn-sm btn-danger">{{ __('admin/page.del_restor_but') }}</a>

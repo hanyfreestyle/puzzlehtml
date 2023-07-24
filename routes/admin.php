@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\config\AmenityController;
 use App\Http\Controllers\admin\DeveloperController;
 use App\Http\Controllers\admin\LocationController;
+use App\Http\Controllers\admin\PostController;
 
 Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
 Route::get('/amenity/create',[AmenityController::class,'create'])->name('amenity.create');
@@ -64,3 +65,28 @@ Route::post('/developer/AddMore',[DeveloperController::class,'AddMorePhotos'])->
 
 Route::get('/developer/PhotoDel/{id}',[DeveloperController::class,'More_PhotosDestroy'])->name('developer.More_PhotosDestroy');
 
+
+
+
+
+
+Route::get('/post/sliderGet',[PostController::class,'sliderGet'])->name('post.sliderGet');
+Route::get('/post',[PostController::class,'index'])->name('post.index');
+Route::get('/post/create',[PostController::class,'create'])->name('post.create');
+Route::post('/post/store/{id}',[PostController::class,'storeUpdate'])->name('post.store');
+Route::get('/post/edit/{id}',[PostController::class,'edit'])->name('post.edit');
+Route::post('/post/update/{id}',[PostController::class,'storeUpdate'])->name('post.update');
+Route::get('/post/destroy/{id}',[PostController::class,'destroy'])->name('post.destroy');
+
+Route::post('/post/updateStatus', [PostController::class,'updateStatus'])->name('post.updateStatus');
+Route::get('/post/emptyPhoto/{id}', [PostController::class,'emptyPhoto'])->name('post.emptyPhoto');
+Route::get('/post/SoftDelete/',[PostController::class,'SoftDeletes'])->name('post.SoftDelete');
+Route::get('/post/restore/{id}',[PostController::class,'Restore'])->name('post.restore');
+Route::get('/post/force/{id}',[PostController::class,'ForceDeletes'])->name('post.force');
+
+Route::get('/post/photos/{id}',[PostController::class,'ListMorePhoto'])->name('post.More_Photos');
+
+Route::post('/post/saveSort', [PostController::class,'sortPhotoSave'])->name('post.sortPhotoSave');
+Route::post('/post/AddMore',[PostController::class,'AddMorePhotos'])->name('post.More_PhotosAdd');
+
+Route::get('/post/PhotoDel/{id}',[PostController::class,'More_PhotosDestroy'])->name('post.More_PhotosDestroy');

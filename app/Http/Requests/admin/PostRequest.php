@@ -6,8 +6,9 @@ use App\Helpers\AdminHelper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class DeveloperRequest extends FormRequest
+class PostRequest extends FormRequest
 {
+
     public function authorize(): bool
     {
         return true;
@@ -22,11 +23,11 @@ class DeveloperRequest extends FormRequest
 
         if($id == '0'){
             $rules =[
-                'slug'=> "required|unique:developers",
+                'slug'=> "required|unique:posts",
             ];
         }else{
             $rules =[
-                'slug'=> "required|unique:developers,slug,$id",
+                'slug'=> "required|unique:posts,slug,$id",
             ];
         }
 

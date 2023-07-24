@@ -11,15 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('developers', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('developer_id')->nullable();
+            $table->unsignedBigInteger('listing_id')->nullable();
+
             $table->string("slug");
             $table->string("photo")->nullable();
             $table->string("photo_thum_1")->nullable();
             $table->string("slider_images_dir")->nullable();
+
             $table->integer("slider_get")->default(0);
-            $table->integer("projects_count")->default(0);
-            $table->boolean("is_active")->default(true);
+
+
+            $table->boolean("is_published")->default(true);
+            $table->dateTime("published_at")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('developers');
+        Schema::dropIfExists('posts');
     }
 };

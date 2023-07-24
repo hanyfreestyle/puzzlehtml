@@ -12,6 +12,9 @@ use Database\Seeders\admin\DeveloperSeeder;
 use Database\Seeders\admin\DeveloperTranslationSeeder;
 use Database\Seeders\admin\LocationSeeder;
 use Database\Seeders\admin\LocationTranslationSeeder;
+use Database\Seeders\admin\PostPhotoSeeder;
+use Database\Seeders\admin\PostSeeder;
+use Database\Seeders\admin\PostTranslationSeeder;
 use Database\Seeders\roles\AdminUserSeeder;
 use Database\Seeders\roles\PermissionSeeder;
 use Database\Seeders\roles\RoleSeeder;
@@ -54,5 +57,10 @@ class DatabaseSeeder extends Seeder
          $this->call(DeveloperSeeder::class);
          $this->call(DeveloperTranslationSeeder::class);
          $this->call(DeveloperPhotoSeeder::class);
+
+         $this->call(PostSeeder::class);
+         $this->call(PostTranslationSeeder::class);
+         $this->call(PostPhotoSeeder::class);
+
     }
 }

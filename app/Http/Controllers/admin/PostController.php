@@ -5,20 +5,25 @@ namespace App\Http\Controllers\admin;
 use App\Helpers\AdminHelper;
 use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\DeveloperRequest;
+use App\Http\Requests\admin\PostRequest;
 use App\Models\admin\Developer;
 use App\Models\admin\DeveloperPhoto;
 use App\Models\admin\DeveloperTranslation;
 use App\Models\admin\Location;
-use DB;
+use App\Models\admin\Post;
+use App\Models\admin\PostPhoto;
+use App\Models\admin\PostTranslation;
 use File;
 use Illuminate\Http\Request;
+use DB ;
 
-class DeveloperController extends AdminMainController
+class PostController extends AdminMainController
 {
     public $controllerName ;
 
-    function __construct($controllerName = 'developer')
+    function __construct($controllerName = 'post')
     {
         parent::__construct();
         $this->controllerName = $controllerName;
@@ -29,29 +34,31 @@ class DeveloperController extends AdminMainController
         $this->middleware('permission:'.$controllerName.'_restore', ['only' => ['SoftDeletes','Restore','ForceDeletes']]);
     }
 
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
     {
-        $sendArr = ['TitlePage' => __('admin/menu.developer'),'restore'=> 1, 'more_photo'=> 0 ];
+        $sendArr = ['TitlePage' => __('admin/menu.post'),'restore'=> 1 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
-        $pageData['Trashed'] = Developer::onlyTrashed()->count();
-        $Developers = self::getSelectQuery( Developer::where('id',"!=","0")->with('getMorePhoto'));
+        $pageData['Trashed'] = Post::onlyTrashed()->count();
 
-        return view('admin.developer.index',compact('pageData','Developers'));
+        $Posts = self::getSelectQuery( Post::where('id',"!=","0")->with('getMorePhoto'));
+
+        return view('admin.post.post_index',compact('pageData','Posts'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     SoftDeletes
     public function SoftDeletes()
     {
-        $sendArr = ['TitlePage' => __('admin/menu.developer') ];
+        $sendArr = ['TitlePage' => __('admin/menu.post') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "deleteList";
-        $Developers = self::getSelectQuery(Developer::onlyTrashed());
+        $Posts = self::getSelectQuery(Post::onlyTrashed());
 
-        return view('admin.developer.index',compact('pageData','Developers'));
+        return view('admin.post.post_index',compact('pageData','Posts'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -62,8 +69,8 @@ class DeveloperController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Add";
 
-        $Developer = Developer::findOrNew(0);
-        return view('admin.developer.form',compact('pageData','Developer'));
+        $Post = Post::findOrNew(0);
+        return view('admin.post.post_form',compact('pageData','Post'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -74,23 +81,24 @@ class DeveloperController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-        $Developer = Developer::findOrFail($id);
-        return view('admin.developer.form',compact('Developer','pageData'));
+        $Post = Post::findOrFail($id);
+        return view('admin.post.post_form',compact('Post','pageData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(DeveloperRequest $request, $id=0)
+    public function storeUpdate(PostRequest $request, $id=0)
     {
 
-        $saveData =  Developer::findOrNew($id);
+
+        $saveData =  Post::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
-        $saveData->setActive((bool) request('is_active', false));
+       // $saveData->setActive((bool) request('is_active', false));
         $saveData->save();
 
         $saveImgData = new PuzzleUploadProcess();
         $saveImgData->setCountOfUpload('2');
-        $saveImgData->setUploadDirIs('developer/'.$saveData->id);
+        $saveImgData->setUploadDirIs('post/'.$saveData->id);
         $saveImgData->setnewFileName($request->input('slug'));
         $saveImgData->UploadOne($request);
         $saveData = AdminHelper::saveAndDeletePhoto($saveData,$saveImgData);
@@ -98,8 +106,8 @@ class DeveloperController extends AdminMainController
 
 
         foreach ( config('app.lang_file') as $key=>$lang) {
-            $saveTranslation = DeveloperTranslation::where('developer_id',$saveData->id)->where('locale',$key)->firstOrNew();
-            $saveTranslation->developer_id = $saveData->id;
+            $saveTranslation = PostTranslation::where('post_id',$saveData->id)->where('locale',$key)->firstOrNew();
+            $saveTranslation->post_id = $saveData->id;
             $saveTranslation->locale = $key;
             $saveTranslation->name = $request->input($key.'.name');
             $saveTranslation->des = $request->input($key.'.des');
@@ -111,27 +119,28 @@ class DeveloperController extends AdminMainController
         }
 
         if($id == '0'){
-            return redirect(route('developer.index'))->with('Add.Done',"");
+            return redirect(route('post.index'))->with('Add.Done',"");
         }else{
             return back();
             ////return redirect(route('category.index'))->with('Edit.Done',"");
         }
     }
 
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id)
     {
-        $deleteRow = Developer::findOrFail($id);
+        $deleteRow = Post::findOrFail($id);
         $deleteRow->delete();
-         return redirect(route('developer.index'))->with('confirmDelete',"");
+        return redirect(route('post.index'))->with('confirmDelete',"");
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Restore
     public function Restore($id)
     {
-        Developer::onlyTrashed()->where('id',$id)->restore();
+        Post::onlyTrashed()->where('id',$id)->restore();
         return back()->with('restore',"");
     }
 
@@ -140,14 +149,14 @@ class DeveloperController extends AdminMainController
     public function ForceDeletes($id)
     {
 
-        $delMorePhoto = DeveloperPhoto::where('developer_id',"=",$id)->get();
+        $delMorePhoto = PostPhoto::where('post_id',"=",$id)->get();
         if(count($delMorePhoto) > 0){
             foreach ($delMorePhoto as $del_photo ){
                 $del_photo = AdminHelper::DeleteAllPhotos($del_photo);
             }
         }
 
-        $deleteRow =  Developer::onlyTrashed()->where('id',$id)->first();
+        $deleteRow =  Post::onlyTrashed()->where('id',$id)->first();
         $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
         $deleteRow->forceDelete();
 
@@ -155,42 +164,27 @@ class DeveloperController extends AdminMainController
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #  updateStatus
-    public function updateStatus(Request $request ){
-        $thisId  = $request->send_id;
-        $updateData = Developer::findOrFail($thisId);
-        if($updateData->is_active == '1'){
-            $updateData->is_active = '0';
-        }else{
-            $updateData->is_active = '1';
-        }
-        $updateData->save();
-        return response()->json(['success'=>$thisId]);
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     EmptyPhoto
     public function emptyPhoto($id){
-        $rowData = Developer::findOrFail($id);
+        $rowData = Post::findOrFail($id);
         $rowData = AdminHelper::DeleteAllPhotos($rowData,true);
         $rowData->save();
         return back();
     }
 
 
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
     public function ListMorePhoto($id)
     {
-        $sendArr = ['TitlePage' => __('admin/menu.developer') ];
+        $sendArr = ['TitlePage' => __('admin/menu.post') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-        $DeveloperPhotos = DeveloperPhoto::where('developer_id','=',$id)->orderBy('position')->with('developerName')->get();
-        $Developer = Developer::findOrFail($id) ;
+        $PostPhotos = PostPhoto::where('post_id','=',$id)->orderBy('position')->with('postName')->get();
+        $Post = Post::findOrFail($id) ;
 
-        return view('admin.developer.photos',compact('DeveloperPhotos','pageData','Developer'));
+        return view('admin.post.post_photos',compact('PostPhotos','pageData','Post'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -200,7 +194,7 @@ class DeveloperController extends AdminMainController
         foreach($positions as $position) {
             $id = $position[0];
             $newPosition = $position[1];
-            $saveData =  DeveloperPhoto::findOrFail($id) ;
+            $saveData =  PostPhoto::findOrFail($id) ;
             $saveData->position = $newPosition;
             $saveData->save();
         }
@@ -214,25 +208,27 @@ class DeveloperController extends AdminMainController
 
         $saveImgData = new PuzzleUploadProcess();
         $saveImgData->setCountOfUpload('2');
-        $saveImgData->setUploadDirIs('developer/'.$request->developer_id);
+        $saveImgData->setUploadDirIs('post/'.$request->post_id);
         $saveImgData->setnewFileName($request->input('name'));
         $saveImgData->UploadMultiple($request);
 
         foreach ($saveImgData->sendSaveData as $newPhoto){
-            $saveData =  DeveloperPhoto::findOrNew('0');
-            $saveData->developer_id   =  $request->developer_id;
+            $saveData =  PostPhoto::findOrNew('0');
+            $saveData->post_id   =  $request->post_id;
             $saveData->photo = $newPhoto['photo']['file_name'];
             $saveData->photo_thum_1 = $newPhoto['photo_thum_1']['file_name'];
             $saveData->save();
         }
 
         return back()->with('Add.Done',"");
+
     }
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     More_PhotosDestroy
     public function More_PhotosDestroy($id){
-        $deleteRow = DeveloperPhoto::findOrFail($id);
+        $deleteRow = PostPhoto::findOrFail($id);
         $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
         $deleteRow->delete();
         return back()->with('confirmDelete',"");
@@ -240,76 +236,24 @@ class DeveloperController extends AdminMainController
 
 
 
-
-
-
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     index
-    public function testXXX()
-    {
-        $sendArr = ['TitlePage' => __('admin/menu.developer'),'restore'=> 1 ];
-        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
-        $pageData['ViewType'] = "List";
-        $pageData['Trashed'] = Developer::onlyTrashed()->count();
-
-        $allData = Location::withTrashed()->get();
-
-        foreach ($allData as $data){
-            if($data->photo != null){
-
-                $oldfile = public_path($data->photo);
-                if(File::exists($oldfile)){
-                    $newFile = public_path(str_replace('locations/', 'newdevelopers/', $data->photo));
-                    echo $oldfile;
-                    echo "<br>";
-                    echo $newFile;
-                    echo "<br>";
-                    echo '<hr>';
-                    File::move($oldfile, $newFile);
-                }
-
-
-                $oldfile = public_path($data->photo_thum_1);
-                if(File::exists($oldfile)){
-                    $newFile = public_path(str_replace('locations/', 'newdevelopers/', $data->photo_thum_1));
-                    echo $oldfile;
-                    echo "<br>";
-                    echo $newFile;
-                    echo "<br>";
-                    echo '<hr>';
-                    File::move($oldfile, $newFile);
-                }
-
-
-            }
-        }
-
-
-
-        #$Developers = self::getSelectQuery(Developer::query());
-        #return view('admin.developer.index',compact('pageData','Developers'));
-    }
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     sliderGet
     public function sliderGet()
     {
-        // $Developers = self::getSelectQuery(Developer::query());
-        $Developers = Developer::where('slider_images_dir','!=',null)
+
+        $Posts = Post::where('slider_images_dir','!=',null)
             ->where('slider_get',"=","0")
-            ->where('id','!=',"191")
-            ->paginate(100);
+            ->where('id','!=',"0")
+            ->paginate(10000);
 
-        $foreign_name = "developer_id";
-        $save_table_name = "developer_photos";
+        $foreign_name = "post_id";
+        $save_table_name = "post_photos";
 
 
-        foreach ($Developers as $developer){
+        foreach ($Posts as $post){
 
-            $oldPath = public_path("ckfinder/userfiles_old/".$developer->slider_images_dir);
-            $newPath =  public_path("ckfinder/userfiles/".$developer->slider_images_dir) ;
+            $oldPath = public_path("ckfinder/userfiles_old/".$post->slider_images_dir);
+            $newPath =  public_path("ckfinder/userfiles/".$post->slider_images_dir) ;
 
             if(File::exists($oldPath)){
                 Update_createDirectory($newPath);
@@ -326,15 +270,15 @@ class DeveloperController extends AdminMainController
 
                                 File::copy($OldFileWillCopyFrom,$newFileWillCopy);
                                 DB::connection('mysql2')->table($save_table_name)->insert([
-                                    $foreign_name => $developer->id,
-                                    'photo' => "ckfinder/userfiles/".$developer->slider_images_dir."/".$filename ,
+                                    $foreign_name => $post->id,
+                                    'photo' => "ckfinder/userfiles/".$post->slider_images_dir."/".$filename ,
                                     'file_extension' =>  File::extension($file),
                                     'file_size' => File::size($file),
 
                                 ]);
 
-                                $developer->slider_get = 1 ;
-                                $developer->save();
+                                $post->slider_get = 1 ;
+                                $post->save();
 
                                 echobr("save");
                             }
@@ -342,18 +286,95 @@ class DeveloperController extends AdminMainController
                     }
                 }
             }else{
-                $developer->slider_get = 2 ;
-                $developer->save();
+                $post->slider_get = 2 ;
+                $post->save();
                 echobr("Error");
             }
         }
 
 
 
-        dd(count($Developers));
-        return view('admin.developer.index',compact('pageData','Developers'));
+        dd(count($Posts));
+
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function RemovePhoto()
+    {
+
+        $allData = Post::withTrashed()->get();
+
+        foreach ($allData as $data){
+            if($data->photo != null){
+
+                $oldfile = public_path($data->photo);
+                if(File::exists($oldfile)){
+                    $newFile = public_path(str_replace('posts/', 'newposts/', $data->photo));
+                    echo $oldfile;
+                    echo "<br>";
+                    echo $newFile;
+                    echo "<br>";
+                    echo '<hr>';
+                    File::move($oldfile, $newFile);
+                }
+
+
+                $oldfile = public_path($data->photo_thum_1);
+                if(File::exists($oldfile)){
+                    $newFile = public_path(str_replace('posts/', 'newposts/', $data->photo_thum_1));
+                    echo $oldfile;
+                    echo "<br>";
+                    echo $newFile;
+                    echo "<br>";
+                    echo '<hr>';
+                    File::move($oldfile, $newFile);
+                }
+
+
+            }
+        }
+
+
+
+
+    }
 
 
 
