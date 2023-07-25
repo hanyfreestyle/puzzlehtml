@@ -10,6 +10,7 @@ use App\Models\admin\Category;
 use App\Models\admin\CategoryTranslation;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 
 class CategoryController extends AdminMainController
@@ -29,7 +30,7 @@ class CategoryController extends AdminMainController
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
-    public function index()
+    public function index() :View
     {
         $sendArr = ['TitlePage' => __('admin/menu.category'),'restore'=> 1 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
