@@ -36,6 +36,14 @@ class AdminMainController extends Controller
             "12"=> ['id'=>'12','name'=>__('admin/config/roles.model_12')],
             "13"=> ['id'=>'13','name'=>__('admin/config/roles.model_13')],
             "14"=> ['id'=>'14','name'=>__('admin/config/roles.model_14')],
+            "15"=> ['id'=>'15','name'=>__('admin/config/roles.model_15')],
+            "16"=> ['id'=>'16','name'=>__('admin/config/roles.model_16')],
+            "17"=> ['id'=>'17','name'=>__('admin/config/roles.model_17')],
+            "18"=> ['id'=>'18','name'=>__('admin/config/roles.model_18')],
+            "19"=> ['id'=>'19','name'=>__('admin/config/roles.model_19')],
+            "20"=> ['id'=>'20','name'=>__('admin/config/roles.model_20')],
+            "21"=> ['id'=>'21','name'=>__('admin/config/roles.model_21')],
+
         ];
         View::share('modelsNameArr', $modelsNameArr);
 

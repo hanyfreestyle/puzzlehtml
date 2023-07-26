@@ -97,6 +97,25 @@
             'roleView'=>'developer_view',
         ],
 
+        [
+            'view'=>true,
+            'sel_routs'=>'project',
+            'type'=>'one',
+            'text'=> 'admin/menu.project',
+            'url'=> 'project.index',
+            'icon'=>'fas fa-truck-monster',
+            'roleView'=>'project_view',
+        ],
+
+        [
+            'view'=>true,
+            'sel_routs'=>'unit',
+            'type'=>'one',
+            'text'=> 'admin/menu.unit',
+            'url'=> 'developer.index',
+            'icon'=>'fas fa-truck-monster',
+            'roleView'=>'unit_view',
+        ],
 
 
     ],

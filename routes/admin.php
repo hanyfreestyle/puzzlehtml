@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\config\AmenityController;
 use App\Http\Controllers\admin\DeveloperController;
 use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\PostController;
+use App\Http\Controllers\admin\ProjectController;
 
 Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
 Route::get('/amenity/create',[AmenityController::class,'create'])->name('amenity.create');
@@ -82,3 +83,22 @@ Route::get('/post/photos/{id}',[PostController::class,'ListMorePhoto'])->name('p
 Route::post('/post/saveSort', [PostController::class,'sortPhotoSave'])->name('post.sortPhotoSave');
 Route::post('/post/AddMore',[PostController::class,'AddMorePhotos'])->name('post.More_PhotosAdd');
 Route::get('/post/PhotoDel/{id}',[PostController::class,'More_PhotosDestroy'])->name('post.More_PhotosDestroy');
+
+
+
+Route::get('/project/sliderGet',[ProjectController::class,'sliderGet'])->name('project.sliderGet');
+Route::get('/project',[ProjectController::class,'index'])->name('project.index');
+Route::get('/project/create',[ProjectController::class,'create'])->name('project.create');
+Route::post('/project/store/{id}',[ProjectController::class,'storeUpdate'])->name('project.store');
+Route::get('/project/edit/{id}',[ProjectController::class,'edit'])->name('project.edit');
+Route::post('/project/update/{id}',[ProjectController::class,'storeUpdate'])->name('project.update');
+Route::get('/project/destroy/{id}',[ProjectController::class,'destroy'])->name('project.destroy');
+Route::post('/project/updateStatus', [ProjectController::class,'updateStatus'])->name('project.updateStatus');
+Route::get('/project/emptyPhoto/{id}', [ProjectController::class,'emptyPhoto'])->name('project.emptyPhoto');
+Route::get('/project/SoftDelete/',[ProjectController::class,'SoftDeletes'])->name('project.SoftDelete');
+Route::get('/project/restore/{id}',[ProjectController::class,'Restore'])->name('project.restore');
+Route::get('/project/force/{id}',[ProjectController::class,'ForceDeletes'])->name('project.force');
+Route::get('/project/photos/{id}',[ProjectController::class,'ListMorePhoto'])->name('project.More_Photos');
+Route::post('/project/saveSort', [ProjectController::class,'sortPhotoSave'])->name('project.sortPhotoSave');
+Route::post('/project/AddMore',[ProjectController::class,'AddMorePhotos'])->name('project.More_PhotosAdd');
+Route::get('/project/PhotoDel/{id}',[ProjectController::class,'More_PhotosDestroy'])->name('project.More_PhotosDestroy');

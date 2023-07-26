@@ -10,6 +10,8 @@ use Database\Seeders\admin\CategoryTranslationSeeder;
 use Database\Seeders\admin\DeveloperPhotoSeeder;
 use Database\Seeders\admin\DeveloperSeeder;
 use Database\Seeders\admin\DeveloperTranslationSeeder;
+use Database\Seeders\admin\ListingSeeder;
+use Database\Seeders\admin\ListingTranslationSeeder;
 use Database\Seeders\admin\LocationSeeder;
 use Database\Seeders\admin\LocationTranslationSeeder;
 use Database\Seeders\admin\PostPhotoSeeder;
@@ -61,6 +63,10 @@ class DatabaseSeeder extends Seeder
          $this->call(PostSeeder::class);
          $this->call(PostTranslationSeeder::class);
          $this->call(PostPhotoSeeder::class);
+
+//        $this->call(ListingSeeder::class);
+//        $this->call(ListingTranslationSeeder::class);
+
 
     }
 }
