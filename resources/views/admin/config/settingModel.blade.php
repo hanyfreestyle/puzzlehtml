@@ -61,6 +61,23 @@
                                 </div>
 
 
+                                <div class="col-lg-12 pt-3">
+                                    <div class="alert alert-dark alert-dismissible">
+                                        {{ __('admin/menu.project') }}
+                                    </div>
+                                    <x-def-settings modelname="project">
+                                    </x-def-settings>
+                                </div>
+
+
+                                <div class="col-lg-12 pt-3">
+                                    <div class="alert alert-dark alert-dismissible">
+                                        {{ __('admin/menu.unit') }}
+                                    </div>
+                                    <x-def-settings modelname="unit">
+                                    </x-def-settings>
+                                </div>
+
 
                             </div>
 

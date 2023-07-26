@@ -269,6 +269,17 @@ if (!function_exists('echobr')) {
     }
 }
 
+
+if (!function_exists('printProjectIconX')) {
+    function printProjectIconX($name,$icon,$count,$sendArr=array()){
+
+        $html = "";
+
+
+        return $html;
+    }
+}
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Text
 

@@ -20,4 +20,35 @@ class Listing extends Model implements TranslatableContract
 
 
 
+    public function getMorePhoto(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ListingPhoto::class,'listing_id','id');
+    }
+
+    public function unitsToProject()
+    {
+        return $this->hasMany(Listing::class,'parent_id','id');
+    }
+
+
+
+/*
+    public function postName(){
+        return $this->belongsTo(Post::class,"post_id");
+    }
+
+    public function childrenlocations()
+    {
+        return $this->hasMany(Location::class,'parent_id')->with('locations');
+    }
+
+
+    public function parentName()
+    {
+       // return $this->hasOne(Location::class,'id');
+        return $this->belongsTo(Location::class,'parent_id','id');
+    }
+
+ */
+
 }
