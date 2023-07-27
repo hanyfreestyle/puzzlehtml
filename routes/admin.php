@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\DeveloperController;
 use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\ProjectController;
+use App\Http\Controllers\admin\QuestionController;
 
 Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
 Route::get('/amenity/create',[AmenityController::class,'create'])->name('amenity.create');
@@ -98,7 +99,19 @@ Route::get('/project/emptyPhoto/{id}', [ProjectController::class,'emptyPhoto'])-
 Route::get('/project/SoftDelete/',[ProjectController::class,'SoftDeletes'])->name('project.SoftDelete');
 Route::get('/project/restore/{id}',[ProjectController::class,'Restore'])->name('project.restore');
 Route::get('/project/force/{id}',[ProjectController::class,'ForceDeletes'])->name('project.force');
+
 Route::get('/project/photos/{id}',[ProjectController::class,'ListMorePhoto'])->name('project.More_Photos');
 Route::post('/project/saveSort', [ProjectController::class,'sortPhotoSave'])->name('project.sortPhotoSave');
 Route::post('/project/AddMore',[ProjectController::class,'AddMorePhotos'])->name('project.More_PhotosAdd');
 Route::get('/project/PhotoDel/{id}',[ProjectController::class,'More_PhotosDestroy'])->name('project.More_PhotosDestroy');
+
+
+Route::get('/project/faqlist/{id}',[QuestionController::class,'FaqList'])->name('project.faq_list');
+Route::get('/project/FaqSoftDelete/{id}',[QuestionController::class,'FaqSoftDeletes'])->name('project.faq_SoftDelete');
+Route::get('/project/faqrestore/{id}',[QuestionController::class,'FaqRestore'])->name('project.faq_restore');
+Route::get('/project/faqforce/{id}',[QuestionController::class,'FaqForceDeletes'])->name('project.faq_force');
+
+Route::get('/project/faq/create/{project_id}',[QuestionController::class,'FaqCreate'])->name('project.faq_create');
+Route::get('/project/faq/edit/{id}',[QuestionController::class,'Faqedit'])->name('project.faq_edit');
+Route::post('/project/faq/update/{id}',[QuestionController::class,'FaqstoreUpdate'])->name('project.faq_update');
+Route::get('/project/faq/destroy/{id}',[QuestionController::class,'Faqdestroy'])->name('project.faq_destroy');

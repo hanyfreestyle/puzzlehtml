@@ -17,6 +17,8 @@ use Database\Seeders\admin\LocationTranslationSeeder;
 use Database\Seeders\admin\PostPhotoSeeder;
 use Database\Seeders\admin\PostSeeder;
 use Database\Seeders\admin\PostTranslationSeeder;
+use Database\Seeders\admin\QuestionSeeder;
+use Database\Seeders\admin\QuestionTranslationSeeder;
 use Database\Seeders\roles\AdminUserSeeder;
 use Database\Seeders\roles\PermissionSeeder;
 use Database\Seeders\roles\RoleSeeder;
@@ -67,6 +69,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call(ListingSeeder::class);
 //        $this->call(ListingTranslationSeeder::class);
 
-
+        $this->call(QuestionSeeder::class);
+        $this->call(QuestionTranslationSeeder::class);
     }
 }

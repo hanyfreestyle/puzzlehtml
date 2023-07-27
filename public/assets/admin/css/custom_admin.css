@@ -85,5 +85,27 @@ div.dataTables_wrapper div.dataTables_filter input {
 
 
 
+.btn_app_new {
+  border-radius: 3px;
+  background-color: #f8f9fa;
+  border: 0px solid #ddd;
+  color: #6c757d;
+  font-size: 12px;
+  height: 60px;
+  margin: 0 0 10px 10px;
+  min-width: 70px;
+  padding: 15px 5px;
+  position: relative;
+  text-align: center;
+}
+
+.btn_app_new > .badge {
+  font-size: 12px;
+  font-weight:normal!important;
+  min-width:20px;
+ 
+}
+
+
 
 

@@ -66,48 +66,29 @@
                                             <td>{{optional($Project->translate('ar'))->name}}</td>
                                             <td>{{optional($Project->translate('en'))->name}}</td>
 
-
-
                                             @if($pageData['ViewType'] == 'deleteList')
                                                 <td>{{$Project->deleted_at}}</td>
                                                 <td class="tc"><x-action-button url="{{route('project.restore',$Project->id)}}" type="restor" /></td>
                                                 <td class="tc"><x-action-button url="#" id="{{route('project.force',$Project->id)}}" type="deleteSweet"/></td>
                                             @else
-
-
                                                 <td>
                                                     <x-project-table-icon name="Units" icon="fas fa-bath"
                                                                           :count="count($Project->unitsToProject)"
-                                                                          url="hany"
-                                                    />
+                                                                          url="hany" />
                                                 </td>
 
                                                 <td>
                                                     <x-project-table-icon name="Photo" icon="fas fa-images"
                                                                           :count="count($Project->getMorePhoto)"
-                                                                          url="{{route('project.More_Photos',$Project->id)}}"
-                                                    />
+                                                                          url="{{route('project.More_Photos',$Project->id)}}" />
                                                 </td>
 
                                                 <td>
                                                     <x-project-table-icon name="FAQ" icon="fas fa-question"
-                                                                          :count="count($Project->getMorePhoto)"
-                                                                          url="{{route('project.More_Photos',$Project->id)}}"
-                                                    />
+                                                                          :count="count($Project->faqToProject)"
+                                                                          url="{{route('project.faq_list',$Project->id)}}" />
                                                 </td>
 
-
-
-{{--                                                <td>--}}
-
-
-{{--                                                    @if(count($Project->getMorePhoto) == '0')--}}
-{{--                                                        <x-action-button url="{{route('project.More_Photos',$Project->id)}}" type="morePhoto" :tip="true" bg="dark" />--}}
-{{--                                                    @else--}}
-{{--                                                        <x-action-button url="{{route('project.More_Photos',$Project->id)}}" type="morePhoto" :tip="true" />--}}
-{{--                                                    @endif--}}
-
-{{--                                                </td>--}}
                                                 @can('project_edit')
                                                     <td class="tc"><x-action-button url="{{route('project.edit',$Project->id)}}" type="edit" :tip="true" /></td>
                                                 @endcan
@@ -132,9 +113,7 @@
             @if($Projects instanceof \Illuminate\Pagination\AbstractPaginator)
                 {{ $Projects->links() }}
             @endif
-
         </div>
-
 
     </section>
 @endsection

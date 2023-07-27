@@ -30,7 +30,10 @@ class Listing extends Model implements TranslatableContract
         return $this->hasMany(Listing::class,'parent_id','id');
     }
 
-
+    public function faqToProject()
+    {
+        return $this->hasMany(Question::class,'project_id','id');
+    }
 
 /*
     public function postName(){

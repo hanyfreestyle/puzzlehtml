@@ -16,6 +16,7 @@ return
 	'des_ar' => 'الوصف',
 	'des_en' => 'Description',
 	'developer' => 'المطورين',
+	'is_published' => 'منشور',
 	'meta_bodyH1_ar' => 'عنوان H1',
 	'meta_bodyH1_en' => 'H1 Tag',
 	'meta_breadcrumb_ar' => 'وسام التنقل',
@@ -28,5 +29,8 @@ return
 	'password_confirm' => 'تاكيد كلمة المرور',
 	'title_ar' => 'العنوان',
 	'title_en' => 'Title',
-	'is_published' => 'منشور',
+	'faq_question_ar' => 'السؤال',
+	'faq_question_en' => 'Question',
+	'faq_answer_ar' => 'الاجابة',
+	'faq_answer_en' => 'Answer',
 ];

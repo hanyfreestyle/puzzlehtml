@@ -16,6 +16,7 @@ return
 	'des_ar' => 'Description',
 	'des_en' => 'Description',
 	'developer' => 'Developer',
+	'is_published' => 'Published',
 	'meta_bodyH1_ar' => 'H1 Text',
 	'meta_bodyH1_en' => 'H1 Tag',
 	'meta_breadcrumb_ar' => 'Breadcrumb',
@@ -28,5 +29,8 @@ return
 	'password_confirm' => 'Confirm Password',
 	'title_ar' => 'Title',
 	'title_en' => 'Title',
-	'is_published' => 'Published',
+	'faq_question_ar' => 'Question',
+	'faq_question_en' => 'Question',
+	'faq_answer_ar' => 'Answer',
+	'faq_answer_en' => 'Answer',
 ];

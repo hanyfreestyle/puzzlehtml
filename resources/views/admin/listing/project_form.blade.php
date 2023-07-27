@@ -12,6 +12,7 @@
                     </div>
                     <div class="col-3 text-left">
                         <x-action-button url="{{route('project.More_Photos',$Project->id)}}" type="morePhoto" :tip="false" bg="dark" />
+                        <x-action-button url="{{route('project.faq_list',$Project->id)}}" print-lable="FAQ" icon="fas fa-question" :tip="false" bg="dark" />
                     </div>
                 </div>
             </div>
