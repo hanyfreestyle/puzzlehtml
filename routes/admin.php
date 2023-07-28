@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\QuestionController;
+use App\Http\Controllers\admin\UnitController;
 
 Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
 Route::get('/amenity/create',[AmenityController::class,'create'])->name('amenity.create');
@@ -115,3 +116,24 @@ Route::get('/project/faq/create/{project_id}',[QuestionController::class,'FaqCre
 Route::get('/project/faq/edit/{id}',[QuestionController::class,'Faqedit'])->name('project.faq_edit');
 Route::post('/project/faq/update/{id}',[QuestionController::class,'FaqstoreUpdate'])->name('project.faq_update');
 Route::get('/project/faq/destroy/{id}',[QuestionController::class,'Faqdestroy'])->name('project.faq_destroy');
+
+
+
+
+
+Route::get('/unit',[UnitController::class,'index'])->name('unit.index');
+Route::get('/unit/create',[UnitController::class,'create'])->name('unit.create');
+Route::post('/unit/store/{id}',[UnitController::class,'storeUpdate'])->name('unit.store');
+Route::get('/unit/edit/{id}',[UnitController::class,'edit'])->name('unit.edit');
+Route::post('/unit/update/{id}',[UnitController::class,'storeUpdate'])->name('unit.update');
+Route::get('/unit/destroy/{id}',[UnitController::class,'destroy'])->name('unit.destroy');
+Route::post('/unit/updateStatus', [UnitController::class,'updateStatus'])->name('unit.updateStatus');
+Route::get('/unit/emptyPhoto/{id}', [UnitController::class,'emptyPhoto'])->name('unit.emptyPhoto');
+Route::get('/unit/SoftDelete/',[UnitController::class,'SoftDeletes'])->name('unit.SoftDelete');
+Route::get('/unit/restore/{id}',[UnitController::class,'Restore'])->name('unit.restore');
+Route::get('/unit/force/{id}',[UnitController::class,'ForceDeletes'])->name('unit.force');
+Route::get('/unit/photos/{id}',[UnitController::class,'ListMorePhoto'])->name('unit.More_Photos');
+Route::post('/unit/saveSort', [UnitController::class,'sortPhotoSave'])->name('unit.sortPhotoSave');
+Route::post('/unit/AddMore',[UnitController::class,'AddMorePhotos'])->name('unit.More_PhotosAdd');
+Route::get('/unit/PhotoDel/{id}',[UnitController::class,'More_PhotosDestroy'])->name('unit.More_PhotosDestroy');
+

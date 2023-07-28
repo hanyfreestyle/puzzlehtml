@@ -21,6 +21,6 @@ return
 	'setting_model' => 'Model Settings',
 	'setting_photo' => 'Photo Settings',
 	'setting_web' => 'Web Settings',
-	'unit' => 'Units',
+	'unit' => 'Units For Sale',
 	'uploadFilter' => 'Upload Filters',
 ];

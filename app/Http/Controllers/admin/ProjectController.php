@@ -36,10 +36,18 @@ class ProjectController extends AdminMainController
         $sendArr = ['TitlePage' => __('admin/menu.project'),'restore'=> 1 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
-        $pageData['Trashed'] = Listing::onlyTrashed()->count();
+        $pageData['Trashed'] = Listing::onlyTrashed()
+            ->where('parent_id' , '=', null )
+            ->where('property_type','=',null)
+            ->count();
 
-        $Projects = self::getSelectQuery( Listing::where('id',"!=","0")->with('unitsToProject')->with('getMorePhoto')
-            ->with('faqToProject'));
+        $Projects = Listing::where('parent_id' , '=', null )
+            ->where('property_type','=',null)
+            ->with('unitsToProject')
+            ->with('getMorePhoto')
+            ->paginate(15);
+//        $Projects = self::getSelectQuery( Listing::where('id',"!=","0")->with('unitsToProject')->with('getMorePhoto')
+//            ->with('faqToProject'));
 
         return view('admin.listing.project_index',compact('pageData','Projects'));
     }
@@ -51,7 +59,10 @@ class ProjectController extends AdminMainController
         $sendArr = ['TitlePage' => __('admin/menu.project') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "deleteList";
-        $Projects = self::getSelectQuery(Listing::onlyTrashed());
+        //$Projects = self::getSelectQuery(Listing::onlyTrashed());
+        $Projects = Listing::onlyTrashed()
+            ->where('parent_id' , '=', null )
+            ->where('property_type','=',null)->paginate(15);
 
         return view('admin.listing.project_index',compact('pageData','Projects'));
     }
@@ -154,17 +165,29 @@ class ProjectController extends AdminMainController
     public function ForceDeletes($id)
     {
 
-//        $delMorePhoto = PostPhoto::where('post_id',"=",$id)->get();
-//        if(count($delMorePhoto) > 0){
-//            foreach ($delMorePhoto as $del_photo ){
-//                $del_photo = AdminHelper::DeleteAllPhotos($del_photo);
-//            }
-//        }
-//
-//        $deleteRow =  Listing::onlyTrashed()->where('id',$id)->first();
-//        $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
-//        $deleteRow->forceDelete();
+        $delMorePhoto = ListingPhoto::where('listing_id',"=",$id)->get();
 
+        if(count($delMorePhoto) > 0){
+            foreach ($delMorePhoto as $del_photo ){
+                $del_photo = AdminHelper::DeleteAllPhotos($del_photo);
+            }
+        }
+
+        $deleteRow =  Listing::onlyTrashed()->where('id',$id)->first();
+        $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
+
+        $deleteSubListings = Listing::withTrashed()->where('parent_id','=',$id)->get();
+        foreach ($deleteSubListings as $subListing){
+            $delMorePhoto = ListingPhoto::where('listing_id',"=",$subListing->id)->get();
+            if(count($delMorePhoto) > 0){
+                foreach ($delMorePhoto as $del_photo ){
+                    $del_photo = AdminHelper::DeleteAllPhotos($del_photo);
+                }
+            }
+            $subListing =  AdminHelper::DeleteAllPhotos($subListing);
+            $subListing->forceDelete();
+        }
+        $deleteRow->forceDelete();
         return back()->with('confirmDelete',"");
     }
 

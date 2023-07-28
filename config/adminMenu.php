@@ -103,7 +103,7 @@
             'type'=>'one',
             'text'=> 'admin/menu.project',
             'url'=> 'project.index',
-            'icon'=>'fas fa-truck-monster',
+            'icon'=>'fas fa-building',
             'roleView'=>'project_view',
         ],
 
@@ -112,8 +112,8 @@
             'sel_routs'=>'unit',
             'type'=>'one',
             'text'=> 'admin/menu.unit',
-            'url'=> 'developer.index',
-            'icon'=>'fas fa-truck-monster',
+            'url'=> 'unit.index',
+            'icon'=>'fas fa-bath',
             'roleView'=>'unit_view',
         ],
 

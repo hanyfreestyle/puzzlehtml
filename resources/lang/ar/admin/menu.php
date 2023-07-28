@@ -21,6 +21,6 @@ return
 	'setting_model' => 'اعدادات الاقسام',
 	'setting_photo' => 'اعدادات الصور',
 	'setting_web' => 'الاعدادات العامة',
-	'unit' => 'الوحدات',
+	'unit' => 'وحدات للبيع',
 	'uploadFilter' => 'فلاتر الصور',
 ];
