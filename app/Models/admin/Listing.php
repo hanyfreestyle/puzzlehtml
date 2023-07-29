@@ -2,6 +2,7 @@
 
 namespace App\Models\admin;
 
+use App\Constants\Fields;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,11 +15,25 @@ class Listing extends Model implements TranslatableContract
     use HasFactory;
     use SoftDeletes;
     use Translatable;
-    public $translatedAttributes = ['name','g_title','g_des','body_h1','breadcrumb'];
+    public array $translatedAttributes = ['name','g_title','g_des','body_h1','breadcrumb'];
     protected $table = "listings";
     protected $primaryKey = 'id';
 
 
+//    protected array $dates = ['delivery_date'];
+//    protected $casts = [
+//        'delivery_date'=> 'datetime'
+//    ];
+//
+//    public function getDate()
+//    {
+//        return $this->delivery_date->format('Y');
+//    }
+
+    public function setPublished(bool $status = true): self
+    {
+        return $this->setAttribute('is_published', $status);
+    }
 
     public function getMorePhoto(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

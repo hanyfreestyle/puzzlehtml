@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\admin;
 
+use App\Helpers\AdminHelper;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class UnitRequest extends FormRequest
 {
@@ -11,18 +13,54 @@ class UnitRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
-    public function rules(): array
+
+    public function rules(Request $request): array
     {
-        return [
-            //
+        $request->slug = AdminHelper::Url_Slug($request->slug) ;
+
+        $id = $this->route('id');
+
+
+
+        if($id == '0'){
+            $rules = [
+                'slug'=> "required|unique:listings",
+
+            ];
+        }else{
+            $rules =[
+                'slug'=> "required|unique:listings,slug,$id",
+
+            ];
+        }
+
+        $rules += [
+            'location_id'=> "required",
+            'developer_id'=> "required",
+            'property_type'=> "required",
+            'unit_status'=> "required",
+            'price'=> "required",
+            'view'=> "required",
+            'area'=> "required",
+            'baths'=> "required",
+            'rooms'=> "required",
+
         ];
+
+
+        foreach(config('app.lang_file') as $key=>$lang){
+            $rules[$key.".name"] =   'required';
+            $rules[$key.".g_title"] =   'required';
+            $rules[$key.".g_des"] =   'required';
+            $rules[$key.".des"] =   'required';
+        }
+
+
+         $rules = [];
+         return $rules;
+
     }
 }

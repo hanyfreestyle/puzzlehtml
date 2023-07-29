@@ -2,11 +2,19 @@
 
 return
 [
-	'loction' => 'المنطقة',
-	'searchable' => 'قابل للبحث',
-	'type' => 'نوع المشروع',
+	'area' => 'المساحة',
+	'baths' => 'الحمامات',
+	'contact_number' => 'رقم الهاتف',
 	'developer' => 'المطور',
 	'location' => 'المنطقة',
-	'view' => 'المطل',
+	'loction' => 'المنطقة',
+	'price' => 'السعر',
 	'property_type' => 'نوع الوحدة',
+	'rooms' => 'الغرف',
+	'searchable' => 'قابل للبحث',
+	'type' => 'نوع المشروع',
+	'unit_status' => 'حالة الوحدة',
+	'view' => 'المطل',
+	'youtube' => 'اليوتيوب',
+	'delivery_date' => 'سنة الاستلام',
 ];

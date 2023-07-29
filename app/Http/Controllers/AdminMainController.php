@@ -104,6 +104,13 @@ class AdminMainController extends Controller
         View::share('ListingView_Arr', $ListingView_Arr);
 
 
+        $UnitSatues_Arr = [
+            "1"=> ['id'=>'1','name'=> 'Primary' ],
+            "2"=> ['id'=>'2','name'=> 'Reseller' ],
+
+        ];
+        View::share('UnitSatues_Arr', $UnitSatues_Arr);
+
     }
 
 

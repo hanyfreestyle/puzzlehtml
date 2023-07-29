@@ -7,6 +7,7 @@ use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 
 use App\Http\Requests\admin\ProjectRequest;
+use App\Http\Requests\admin\UnitRequest;
 use App\Models\admin\Category;
 use App\Models\admin\Developer;
 use App\Models\admin\Listing;
@@ -89,21 +90,39 @@ class UnitController extends AdminMainController
         $Unit = Listing::findOrFail($id);
         $Developers = Developer::all();
         $Locations = Location::all();
+
+        ///dd($Unit->getDate());
         return view('admin.listing.unit_form',compact('pageData','Unit','Developers','Locations'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(ProjectRequest $request, $id=0)
+    public function storeUpdate(UnitRequest $request, $id=0)
     {
 
 
 
         $saveData =  Listing::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
-//        $saveData->category_id = $request->input('category_id');
-//        $saveData->developer_id = $request->input('developer_id');
-//        $saveData->setPublished((bool) request('is_published', false));
+        $saveData->location_id = $request->input('location_id');
+        $saveData->developer_id  = $request->input('developer_id');
+        $saveData->property_type  = $request->input('property_type');
+        $saveData->view  = $request->input('view');
+        //$saveData->delivery_date  = $request->input('delivery_date');
+
+        $saveData->delivery_date  = $request->input('delivery_date');
+        $saveData->price  = $request->input('price');
+        $saveData->area  = $request->input('area');
+        $saveData->baths  = $request->input('baths');
+        $saveData->rooms  = $request->input('rooms');
+        $saveData->unit_status  = $request->input('unit_status');
+
+        $saveData->latitude   = $request->input('latitude');
+        $saveData->longitude   = $request->input('longitude');
+        $saveData->youtube_url   = $request->input('youtube_url');
+        $saveData->contact_number   = $request->input('contact_number');
+        $saveData->setPublished((bool) request('is_published', false));
+
         $saveData->save();
 
         $saveImgData = new PuzzleUploadProcess();

@@ -14,13 +14,12 @@ class ListingSeeder extends Seeder
 
     public function run(): void
     {
-       // $old_listing = DB::connection('mysql2')->table('listings')->get();
-        $old_listing = DB::connection('mysql2')->table('listings')->limit(50000)->get();
+        $old_listing = DB::connection('mysql2')->table('listings')->limit(20000000)->get();
         foreach ($old_listing as $oneListing)
         {
             $data = [
                 'id'=>$oneListing->id ,
-                'parent_id'=>$oneListing->parent_id ,
+
                 'location_id'=>$oneListing->location_id ,
                 'developer_id'=>$oneListing->developer_id ,
 
@@ -41,7 +40,7 @@ class ListingSeeder extends Seeder
 
                 'latitude'=>$oneListing->latitude ,
                 'longitude'=>$oneListing->longitude ,
-                'delivery_date'=>$oneListing->delivery_date ,
+                'delivery_date'=>substr($oneListing->delivery_date, 0, 4) ,
 
                 'is_published'=>$oneListing->is_published ,
                 'is_featured'=>$oneListing->is_featured ,
@@ -50,11 +49,21 @@ class ListingSeeder extends Seeder
                 'created_at'=>$oneListing->created_at ,
                 'deleted_at'=>$oneListing->deleted_at ,
                 'updated_at'=>$oneListing->updated_at  ,
-
-
             ];
+
+            if( $oneListing->property_type  != null){
+                $data += [ 'unit_status'=>1 ];
+            }
+
+            if( $oneListing->id  ==  $oneListing->parent_id ){
+                $data += [ 'parent_id'=>null];
+            }else{
+                $data += [ 'parent_id'=>$oneListing->parent_id ];
+            }
+
             Listing::create($data);
         }
+
 
     }
 }

@@ -289,32 +289,6 @@ class ProjectController extends AdminMainController
 
 
 
-    public function index_testRela(){
-
-        // self::PrintData();
-         $Project = Listing::where('parent_id' , '=', null )
-             ->where('property_type','=',null)
-             //->where('id','=',14)
-             ->with('unitsToProject')
-             ->paginate(10);
-
-
-         foreach ($Project as $project)
-         {
-             echobr($project->name);
-             echobr($project->slug);
-             echobr($project->id);
-             echobr(count($project->unitsToProject));
-             echobr('hr');
-
-         }
-
-
-         dd(count($Project));
-
-
-
-     }
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -404,6 +378,11 @@ class ProjectController extends AdminMainController
     }
 
 
+
+    public function indexXXX()
+    {
+
+    }
 
 
 }

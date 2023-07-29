@@ -16,7 +16,7 @@ class ListingTranslationSeeder extends Seeder
         $old_DeveloperTranslations = DB::connection('mysql2')->table('listing_translations')
             ->where('deleted_at','=',null)
             ->where('listing_id','!=','30235')
-            ->limit(1000000000)->get();
+            ->limit(10000000000)->get();
         foreach ($old_DeveloperTranslations as $old_Developer)
         {
             $data = [
