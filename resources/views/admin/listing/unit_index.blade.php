@@ -42,6 +42,7 @@
                                             <th>{{ __('admin/page.del_date') }}</th>
                                             <th></th>
                                             <th></th>
+                                            <th></th>
 
                                         @else
                                             <th></th>
@@ -69,6 +70,11 @@
                                                 <td class="tc"><x-action-button url="{{route('unit.restore',$Unit->id)}}" type="restor" /></td>
                                                 <td class="tc"><x-action-button url="#" id="{{route('unit.force',$Unit->id)}}" type="deleteSweet"/></td>
                                             @else
+                                                <td>
+                                                    @if($Unit->slider_active)
+                                                        <x-action-button url="{{route('unit.Old_Photos',$Unit->id)}}" icon="far fa-folder-open"  :tip="true" bg="p" />
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if(count($Unit->getMorePhoto) == '0')
                                                         <x-action-button url="{{route('unit.More_Photos',$Unit->id)}}" type="morePhoto" :tip="true" bg="dark" />

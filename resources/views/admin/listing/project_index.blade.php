@@ -37,6 +37,7 @@
                                         <th class="tc">{{__('admin/def.photo')}}</th>
                                         <th class="TD_350">{{__('admin/def.form_name_ar')}}</th>
                                         <th class="TD_350">{{__('admin/def.form_name_en')}}</th>
+                                        <th ></th>
 
                                         @if($pageData['ViewType'] == 'deleteList')
                                             <th>{{ __('admin/page.del_date') }}</th>
@@ -65,6 +66,11 @@
 
                                             <td>{{optional($Project->translate('ar'))->name}}</td>
                                             <td>{{optional($Project->translate('en'))->name}}</td>
+                                            <td>
+                                                @if($Project->slider_active)
+                                                    <x-action-button url="{{route('project.Old_Photos',$Project->id)}}" icon="far fa-folder-open"  :tip="true" bg="p" />
+                                                @endif
+                                            </td>
 
                                             @if($pageData['ViewType'] == 'deleteList')
                                                 <td>{{$Project->deleted_at}}</td>

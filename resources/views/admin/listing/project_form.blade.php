@@ -11,6 +11,9 @@
                         <h1 class="def_h1">{{ $Project->translate('ar')->name }}</h1>
                     </div>
                     <div class="col-3 text-left">
+                        @if($Project->slider_active)
+                            <x-action-button url="{{route('project.Old_Photos',$Project->id)}}" icon="far fa-folder-open"  :tip="true" bg="p" />
+                        @endif
                         <x-action-button url="{{route('project.More_Photos',$Project->id)}}" type="morePhoto" :tip="false" bg="dark" />
                         <x-action-button url="{{route('project.faq_list',$Project->id)}}" print-lable="FAQ" icon="fas fa-question" :tip="false" bg="dark" />
                     </div>

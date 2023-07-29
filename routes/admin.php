@@ -102,6 +102,7 @@ Route::get('/project/restore/{id}',[ProjectController::class,'Restore'])->name('
 Route::get('/project/force/{id}',[ProjectController::class,'ForceDeletes'])->name('project.force');
 
 Route::get('/project/photos/{id}',[ProjectController::class,'ListMorePhoto'])->name('project.More_Photos');
+Route::get('/project/oldphoto/{id}',[ProjectController::class,'ListOldPhoto'])->name('project.Old_Photos');
 Route::post('/project/saveSort', [ProjectController::class,'sortPhotoSave'])->name('project.sortPhotoSave');
 Route::post('/project/AddMore',[ProjectController::class,'AddMorePhotos'])->name('project.More_PhotosAdd');
 Route::get('/project/PhotoDel/{id}',[ProjectController::class,'More_PhotosDestroy'])->name('project.More_PhotosDestroy');
@@ -137,3 +138,4 @@ Route::post('/unit/saveSort', [UnitController::class,'sortPhotoSave'])->name('un
 Route::post('/unit/AddMore',[UnitController::class,'AddMorePhotos'])->name('unit.More_PhotosAdd');
 Route::get('/unit/PhotoDel/{id}',[UnitController::class,'More_PhotosDestroy'])->name('unit.More_PhotosDestroy');
 
+Route::get('/unit/oldphoto/{id}',[UnitController::class,'ListOldPhoto'])->name('unit.Old_Photos');

@@ -14,6 +14,7 @@ use App\Models\admin\Listing;
 use App\Models\admin\ListingPhoto;
 use App\Models\admin\ListingTranslation;
 use App\Models\admin\Location;
+use File;
 use Illuminate\Http\Request;
 
 class UnitController extends AdminMainController
@@ -228,6 +229,27 @@ class UnitController extends AdminMainController
 
         return view('admin.listing.unit_photos',compact('UnitPhotos','pageData','Unit'));
     }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     edit
+    public function ListOldPhoto($id)
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.unit') ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "Edit";
+
+
+        $Unit = Listing::findOrFail($id) ;
+
+        $folderPath = public_path("ckfinder/userfiles_old/".$Unit->slider_images_dir);
+        if(File::isDirectory($folderPath)){
+            $UnitPhotos = File::files($folderPath);
+        }else{
+            $UnitPhotos = [];
+        }
+       return view('admin.listing.unit_old_photos',compact('UnitPhotos','pageData','Unit'));
+    }
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     sortDefPhotoList
