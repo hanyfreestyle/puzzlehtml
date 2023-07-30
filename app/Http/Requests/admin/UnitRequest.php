@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 
 class UnitRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+
     public function authorize(): bool
     {
         return true;
@@ -42,13 +40,13 @@ class UnitRequest extends FormRequest
             'developer_id'=> "required",
             'property_type'=> "required",
             'unit_status'=> "required",
+            'delivery_date'=> "required",
             'price'=> "required",
             'view'=> "required",
             'area'=> "required",
             'baths'=> "required",
             'rooms'=> "required",
             'amenity' => "required|array|min:3",
-
         ];
 
 

@@ -111,6 +111,25 @@ class AdminMainController extends Controller
         ];
         View::share('UnitSatues_Arr', $UnitSatues_Arr);
 
+        $ProjectSatues_Arr = [
+            "1"=> ['id'=>'under-construction','name'=> 'Under Construction' ],
+            "2"=> ['id'=>'completed','name'=> 'Completed' ],
+
+        ];
+        View::share('ProjectSatues_Arr', $ProjectSatues_Arr);
+
+        $ProjectType_Arr = [
+            "1"=> ['id'=>'residential','name'=> 'Residential' ],
+            "2"=> ['id'=>'vacation','name'=> 'Vacation' ],
+            "3"=> ['id'=>'commercial','name'=> 'Commercial' ],
+            "4"=> ['id'=>'medical','name'=> 'Medical' ],
+
+        ];
+        View::share('ProjectType_Arr', $ProjectType_Arr);
+
+
+
+
     }
 
 

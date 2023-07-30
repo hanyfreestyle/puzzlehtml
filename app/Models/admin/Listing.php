@@ -3,6 +3,7 @@
 namespace App\Models\admin;
 
 use App\Constants\Fields;
+use App\Helpers\AdminHelper;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -28,6 +29,13 @@ class Listing extends Model implements TranslatableContract
             set: fn($value) => json_encode($value)
         );
     }
+
+//    protected function slug() :Attribute{
+//        return Attribute::make(
+//            get: fn($value) => AdminHelper::Url_Slug($value),
+//            set: fn($value) => AdminHelper::Url_Slug($value),
+//        );
+//    }
 
 
 //    protected array $dates = ['delivery_date'];
@@ -59,6 +67,18 @@ class Listing extends Model implements TranslatableContract
     {
         return $this->hasMany(Question::class,'project_id','id');
     }
+
+
+    public function developerName() :BelongsTo
+    {
+        return $this->belongsTo(Developer::class,'developer_id','id');
+    }
+
+    public function locationName():BelongsTo
+    {
+        return $this->belongsTo(Location::class,'location_id','id');
+    }
+
 
 /*
     public function postName(){

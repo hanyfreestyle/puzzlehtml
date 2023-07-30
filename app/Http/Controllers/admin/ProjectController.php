@@ -7,13 +7,16 @@ use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\ProjectRequest;
 use App\Models\admin\Category;
+use App\Models\admin\config\Amenity;
 use App\Models\admin\Developer;
 use App\Models\admin\Listing;
 use App\Models\admin\ListingPhoto;
 use App\Models\admin\ListingTranslation;
+use App\Models\admin\Location;
 use Illuminate\Http\Request;
 use DB;
 use File;
+use Illuminate\Support\Facades\View;
 
 class ProjectController extends AdminMainController
 {
@@ -29,6 +32,10 @@ class ProjectController extends AdminMainController
         $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit']]);
         $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
         $this->middleware('permission:'.$controllerName.'_restore', ['only' => ['SoftDeletes','Restore','ForceDeletes']]);
+        View::share('Amenities', Amenity::all());
+        View::share('Developers', Developer::all());
+        View::share('Locations', Location::all());
+
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -61,8 +68,6 @@ class ProjectController extends AdminMainController
         echobr($Listing_List);
 
     }
-
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     MoveImage
     public function  MoveImage()
@@ -111,7 +116,6 @@ class ProjectController extends AdminMainController
 
 
     }
-
     public function  indexYYYY(){
 //        $Listings = Listing::where('getslider',"=","1")
 //            ->where('slider_images_dir','!=',null)
@@ -242,7 +246,6 @@ class ProjectController extends AdminMainController
         $sendArr = ['TitlePage' => __('admin/menu.project') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "deleteList";
-        //$Projects = self::getSelectQuery(Listing::onlyTrashed());
         $Projects = Listing::onlyTrashed()
             ->where('parent_id' , '=', null )
             ->where('property_type','=',null)->paginate(15);
@@ -259,9 +262,8 @@ class ProjectController extends AdminMainController
         $pageData['ViewType'] = "Add";
 
         $Project = Listing::findOrNew(0);
-        $Developers = Developer::all();
-        $Categories = Category::all();
-        return view('admin.listing.project_form',compact('pageData','Project','Developers','Categories'));
+
+        return view('admin.listing.project_form',compact('pageData','Project'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -272,10 +274,18 @@ class ProjectController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-        $Project = Listing::findOrFail($id);
-        $Developers = Developer::all();
-        $Categories = Category::all();
-        return view('admin.listing.project_form',compact('pageData','Project','Developers','Categories'));
+       /// $Project = Listing::findOrFail($id);
+
+
+        $Project = Listing::query()
+            ->where('id','=',$id)
+            ->where('parent_id','=',null)
+            ->where('property_type','=',null)
+            ->firstOrFail();
+
+
+
+        return view('admin.listing.project_form',compact('pageData','Project'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -287,9 +297,19 @@ class ProjectController extends AdminMainController
 
         $saveData =  Listing::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
-//        $saveData->category_id = $request->input('category_id');
-//        $saveData->developer_id = $request->input('developer_id');
-//        $saveData->setPublished((bool) request('is_published', false));
+        $saveData->location_id = $request->input('location_id');
+        $saveData->developer_id  = $request->input('developer_id');
+        $saveData->project_type  = $request->input('project_type');
+        $saveData->status  = $request->input('status');
+
+        $saveData->delivery_date  = $request->input('delivery_date');
+        $saveData->price  = $request->input('price');
+        $saveData->latitude   = $request->input('latitude');
+        $saveData->longitude   = $request->input('longitude');
+        $saveData->youtube_url   = $request->input('youtube_url');
+        $saveData->contact_number   = $request->input('contact_number');
+        $saveData->setPublished((bool) request('is_published', false));
+        $saveData->amenity  = $request->input('amenity');
         $saveData->save();
 
         $saveImgData = new PuzzleUploadProcess();
@@ -312,8 +332,6 @@ class ProjectController extends AdminMainController
             $saveTranslation->des = $request->input($key.'.des');
             $saveTranslation->g_title = $request->input($key.'.g_title');
             $saveTranslation->g_des = $request->input($key.'.g_des');
-            $saveTranslation->body_h1 = $request->input($key.'.body_h1');
-            $saveTranslation->breadcrumb = $request->input($key.'.breadcrumb');
             $saveTranslation->save();
         }
 

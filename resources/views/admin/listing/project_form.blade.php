@@ -28,14 +28,40 @@
         <form  class="mainForm" action="{{route('project.update',intval($Project->id))}}" method="post"  enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <x-form-input label="Slug" name="slug" :requiredSpan="true" colrow="col-lg-12 {{getColDir('en')}}"
+                <x-form-input label="Slug" name="slug" :requiredSpan="true" colrow="col-lg-6 {{getColDir('en')}}"
                               value="{{old('slug',$Project->slug)}}"  dir="en" inputclass="dir_en"/>
+                <x-form-select-arr name="developer_id" label="{{__('admin/project.developer')}}" :sendvalue="old('developer_id',$Project->developer_id)" :required-span="true" colrow="col-lg-3 " :send-arr="$Developers"/>
+                <x-form-select-arr name="location_id" label="{{__('admin/project.loction')}}" :sendvalue="old('location_id',$Project->location_id)" :required-span="true" colrow="col-lg-3 " :send-arr="$Locations"/>
             </div>
 
-{{--            <div class="row">--}}
-{{--                <x-form-select-arr name="developer_id" label="{{__('admin/form.developer')}}" :sendvalue="old('developer_id',$Project->developer_id)" :required-span="false" colrow="col-lg-3 " :send-arr="$Developers"/>--}}
-{{--                <x-form-select-arr name="category_id" label="{{__('admin/form.category')}}" :sendvalue="old('category_id',$Project->category_id)" :required-span="false" colrow="col-lg-3 " :send-arr="$Categories"/>--}}
-{{--            </div>--}}
+
+            <div class="row">
+                <x-form-select-arr name="status" label="{{__('admin/project.project_status') }}" :sendvalue="old('status',$Project->status)" :required-span="true" colrow="col-lg-3 " :send-arr="$ProjectSatues_Arr"/>
+                <x-form-select-arr name="project_type" label="{{__('admin/project.project_type')}}" :sendvalue="old('project_type',$Project->project_type)" :required-span="true" colrow="col-lg-3 " :send-arr="$ProjectType_Arr"/>
+
+                <x-form-input label="{{__('admin/project.delivery_date')}}" name="delivery_date" :requiredSpan="false" colrow="col-lg-3 {{getColDir('en')}}"
+                              value="{{old('delivery_date',$Project->delivery_date)}}"  dir="ar" inputclass="dir_en"/>
+
+                <x-form-input label="{{__('admin/project.price')}}" name="price" :requiredSpan="true" colrow="col-lg-3 {{getColDir('en')}}"
+                              value="{{old('price',$Project->price)}}"  dir="ar" inputclass="dir_en"/>
+
+            </div>
+
+            <div class="row">
+                <x-form-input label="Latitude" name="latitude" :requiredSpan="false" colrow="col-lg-3 {{getColDir('en')}}"
+                              value="{{old('latitude',$Project->latitude)}}"  dir="ar" inputclass="dir_en"/>
+
+                <x-form-input label="Longitude" name="longitude" :requiredSpan="false" colrow="col-lg-3 {{getColDir('en')}}"
+                              value="{{old('longitude',$Project->longitude)}}"  dir="ar" inputclass="dir_en"/>
+
+                <x-form-input label="{{__('admin/project.youtube')}}" name="youtube_url" :requiredSpan="false" colrow="col-lg-3"
+                              value="{{old('youtube_url',$Project->youtube_url )}}"  dir="ar" />
+
+                <x-form-input label="{{__('admin/project.contact_number')}}" name="contact_number" :requiredSpan="false" colrow="col-lg-3"
+                              value="{{old('contact_number',$Project->contact_number )}}"  dir="ar" />
+
+            </div>
+
 
 
             <div class="row">
@@ -63,7 +89,7 @@
 
             <x-meta-tage-filde :body-h1="false" :breadcrumb="false"  :old-data="$Project" :placeholder="false" />
 
-            <hr>
+            <x-form-amenities :send-data="$Project->amenity"/>
 
             <div class="row">
                 <x-form-check-active :row="$Project" lable="{{__('admin/form.is_published')}}" name="is_published" page-view="{{$pageData['ViewType']}}"/>

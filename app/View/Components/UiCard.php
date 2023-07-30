@@ -54,6 +54,7 @@ class UiCard extends Component
         $this->RestoreRole = $RestoreRole;
         $this->pageData = $pageData;
 
+
         if($showIcon){
             $this->collapsedStyle = $collapsedStyle;
         }else{

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Helpers\AdminHelper;
 use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
+use App\Http\Requests\admin\ProjectToUnitsRequest;
 use App\Http\Requests\admin\UnitRequest;
 use App\Models\admin\config\Amenity;
 use App\Models\admin\Developer;
@@ -12,16 +13,16 @@ use App\Models\admin\Listing;
 use App\Models\admin\ListingPhoto;
 use App\Models\admin\ListingTranslation;
 use App\Models\admin\Location;
-use File;
-use Validator ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use File;
 
-class UnitController extends AdminMainController
+
+class ProjectToUnitsController extends AdminMainController
 {
     public $controllerName ;
 
-    function __construct($controllerName = 'unit')
+    function __construct($controllerName = 'project')
     {
         parent::__construct();
         $this->controllerName = $controllerName;
@@ -40,75 +41,108 @@ class UnitController extends AdminMainController
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
-    public function index()
+    public function index($projectId)
     {
-        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 1 ];
+
+        $Project = Listing::withTrashed()
+            ->where('id','=',$projectId)
+            ->firstOrFail();
+
+
+
+        $sendArr = ['TitlePage' => __('admin/project.units_project_title'),'restore'=> 1 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
+        $pageData['AddPageUrl'] = route('project.project_units.create',$projectId);
+        $pageData['RestoreUrl'] = route('project.project_units.SoftDelete',$projectId);
+
 
         $pageData['Trashed'] = Listing::onlyTrashed()
-            ->where('parent_id' , '=', null )
-            ->where('property_type','!=',null)
+            ->where('parent_id', '=',$projectId )
             ->count();
 
-        $Units = Listing::where('parent_id' , '=', null )
-            ->where('property_type','!=',null)
+        $Units = Listing::where('parent_id' , '=', $projectId )
             ->paginate(15);
 
-        return view('admin.listing.unit_index',compact('pageData','Units'));
+        return view('admin.listing.project_unit_index',compact('pageData','Units','Project'));
     }
+
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     SoftDeletes
-    public function SoftDeletes()
+    public function SoftDeletes($projectId)
     {
-        $sendArr = ['TitlePage' => __('admin/menu.project') ];
+
+        $Project = Listing::withTrashed()
+            ->where('id','=',$projectId)
+            ->firstOrFail();
+
+
+
+
+        $sendArr = ['TitlePage' => __('admin/project.units_project_title') ,'restore'=> 1 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "deleteList";
         $Units = Listing::onlyTrashed()
-            ->where('parent_id' , '=', null )
-            ->where('property_type','!=',null)->paginate(15);
-        return view('admin.listing.unit_index',compact('pageData','Units'));
+            ->where('parent_id' , '=', $projectId )
+            ->paginate(15);
+        return view('admin.listing.project_unit_index',compact('pageData','Units','Project'));
     }
+
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
-    public function create()
+    public function create($projectId)
     {
-        $sendArr = ['TitlePage' => __('admin/menu.unit') ];
+
+        $Project = Listing::withTrashed()
+            ->where('id','=',$projectId)
+            ->with('developerName')
+            ->with('locationName')
+            ->firstOrFail();
+
+        $sendArr = ['TitlePage' => __('admin/project.units')];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Add";
 
         $Unit = Listing::findOrNew(0);
 
-        return view('admin.listing.unit_form',compact('pageData','Unit'));
+        return view('admin.listing.project_unit_form',compact('pageData','Unit','Project'));
     }
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
     public function edit($id)
     {
-
         $sendArr = ['TitlePage' => __('admin/menu.unit') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-       // $Unit = Listing::findOrFail($id);
-        $Unit = Listing::query()
-        ->where('id','=',$id)
-        ->where('parent_id','=',null)
-        ->firstOrFail();
+        $Unit = Listing::findOrFail($id);
 
-        return view('admin.listing.unit_form',compact('pageData','Unit'));
+        $Project = Listing::withTrashed()
+            ->where('id','=',$Unit->parent_id)
+            ->with('developerName')
+            ->with('locationName')
+            ->firstOrFail();
+
+
+
+        return view('admin.listing.project_unit_form',compact('pageData','Unit','Project'));
     }
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(UnitRequest $request, $id=0)
+    public function storeUpdate(ProjectToUnitsRequest $request, $id=0)
     {
 
         $saveData =  Listing::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
+        $saveData->parent_id = $request->input('parent_id');
         $saveData->location_id = $request->input('location_id');
         $saveData->developer_id  = $request->input('developer_id');
         $saveData->property_type  = $request->input('property_type');
@@ -157,20 +191,22 @@ class UnitController extends AdminMainController
         }
 
         if($id == '0'){
-            return redirect(route('unit.index'))->with('Add.Done',"");
+            return redirect(route('project.project_units_index',$request->input('parent_id')))->with('Add.Done',"");
         }else{
             return back();
             ////return redirect(route('post.index'))->with('Edit.Done',"");
         }
     }
 
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id)
     {
         $deleteRow = Listing::findOrFail($id);
+        $projectId = $deleteRow->parent_id ;
         $deleteRow->delete();
-        return redirect(route('unit.index'))->with('confirmDelete',"");
+        return redirect(route('project.project_units_index',$projectId))->with('confirmDelete',"");
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -180,6 +216,7 @@ class UnitController extends AdminMainController
         Listing::onlyTrashed()->where('id',$id)->restore();
         return back()->with('restore',"");
     }
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     ForceDeletes
@@ -210,10 +247,12 @@ class UnitController extends AdminMainController
         return back();
     }
 
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     edit
+#|||||||||||||||||||||||||||||||||||||| #     ListMorePhoto
     public function ListMorePhoto($id)
     {
+
         $sendArr = ['TitlePage' => __('admin/menu.unit') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
@@ -221,28 +260,9 @@ class UnitController extends AdminMainController
         $UnitPhotos = ListingPhoto::where('listing_id','=',$id)->orderBy('position')->get();
         $Unit = Listing::findOrFail($id) ;
 
-        return view('admin.listing.unit_photos',compact('UnitPhotos','pageData','Unit'));
+        return view('admin.listing.ptoject_unit_photos',compact('UnitPhotos','pageData','Unit'));
     }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     edit
-    public function ListOldPhoto($id)
-    {
-        $sendArr = ['TitlePage' => __('admin/menu.unit') ];
-        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
-        $pageData['ViewType'] = "Edit";
-
-
-        $Unit = Listing::findOrFail($id) ;
-
-        $folderPath = public_path("ckfinder/userfiles_old/".$Unit->slider_images_dir);
-        if(File::isDirectory($folderPath)){
-            $UnitPhotos = File::files($folderPath);
-        }else{
-            $UnitPhotos = [];
-        }
-       return view('admin.listing.unit_old_photos',compact('UnitPhotos','pageData','Unit'));
-    }
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -291,5 +311,26 @@ class UnitController extends AdminMainController
         return back()->with('confirmDelete',"");
     }
 
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     ListOldPhoto
+    public function ListOldPhoto($id)
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.unit') ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "Edit";
+
+
+        $Unit = Listing::findOrFail($id) ;
+
+        $folderPath = public_path("ckfinder/userfiles_old/".$Unit->slider_images_dir);
+        if(File::isDirectory($folderPath)){
+            $UnitPhotos = File::files($folderPath);
+        }else{
+            $UnitPhotos = [];
+        }
+        return view('admin.listing.project_unit_old_photos',compact('UnitPhotos','pageData','Unit'));
+    }
 
 }

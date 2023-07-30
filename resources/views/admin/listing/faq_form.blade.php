@@ -36,14 +36,14 @@
                                             name="{{ $key }}[question]"
                                             dir="{{ $key }}"
                                             reqname="{{ $key }}.question"
-                                            value="{{old($key.'.name',$ProjectQuestion->translateOrNew($key)->question)}}"
+                                            value="{{old($key.'.question',$ProjectQuestion->translateOrNew($key)->question)}}"
                                         />
                                         <x-trans-text-area
                                             label="{{ __('admin/form.faq_answer_'.$key)}} ({{ ($key) }})"
                                             name="{{ $key }}[answer]"
                                             dir="{{ $key }}"
                                             reqname="{{ $key }}.answer"
-                                            value="{{ old($key.'.des',$ProjectQuestion->translateOrNew($key)->answer) }}"
+                                            value="{{ old($key.'.answer',$ProjectQuestion->translateOrNew($key)->answer) }}"
                                         />
 
                                     </div>

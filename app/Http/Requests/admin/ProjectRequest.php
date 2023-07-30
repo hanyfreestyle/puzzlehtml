@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 
 class ProjectRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+
     public function authorize(): bool
     {
         return true;
@@ -34,6 +32,16 @@ class ProjectRequest extends FormRequest
 
             ];
         }
+
+        $rules += [
+            'location_id'=> "required",
+            'developer_id'=> "required",
+            'project_type'=> "required",
+            'status'=> "required",
+            'price'=> "required",
+            'delivery_date'=> "required",
+            'amenity' => "required|array|min:3",
+        ];
 
         foreach(config('app.lang_file') as $key=>$lang){
             $rules[$key.".name"] =   'required';

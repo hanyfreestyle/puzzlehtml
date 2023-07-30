@@ -2,6 +2,7 @@
 
 return
 [
+	'amenity' => 'Amenities',
 	'area' => 'Area',
 	'baths' => 'Baths',
 	'contact_number' => 'Contact Number',
@@ -10,12 +11,15 @@ return
 	'location' => 'Location',
 	'loction' => 'Loction',
 	'price' => 'Price',
+	'project_status' => 'Project Status',
+	'project_type' => 'Project Type',
 	'property_type' => 'Property Type',
 	'rooms' => 'Rooms',
 	'searchable' => 'Searchable',
 	'type' => 'Projects Type',
 	'unit_status' => 'Unit Status',
+	'units_project_title' => 'الواحدات التابعة للمشروع',
 	'view' => 'View',
 	'youtube' => 'Youtube Url',
-	'amenity' => 'Amenities',
+	'list_units' => 'عرض الوحدات',
 ];

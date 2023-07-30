@@ -37,7 +37,8 @@
                                         <th class="tc">{{__('admin/def.photo')}}</th>
                                         <th class="TD_350">{{__('admin/def.form_name_ar')}}</th>
                                         <th class="TD_350">{{__('admin/def.form_name_en')}}</th>
-                                        <th ></th>
+                                        <th></th>
+                                        <th></th>
 
                                         @if($pageData['ViewType'] == 'deleteList')
                                             <th>{{ __('admin/page.del_date') }}</th>
@@ -66,8 +67,9 @@
 
                                             <td>{{optional($Project->translate('ar'))->name}}</td>
                                             <td>{{optional($Project->translate('en'))->name}}</td>
+                                            <td class="text-center">{!! printStateIcon($Project->is_published) !!}</td>
                                             <td>
-                                                @if($Project->slider_active)
+                                                @if($Project->slider_active == 1)
                                                     <x-action-button url="{{route('project.Old_Photos',$Project->id)}}" icon="far fa-folder-open"  :tip="true" bg="p" />
                                                 @endif
                                             </td>
@@ -80,7 +82,7 @@
                                                 <td>
                                                     <x-project-table-icon name="Units" icon="fas fa-bath"
                                                                           :count="count($Project->unitsToProject)"
-                                                                          url="hany" />
+                                                                          url="{{route('project.project_units_index',$Project->id)}}" />
                                                 </td>
 
                                                 <td>
