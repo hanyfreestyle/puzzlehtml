@@ -5,6 +5,7 @@ return
 	'area' => 'Area',
 	'baths' => 'Baths',
 	'contact_number' => 'Contact Number',
+	'delivery_date' => 'Delivery Date',
 	'developer' => 'Developer',
 	'location' => 'Location',
 	'loction' => 'Loction',
@@ -16,5 +17,5 @@ return
 	'unit_status' => 'Unit Status',
 	'view' => 'View',
 	'youtube' => 'Youtube Url',
-	'delivery_date' => 'Delivery Date',
+	'amenity' => 'Amenities',
 ];

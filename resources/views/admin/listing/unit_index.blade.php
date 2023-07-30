@@ -46,6 +46,7 @@
 
                                         @else
                                             <th></th>
+                                            <th></th>
                                             @can('unit_edit')
                                                 <th class="tbutaction"></th>
                                             @endcan
@@ -64,6 +65,7 @@
 
                                             <td>{{optional($Unit->translate('ar'))->name}}</td>
                                             <td>{{optional($Unit->translate('en'))->name}}</td>
+                                            <td class="text-center">{!! printStateIcon($Unit->is_published) !!}</td>
 
                                             @if($pageData['ViewType'] == 'deleteList')
                                                 <td>{{$Unit->deleted_at}}</td>

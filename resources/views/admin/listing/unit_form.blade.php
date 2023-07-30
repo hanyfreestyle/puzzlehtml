@@ -21,8 +21,10 @@
     <x-ui-card :page-data="$pageData"  >
         <x-mass.confirm-massage />
 
+
         <form  class="mainForm" action="{{route('unit.update',intval($Unit->id))}}" method="post"  enctype="multipart/form-data">
             @csrf
+
             <div class="row">
                 <x-form-input label="Slug" name="slug" :requiredSpan="true" colrow="col-lg-6 {{getColDir('en')}}"
                               value="{{old('slug',$Unit->slug)}}"  dir="en" inputclass="dir_en"/>
@@ -100,7 +102,8 @@
 
             <x-meta-tage-filde :body-h1="false" :breadcrumb="false"  :old-data="$Unit" :placeholder="false" />
 
-            <hr>
+            <x-form-amenities :send-data="$Unit->amenity"/>
+
 
             <div class="row">
                 <x-form-check-active :row="$Unit" lable="{{__('admin/form.is_published')}}" name="is_published" page-view="{{$pageData['ViewType']}}"/>

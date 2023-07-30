@@ -5,6 +5,7 @@ namespace App\Models\admin;
 use App\Constants\Fields;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,6 +19,15 @@ class Listing extends Model implements TranslatableContract
     public array $translatedAttributes = ['name','g_title','g_des','body_h1','breadcrumb'];
     protected $table = "listings";
     protected $primaryKey = 'id';
+
+
+
+    protected function amenity() :Attribute{
+        return Attribute::make(
+            get: fn($value) => json_decode($value,true),
+            set: fn($value) => json_encode($value)
+        );
+    }
 
 
 //    protected array $dates = ['delivery_date'];

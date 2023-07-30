@@ -47,6 +47,7 @@ class UnitRequest extends FormRequest
             'area'=> "required",
             'baths'=> "required",
             'rooms'=> "required",
+            'amenity' => "required|array|min:3",
 
         ];
 
@@ -59,7 +60,7 @@ class UnitRequest extends FormRequest
         }
 
 
-         $rules = [];
+
          return $rules;
 
     }

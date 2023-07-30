@@ -9,6 +9,8 @@ use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\ProjectRequest;
 use App\Http\Requests\admin\UnitRequest;
 use App\Models\admin\Category;
+use App\Models\admin\config\Amenity;
+use App\Models\admin\config\UploadFilter;
 use App\Models\admin\Developer;
 use App\Models\admin\Listing;
 use App\Models\admin\ListingPhoto;
@@ -16,6 +18,7 @@ use App\Models\admin\ListingTranslation;
 use App\Models\admin\Location;
 use File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class UnitController extends AdminMainController
 {
@@ -30,6 +33,7 @@ class UnitController extends AdminMainController
         $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit']]);
         $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
         $this->middleware('permission:'.$controllerName.'_restore', ['only' => ['SoftDeletes','Restore','ForceDeletes']]);
+        View::share('Amenities', Amenity::all());
     }
 
 
@@ -101,15 +105,14 @@ class UnitController extends AdminMainController
     public function storeUpdate(UnitRequest $request, $id=0)
     {
 
-
-
         $saveData =  Listing::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
         $saveData->location_id = $request->input('location_id');
         $saveData->developer_id  = $request->input('developer_id');
         $saveData->property_type  = $request->input('property_type');
         $saveData->view  = $request->input('view');
-        //$saveData->delivery_date  = $request->input('delivery_date');
+        $saveData->amenity  = $request->input('amenity');
+
 
         $saveData->delivery_date  = $request->input('delivery_date');
         $saveData->price  = $request->input('price');
@@ -180,7 +183,6 @@ class UnitController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     ForceDeletes
     public function ForceDeletes($id)
     {
-        dd('exit');
         $delMorePhoto = ListingPhoto::where('listing_id',"=",$id)->get();
 
         if(count($delMorePhoto) > 0){
@@ -192,20 +194,10 @@ class UnitController extends AdminMainController
         $deleteRow =  Listing::onlyTrashed()->where('id',$id)->first();
         $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
 
-        $deleteSubListings = Listing::withTrashed()->where('parent_id','=',$id)->get();
-        foreach ($deleteSubListings as $subListing){
-            $delMorePhoto = ListingPhoto::where('listing_id',"=",$subListing->id)->get();
-            if(count($delMorePhoto) > 0){
-                foreach ($delMorePhoto as $del_photo ){
-                    $del_photo = AdminHelper::DeleteAllPhotos($del_photo);
-                }
-            }
-            $subListing =  AdminHelper::DeleteAllPhotos($subListing);
-            $subListing->forceDelete();
-        }
         $deleteRow->forceDelete();
         return back()->with('confirmDelete',"");
     }
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     EmptyPhoto
