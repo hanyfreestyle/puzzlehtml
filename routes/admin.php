@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\ProjectToUnitsController;
 use App\Http\Controllers\admin\QuestionController;
 use App\Http\Controllers\admin\UnitController;
+use App\Http\Controllers\admin\UpdateProjectController;
 
 Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
 Route::get('/amenity/create',[AmenityController::class,'create'])->name('amenity.create');
@@ -157,3 +158,5 @@ Route::post('/projectUnit/AddMore',[ProjectToUnitsController::class,'AddMorePhot
 Route::get('/projectUnit/PhotoDel/{id}',[ProjectToUnitsController::class,'More_PhotosDestroy'])->name('project.project_units.More_PhotosDestroy');
 Route::get('/projectUnit/oldphoto/{id}',[ProjectToUnitsController::class,'ListOldPhoto'])->name('project.project_units.Old_Photos');
 
+
+Route::get('/project/update',[UpdateProjectController::class,'index'])->name('updatepro');

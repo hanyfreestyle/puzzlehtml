@@ -70,5 +70,14 @@ class DeveloperSeeder extends Seeder
         }
 
 
+
+        $data = [
+            'slug'=>"unknown" ,
+            'is_active'=>1 ,
+        ];
+
+        Developer::create($data);
+
+
     }
 }

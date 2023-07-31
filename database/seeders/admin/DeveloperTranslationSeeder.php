@@ -51,5 +51,30 @@ class DeveloperTranslationSeeder extends Seeder
         $saveTranslation->name = "en10";
         $saveTranslation->save();
 
+
+
+        $data = [
+            'developer_id'=> 331 ,
+            'locale'=> 'ar' ,
+            'name'=> "غير محدد"  ,
+            'des'=> "غير محدد" ,
+            'g_des'=> "غير محدد" ,
+        ];
+        DeveloperTranslation::create($data);
+
+
+        $data = [
+            'developer_id'=> 331 ,
+            'locale'=> 'en' ,
+            'name'=> "unknown"  ,
+            'des'=> "unknown"  ,
+            'g_des'=> "unknown"  ,
+        ];
+        DeveloperTranslation::create($data);
+
+
     }
+
+
+
 }

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Listing extends Model implements TranslatableContract
@@ -79,6 +80,11 @@ class Listing extends Model implements TranslatableContract
         return $this->belongsTo(Location::class,'location_id','id');
     }
 
+
+    public function getoldtools() :HasMany
+    {
+        return $this->hasMany(Amenitable::class,'amenitable_id','id');
+    }
 
 /*
     public function postName(){

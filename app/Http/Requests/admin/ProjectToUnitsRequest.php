@@ -49,7 +49,7 @@ class ProjectToUnitsRequest extends FormRequest
             'area'=> "required",
             'baths'=> "required",
             'rooms'=> "required",
-            'amenity' => "required|array|min:3",
+//            'amenity' => "required|array|min:3",
         ];
 
 

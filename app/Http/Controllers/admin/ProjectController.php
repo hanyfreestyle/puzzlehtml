@@ -37,185 +37,6 @@ class ProjectController extends AdminMainController
         View::share('Locations', Location::all());
 
     }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     UpdateImage
-    public function UpdateImage(){
-
-        $Listing_List = Listing::where('getslider',"=","0")->limit(1000)->get();
-        if(count($Listing_List) > 0){
-            foreach ($Listing_List as $oneList){
-                $old_Post = DB::connection('mysql2')->table('images')
-                    ->where('imageable_type','=',"App\Listing")
-                    ->where('imageable_id',"=",$oneList->id)
-                    ->get();
-
-                $Update = Listing::findOrFail($oneList->id);
-                if(count($old_Post) == '1'){
-                    $Update->photo = $old_Post->first()->image_url;
-                    $Update->photo_thum_1 = $old_Post->first()->thumb_url;
-                }
-                $Update->getslider = 1;
-                $Update->save();
-            }
-        }else{
-            echobr('nodata');
-        }
-        $Listing_List = Listing::where('getslider',"=","0")->count();
-        echobr($Listing_List);
-
-        $Listing_List = Listing::where('getslider',"=","1")->count();
-        echobr($Listing_List);
-
-    }
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     MoveImage
-    public function  MoveImage()
-    {
-        //$Listing_List = Listing::where('getslider',"=","1")->limit(1000)->get();
-        $Listing_List = Listing::where('getslider',"=","1")->where('photo','!=',null)->limit(1000)->get();
-        echobr(count($Listing_List));
-        if(count($Listing_List) > 0){
-            foreach ($Listing_List as $list){
-                $err_photo = 0;
-                $err_photo_2 = 0;
-
-                $oldfile = public_path($list->photo);
-                if(File::exists($oldfile)){
-                    $newFile = public_path(str_replace('listings/', 'newlistings/', $list->photo));
-                    File::move($oldfile, $newFile);
-                }else{
-                    $err_photo = 1 ;
-                }
-
-                $oldfile = public_path($list->photo_thum_1);
-                if(File::exists($oldfile)){
-                    $newFile = public_path(str_replace('listings/', 'newlistings/', $list->photo_thum_1));
-                    File::move($oldfile, $newFile);
-                }else{
-                    $err_photo_2 = 1 ;
-                }
-
-
-                if($err_photo == 1 or $err_photo_2 == 1 ){
-                    $list->getslider = 2;
-                    $list->save();
-                }else{
-                    $list->getslider = 0;
-                    $list->save();
-                }
-
-            }
-
-        }
-        $Listing_List = Listing::where('getslider',"=","1")->where('photo','!=',null)->get();
-        echobr(count($Listing_List));
-
-        $Listing_List = Listing::where('getslider',"=","0")->get();
-        echobr(count($Listing_List));
-
-
-    }
-    public function  indexYYYY(){
-//        $Listings = Listing::where('getslider',"=","1")
-//            ->where('slider_images_dir','!=',null)
-//            ->where('parent_id' , '=', null )
-//            ->where('property_type','=',null)
-//            ->where('slidercount','=','1')
-//            ->count();
-
-        $Listings = Listing::where('slider_active',"=","0")
-            ->where('slider_images_dir','!=',null)
-            ->limit(500)
-            ->get();
-
-        foreach ($Listings as $list){
-            $folderPath = public_path("ckfinder/userfiles_old/".$list->slider_images_dir);
-            if(File::isDirectory($folderPath)){
-                $files = File::files($folderPath);
-                if( count($files) > 0 ) {
-                    $list->slider_active = 1;
-                    $list->save();
-                }else{
-                    $list->slider_active = 2;
-                    $list->save();
-                }
-            }else{
-                $list->slider_active = 2;
-                $list->save();
-            }
-        }
-
-
-        $Listings = Listing::where('slider_active',"=","2")
-            ->where('slider_images_dir','!=',null)
-            ->count();
-
-        echobr($Listings);
-
-
-    }
-    public function  indexXXXXXXXX(){
-
-        /*
-        $Listing_List = Listing::where('getslider',"=","0")->where('slider_images_dir','!=',null)
-            ->groupBy('slider_images_dir');
-
-        dd($Listing_List);
-        echobr(count($Listing_List));
-
-
-        $user_info = DB::table('listings')
-            ->where('parent_id' , '=', null )
-            ->where('property_type','!=',null)
-            ->select('slider_images_dir', DB::raw('count(*) as total'))
-            ->groupBy('slider_images_dir')
-            ->pluck('total','slider_images_dir');
-
-*/
-
-        $Listings = Listing::where('getslider',"=","0")
-            ->where('slider_images_dir','!=',null)
-            ->where('parent_id' , '=', null )
-            ->where('property_type','!=',null)
-            ->limit(100)
-            ->get();
-
-
-
-
-
-        if(count($Listings) > 0){
-            foreach ($Listings as $unit){
-                $count =  Listing::where('slider_images_dir','=',$unit->slider_images_dir)->count();
-                $unit->getslider = 1;
-                $unit->slidercount = intval($count);
-                $unit->save();
-            }
-        }
-
-
-        $Listings = Listing::where('getslider',"=","0")
-            ->where('slider_images_dir','!=',null)
-            ->where('parent_id' , '=', null )
-            ->where('property_type','!=',null)
-            ->count();
-        dd($Listings);
-
-
-//        $user_info = DB::table('listings')
-//            ->where('parent_id' , '=', null )
-//            ->where('property_type','!=',null)
-//            ->select('slider_images_dir', DB::raw('count(*) as total'))
-//            ->groupBy('slider_images_dir')
-//            ->orderBy('total', 'desc')
-//            ->pluck('total','slider_images_dir');
-//
-//
-//        dd($user_info);
-
-    }
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
@@ -293,8 +114,6 @@ class ProjectController extends AdminMainController
     public function storeUpdate(ProjectRequest $request, $id=0)
     {
 
-
-
         $saveData =  Listing::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
         $saveData->location_id = $request->input('location_id');
@@ -333,6 +152,17 @@ class ProjectController extends AdminMainController
             $saveTranslation->g_title = $request->input($key.'.g_title');
             $saveTranslation->g_des = $request->input($key.'.g_des');
             $saveTranslation->save();
+        }
+
+        $UpdateUnits = Listing::withTrashed()
+            ->where('parent_id', '=', $saveData->id)
+            ->get();
+        if(count($UpdateUnits) > 0){
+            foreach ($UpdateUnits as $UpdateUnit){
+                $UpdateUnit->location_id = $request->input('location_id');
+                $UpdateUnit->developer_id  = $request->input('developer_id');
+                $UpdateUnit->save();
+            }
         }
 
         if($id == '0'){
@@ -600,10 +430,182 @@ class ProjectController extends AdminMainController
         }
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     UpdateImage
+    public function UpdateImage(){
 
+        $Listing_List = Listing::where('getslider',"=","0")->limit(1000)->get();
+        if(count($Listing_List) > 0){
+            foreach ($Listing_List as $oneList){
+                $old_Post = DB::connection('mysql2')->table('images')
+                    ->where('imageable_type','=',"App\Listing")
+                    ->where('imageable_id',"=",$oneList->id)
+                    ->get();
 
-    public function indexXXX()
+                $Update = Listing::findOrFail($oneList->id);
+                if(count($old_Post) == '1'){
+                    $Update->photo = $old_Post->first()->image_url;
+                    $Update->photo_thum_1 = $old_Post->first()->thumb_url;
+                }
+                $Update->getslider = 1;
+                $Update->save();
+            }
+        }else{
+            echobr('nodata');
+        }
+        $Listing_List = Listing::where('getslider',"=","0")->count();
+        echobr($Listing_List);
+
+        $Listing_List = Listing::where('getslider',"=","1")->count();
+        echobr($Listing_List);
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     MoveImage
+    public function  MoveImage()
     {
+        //$Listing_List = Listing::where('getslider',"=","1")->limit(1000)->get();
+        $Listing_List = Listing::where('getslider',"=","1")->where('photo','!=',null)->limit(1000)->get();
+        echobr(count($Listing_List));
+        if(count($Listing_List) > 0){
+            foreach ($Listing_List as $list){
+                $err_photo = 0;
+                $err_photo_2 = 0;
+
+                $oldfile = public_path($list->photo);
+                if(File::exists($oldfile)){
+                    $newFile = public_path(str_replace('listings/', 'newlistings/', $list->photo));
+                    File::move($oldfile, $newFile);
+                }else{
+                    $err_photo = 1 ;
+                }
+
+                $oldfile = public_path($list->photo_thum_1);
+                if(File::exists($oldfile)){
+                    $newFile = public_path(str_replace('listings/', 'newlistings/', $list->photo_thum_1));
+                    File::move($oldfile, $newFile);
+                }else{
+                    $err_photo_2 = 1 ;
+                }
+
+
+                if($err_photo == 1 or $err_photo_2 == 1 ){
+                    $list->getslider = 2;
+                    $list->save();
+                }else{
+                    $list->getslider = 0;
+                    $list->save();
+                }
+
+            }
+
+        }
+        $Listing_List = Listing::where('getslider',"=","1")->where('photo','!=',null)->get();
+        echobr(count($Listing_List));
+
+        $Listing_List = Listing::where('getslider',"=","0")->get();
+        echobr(count($Listing_List));
+
+
+    }
+    public function  indexYYYY(){
+//        $Listings = Listing::where('getslider',"=","1")
+//            ->where('slider_images_dir','!=',null)
+//            ->where('parent_id' , '=', null )
+//            ->where('property_type','=',null)
+//            ->where('slidercount','=','1')
+//            ->count();
+
+        $Listings = Listing::where('slider_active',"=","0")
+            ->where('slider_images_dir','!=',null)
+            ->limit(500)
+            ->get();
+
+        foreach ($Listings as $list){
+            $folderPath = public_path("ckfinder/userfiles_old/".$list->slider_images_dir);
+            if(File::isDirectory($folderPath)){
+                $files = File::files($folderPath);
+                if( count($files) > 0 ) {
+                    $list->slider_active = 1;
+                    $list->save();
+                }else{
+                    $list->slider_active = 2;
+                    $list->save();
+                }
+            }else{
+                $list->slider_active = 2;
+                $list->save();
+            }
+        }
+
+
+        $Listings = Listing::where('slider_active',"=","2")
+            ->where('slider_images_dir','!=',null)
+            ->count();
+
+        echobr($Listings);
+
+
+    }
+    public function  indexXXXXXXXX(){
+
+        /*
+        $Listing_List = Listing::where('getslider',"=","0")->where('slider_images_dir','!=',null)
+            ->groupBy('slider_images_dir');
+
+        dd($Listing_List);
+        echobr(count($Listing_List));
+
+
+        $user_info = DB::table('listings')
+            ->where('parent_id' , '=', null )
+            ->where('property_type','!=',null)
+            ->select('slider_images_dir', DB::raw('count(*) as total'))
+            ->groupBy('slider_images_dir')
+            ->pluck('total','slider_images_dir');
+
+*/
+
+        $Listings = Listing::where('getslider',"=","0")
+            ->where('slider_images_dir','!=',null)
+            ->where('parent_id' , '=', null )
+            ->where('property_type','!=',null)
+            ->limit(100)
+            ->get();
+
+
+
+
+
+        if(count($Listings) > 0){
+            foreach ($Listings as $unit){
+                $count =  Listing::where('slider_images_dir','=',$unit->slider_images_dir)->count();
+                $unit->getslider = 1;
+                $unit->slidercount = intval($count);
+                $unit->save();
+            }
+        }
+
+
+        $Listings = Listing::where('getslider',"=","0")
+            ->where('slider_images_dir','!=',null)
+            ->where('parent_id' , '=', null )
+            ->where('property_type','!=',null)
+            ->count();
+        dd($Listings);
+
+
+//        $user_info = DB::table('listings')
+//            ->where('parent_id' , '=', null )
+//            ->where('property_type','!=',null)
+//            ->select('slider_images_dir', DB::raw('count(*) as total'))
+//            ->groupBy('slider_images_dir')
+//            ->orderBy('total', 'desc')
+//            ->pluck('total','slider_images_dir');
+//
+//
+//        dd($user_info);
 
     }
 
