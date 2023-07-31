@@ -8,33 +8,33 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LocationRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'slug'=> AdminHelper::Url_Slug($this->get('slug')),
+        ]);
+    }
+
+
     public function rules(Request $request): array
     {
-        $request->slug = AdminHelper::Url_Slug($request->slug) ;
-
+        $request->merge(['slug' => AdminHelper::Url_Slug($request->slug)]);
 
         $id = $this->route('id');
 
         if($id == '0'){
             $rules =[
-                'slug'=> "required|unique:categories",
+                'slug'=> "required|unique:locations",
             ];
         }else{
             $rules =[
-                'slug'=> "required|unique:categories,slug,$id",
+                'slug'=> "required|unique:locations,slug,$id",
             ];
         }
 

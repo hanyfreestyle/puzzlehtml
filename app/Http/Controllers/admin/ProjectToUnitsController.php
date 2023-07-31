@@ -73,13 +73,9 @@ class ProjectToUnitsController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     SoftDeletes
     public function SoftDeletes($projectId)
     {
-
         $Project = Listing::withTrashed()
             ->where('id','=',$projectId)
             ->firstOrFail();
-
-
-
 
         $sendArr = ['TitlePage' => __('admin/project.units_project_title') ,'restore'=> 1 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);

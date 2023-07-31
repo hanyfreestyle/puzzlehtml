@@ -14,9 +14,17 @@ class DeveloperRequest extends FormRequest
     }
 
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'slug'=> AdminHelper::Url_Slug($this->get('slug')),
+        ]);
+    }
+
     public function rules(Request $request): array
     {
-        $request->slug = AdminHelper::Url_Slug($request->slug) ;
+
+        $request->merge(['slug' => AdminHelper::Url_Slug($request->slug)]);
 
         $id = $this->route('id');
 
