@@ -11,12 +11,12 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer("getslider")->default(0);
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->unsignedBigInteger('location_id')->nullable();
             $table->unsignedBigInteger('developer_id')->nullable();
             $table->string("slug")->unique();
             $table->string("slider_images_dir")->nullable();
+            $table->integer("slider_active")->default(0);
             $table->string("photo")->nullable();
             $table->string("photo_thum_1")->nullable();
 
@@ -39,6 +39,7 @@ return new class extends Migration
             $table->boolean('is_published')->default(false);
             $table->boolean('is_featured')->default(false);
             $table->dateTime('published_at')->nullable();
+            $table->json('amenity')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
