@@ -2,8 +2,6 @@
 
 namespace Database\Seeders\admin;
 
-
-use App\Models\admin\Developer;
 use App\Models\admin\Post;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -56,27 +54,31 @@ class PostSeeder extends Seeder
 */
 
 
-        $old_Posts = DB::connection('mysql2')->table('backup_posts')->get();
-        foreach ($old_Posts as $onePost)
-        {
-            $data = [
-                'id'=>$onePost->id ,
-                'category_id'=>$onePost->category_id ,
-                'developer_id'=>$onePost->developer_id ,
-                'listing_id'=>$onePost->listing_id ,
-                'slug'=>$onePost->slug ,
-                'photo'=>$onePost->photo ,
-                'photo_thum_1'=>$onePost->photo_thum_1 ,
-                'slider_images_dir'=>$onePost->slider_images_dir ,
+//        $old_Posts = DB::connection('mysql2')->table('backup_posts')->get();
+//        foreach ($old_Posts as $onePost)
+//        {
+//            $data = [
+//                'id'=>$onePost->id ,
+//                'category_id'=>$onePost->category_id ,
+//                'developer_id'=>$onePost->developer_id ,
+//                'listing_id'=>$onePost->listing_id ,
+//                'slug'=>$onePost->slug ,
+//                'photo'=>$onePost->photo ,
+//                'photo_thum_1'=>$onePost->photo_thum_1 ,
+//                'slider_images_dir'=>$onePost->slider_images_dir ,
+//
+//                'is_published'=>$onePost->is_published ,
+//                'published_at'=>$onePost->published_at ,
+//                'created_at'=>$onePost->created_at ,
+//                'deleted_at'=>$onePost->deleted_at ,
+//                'updated_at'=>$onePost->updated_at  ,
+//            ];
+//            Post::create($data);
+//        }
 
-                'is_published'=>$onePost->is_published ,
-                'published_at'=>$onePost->published_at ,
-                'created_at'=>$onePost->created_at ,
-                'deleted_at'=>$onePost->deleted_at ,
-                'updated_at'=>$onePost->updated_at  ,
-            ];
-            Post::create($data);
-        }
+        Post::unguard();
+        $tablePath = public_path('db/posts.sql');
+        DB::unprepared(file_get_contents($tablePath));
 
 
     }

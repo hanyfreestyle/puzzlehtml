@@ -53,6 +53,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UploadFilterSeeder::class);
         $this->call(UploadFilterSizeSeeder::class);
         $this->call(DefPhotoSeeder::class);
+
+
         $this->call(CategorySeeder::class);
         $this->call(CategoryTranslationSeeder::class);
         $this->call(LocationSeeder::class);
@@ -62,16 +64,15 @@ class DatabaseSeeder extends Seeder
         $this->call(DeveloperTranslationSeeder::class);
         $this->call(DeveloperPhotoSeeder::class);
 
+
          $this->call(PostSeeder::class);
          $this->call(PostTranslationSeeder::class);
          $this->call(PostPhotoSeeder::class);
 
-//        $this->call(ListingSeeder::class);
-//        $this->call(ListingTranslationSeeder::class);
-//        $this->call(QuestionSeeder::class);
-//        $this->call(QuestionTranslationSeeder::class);
-
-
+          $this->call(ListingSeeder::class);
+          $this->call(ListingTranslationSeeder::class);
+          $this->call(QuestionSeeder::class);
+          $this->call(QuestionTranslationSeeder::class);
 
     }
 }

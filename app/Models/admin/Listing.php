@@ -32,6 +32,7 @@ class Listing extends Model implements TranslatableContract
         );
     }
 
+
 //    protected function slug() :Attribute{
 //        return Attribute::make(
 //            get: fn($value) => AdminHelper::Url_Slug($value),

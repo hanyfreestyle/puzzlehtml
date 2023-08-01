@@ -4,6 +4,7 @@ namespace Database\Seeders\admin;
 
 use App\Models\admin\Developer;
 use App\Models\admin\Location;
+use App\Models\admin\Question;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use DB;
@@ -62,31 +63,46 @@ class LocationSeeder extends Seeder
             }
         }
 */
-        $old_Location = DB::connection('mysql2')->table('backup_locations')->get();
-        foreach ($old_Location as $oneLocation)
-        {
-            $data = [
 
-                'id'=>$oneLocation->id ,
-                'slug'=>$oneLocation->slug ,
-                'parent_id'=>$oneLocation->parent_id ,
-                'sort_order'=>$oneLocation->sort_order ,
-                'latitude'=>$oneLocation->latitude ,
-                'longitude'=>$oneLocation->longitude ,
-                'projects_type'=>$oneLocation->projects_type ,
 
-                'photo'=>$oneLocation->photo ,
-                'photo_thum_1'=>$oneLocation->photo_thum_1 ,
-                'is_active'=>$oneLocation->is_active ,
-                'is_searchable'=>$oneLocation->is_searchable ,
 
-                'created_at'=>$oneLocation->created_at ,
-                'deleted_at'=>$oneLocation->deleted_at ,
-                'updated_at'=>$oneLocation->updated_at  ,
-            ];
-            Location::create($data);
-        }
+//        $old_Location = DB::connection('mysql2')->table('backup_locations')->get();
+//        foreach ($old_Location as $oneLocation)
+//        {
+//            $data = [
+//
+//                'id'=>$oneLocation->id ,
+//                'slug'=>$oneLocation->slug ,
+//                'parent_id'=>$oneLocation->parent_id ,
+//                'sort_order'=>$oneLocation->sort_order ,
+//                'latitude'=>$oneLocation->latitude ,
+//                'longitude'=>$oneLocation->longitude ,
+//                'projects_type'=>$oneLocation->projects_type ,
+//
+//                'photo'=>$oneLocation->photo ,
+//                'photo_thum_1'=>$oneLocation->photo_thum_1 ,
+//                'is_active'=>$oneLocation->is_active ,
+//                'is_searchable'=>$oneLocation->is_searchable ,
+//
+//                'created_at'=>$oneLocation->created_at ,
+//                'deleted_at'=>$oneLocation->deleted_at ,
+//                'updated_at'=>$oneLocation->updated_at  ,
+//            ];
+//            Location::create($data);
+//        }
+//
+//
+//        $location = Location::findOrFail(4);
+//        $location->parent_id = 7 ;
+//        $location->save();
+//
+//        $location = Location::findOrFail(5);
+//        $location->parent_id = 7 ;
+//        $location->save();
 
+        Location::unguard();
+        $tablePath = public_path('db/locations.sql');
+        DB::unprepared(file_get_contents($tablePath));
 
         $location = Location::findOrFail(4);
         $location->parent_id = 7 ;
@@ -95,7 +111,6 @@ class LocationSeeder extends Seeder
         $location = Location::findOrFail(5);
         $location->parent_id = 7 ;
         $location->save();
-
 
     }
 }
