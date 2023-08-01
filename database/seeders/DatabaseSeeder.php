@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
          $this->call(PostPhotoSeeder::class);
 
           $this->call(ListingSeeder::class);
-          $this->call(ListingTranslationSeeder::class);
+          #$this->call(ListingTranslationSeeder::class);
           $this->call(QuestionSeeder::class);
           $this->call(QuestionTranslationSeeder::class);
 

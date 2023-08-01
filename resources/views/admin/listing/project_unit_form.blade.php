@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-9">
 {{--                    <h1 class="def_h1">{{ optional($Project->translate('fr'))->name }}</h1>--}}
-                    <h1 class="def_h1">{{ $Project->translate('fr')->name ?? '' }}</h1>
+                    <h1 class="def_h1">{{ $Project->translate('ar')->name ?? '' }}</h1>
                 </div>
                 <div class="col-3 text-left">
                     <x-action-button url="{{route('project.project_units_index',$Project->id)}}" print-lable="{{__('admin/project.list_units')}}" icon="fas fa-bath" :tip="false" bg="p" />

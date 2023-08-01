@@ -593,6 +593,7 @@ class ProjectController extends AdminMainController
             ->where('parent_id' , '=', null )
             ->where('property_type','!=',null)
             ->count();
+
         dd($Listings);
 
 

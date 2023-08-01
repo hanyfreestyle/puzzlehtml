@@ -107,19 +107,19 @@ class Listing extends Model implements TranslatableContract
 
  */
 
-    public function scopeOnlyProject(Builder $query): Builder
+    public function scopeProject(Builder $query): Builder
     {
-        return $query->where('parent_id',null)->where('property_type',null);
+        return $query->where('listing_type','Project');
     }
 
-    public function scopeUnitProject(Builder $query): Builder
+    public function scopeUnit(Builder $query): Builder
     {
-        return $query->where('parent_id',"!=",null)->where('property_type',"!=",null);
+        return $query->where('listing_type','Unit');
     }
 
-    public function scopeForSaleUnit(Builder $query): Builder
+    public function scopeForSale(Builder $query): Builder
     {
-        return $query->where('parent_id',null)->where('property_type',"!=",null);
+        return $query->where('listing_type','ForSale');
     }
 
 

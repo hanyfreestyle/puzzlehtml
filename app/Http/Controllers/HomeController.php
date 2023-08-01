@@ -6,6 +6,7 @@ use App\Helpers\AdminHelper;
 use App\Models\admin\Listing;
 use App\Models\admin\ListingPhoto;
 use App\Models\admin\Location;
+use DB;
 use DirectoryIterator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -74,6 +75,107 @@ class HomeController extends Controller
     public function location()
     {
 
+
+        $locations = Location::query()
+           // ->withCount('getProjectToLocation')
+            ->with('getUnitsCount')
+            ->get()->KeyBy('id');
+
+
+        $XX = 0 ;
+        foreach ($locations as $location)
+        {
+                echobr($location->name);
+                echobr( count($location->getUnitsCount));
+                $XX = $XX + count($location->getUnitsCount) ;
+
+        }
+
+
+        echobr($XX);
+
+        dd($locations);
+
+
+//        $locations = Location::query()
+//            ->with('getProjectToLocation')
+//            ->get()
+//        ;
+//
+//
+//        foreach ($locations as $location)
+//        {
+//                echobr($location->name);
+//                echobr( count($location->getProjectToLocation));
+//
+//        }
+//    dump($locations);
+
+
+
+//        $user_info = Listing::query()
+//            ->where('id' , '!=',0 )
+//            ->with('locationName')
+//            ->select('location_id', DB::raw('count(*) as total'))
+//            ->groupBy('location_id')
+//            ->orderBy('total', 'desc')
+//            ->pluck('total','location_id');
+
+
+
+
+//        $user_info = Listing::query()
+//            ->where('id' , '!=',0 )
+//            ->with('locationName')
+//            ->limit(10)
+//            ->get()
+//            ->groupBy('listing_type')
+//            ->groupBy('location_id')
+//
+//        ;
+
+
+//        dd($user_info);
+
+//        foreach ( $user_info as $item)
+//        {
+//            echobr($item->listing_type);
+//            echobr($item->id);
+//
+//        }
+
+
+
+    }
+
+
+    public function locationS()
+    {
+
+
+
+
+
+
+
+//        $UnitProjectErr = Listing::where('parent_id','!=',null)->where('property_type',null)->get();
+//        foreach ($UnitProjectErr as $item)
+//        {
+//            echobr($item->id);
+//            echobr($item->name);
+//            echobr($item->parent_id);
+//            echobr('hr');
+//
+//        }
+//
+
+
+
+
+
+
+
+
         $Projects = Listing::where('parent_id',null)->where('property_type',null)->count();
         echobr($Projects);
 
@@ -131,51 +233,57 @@ class HomeController extends Controller
 
 
 
-      $xx = Listing::OnlyProject()->count();
+      $xx = Listing::query()->scopes('Project')->count();
       echobr($xx);
 
-      $xx = Listing::UnitProject()->count();
+      $xx = Listing::Unit()->count();
       echobr($xx);
 
-      $xx = Listing::ForSaleUnit()->count();
+      $xx = Listing::Project()->count();
+
+
       echobr($xx);
 
 
 
-//
-//        $locations = Location::query()
-//            ->where('id','!=', 0)
-//            ->with('getProjectToLocation')
-//             ->with('getProjectUnitsToLocation')
-//             ->with('getUnitsForSaleToLocation')
-//            ->get();
-//
-//
-//
-//
-//         $Project = 0 ;
-//         $Unit = 0 ;
-//         $forSale = 0 ;
-//
-//
-//
-//        foreach ($locations as $location)
-//        {
-//            echobr($location->name);
-//            echobr("Project: ". count($location->getProjectToLocation));
-//            echobr("For Sale : ". count($location->getUnitsForSaleToLocation));#getProjectToLocation
-//            echobr("Project Unit : ". count($location->getProjectUnitsToLocation));#getProjectToLocation
-//            echobr('hr');
-//
-//            $Project = $Project +count($location->getProjectToLocation);
-//            $forSale = $forSale +count($location->getUnitsForSaleToLocation);
-//            $Unit = $Unit +count($location->getProjectUnitsToLocation);
-//        }
-//
-//       echobr($Project);
-//       echobr($forSale);
-//       echobr($Unit);
-//       echobr($Project+$Unit+$forSale);
+
+
+
+        $locations = Location::query()
+            ->where('id','!=', 0)
+            ->with('getProjectToLocation')
+            ->with('getProjectUnitsToLocation')
+            ->with('getUnitsForSaleToLocation')
+            ->get();
+
+        //dd(count($locations));
+
+
+
+
+         $Project = 0 ;
+         $Unit = 0 ;
+         $forSale = 0 ;
+
+
+
+        foreach ($locations as $location)
+        {
+            echobr($location->name);
+            echobr("Project: ". count($location->getProjectToLocation));
+            echobr("For Sale : ". count($location->getUnitsForSaleToLocation));#getProjectToLocation
+            echobr("Project Unit : ". count($location->getProjectUnitsToLocation));#getProjectToLocation
+            echobr('hr');
+
+            $Project = $Project +count($location->getProjectToLocation);
+            $forSale = $forSale +count($location->getUnitsForSaleToLocation);
+            $Unit = $Unit +count($location->getProjectUnitsToLocation);
+        }
+
+       echobr($Project);
+       echobr($forSale);
+       echobr($Unit);
+       echobr($Project+$Unit+$forSale);
 
 
 

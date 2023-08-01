@@ -54,23 +54,27 @@ class Location extends Model implements TranslatableContract
     public function getProjectToLocation()
     {
         return $this->hasMany(Listing::class,'location_id', 'id')
-            ->where('parent_id','=',null)
-            ->where('property_type','=',null);
+            ->where('listing_type','Project');
     }
 
     public function getProjectUnitsToLocation()
     {
         return $this->hasMany(Listing::class,'location_id', 'id')
-            ->where('parent_id','!=',null)
-            ->where('property_type','!=',null);
+            ->where('listing_type','Unit');
     }
 
 
     public function getUnitsForSaleToLocation()
     {
         return $this->hasMany(Listing::class,'location_id', 'id')
-            ->where('parent_id','=',null)
-            ->where('property_type','!=',null);
+            ->where('listing_type','ForSale');
+    }
+
+
+    public function getUnitsCount()
+    {
+        return $this->hasMany(Listing::class,'location_id', 'id');
+
     }
 
 }
