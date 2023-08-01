@@ -20,14 +20,17 @@ Auth::viaRemember();
 Route::group(['middleware' => ['auth','status']], function() {
 
     Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
-        Route::group(['prefix'=>'admin'],function(){
+
 
             Route::get('/', [HomeController::class, 'index'])->name('admin.Dashboard');
             Route::get('/Home', [HomeController::class, 'index'])->name('admin.Dashboard');
             Route::get('/TestLang', [HomeController::class, 'TestLang'])->name('admin.DashboardXXXX');
 
 
-        });
+            Route::get('/loc', [HomeController::class, 'location'])->name('admin.location');
+
+
+
     });
 });
 

@@ -6,6 +6,7 @@ use App\Constants\Fields;
 use App\Helpers\AdminHelper;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -104,5 +105,24 @@ class Listing extends Model implements TranslatableContract
     }
 
  */
+
+    public function scopeOnlyProject(Builder $query): Builder
+    {
+        return $query->where('parent_id',null)->where('property_type',null);
+    }
+
+    public function scopeUnitProject(Builder $query): Builder
+    {
+        return $query->where('parent_id',"!=",null)->where('property_type',"!=",null);
+    }
+
+    public function scopeForSaleUnit(Builder $query): Builder
+    {
+        return $query->where('parent_id',null)->where('property_type',"!=",null);
+    }
+
+
+
+
 
 }

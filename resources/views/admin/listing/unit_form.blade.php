@@ -126,14 +126,14 @@
 
 
 @push('JsCode')
-    {{--    <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>--}}
-    {{--    <script>--}}
-    {{--        CKEDITOR.config.height = 450;--}}
-    {{--        //  CKEDITOR.config.contentsCss = "https://realestate.eg/css/bootstrap.min.css";--}}
-    {{--        CKEDITOR.replace('en[des]');--}}
-    {{--        CKEDITOR.replace('ar[des]', {--}}
-    {{--            contentsLangDirection: 'rtl',--}}
-    {{--        });--}}
-    {{--    </script>--}}
+        <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+        <script>
+            CKEDITOR.config.height = 450;
+            //  CKEDITOR.config.contentsCss = "https://realestate.eg/css/bootstrap.min.css";
+            CKEDITOR.replace('en[des]');
+            CKEDITOR.replace('ar[des]', {
+                contentsLangDirection: 'rtl',
+            });
+        </script>
 
 @endpush

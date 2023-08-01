@@ -9,7 +9,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-9">
-                    <h1 class="def_h1">{{ optional($Project->translate('ar'))->name }}</h1>
+{{--                    <h1 class="def_h1">{{ optional($Project->translate('fr'))->name }}</h1>--}}
+                    <h1 class="def_h1">{{ $Project->translate('fr')->name ?? '' }}</h1>
                 </div>
                 <div class="col-3 text-left">
                     <x-action-button url="{{route('project.project_units_index',$Project->id)}}" print-lable="{{__('admin/project.list_units')}}" icon="fas fa-bath" :tip="false" bg="p" />
@@ -147,14 +148,14 @@
 
 
 @push('JsCode')
-    {{--    <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>--}}
-    {{--    <script>--}}
-    {{--        CKEDITOR.config.height = 450;--}}
-    {{--        //  CKEDITOR.config.contentsCss = "https://realestate.eg/css/bootstrap.min.css";--}}
-    {{--        CKEDITOR.replace('en[des]');--}}
-    {{--        CKEDITOR.replace('ar[des]', {--}}
-    {{--            contentsLangDirection: 'rtl',--}}
-    {{--        });--}}
-    {{--    </script>--}}
+        <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+        <script>
+            CKEDITOR.config.height = 450;
+            //  CKEDITOR.config.contentsCss = "https://realestate.eg/css/bootstrap.min.css";
+            CKEDITOR.replace('en[des]');
+            CKEDITOR.replace('ar[des]', {
+                contentsLangDirection: 'rtl',
+            });
+        </script>
 
 @endpush
