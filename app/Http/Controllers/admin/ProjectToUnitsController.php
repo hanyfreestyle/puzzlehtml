@@ -88,6 +88,8 @@ class ProjectToUnitsController extends AdminMainController
             ->where('parent_id' , '=', $projectId )
             ->paginate(15);
         return view('admin.listing.project_unit_index',compact('pageData','Units','Project'));
+
+
     }
 
 

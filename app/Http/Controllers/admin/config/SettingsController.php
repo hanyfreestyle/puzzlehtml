@@ -112,6 +112,8 @@ public function webConfigModel(){
         Artisan::call('view:clear');
         echobr('View cache has been cleared');
 
+
+
     }
 
 }
