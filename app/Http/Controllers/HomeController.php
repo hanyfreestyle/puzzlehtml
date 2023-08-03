@@ -6,10 +6,14 @@ use App\Helpers\AdminHelper;
 use App\Models\admin\Listing;
 use App\Models\admin\ListingPhoto;
 use App\Models\admin\Location;
+use App\Models\User;
+use Cache;
 use DB;
 use DirectoryIterator;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Lang;
 
@@ -48,36 +52,135 @@ class HomeController extends Controller
 
 
 
- /*
-        $langFile = Lang::get('admin/config/');
+        /*
+               $langFile = Lang::get('admin/config/');
 
 
 
-        foreach ($langFile as  $key=>$langTxt)
-        {
-            if (is_array($langTxt))
-            {
-                foreach ($langTxt as $key_sub => $langTxtsub)
-                {
-                    echo "------" . $langTxtsub . "<br>";
-                }
+               foreach ($langFile as  $key=>$langTxt)
+               {
+                   if (is_array($langTxt))
+                   {
+                       foreach ($langTxt as $key_sub => $langTxtsub)
+                       {
+                           echo "------" . $langTxtsub . "<br>";
+                       }
 
-            } else
-            {
-                echo $langTxt . "<br>";
-            }
-        }
-*/
+                   } else
+                   {
+                       echo $langTxt . "<br>";
+                   }
+               }
+       */
 
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     location
 
-    public function location()
+    public function location(){
+        // Cache::flush();
+        $locations = Cache::remember('user',60*60, function (){
+            return  Location::query()
+                ->where('id',"!=",0)
+                ->with('translations')
+                ->withCount('getUnitsCount')
+                ->orderBy('get_units_count_count','desc')
+               // ->limit(6)
+                ->get();
+        } );
+
+        $SendArr = Cache::remember('user_send',60*60,function () use($locations){
+
+            $SendArr = [];
+            foreach ($locations as $location ){
+                $NewArr = [];
+                foreach ( $location->getUnitsCount as $key => $value){
+                    $NewArr +=[$key=>$value['listing_type']] ;
+                }
+                $NewArr = array_count_values($NewArr);
+                $SendArr +=[$location->id => $NewArr];
+            }
+
+            return   $SendArr;
+        });
+
+        return view('hany',compact('locations','SendArr'));
+    }
+
+
+
+    public function location_3()
+    {
+
+      ///  Cache::flush();
+//
+//
+//        $locations = Cache::remember('user',60*60, function (){
+//
+//            #return   Location::query()->get();
+//            #return   Location::query()->with('translations')->with('getUnitsCount')->get();
+//            return   Location::query()
+//                ->where('id',19)
+//                ->with('translations')
+//                ->withCount('getUnitsCount')
+//                ->orderBy('get_units_count_count','desc')
+//                ->get()
+//
+//
+//                ;
+//
+//
+//        } );
+
+
+        $locations = Location::query()
+            ->where('id',"!=",0)
+            ->with('translations')
+            ->withCount('getUnitsCount')
+            ->orderBy('get_units_count_count','desc')
+            ->get();
+
+
+        $SendArr = [];
+        foreach ($locations as $location ){
+            $NewArr = [];
+            foreach ( $location->getUnitsCount as $key => $value){
+                $NewArr +=[$key=>$value['listing_type']] ;
+            }
+            $NewArr = array_count_values($NewArr);
+            $SendArr +=[$location->id => $NewArr];
+        }
+
+        return view('hany',compact('locations','SendArr'));
+    }
+
+
+
+    public function location_2()
+    {
+
+        // Cache::flush();
+
+
+
+        $locations = "";
+        // $locations = Location::all();
+
+        $locations = Cache::remember('user',60*60, function (){
+            return   User::all();
+        } );
+
+        return view('hany',compact('locations'));
+    }
+
+
+    public function locationX()
     {
 
 
         $locations = Location::query()
-           // ->withCount('getProjectToLocation')
+            // ->withCount('getProjectToLocation')
             ->with('getUnitsCount')
             ->get()->KeyBy('id');
 
@@ -85,16 +188,16 @@ class HomeController extends Controller
         $XX = 0 ;
         foreach ($locations as $location)
         {
-                echobr($location->name);
-                echobr( count($location->getUnitsCount));
-                $XX = $XX + count($location->getUnitsCount) ;
+            echobr($location->name);
+            echobr( count($location->getUnitsCount));
+            $XX = $XX + count($location->getUnitsCount) ;
 
         }
 
 
         echobr($XX);
 
-        dd($locations);
+        // dd($locations);
 
 
 //        $locations = Location::query()
@@ -233,16 +336,16 @@ class HomeController extends Controller
 
 
 
-      $xx = Listing::query()->scopes('Project')->count();
-      echobr($xx);
+        $xx = Listing::query()->scopes('Project')->count();
+        echobr($xx);
 
-      $xx = Listing::Unit()->count();
-      echobr($xx);
+        $xx = Listing::Unit()->count();
+        echobr($xx);
 
-      $xx = Listing::Project()->count();
+        $xx = Listing::Project()->count();
 
 
-      echobr($xx);
+        echobr($xx);
 
 
 
@@ -261,9 +364,9 @@ class HomeController extends Controller
 
 
 
-         $Project = 0 ;
-         $Unit = 0 ;
-         $forSale = 0 ;
+        $Project = 0 ;
+        $Unit = 0 ;
+        $forSale = 0 ;
 
 
 
@@ -280,10 +383,10 @@ class HomeController extends Controller
             $Unit = $Unit +count($location->getProjectUnitsToLocation);
         }
 
-       echobr($Project);
-       echobr($forSale);
-       echobr($Unit);
-       echobr($Project+$Unit+$forSale);
+        echobr($Project);
+        echobr($forSale);
+        echobr($Unit);
+        echobr($Project+$Unit+$forSale);
 
 
 

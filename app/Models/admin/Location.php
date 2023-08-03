@@ -4,6 +4,7 @@ namespace App\Models\admin;
 
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -71,10 +72,22 @@ class Location extends Model implements TranslatableContract
     }
 
 
-    public function getUnitsCount()
+    public function getUnitsCount():HasMany
     {
-        return $this->hasMany(Listing::class,'location_id', 'id');
+        return $this->hasMany(Listing::class,'location_id', 'id')
+            ->select(['location_id','listing_type'])
+            //->select('listing_type AS type')
+            //->groupBy('type')
+
+            ;
+
+
+            //->select('listing_type');
 
     }
 
+//    public function scopeGetList(Builder $query): Builder
+//    {
+//        return $query->where();
+//    }
 }
