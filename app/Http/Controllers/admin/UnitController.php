@@ -33,9 +33,10 @@ class UnitController extends AdminMainController
 
 
 
-        View::share('Amenities', Amenity::all());
-        View::share('Developers', Developer::all());
-        View::share('Locations', Location::all());
+        //Cache::flush();
+        View::share('Amenities', Amenity::cash_amenities());
+        View::share('Developers', Developer::cash_developers());
+        View::share('Locations', Location::cash_locations());
 
     }
 
@@ -49,12 +50,13 @@ class UnitController extends AdminMainController
         $pageData['ViewType'] = "List";
 
         $pageData['Trashed'] = Listing::onlyTrashed()
-            ->where('parent_id' , '=', null )
-            ->where('property_type','!=',null)
+            ->where('listing_type', 'Project' )
+            ->with('translations')
             ->count();
 
-        $Units = Listing::where('parent_id' , '=', null )
-            ->where('property_type','!=',null)
+        $Units = Listing::query()->forSale()
+            ->with('translations')
+            ->withCount('get_more_photo')
             ->paginate(15);
 
         return view('admin.listing.unit_index',compact('pageData','Units'));

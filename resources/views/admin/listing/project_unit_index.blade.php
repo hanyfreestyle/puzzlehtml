@@ -99,7 +99,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if(count($Unit->getMorePhoto) == '0')
+                                                    @if( $Unit->get_more_photo_count == '0')
                                                         <x-action-button url="{{route('project.project_units.More_Photos',$Unit->id)}}" type="morePhoto" :tip="true" bg="dark" />
                                                     @else
                                                         <x-action-button url="{{route('project.project_units.More_Photos',$Unit->id)}}" type="morePhoto" :tip="true" />

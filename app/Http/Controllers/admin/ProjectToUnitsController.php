@@ -32,9 +32,10 @@ class ProjectToUnitsController extends AdminMainController
         $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
         $this->middleware('permission:'.$controllerName.'_restore', ['only' => ['SoftDeletes','Restore','ForceDeletes']]);
 
-        View::share('Amenities', Amenity::all());
-        View::share('Developers', Developer::all());
-        View::share('Locations', Location::all());
+        //Cache::flush();
+        View::share('Amenities', Amenity::cash_amenities());
+        View::share('Developers', Developer::cash_developers());
+        View::share('Locations', Location::cash_locations());
 
     }
 
@@ -59,9 +60,12 @@ class ProjectToUnitsController extends AdminMainController
 
         $pageData['Trashed'] = Listing::onlyTrashed()
             ->where('parent_id', '=',$projectId )
+            ->with('translations')
             ->count();
 
         $Units = Listing::where('parent_id' , '=', $projectId )
+            ->with('translations')
+            ->withCount('get_more_photo')
             ->paginate(15);
 
         return view('admin.listing.project_unit_index',compact('pageData','Units','Project'));
