@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin\config;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\SettingFormRequest;
 use App\Models\admin\config\Setting;
+use Artisan;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
 
@@ -96,5 +97,21 @@ public function webConfigModel(){
 
     }
 
+
+    public function clearCash()
+    {
+        Artisan::call('cache:clear');
+        echobr('Application cache has been cleared');
+
+//        Artisan::call('route:cache');
+//        echobr('Routes cache has been cleared');
+
+        Artisan::call('config:cache');
+        echobr('Config cache has been cleared');
+
+        Artisan::call('view:clear');
+        echobr('View cache has been cleared');
+
+    }
 
 }

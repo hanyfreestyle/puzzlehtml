@@ -56,20 +56,10 @@ class Listing extends Model implements TranslatableContract
         return $this->setAttribute('is_published', $status);
     }
 
-    public function getMorePhoto(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(ListingPhoto::class,'listing_id','id');
-    }
 
-    public function unitsToProject()
-    {
-        return $this->hasMany(Listing::class,'parent_id','id');
-    }
 
-    public function faqToProject()
-    {
-        return $this->hasMany(Question::class,'project_id','id');
-    }
+
+
 
 
     public function developerName() :BelongsTo
@@ -88,24 +78,7 @@ class Listing extends Model implements TranslatableContract
         return $this->hasMany(Amenitable::class,'amenitable_id','id');
     }
 
-/*
-    public function postName(){
-        return $this->belongsTo(Post::class,"post_id");
-    }
 
-    public function childrenlocations()
-    {
-        return $this->hasMany(Location::class,'parent_id')->with('locations');
-    }
-
-
-    public function parentName()
-    {
-       // return $this->hasOne(Location::class,'id');
-        return $this->belongsTo(Location::class,'parent_id','id');
-    }
-
- */
 
     public function scopeProject(Builder $query): Builder
     {
@@ -125,5 +98,19 @@ class Listing extends Model implements TranslatableContract
 
 
 
+
+    public function get_more_photo():HasMany
+    {
+        return $this->hasMany(ListingPhoto::class,'listing_id','id');
+    }
+
+    public function get_units_to_project():HasMany
+    {
+        return $this->hasMany(Listing::class,'parent_id','id');
+    }
+    public function faq_to_project():HasMany
+    {
+        return $this->hasMany(Question::class,'project_id','id');
+    }
 
 }

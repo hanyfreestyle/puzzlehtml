@@ -28,7 +28,10 @@ Route::group(['middleware' => ['auth','status']], function() {
 
 
             Route::get('/loc', [HomeController::class, 'location'])->name('admin.location');
-
+        Route::get('/clear', function() {
+            Artisan::call('cache:clear');
+            return 'Application cache has been cleared';
+        });
 
 
     });

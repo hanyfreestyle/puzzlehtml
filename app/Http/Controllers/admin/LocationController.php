@@ -9,6 +9,7 @@ use App\Http\Requests\admin\LocationRequest;
 use App\Models\admin\Location;
 use App\Models\admin\LocationTranslation;
 use DB;
+use Cache;
 use Illuminate\Http\Request;
 
 class LocationController extends AdminMainController
@@ -115,7 +116,7 @@ class LocationController extends AdminMainController
             $saveTranslation->breadcrumb = $request->input($key.'.breadcrumb');
             $saveTranslation->save();
         }
-
+        Cache::forget('locations_list_cash');
         if($id == '0'){
             return redirect(route('location.index'))->with('Add.Done',"");
         }else{

@@ -4,6 +4,7 @@ namespace App\Models\admin;
 
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Cache;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -75,19 +76,21 @@ class Location extends Model implements TranslatableContract
     public function getUnitsCount():HasMany
     {
         return $this->hasMany(Listing::class,'location_id', 'id')
-            ->select(['location_id','listing_type'])
+            ->select(['location_id','listing_type']);
             //->select('listing_type AS type')
             //->groupBy('type')
-
-            ;
-
-
-            //->select('listing_type');
-
     }
 
-//    public function scopeGetList(Builder $query): Builder
-//    {
-//        return $query->where();
-//    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     cash_locations
+    static function cash_locations()
+    {
+        $locations = Cache::remember('locations_list_cash',config('app.locations_list_cash_time'), function (){
+            return  Location::with('translations')->get();
+        });
+        return $locations ;
+    }
+
+
 }

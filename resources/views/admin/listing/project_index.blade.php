@@ -81,19 +81,19 @@
                                             @else
                                                 <td>
                                                     <x-project-table-icon name="Units" icon="fas fa-bath"
-                                                                          :count="count($Project->unitsToProject)"
+                                                                          :count="$Project->get_units_to_project_count"
                                                                           url="{{route('project.project_units_index',$Project->id)}}" />
                                                 </td>
 
                                                 <td>
                                                     <x-project-table-icon name="Photo" icon="fas fa-images"
-                                                                          :count="count($Project->getMorePhoto)"
+                                                                          :count="$Project->get_more_photo_count"
                                                                           url="{{route('project.More_Photos',$Project->id)}}" />
                                                 </td>
 
                                                 <td>
                                                     <x-project-table-icon name="FAQ" icon="fas fa-question"
-                                                                          :count="count($Project->faqToProject)"
+                                                                          :count="$Project->faq_to_project_count"
                                                                           url="{{route('project.faq_list',$Project->id)}}" />
                                                 </td>
 

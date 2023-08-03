@@ -6,7 +6,7 @@ use App\Http\Controllers\admin\config\MetaTagController;
 use App\Http\Controllers\admin\config\SettingsController;
 use App\Http\Controllers\admin\config\UploadFilterController;
 use App\Http\Controllers\admin\config\UploadFilterSizeController;
-
+Route::get('/clearCash/',[SettingsController::class,'clearCash'])->name('cash.index');
 Route::get('/adminlang',[LangFileController::class,'index'])->name('adminlang.index');
 Route::post('/adminlang/updateFile',[LangFileController::class,'updateFile'])->name('adminlang.updateFile');
 

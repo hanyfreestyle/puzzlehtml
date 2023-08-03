@@ -5,7 +5,7 @@ use App\Helpers\AdminHelper;
 use App\Helpers\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\AmenityRequest;
-use App\Models\admin\Category;
+use Cache;
 use App\Models\admin\config\Amenity;
 use App\Models\admin\config\AmenityTranslation;
 
@@ -93,6 +93,8 @@ class AmenityController extends AdminMainController
             $saveTranslation->save();
         }
 
+        Cache::forget('amenities_list_cash');
+
         if($id == '0'){
             return  back()->with('Add.Done',"");
         }else{
@@ -108,6 +110,7 @@ class AmenityController extends AdminMainController
         $deleteRow = Amenity::findOrFail($id);
         $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,2);
         $deleteRow->delete();
+        Cache::forget('amenities_list_cash');
         return redirect(route('amenity.index'))->with('confirmDelete',"");
     }
 

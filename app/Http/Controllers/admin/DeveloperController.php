@@ -10,6 +10,7 @@ use App\Models\admin\Developer;
 use App\Models\admin\DeveloperPhoto;
 use App\Models\admin\DeveloperTranslation;
 use App\Models\admin\Location;
+use Cache;
 use DB;
 use File;
 use Illuminate\Http\Request;
@@ -109,6 +110,7 @@ class DeveloperController extends AdminMainController
             $saveTranslation->breadcrumb = $request->input($key.'.breadcrumb');
             $saveTranslation->save();
         }
+         Cache::forget('developers_list_cash');
 
         if($id == '0'){
             return redirect(route('developer.index'))->with('Add.Done',"");
@@ -124,7 +126,8 @@ class DeveloperController extends AdminMainController
     {
         $deleteRow = Developer::findOrFail($id);
         $deleteRow->delete();
-         return redirect(route('developer.index'))->with('confirmDelete',"");
+        Cache::forget('developers_list_cash');
+        return redirect(route('developer.index'))->with('confirmDelete',"");
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -132,6 +135,7 @@ class DeveloperController extends AdminMainController
     public function Restore($id)
     {
         Developer::onlyTrashed()->where('id',$id)->restore();
+        Cache::forget('developers_list_cash');
         return back()->with('restore',"");
     }
 
@@ -150,7 +154,7 @@ class DeveloperController extends AdminMainController
         $deleteRow =  Developer::onlyTrashed()->where('id',$id)->first();
         $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
         $deleteRow->forceDelete();
-
+        Cache::forget('developers_list_cash');
         return back()->with('confirmDelete',"");
     }
 

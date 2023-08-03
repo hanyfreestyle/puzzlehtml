@@ -31,6 +31,8 @@ class UnitController extends AdminMainController
         $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
         $this->middleware('permission:'.$controllerName.'_restore', ['only' => ['SoftDeletes','Restore','ForceDeletes']]);
 
+
+
         View::share('Amenities', Amenity::all());
         View::share('Developers', Developer::all());
         View::share('Locations', Location::all());

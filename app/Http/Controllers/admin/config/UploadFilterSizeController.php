@@ -78,7 +78,7 @@ class UploadFilterSizeController extends AdminMainController
         $saveData->get_watermark = $request->get_watermark;
 
         $saveData->save();
-
+        Cache::forget('upload_filter_list_cash');
         if($id == '0'){
             return  redirect(route('config.upFilter.edit',$request->filter_id))->with('Add.Done','');
         }else{
@@ -92,6 +92,7 @@ class UploadFilterSizeController extends AdminMainController
         $deleteRow = UploadFilterSize::findOrFail($id);
         $filterId = $deleteRow->filter_id ;
         $deleteRow->delete();
+        Cache::forget('upload_filter_list_cash');
         return redirect(route('config.upFilter.edit',$filterId))->with('confirmDelete','');
     }
 

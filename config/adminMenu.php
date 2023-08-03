@@ -117,6 +117,15 @@
             'roleView'=>'unit_view',
         ],
 
+        [
+            'view'=>true,
+            'sel_routs'=>'cash',
+            'type'=>'one',
+            'text'=> 'Cash',
+            'url'=> 'cash.index',
+            'icon'=>'fas fa-bath',
+            'roleView'=>'unit_view',
+        ],
 
     ],
 

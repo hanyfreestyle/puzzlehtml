@@ -201,4 +201,8 @@ return [
     'development' => true,
     'model_settings_name' => 'model_settings.json',
 
+    'developers_list_cash_time' => 60*60*24,
+    'locations_list_cash_time' => 60*60*24,
+    'amenities_list_cash_time' => 60*60*24,
+    'upload_filter_list_cash' => 60*60*24,
 ];

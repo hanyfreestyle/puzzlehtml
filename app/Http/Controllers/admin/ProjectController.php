@@ -16,6 +16,7 @@ use App\Models\admin\Location;
 use Illuminate\Http\Request;
 use DB;
 use File;
+use Cache;
 use Illuminate\Support\Facades\View;
 
 class ProjectController extends AdminMainController
@@ -32,9 +33,11 @@ class ProjectController extends AdminMainController
         $this->middleware('permission:'.$controllerName.'_edit', ['only' => ['edit']]);
         $this->middleware('permission:'.$controllerName.'_delete', ['only' => ['destroy']]);
         $this->middleware('permission:'.$controllerName.'_restore', ['only' => ['SoftDeletes','Restore','ForceDeletes']]);
-        View::share('Amenities', Amenity::all());
-        View::share('Developers', Developer::all());
-        View::share('Locations', Location::all());
+
+        //Cache::flush();
+        View::share('Amenities', Amenity::cash_amenities());
+        View::share('Developers', Developer::cash_developers());
+        View::share('Locations', Location::cash_locations());
 
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -44,18 +47,18 @@ class ProjectController extends AdminMainController
         $sendArr = ['TitlePage' => __('admin/menu.project'),'restore'=> 1 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
+
         $pageData['Trashed'] = Listing::onlyTrashed()
-            ->where('parent_id' , '=', null )
-            ->where('property_type','=',null)
+            ->where('listing_type', 'Project' )
+            ->with('translations')
             ->count();
 
-        $Projects = Listing::where('parent_id' , '=', null )
-            ->where('property_type','=',null)
-            ->with('unitsToProject')
-            ->with('getMorePhoto')
+        $Projects = Listing::query()->Project()
+            ->with('translations')
+            ->withCount('get_more_photo')
+            ->withCount('get_units_to_project')
+            ->withCount('faq_to_project')
             ->paginate(15);
-//        $Projects = self::getSelectQuery( Listing::where('id',"!=","0")->with('unitsToProject')->with('getMorePhoto')
-//            ->with('faqToProject'));
 
         return view('admin.listing.project_index',compact('pageData','Projects'));
     }

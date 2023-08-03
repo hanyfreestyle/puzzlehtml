@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminMainController;
 use App\Models\admin\config\UploadFilter;
 use App\Http\Requests\admin\config\UploadFilterRequest;
 use App\Models\admin\config\UploadFilterSize;
+use Cache;
 use Illuminate\Support\Facades\View;
 
 
@@ -79,6 +80,7 @@ class UploadFilterController extends AdminMainController
     {
         $deleteRow = UploadFilter::where('id',$id);
         $deleteRow->delete();
+        Cache::forget('upload_filter_list_cash');
         return redirect(route('config.upFilter.index'))->with('confirmDelete',"");
     }
 
@@ -127,6 +129,7 @@ class UploadFilterController extends AdminMainController
         $saveData->watermark_position = $request->watermark_position;
 
         $saveData->save();
+        Cache::forget('upload_filter_list_cash');
 
         if($id == '0'){
             return  back()->with('Add.Done','');

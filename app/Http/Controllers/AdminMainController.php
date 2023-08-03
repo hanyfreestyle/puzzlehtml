@@ -19,7 +19,7 @@ class AdminMainController extends Controller
         $this->middleware('auth');
 
 
-        View::share('filterTypes', UploadFilter::all());
+        View::share('filterTypes', UploadFilter::cash_UploadFilter());
 
         $modelsNameArr = [
             "1"=> ['id'=>'1','name'=>__('admin/config/roles.model_1')],
