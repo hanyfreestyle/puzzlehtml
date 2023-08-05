@@ -60,7 +60,8 @@ class HomeController extends WebMainController
 //        SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
 //
 //
-        return view('seo');
+        return view('web.index');
+       // return view('seo');
     }
 
 

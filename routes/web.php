@@ -19,12 +19,23 @@ Auth::viaRemember();
 
 Route::group(['middleware' => ['auth','status']], function() {
     Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
+        Route::get('/', [HomeController::class, 'index'])->name('menu-home');
+        Route::get('/blog', [HomeController::class, 'index'])->name('menu-blog');
+        Route::get('/developers', [HomeController::class, 'index'])->name('menu-developers');
+        Route::get('/contact-us', [HomeController::class, 'index'])->name('menu-contact-us');
 
-        Route::get('/', [HomeController::class, 'index'])->name('admin.Dashboard');
-        Route::get('/TestLang', [HomeController::class, 'TestLang'])->name('admin.DashboardXXXX');
 
 
-        Route::get('/loc', [HomeController::class, 'location'])->name('admin.location');
+
+
+
+
+
+//
+//        Route::get('/TestLang', [HomeController::class, 'TestLang'])->name('admin.DashboardXXXX');
+//
+//
+//        Route::get('/loc', [HomeController::class, 'location'])->name('admin.location');
 
 
     });

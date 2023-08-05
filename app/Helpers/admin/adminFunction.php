@@ -17,6 +17,17 @@ if (!function_exists('defAdminAssets')) {
     }
 }
 
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #    static_admin_asset
+if (!function_exists('defWebAssets')) {
+    function defWebAssets($path, $secure = null): string
+    {
+        return app('url')->asset('assets/web/' . $path, $secure);
+    }
+}
+
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #    static_admin_asset
 if (!function_exists('defImagesDir')) {
@@ -314,6 +325,39 @@ if (!function_exists('Update_defImagesDir')) {
     function Update_defImagesDir($path, $secure = null): string
     {
         return app('url')->asset( "ckfinder/userfiles/".$path, $secure);
+    }
+}
+
+
+
+
+
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #    thisCurrentLocale
+if (!function_exists('webChangeLocale')) {
+    function webChangeLocale(){
+        $Current =  LaravelLocalization::getCurrentLocale() ;
+        if($Current == 'ar'){
+            $change = 'en';
+        }else{
+            $change = 'ar';
+        }
+        return $change;
+    }
+}
+
+if (!function_exists('webChangeLocaletext')) {
+    function webChangeLocaletext(){
+        $Current =  LaravelLocalization::getCurrentLocale() ;
+        if($Current == 'ar'){
+            $change = 'English';
+        }else{
+            $change = 'عربى';
+        }
+        return $change;
     }
 }
 
