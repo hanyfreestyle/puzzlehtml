@@ -12,8 +12,10 @@ use App\Http\Controllers\admin\QuestionController;
 use App\Http\Controllers\admin\UnitController;
 use App\Http\Controllers\admin\UpdateProjectController;
 use App\Http\Controllers\AdminMainController;
+use App\Http\Controllers\UpdateDataController;
 
 Route::get('/Home',[AdminMainController::class,'Home'])->name('admin.Dashboard');
+Route::get('/UpdateData',[UpdateDataController::class,'index'])->name('updateData');
 
 Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
 Route::get('/amenity/create',[AmenityController::class,'create'])->name('amenity.create');

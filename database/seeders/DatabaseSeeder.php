@@ -65,14 +65,14 @@ class DatabaseSeeder extends Seeder
         $this->call(DeveloperPhotoSeeder::class);
 
 
-         $this->call(PostSeeder::class);
-         $this->call(PostTranslationSeeder::class);
-         $this->call(PostPhotoSeeder::class);
+        $this->call(PostSeeder::class);
+        $this->call(PostTranslationSeeder::class);
+        $this->call(PostPhotoSeeder::class);
 
-          $this->call(ListingSeeder::class);
-          $this->call(ListingTranslationSeeder::class);
-          $this->call(QuestionSeeder::class);
-          $this->call(QuestionTranslationSeeder::class);
+        $this->call(ListingSeeder::class);
+        $this->call(ListingTranslationSeeder::class);
+        $this->call(QuestionSeeder::class);
+        $this->call(QuestionTranslationSeeder::class);
 
     }
 }

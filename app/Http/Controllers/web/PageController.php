@@ -24,13 +24,8 @@ class PageController extends WebMainController
     {
         $Developers = Developer::query()
             ->with('translation')
-//            ->withCount('projectCount')
-//            ->orderBy('project_count_count','desc')
+            ->orderBy('projects_count','desc')
             ->paginate(12);
-
-
-
-
         return view('web.developers_index',compact('Developers'));
     }
 
@@ -42,26 +37,34 @@ class PageController extends WebMainController
             ->withCount('projectCount')
             ->firstOrFail();
 
-//dd();
-//
-
         $Projects= Listing::query()
             ->where('developer_id',$Developer->id)
             ->where('listing_type','Project')
-            ->paginate(6, ['*'], 'compound_page')
-             ;
+            ->orderBy('id','desc')
+            ->paginate(12, ['*'], 'compound_page')
+        ;
 
 
         $Units= Listing::query()
             ->where('developer_id',$Developer->id)
             ->where('listing_type','Unit')
-            ->paginate(6, ['*'], 'property_page')
-             ;
+            ->orderBy('id','desc')
+            ->paginate(12, ['*'], 'property_page')
+        ;
+
+        $Posts = Post::query()
+            ->where('developer_id',$Developer->id)
+            ->orderBy('id','asc')
+            ->limit(10)
+            ->get()
+        ;
 
 
 
 
-        return view('web.developers_view',compact('Developer','Projects','Units'));
+
+
+        return view('web.developers_view',compact('Developer','Projects','Units','Posts'));
     }
 
 

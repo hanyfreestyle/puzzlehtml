@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("slider_images_dir")->nullable();
             $table->integer("slider_get")->default(0);
             $table->integer("projects_count")->default(0);
+            $table->integer("units_count")->default(0);
             $table->boolean("is_active")->default(true);
             $table->softDeletes();
             $table->timestamps();
