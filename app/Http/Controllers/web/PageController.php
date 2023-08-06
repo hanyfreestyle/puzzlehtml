@@ -74,6 +74,7 @@ class PageController extends WebMainController
     public function BlogPageList()
     {
         $Posts = Post::query()
+            ->where('is_published' ,true)
             ->with('translation')
             ->with('getCatName')
             ->orderBy('id','desc')
