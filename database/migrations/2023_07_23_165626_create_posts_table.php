@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('developer_id')->nullable();
             $table->unsignedBigInteger('listing_id')->nullable();
+            $table->unsignedBigInteger('location_id')->nullable();
 
             $table->string("slug");
             $table->string("photo")->nullable();

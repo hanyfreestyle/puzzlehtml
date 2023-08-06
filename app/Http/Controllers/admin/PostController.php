@@ -73,7 +73,8 @@ class PostController extends AdminMainController
         $Post = Post::findOrNew(0);
         $Developers = Developer::all();
         $Categories = Category::all();
-        return view('admin.post.post_form',compact('pageData','Post','Developers','Categories'));
+        $Locations = Location::all();
+        return view('admin.post.post_form',compact('pageData','Post','Developers','Categories','Locations'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -87,7 +88,8 @@ class PostController extends AdminMainController
         $Post = Post::findOrFail($id);
         $Developers = Developer::all();
         $Categories = Category::all();
-        return view('admin.post.post_form',compact('pageData','Post','Developers','Categories'));
+        $Locations = Location::all();
+        return view('admin.post.post_form',compact('pageData','Post','Developers','Categories','Locations'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -100,6 +102,7 @@ class PostController extends AdminMainController
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
         $saveData->category_id = $request->input('category_id');
         $saveData->developer_id = $request->input('developer_id');
+        $saveData->location_id = $request->input('location_id');
         $saveData->setPublished((bool) request('is_published', false));
         $saveData->save();
 

@@ -48,6 +48,7 @@
                 <div class="tab-pane fade @if(!isset($_GET['property_page'])) show active @endif()  " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="row">
                         @foreach($Projects as $Project)
+
                             <div class="col-lg-6 ">
 
                                 <div class="card mb-3">
@@ -57,6 +58,11 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><a href="#">{{$Project->name}}</a></h5>
                                         <p class="card-text">{{$Project->g_des}}</p>
+                                        <p class="card-text">تبداء من {{ number_format($Project->price) }} <br>
+                                            {{ $Project->locationName->name }}  </p>
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -84,6 +90,21 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><a href="#">{{$Unit->name}}</a></h5>
                                         <p class="card-text">{{$Unit->g_des}}</p>
+                                        <p class="card-text">
+                                            {{ number_format($Unit->price) }}
+                                            <br>
+                                            {{ $Unit->locationName->name }}
+                                        </p>
+
+                                        <div class="info">
+                                            <ul class="list-inline listing__attribute">
+                                                <li><i class="fa fa-home"></i> {{ $Unit->property_type }}</li>
+                                                <li><i class="fa fa-bed"></i> {{ $Unit->rooms }}</li>
+                                                <li><i class="fa fa-bath"></i> {{ $Unit->baths }}</li>
+                                                <li><i class="fa fa-arrows-alt-v"></i> {{ $Unit->area }}  م<sup>2</sup></li>
+                                            </ul>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -106,7 +127,7 @@
 
         </div>
         <div class="col-6 col-md-4">
-        <div class="font-weight-bolder">  أخبار مشاريع كمبوندات {{$Developer->name}}</div>
+            <div class="font-weight-bolder">  أخبار مشاريع كمبوندات {{$Developer->name}}</div>
             <hr>
             @foreach($Posts as $Post)
                 <div class="blogLeft">

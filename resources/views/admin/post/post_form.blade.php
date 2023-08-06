@@ -31,6 +31,7 @@
             <div class="row">
                 <x-form-select-arr name="developer_id" label="{{__('admin/form.developer')}}" :sendvalue="old('developer_id',$Post->developer_id)" :required-span="false" colrow="col-lg-3 " :send-arr="$Developers"/>
                 <x-form-select-arr name="category_id" label="{{__('admin/form.category')}}" :sendvalue="old('category_id',$Post->category_id)" :required-span="false" colrow="col-lg-3 " :send-arr="$Categories"/>
+                <x-form-select-arr name="location_id" label="{{__('admin/project.loction')}}" :sendvalue="old('location_id',$Post->location_id)" :required-span="false" colrow="col-lg-3 " :send-arr="$Locations"/>
             </div>
 
 
@@ -56,7 +57,7 @@
                 @endforeach
             </div>
 
-            <x-meta-tage-filde :body-h1="true" :breadcrumb="true"  :old-data="$Post" :placeholder="false" />
+            <x-meta-tage-filde :body-h1="false" :breadcrumb="false"  :old-data="$Post" :placeholder="false" />
 
             <hr>
 

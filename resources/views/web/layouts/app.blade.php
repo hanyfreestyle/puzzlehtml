@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{{ defWebAssets('bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ defAdminAssets('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ defWebAssets('css/Main_Style.css') }}">
     <link rel="stylesheet" href="{{ defWebAssets('css/Main_Style_'.thisCurrentLocale().'.css') }}">
 

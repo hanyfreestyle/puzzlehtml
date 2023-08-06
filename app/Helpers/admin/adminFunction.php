@@ -362,6 +362,19 @@ if (!function_exists('webChangeLocaletext')) {
 }
 
 
+if (!function_exists('project_status')) {
+    function project_status($getVal){
+
+        if($getVal == 'under-construction'){
+            $sendVal = 'تحت الانشاء';
+        }else{
+            $sendVal = 'اكتمل';
+        }
+        return $sendVal;
+    }
+}
+
+
 
 
 ?>

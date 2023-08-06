@@ -3,10 +3,12 @@
 namespace App\Models\admin;
 
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model implements TranslatableContract
@@ -25,5 +27,18 @@ class Category extends Model implements TranslatableContract
     {
         return $this->setAttribute('is_active', $status);
     }
+
+
+    public function post_count() :HasMany
+    {
+      return $this->hasMany(Post::class,'category_id','id')->where('is_published', true)
+
+
+
+          ;
+    }
+
+
+
 
 }

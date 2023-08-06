@@ -2,11 +2,16 @@
  min-height:600px;
  }
  
+a{
+text-decoration:none;
+
+} 
  
 .def_h1{
 font-size:20px;
 width:100%;
 font-weight:bold;
+margin-bottom:0px;
 
 }
 
@@ -17,8 +22,20 @@ overflow:hidden;
 
 .imgdiv img{
 width:100%;
- 
 }
+
+
+.imgdiv_post{
+height:400px;
+overflow:hidden;
+}
+
+.imgdiv_post img{
+width:100%;
+}
+
+
+
 .bg-gray{
 background-color:#006600;
 }
@@ -89,3 +106,28 @@ float:right;
 width:50%;
 text-align:center;
 } 
+
+
+.listing__attribute{
+list-style:none;
+margin:0px;
+padding:0px;
+background-color:#99CCCC;
+}
+
+.listing__attribute li{
+float:right;
+margin-right:5px;
+margin-left:5px;
+}
+
+
+
+
+.project_post{
+background-color:rgba(0,0,0,.1);
+margin-top:20px;
+margin-bottom:20px;
+padding:15px;
+}
+

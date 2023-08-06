@@ -14,7 +14,7 @@ class Post extends Model implements TranslatableContract
     use SoftDeletes;
     use Translatable;
 
-    public $translatedAttributes = ['name','g_title','g_des','body_h1','breadcrumb'];
+    public $translatedAttributes = ['name','des','g_title','g_des','body_h1','breadcrumb'];
     protected $fillable = ['slug','photo','photo_thum_1'];
     protected $table = "posts";
     protected $primaryKey = 'id';
@@ -30,5 +30,17 @@ class Post extends Model implements TranslatableContract
     {
         return $this->setAttribute('is_published', $status);
     }
+
+
+    public function getCatName()
+    {
+        return $this->belongsTo(Category::class,'category_id','id');
+    }
+
+    public function getLoationName()
+    {
+        return $this->belongsTo(Location::class,'location_id','id');
+    }
+
 
 }
