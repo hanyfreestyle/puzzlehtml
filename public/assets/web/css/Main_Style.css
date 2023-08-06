@@ -2,3 +2,9 @@
  min-height:600px;
  }
  
+ 
+
+.DeveloperCard img{
+max-height: 200px!important;
+}
+ 

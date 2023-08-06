@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\web\PageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,12 +20,14 @@ Auth::viaRemember();
 
 Route::group(['middleware' => ['auth','status']], function() {
     Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
-        Route::get('/', [HomeController::class, 'index'])->name('menu-home');
-        Route::get('/blog', [HomeController::class, 'index'])->name('menu-blog');
-        Route::get('/developers', [HomeController::class, 'index'])->name('menu-developers');
-        Route::get('/contact-us', [HomeController::class, 'index'])->name('menu-contact-us');
 
+        Route::get('/', [PageController::class, 'index'])->name('menu-home');
+        Route::get('/blog', [PageController::class, 'index'])->name('menu-blog');
 
+        Route::get('/contact-us', [PageController::class, 'index'])->name('menu-contact-us');
+
+        Route::get('/developers', [PageController::class, 'DevelopersPage'])->name('menu-developers');
+        Route::get('/developers/{slug}', [PageController::class, 'DeveloperView'])->name('page-developer-view');
 
 
 

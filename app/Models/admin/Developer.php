@@ -15,7 +15,7 @@ class Developer extends Model implements TranslatableContract
     use SoftDeletes;
     use Translatable;
 
-    public $translatedAttributes = ['name','g_title','g_des','body_h1','breadcrumb'];
+    public $translatedAttributes = ['name','des','g_title','g_des','body_h1','breadcrumb'];
     protected $fillable = ['slug','photo','photo_thum_1','is_active'];
     protected $table = "developers";
     protected $primaryKey = 'id';
@@ -44,6 +44,14 @@ class Developer extends Model implements TranslatableContract
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
+    public function projectCount()
+    {
+        return $this->hasMany(Listing::class,'developer_id','id')
+            ->where('listing_type','!=','ForSale')
+            ->select(['developer_id','listing_type'])
+
+            ;
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
