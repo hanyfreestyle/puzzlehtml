@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Post extends Model implements TranslatableContract
 {
@@ -43,4 +44,12 @@ class Post extends Model implements TranslatableContract
     }
 
 
+    public function seoDes():string
+    {
+        $str = $this->des ;
+        $str = strip_tags($str);
+        $str = str_replace('&nbsp;', ' ', $str);
+       # return Str::words($str,500);
+        return Str::limit($str,160);
+    }
 }

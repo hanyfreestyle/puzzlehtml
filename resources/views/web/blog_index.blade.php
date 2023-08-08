@@ -13,7 +13,8 @@
 {{--                        <p>{{ $Post->id  }}</p>--}}
                         <h5 class="card-title"><a href="{{route('blogView',[$Post->getCatName->slug,$Post->slug])}}">{{$Post->name}}</a></h5>
                         <p class="card-text">نُشرت بتاريخ {{ $Post->published_at  }}</p>
-                        <p class="card-text">{{ \Illuminate\Support\Str::limit($Post->g_des,160) ?? 'No Des' }}</p>
+{{--                        <p class="card-text">{{ \Illuminate\Support\Str::limit($Post->g_des,160) ?? 'No Des' }}</p>--}}
+                        <p class="card-text">{!! $Post->seoDes() !!}</p>
                     </div>
                 </div>
             </div>
