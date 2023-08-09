@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Phattarachai\LaravelMobileDetect\Agent;
 
 class WebMainController extends Controller
 {
+
+    public function __construct()
+    {
+        $agent = new Agent();
+        View::share('agent', $agent);
+    }
+
+
+
+
     //
     static function printSeoMeta($row){
         $lang = thisCurrentLocale();

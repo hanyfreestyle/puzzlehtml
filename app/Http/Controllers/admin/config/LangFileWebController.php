@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 
-class LangFileController extends AdminMainController
+class LangFileWebController extends AdminMainController
 {
     public $controllerName ;
 
-    function __construct($controllerName = 'adminlang')
+    function __construct($controllerName = 'weblang')
     {
         parent::__construct();
 
@@ -26,7 +26,9 @@ class LangFileController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
     {
-        $listFile =  config('adminLangFile.adminFile');
+        $listFile =  config('adminLangFile.webFile');
+
+
         $pageData = "";
         $mergeData = [];
         $allData = [];
@@ -39,10 +41,10 @@ class LangFileController extends AdminMainController
             $id = intval($_GET['id']);
 
             $selFileIs =  $listFile[$id]['file_name'];
-            $prefixCopy = LangFileController::getPrefixCopy($listFile[$id]);
+            $prefixCopy = LangFileWebController::getPrefixCopy($listFile[$id]);
 
             foreach ( config('app.lang_file') as $key=>$lang) {
-                $FullPathToFile  = LangFileController::getFullPathToFileArr($listFile[$id],$key);
+                $FullPathToFile  = LangFileWebController::getFullPathToFileArr($listFile[$id],$key);
                 $GetData = File::getRequire($FullPathToFile);
                 $result = array();
 
@@ -67,7 +69,7 @@ class LangFileController extends AdminMainController
         }
         ksort($mergeData);
 
-        return view('admin.config.lang_admin_index',compact('pageData','mergeData','allData','prefixCopy','ViewData'));
+        return view('admin.config.lang_web_index',compact('pageData','mergeData','allData','prefixCopy','ViewData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -76,13 +78,13 @@ class LangFileController extends AdminMainController
         $request-> validated();
 
         $id = $request->file_id ;
-        $listFile =  config('adminLangFile.adminFile');
+        $listFile =  config('adminLangFile.webFile');
         $selFileIs =  $listFile[$id]['file_name'];
 
         $contentAsArr =[];
         foreach ( config('app.lang_file') as $key=>$lang)
         {
-            $FullPathToFile = LangFileController::getFullPathToFileArr($listFile[$id], $key);
+            $FullPathToFile = LangFileWebController::getFullPathToFileArr($listFile[$id], $key);
 
 
             $content = "<?php\n\nreturn\n[\n";

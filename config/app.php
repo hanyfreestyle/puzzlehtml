@@ -174,6 +174,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+        Phattarachai\LaravelMobileDetect\AgentServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -201,6 +202,7 @@ return [
         'JsonLdMulti'   => Artesaos\SEOTools\Facades\JsonLdMulti::class,
         // or
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+        'Agent' => Phattarachai\LaravelMobileDetect\Facades\Agent::class,
     ])->toArray(),
 
 

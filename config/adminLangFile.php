@@ -12,6 +12,13 @@ return [
        '8'=> ['id'=> '8' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'roles','name'=>'الصلاحيات' ],
        '9'=> ['id'=> '9' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'settings','name'=>'الاعدادات' ],
        '10'=> ['id'=> '10' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'project','name'=>'المشروعات' ],
-       '11'=> ['id'=> '11' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> '','name'=>'web' ],
+
     ],
+
+    'webFile' => [
+        '1'=> ['id'=> '1' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'def','name'=>'المتغيرات الاساسية' ],
+        '2'=> ['id'=> '2' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'menu','name'=>'Menu' ],
+
+    ],
+
 ];

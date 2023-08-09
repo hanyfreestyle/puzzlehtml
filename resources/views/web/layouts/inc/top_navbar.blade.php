@@ -1,5 +1,6 @@
 <nav class="lang py-2 mb-2" >
     <a href="{{ LaravelLocalization::getLocalizedURL(webChangeLocale(), null, [], true) }}">{{webChangeLocaletext()}}</a>
+    <a href="{{route('admin.Dashboard') }}">Admin</a>
 </nav>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">

@@ -32,6 +32,16 @@
 
         [
             'view'=>true,
+            'sel_routs'=>'weblang',
+            'type'=>'one',
+            'text'=> 'admin/menu.lang_file_web',
+            'url'=> 'weblang.index',
+            'icon'=>'fas fa-globe-africa',
+            'roleView'=>'weblang_view',
+        ],
+
+        [
+            'view'=>true,
             'sel_routs'=>'adminlang',
             'type'=>'one',
             'text'=> 'admin/menu.lang_file_admin',

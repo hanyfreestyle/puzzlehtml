@@ -23,4 +23,5 @@ return
 	'setting_web' => 'الاعدادات العامة',
 	'unit' => 'وحدات للبيع',
 	'uploadFilter' => 'فلاتر الصور',
+	'lang_file_web' => 'ملفات اللغة للموقع',
 ];

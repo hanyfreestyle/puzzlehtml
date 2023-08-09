@@ -23,4 +23,5 @@ return
 	'setting_web' => 'Web Settings',
 	'unit' => 'Units For Sale',
 	'uploadFilter' => 'Upload Filters',
+	'lang_file_web' => 'Web Lang File',
 ];
