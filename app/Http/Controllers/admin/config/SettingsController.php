@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\SettingFormRequest;
 use App\Models\admin\config\Setting;
 use Artisan;
+use Cache;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
 
@@ -40,6 +41,8 @@ class SettingsController extends AdminMainController
         }
         $setting= Setting::findorfail('1');
         $setting->update($request->all());
+        Cache::forget('WebConfig_Cash');
+
         return  back()->with('Edit.Done',"");
     }
 

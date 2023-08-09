@@ -216,4 +216,9 @@ return [
     'locations_list_cash_time' => 60*60*24,
     'amenities_list_cash_time' => 60*60*24,
     'upload_filter_list_cash' => 60*60*24,
+    'website_config_cash' => 60*60*24,
+    'def_photo_cash' => 60*60*24,
+    'meta_tage_cash' => 60*60*24,
+
+
 ];

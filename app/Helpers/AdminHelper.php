@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 
+use App\Http\Controllers\WebMainController;
 use App\Models\admin\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -480,12 +481,13 @@ class AdminHelper{
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     printTableImage
-    static  function printWebImage($row,$fildeName='photo_thum_1'){
+    static  function printWebImage($row,$fildeName,$defPhoto,$sendArr=array()){
+        $defPhoto_file = WebMainController::getDefPhotoById($defPhoto);
 
         if($row->$fildeName){
-            $sendImg = '<img  class="img-fluid" src="'.defImagesDir($row->$fildeName).'">';
+            $sendImg = '<img  class="img-fluid" src="'.defImagesDir($row->$fildeName).'" >';
         }else{
-            $sendImg = '<img  class="img-fluid" src="'.defAdminAssets('img/default-150x150.png').'">';
+            $sendImg = '<img  class="img-fluid" src="'.defImagesDir($defPhoto_file->photo).'">';
         }
 
         return $sendImg ;

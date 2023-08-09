@@ -9,14 +9,26 @@
 
         {{ Breadcrumbs::render('blogCatList',$Category) }}
     </div>
-
+    <textarea class="textarea_code">
+                   {!! SEO::generate() !!}
+               </textarea>
 
     <div class="row">
         @foreach($Posts as $Post)
             <div class="col-lg-3 ">
                 <div class="card mb-3">
                     <div class="imgdiv">
-                        {!! \App\Helpers\AdminHelper::printWebImage($Post,'photo') !!}
+
+                        <img src="{{getPhotoPath($Post->photo,"blog")}}"
+                             class="img-fluid"
+                             width="200"
+                             height="100"
+                             title="{{$Post->name}}"
+                             alt="{{$Post->name}}"
+                        >
+
+
+{{--                        {!! \App\Helpers\AdminHelper::printWebImage($Post,'photo') !!}--}}
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{route('blogView',[$Post->getCatName->slug,$Post->slug])}}">{{$Post->name}}</a></h5>

@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminMainController;
 use App\Http\Requests\admin\config\DefPhotoRequest;
 use App\Models\admin\config\DefPhoto;
 use Illuminate\Http\Request;
+use Cache ;
 
 
 
@@ -68,7 +69,7 @@ class DefPhotoController extends AdminMainController
         $deleteRow = DefPhoto::findOrFail($id);
         $deleteRow = AdminHelper::onlyDeletePhotos($deleteRow,3);
         $deleteRow->delete();
-
+        Cache::forget('DefPhoto_Cash');
         return redirect(route('config.defPhoto.index'))->with('confirmDelete',"");
     }
 
@@ -89,7 +90,7 @@ class DefPhotoController extends AdminMainController
         $saveData = AdminHelper::saveAndDeletePhoto($saveData,$saveImgData);
 
         $saveData->save();
-
+        Cache::forget('DefPhoto_Cash');
 
         if($id == '0'){
             return redirect(route('config.defPhoto.index'))->with('Add.Done',__('general.alertMass.confirmAdd'));
@@ -111,6 +112,7 @@ class DefPhotoController extends AdminMainController
             $saveData->postion = $newPosition;
             $saveData->save();
         }
+        Cache::forget('DefPhoto_Cash');
         return response()->json(['success'=>$positions]);
     }
 

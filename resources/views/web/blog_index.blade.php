@@ -8,13 +8,21 @@
             <div class="col-lg-3 ">
                 <div class="card mb-3">
                     <div class="imgdiv">
-                        {!! \App\Helpers\AdminHelper::printWebImage($Post,'photo') !!}
+{{--                        {!! \App\Helpers\AdminHelper::printWebImage($Post,'photo') !!}--}}
+                        <img src="{{getPhotoPath($Post->photo,"blog")}}"
+                             class="img-fluid"
+                             width="200"
+                             height="100"
+                             title="{{$Post->name}}"
+                             alt="{{$Post->name}}"
+                        >
+
                     </div>
                     <div class="card-body">
 {{--                        <p>{{ $Post->id  }}</p>--}}
                         <h5 class="card-title"><a href="{{route('blogView',[$Post->getCatName->slug,$Post->slug])}}">{{$Post->name}}</a></h5>
-                        <p class="card-text">نُشرت بتاريخ {{ $Post->published_at  }}</p>
-{{--                        <p class="card-text">{{ \Illuminate\Support\Str::limit($Post->g_des,160) ?? 'No Des' }}</p>--}}
+                        <p class="card-text"> {{ __('web/def.published_at') }} {{ $Post->published_at  }}</p>
+
                         <p class="card-text">{!! $Post->seoDes() !!}</p>
                     </div>
                 </div>

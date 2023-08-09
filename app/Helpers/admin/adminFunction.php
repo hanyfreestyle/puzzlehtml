@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WebMainController;
 use Illuminate\Support\Facades\File;
 
 if (!function_exists('getTrans')) {
@@ -373,6 +374,21 @@ if (!function_exists('project_status')) {
         return $sendVal;
     }
 }
+
+
+if (!function_exists('getPhotoPath')) {
+    function getPhotoPath($file,$defPhoto){
+        $defPhoto_file = WebMainController::getDefPhotoById($defPhoto);
+        if($file){
+            $sendImg = defImagesDir($file);
+        }else{
+            $sendImg = defImagesDir($defPhoto_file->photo);
+        }
+        return $sendImg ;
+    }
+}
+
+
 
 
 

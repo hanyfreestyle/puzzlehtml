@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\AdminHelper;
 use App\Models\admin\config\UploadFilter;
+use Cache;
 use Illuminate\Support\Facades\View;
 use Spatie\Valuestore\Valuestore;
 
@@ -16,6 +17,8 @@ class AdminMainController extends Controller
 
     )
     {
+
+       // Cache::flush();
         $this->middleware('auth');
 
 

@@ -8,6 +8,7 @@ use App\Models\admin\config\MetaTag;
 
 use App\Http\Requests\admin\config\MetaTagRequest;
 use App\Models\admin\config\MetaTagTranslation;
+use Cache ;
 
 class MetaTagController extends AdminMainController
 {
@@ -77,6 +78,7 @@ class MetaTagController extends AdminMainController
             $saveTranslation->save();
         }
 
+        Cache::forget('WebMeta_Cash');
         if($id == '0'){
             return redirect(route('config.meta.index'))->with('Add.Done',"");
         }else{
@@ -89,7 +91,7 @@ class MetaTagController extends AdminMainController
     public function delete($id)
     {
         MetaTag::findOrFail($id)->delete();
-
+        Cache::forget('WebMeta_Cash');
         return redirect(route('config.meta.index'))->with('confirmDelete','');
     }
 

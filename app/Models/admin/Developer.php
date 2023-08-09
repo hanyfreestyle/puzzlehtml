@@ -9,6 +9,7 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cache;
+use Illuminate\Support\Str;
 
 class Developer extends Model implements TranslatableContract
 {
@@ -78,12 +79,17 @@ public function scopeGetDeveloperList(Builder $query): Builder
 {
     return $query->where('is_active',true)
         ->with('translation')
-        ->orderBy('projects_count','desc')
-        ;
+        ->orderBy('projects_count','desc');
 }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     text
-
+#|||||||||||||||||||||||||||||||||||||| #     seoDes
+    public function seoDes():string
+    {
+        $str = $this->des ;
+        $str = strip_tags($str);
+        $str = str_replace('&nbsp;', ' ', $str);
+        return Str::limit($str,160);
+    }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
 

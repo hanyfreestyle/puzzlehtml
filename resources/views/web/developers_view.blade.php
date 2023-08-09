@@ -1,27 +1,27 @@
 @extends('web.layouts.app')
 @section('content')
 
-
     <div class="row">
         {{ Breadcrumbs::render('developer_view',$Developer) }}
     </div>
 
-
-
     <div class="row developer-header mb-5">
         <div class="col-md-12 text-center ">
-            {!! \App\Helpers\AdminHelper::printWebImage($Developer,'photo') !!}
+            <img src="{{getPhotoPath($Developer->photo,"developer")}}"
+                 class="img-fluid"
+                 width="200"
+                 height="100"
+                 title="{{$Developer->name}}"
+                 alt="{{$Developer->name}}"
+            >
         </div>
 
-        <h1 class="def_h1 text-center mt-3">كمبوندات {{$Developer->name}} </h1>
-
+        @if(thisCurrentLocale() == 'ar')
+            <h1 class="def_h1 text-center mt-3"> {{__('web/def.Compounds')}} {{$Developer->name}} </h1>
+        @else
+            <h1 class="def_h1 text-center mt-3"> {{$Developer->name}}  {{__('web/def.Compounds')}} </h1>
+        @endif
     </div>
-
-
-
-
-
-
 
     <div class="row">
         <div class="col-md-8">
@@ -35,8 +35,7 @@
                             type="button"
                             role="tab"
                             aria-controls="pills-home"
-                        {{--                            aria-selected="true"--}}
-                    >  Project {{$Projects->total()}} </button>
+                    >  {{$Projects->total()}} {{ __('web/def.Project') }}  </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link @if(isset($_GET['property_page'])) active @endif()"
@@ -46,8 +45,7 @@
                             type="button"
                             role="tab"
                             aria-controls="pills-profile"
-                        {{--                            aria-selected="false"--}}
-                    > Units {{$Units->total()}}</button>
+                    >  {{$Units->total()}} {{ __('web/def.Units') }}</button>
                 </li>
 
             </ul>
@@ -60,26 +58,30 @@
 
                                 <div class="card mb-3">
                                     <div class="imgdiv">
-                                        {!! \App\Helpers\AdminHelper::printWebImage($Project,'photo') !!}
+                                        <img src="{{getPhotoPath($Project->photo,"project")}}"
+                                             class="img-fluid"
+                                             width="200"
+                                             height="100"
+                                             title="{{$Project->name}}"
+                                             alt="{{$Project->name}}"
+                                        >
+
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title"><a href="#">{{$Project->name}}</a></h5>
                                         <p class="card-text">{{$Project->g_des}}</p>
-                                        <p class="card-text">تبداء من {{ number_format($Project->price) }} <br>
+                                        <p class="card-text">{{__('web/def.starting_from')}} {{ number_format($Project->price) }} <br>
                                             {{ $Project->locationName->name }}  </p>
-
-
-
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
+
                     <div class="d-flex justify-content-center mt-5">
                         @if($Projects instanceof \Illuminate\Pagination\AbstractPaginator)
                             {{ $Projects->links() }}
                         @endif
-
                     </div>
 
                 </div>
@@ -92,7 +94,13 @@
 
                                 <div class="card mb-3">
                                     <div class="imgdiv">
-                                        {!! \App\Helpers\AdminHelper::printWebImage($Unit,'photo') !!}
+                                        <img src="{{getPhotoPath($Unit->photo,"units")}}"
+                                             class="img-fluid"
+                                             width="200"
+                                             height="100"
+                                             title="{{$Unit->name}}"
+                                             alt="{{$Unit->name}}"
+                                        >
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title"><a href="#">{{$Unit->name}}</a></h5>
@@ -134,12 +142,22 @@
 
         </div>
         <div class="col-6 col-md-4">
-            <div class="font-weight-bolder">  أخبار مشاريع كمبوندات {{$Developer->name}}</div>
+            <div class="font-weight-bolder">{{ __('web/def.projects_news') }} {{$Developer->name}}</div>
             <hr>
             @foreach($Posts as $Post)
                 <div class="blogLeft">
                     <div class="rightdiv">
-                        {!! \App\Helpers\AdminHelper::printWebImage($Post,'photo') !!}
+
+                        <img src="{{getPhotoPath($Post->photo,"blog")}}"
+                             class="img-fluid"
+                             width="200"
+                             height="100"
+                             title="{{$Post->name}}"
+                             alt="{{$Post->name}}"
+                        >
+
+
+
                     </div>
                     <div class="leftdiv">
                         <p><a href="#">{{ $Post->name }}</a></p>
@@ -156,16 +174,8 @@
     <hr>
     <div class="row">
         <div class="col-md-12">
-
-
             {!!  $Developer->des !!}
         </div>
     </div>
-
-
-
-
-
-
 
 @endsection

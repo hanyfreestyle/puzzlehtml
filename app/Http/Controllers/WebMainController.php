@@ -7,6 +7,8 @@ use App\Models\admin\config\DefPhoto;
 use App\Models\admin\config\MetaTag;
 
 use App\Models\admin\config\Setting;
+use App\Models\admin\Location;
+use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Phattarachai\LaravelMobileDetect\Agent;
@@ -41,7 +43,7 @@ class WebMainController extends Controller
         if($row->photo){
             $defImage = $row->photo ;
         }else{
-            $GetdefImage = DefPhoto::where('cat_id',$defPhoto)->first();
+            $GetdefImage = self::getDefPhotoById($defPhoto);
             $defImage =optional($GetdefImage)->photo;
         }
         if($defImage){
@@ -71,30 +73,42 @@ class WebMainController extends Controller
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     getMeatByCatId
     static function getMeatByCatId($cat_id){
-        $WebMeta = MetaTag::query()
-            ->where('cat_id' , $cat_id)
-            ->first()
-        ;
-        return $WebMeta ;
-    }
+
+        $WebMeta = Cache::remember('WebMeta_Cash',config('app.meta_tage_cash'), function (){
+            return  MetaTag::with('translation')->get()->keyBy('cat_id');
+        });
+
+        if ($WebMeta->has($cat_id)) {
+            return $WebMeta[$cat_id] ;
+        }else{
+            return $WebMeta['home'] ;
+        }
+   }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     getWebConfig
-    static function getWebConfig(){
-        $WebConfig = Setting::where('id' , 1)
-            ->first()
-        ;
-        return $WebConfig ;
+#|||||||||||||||||||||||||||||||||||||| #     getDefPhotoById
+    static function getDefPhotoById($cat_id){
+
+        $DefPhoto = Cache::remember('DefPhoto_Cash',config('app.def_photo_cash'), function (){
+            return  DefPhoto::get()->keyBy('cat_id');
+        });
+
+        if ($DefPhoto->has($cat_id)) {
+            return $DefPhoto[$cat_id] ;
+        }else{
+            return $DefPhoto['logo'] ;
+        }
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     getMeatByCatId
-    static function getDefPhotoById($cat_id){
-//        $WebMeta = MetaTag::query()
-//            ->where('cat_id' , $cat_id)
-//            ->first()
-//        ;
-//        return $WebMeta ;
+#|||||||||||||||||||||||||||||||||||||| #     getWebConfig
+    static function getWebConfig(){
+        $WebConfig = Cache::remember('WebConfig_Cash',config('app.website_config_cash'), function (){
+            return  Setting::where('id' , 1)->with('translation')->first();
+        });
+        return $WebConfig ;
     }
+
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text

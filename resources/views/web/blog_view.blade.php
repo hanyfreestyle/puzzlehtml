@@ -11,11 +11,21 @@
 
 
 
+
+
     <div class="row">
         <div class="col-lg-8">
             <div class="col-lg-12">
                 <div class="imgdiv_post">
-                    {!! \App\Helpers\AdminHelper::printWebImage($Post,'photo') !!}
+
+                    <img src="{{getPhotoPath($Post->photo,"blog")}}"
+                         class="img-fluid"
+                         width="200"
+                         height="100"
+                         title="{{$Post->name}}"
+                         alt="{{$Post->name}}"
+                    >
+
                 </div>
             </div>
 
@@ -65,7 +75,15 @@
                 @foreach($relatedProjects as $relatedProject)
                     <div class="blogLeft">
                         <div class="rightdiv">
-                            {!! \App\Helpers\AdminHelper::printWebImage($relatedProject,'photo') !!}
+
+                            <img src="{{getPhotoPath($relatedProject->photo,"project")}}"
+                                 class="img-fluid"
+                                 width="200"
+                                 height="100"
+                                 title="{{$Post->name}}"
+                                 alt="{{$Post->name}}"
+                            >
+
                         </div>
                         <div class="leftdiv">
                             <p><a href="#">{{ $relatedProject->name }}</a>
@@ -84,8 +102,4 @@
             @endif
         </div>
     </div>
-
-
-
-
 @endsection

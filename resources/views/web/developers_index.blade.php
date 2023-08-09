@@ -8,24 +8,31 @@
         {{ Breadcrumbs::render('developer_list') }}
     </div>
 
-
     <div class="row">
 
         @foreach($Developers as $Developer)
-            <div class="col-lg-4 ">
+            <div class="col-lg-3 ">
 
                 <div class="card mb-3">
                     <div class="imgdiv">
-                        {!! \App\Helpers\AdminHelper::printWebImage($Developer,'photo') !!}
+{{--                        {!! \App\Helpers\AdminHelper::printWebImage($Developer,'photo',"logo") !!}--}}
+                        <img src="{{getPhotoPath($Developer->photo,"developer")}}"
+                             class="img-fluid"
+                             width="200"
+                             height="100"
+                             title="{{$Developer->name}}"
+                             alt="{{$Developer->name}}"
+                        >
+
                     </div>
 
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{route('page-developer-view',$Developer->slug)}}">{{$Developer->name}}</a></h5>
                         <p class="UnitsInfo">
-                            <span>Project {{$Developer->projects_count}}</span>
-                            <span>Units {{$Developer->units_count}}</span>
+                            <span>{{$Developer->projects_count}} {{__('web/def.Project')}} </span>
+                            <span>{{$Developer->units_count}} {{__('web/def.Units')}}</span>
                         </p>
-                        <p class="card-text">{{ $Developer->g_des ?? 'No Des' }}</p>
+                        <p class="card-text">{{ $Developer->seoDes() ?? 'No Des' }}</p>
 
                     </div>
                 </div>

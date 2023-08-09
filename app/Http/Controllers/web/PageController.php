@@ -29,7 +29,7 @@ class PageController extends WebMainController
         parent::printSeoMeta($Meta);
 
         $Developers = Developer::getDeveloperList()
-            ->paginate(12);
+            ->paginate(16);
         return view('web.developers_index',compact('Developers'));
     }
 
@@ -38,12 +38,13 @@ class PageController extends WebMainController
 #|||||||||||||||||||||||||||||||||||||| #     DeveloperView
     public function DeveloperView($slug)
     {
-        $Developer = Developer::query()
+        $Developer = Developer::getDeveloperList()
             ->where('slug',$slug)
-            ->withCount('projectCount')
             ->firstOrFail();
 
-        $Projects= Listing::query()
+        parent::printSeoMeta($Developer,'developer');
+
+       $Projects= Listing::query()
             ->where('developer_id',$Developer->id)
             ->where('listing_type','Project')
             ->with('locationName')
@@ -74,15 +75,17 @@ class PageController extends WebMainController
 #|||||||||||||||||||||||||||||||||||||| #     BlogPageList
     public function BlogPageList()
     {
+
+        $Meta = parent::getMeatByCatId('blog');
+        parent::printSeoMeta($Meta,'blog');
+
+
         $Posts = Post::query()
             ->where('is_published' ,true)
             ->with('translation')
             ->with('getCatName')
             ->orderBy('id','desc')
             ->paginate(12);
-
-
-
 
         $Categories = Category::query()
             ->where('is_active',true)
@@ -105,6 +108,10 @@ class PageController extends WebMainController
            // ->with('translation')
             ->firstOrFail();
         ;
+
+        parent::printSeoMeta($Category,'blog');
+
+
         $Posts = Post::query()
             ->where('is_published',true)
             ->where('category_id',$Category->id)
@@ -128,6 +135,7 @@ class PageController extends WebMainController
             ->with('getLoationName')
             ->firstOrFail()
         ;
+        parent::printSeoMeta($Post,'blog');
 
         $Category = Category::query()
             ->where('is_active',true)
