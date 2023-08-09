@@ -12,15 +12,15 @@
         <ul class="navbar-nav">
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('menu-home')}}">{{__('web/.menu_home')}}</a>
+                <a class="nav-link" href="{{route('menu-home')}}">{{__('web/menu.home')}}</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('menu-blog')}}">{{ __('web/.menu_blog') }}</a>
+                <a class="nav-link" href="{{route('menu-blog')}}">{{ __('web/menu.blog') }}</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('menu-developers')}}">{{ __('web/.menu_developer') }}</a>
+                <a class="nav-link" href="{{route('menu-developers')}}">{{ __('web/menu.developer') }}</a>
             </li>
 
 
@@ -29,7 +29,7 @@
 {{--            </li>--}}
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('menu-contact-us')}}">{{ __('web/.menu_contatc_us') }}</a>
+                <a class="nav-link" href="{{route('menu-contact-us')}}">{{ __('web/menu.contatc_us') }}</a>
             </li>
 
 

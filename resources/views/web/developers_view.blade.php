@@ -1,6 +1,13 @@
 @extends('web.layouts.app')
 @section('content')
 
+
+    <div class="row">
+        {{ Breadcrumbs::render('developer_view',$Developer) }}
+    </div>
+
+
+
     <div class="row developer-header mb-5">
         <div class="col-md-12 text-center ">
             {!! \App\Helpers\AdminHelper::printWebImage($Developer,'photo') !!}

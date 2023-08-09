@@ -8,7 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Auth::routes();
+
 Auth::routes([
     'register' => false, // Registration Routes...
     'reset' => false, // Password Reset Routes...
@@ -33,17 +33,6 @@ Route::group(['middleware' => ['auth','status']], function() {
         Route::get('/blog', [PageController::class, 'BlogPageList'])->name('menu-blog');
         Route::get('/blog/{catSlug}', [PageController::class, 'BlogCatList'])->name('blogCatList');
         Route::get('/blog/{catSlug}/{postSlug}', [PageController::class, 'BlogView'])->name('blogView');
-
-
-
-
-
-//
-//        Route::get('/TestLang', [HomeController::class, 'TestLang'])->name('admin.DashboardXXXX');
-//
-//
-//        Route::get('/loc', [HomeController::class, 'location'])->name('admin.location');
-
 
     });
 });

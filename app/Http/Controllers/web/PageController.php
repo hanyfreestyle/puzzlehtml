@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\web;
-
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebMainController;
 use App\Models\admin\Category;
 use App\Models\admin\Developer;
@@ -12,22 +10,25 @@ use Illuminate\Http\Request;
 
 class PageController extends WebMainController
 {
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
     {
-//        $post = Post::where("id",250)->firstOrFail();
-//
-//        parent::printSeoMeta($post);
+       $Meta = parent::getMeatByCatId('home');
+       parent::printSeoMeta($Meta);
        return view('web.index');
-
     }
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     DevelopersPage
     public function DevelopersPage()
     {
-        $Developers = Developer::query()
-            ->with('translation')
-            ->orderBy('projects_count','desc')
+        $Meta = parent::getMeatByCatId('developer');
+        parent::printSeoMeta($Meta);
+
+        $Developers = Developer::getDeveloperList()
             ->paginate(12);
         return view('web.developers_index',compact('Developers'));
     }
@@ -128,6 +129,13 @@ class PageController extends WebMainController
             ->firstOrFail()
         ;
 
+        $Category = Category::query()
+            ->where('is_active',true)
+            ->where('slug',$catSlug)
+            ->firstOrFail();
+        ;
+
+
         if($Post->listing_id == null){
             $project_tag = null ;
         }else{
@@ -160,7 +168,7 @@ class PageController extends WebMainController
 
 
 
-        return view('web.blog_view',compact('Post','project_tag','relatedProjects'));
+        return view('web.blog_view',compact('Post','project_tag','relatedProjects','Category'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text

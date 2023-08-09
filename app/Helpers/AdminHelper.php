@@ -481,6 +481,7 @@ class AdminHelper{
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     printTableImage
     static  function printWebImage($row,$fildeName='photo_thum_1'){
+
         if($row->$fildeName){
             $sendImg = '<img  class="img-fluid" src="'.defImagesDir($row->$fildeName).'">';
         }else{

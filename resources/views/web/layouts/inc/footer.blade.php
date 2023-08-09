@@ -4,12 +4,10 @@
             <div class="col-md-12 text-center">
                 <h2 class="footer-heading"><a href="#" class="logo">realestate.eg</a></h2>
                 <p class="menu">
-                    <a href="#">Home</a>
-                    <a href="#">Agent</a>
-                    <a href="#">About</a>
-                    <a href="#">Listing</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Contact</a>
+                    <a href="{{route('menu-home')}}">{{__('web/menu.home')}}</a>
+                    <a href="{{route('menu-blog')}}">{{ __('web/menu.blog') }}</a>
+                    <a href="{{route('menu-developers')}}">{{ __('web/menu.developer') }}</a>
+                    <a href="{{route('menu-contact-us')}}">{{ __('web/menu.contatc_us') }}</a>
                 </p>
 
             </div>

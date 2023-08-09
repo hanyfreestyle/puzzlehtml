@@ -7,6 +7,7 @@
                 <h1 class="def_h1 mb-4">{{ $Category->name }}</h1>
             </div>
 
+        {{ Breadcrumbs::render('blogCatList',$Category) }}
     </div>
 
 

@@ -1,6 +1,7 @@
 @extends('web.layouts.app')
 @section('content')
 
+    {{ Breadcrumbs::render('blog') }}
 
     <div class="row">
         @foreach($Posts as $Post)

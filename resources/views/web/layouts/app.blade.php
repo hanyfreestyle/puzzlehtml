@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+{!! SEO::generate() !!}
     <link rel="stylesheet" href="{{ defWebAssets('bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ defWebAssets('css/Main_Style.css') }}">
@@ -19,6 +19,7 @@
 
 <div class="container main-container">
     @yield('content')
+
 </div>
 
 

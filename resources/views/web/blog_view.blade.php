@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <h1 class="def_h1 mb-4">{{ $Post->name }}</h1>
         </div>
-
+        {{ Breadcrumbs::render('post_view',$Category,$Post) }}
     </div>
 
 

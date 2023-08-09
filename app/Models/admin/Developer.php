@@ -2,6 +2,7 @@
 
 namespace App\Models\admin;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
@@ -63,9 +64,23 @@ class Developer extends Model implements TranslatableContract
 #|||||||||||||||||||||||||||||||||||||| #     text
 
 
+
+
+
+
+
+
+
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
-
+public function scopeGetDeveloperList(Builder $query): Builder
+{
+    return $query->where('is_active',true)
+        ->with('translation')
+        ->orderBy('projects_count','desc')
+        ;
+}
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
 

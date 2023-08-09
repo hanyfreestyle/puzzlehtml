@@ -1,6 +1,13 @@
 @extends('web.layouts.app')
 @section('content')
 
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="def_h1 mb-4">{{  __('web/menu.developer') }}</h1>
+        </div>
+        {{ Breadcrumbs::render('developer_list') }}
+    </div>
+
 
     <div class="row">
 
