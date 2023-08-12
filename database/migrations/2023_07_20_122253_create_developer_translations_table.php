@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('developer_id')->unsigned();
             $table->string('locale')->index();
             $table->string('name')->nullable();
-            $table->text('des')->nullable();
+            $table->longText('des')->nullable();
             $table->string('g_title')->nullable();
             $table->text('g_des')->nullable();
             $table->string('body_h1')->nullable();

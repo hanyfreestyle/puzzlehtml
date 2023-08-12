@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('developers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("slug");
+            $table->integer("slug_count")->nullable();
             $table->string("photo")->nullable();
             $table->string("photo_thum_1")->nullable();
             $table->string("slider_images_dir")->nullable();

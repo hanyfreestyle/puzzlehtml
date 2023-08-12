@@ -13,8 +13,40 @@ use Illuminate\Support\Str;
 
 class UpdateDataController extends Controller
 {
-
     public function index()
+    {
+
+//        $Developers =  Developer::onlyTrashed()->get();
+//        foreach ($Developers as $Developer)
+//        {
+//            $Developer->forceDelete();
+//        }
+
+//        $Developers = Developer::where('slug_count',null)->get();
+//        if(count($Developers) > 0){
+//            foreach ($Developers as $Developer)
+//            {
+//                $getCount = Developer::where('slug',$Developer->slug)->count();
+//                $Developer->slug_count  =  $getCount;
+//                $Developer->save();
+//            }
+//        }
+
+
+//        $Developers =  Developer::all();
+//        foreach ($Developers as $Developer)
+//        {
+//            $Developer->forceDelete();
+//        }
+
+
+
+
+    }
+
+
+
+    public function index_Old()
     {
 
 
@@ -35,53 +67,8 @@ class UpdateDataController extends Controller
 //        ;
 //
 //
-//        foreach ($Developers as $rowData)
-//        {
-//            echobr($rowData->id);
-//
-//            $saveTranslation = PostTranslation::where('post_id', $rowData->id)->where('locale', 'ar')->firstOrNew();
-//
-//            if ($saveTranslation->g_title == null and $saveTranslation->name  != null)
-//            {
-//                $saveTranslation->g_title = $rowData->translate('ar')->name;
-//                $saveTranslation->save();
-//            }
-//            $saveTranslation = PostTranslation::where('post_id', $rowData->id)->where('locale', 'en')->firstOrNew();
-//            if ($saveTranslation->g_title == null and $saveTranslation->name  != null)
-//            {
-//                $saveTranslation->g_title = $rowData->translate('en')->name;
-//                $saveTranslation->save();
-//            }
-//
-//        }
-//
 
 
-//        $Developers =  Developer::query()
-//            ->where('id',13)
-//            ->limit(1)
-//            ->get();
-//        ;
-//        foreach ($Developers as $rowData)
-//        {
-//            echobr($rowData->id);
-//
-//            $saveTranslation = DeveloperTranslation::where('developer_id',$rowData->id)->where('locale','ar')->firstOrNew();
-//
-//            if($saveTranslation->g_title == null){
-//                $saveTranslation->g_title = $rowData->translate('ar')->name;
-//            }
-//
-//            $saveTranslation->save();
-//
-//            $saveTranslation = DeveloperTranslation::where('developer_id',$rowData->id)->where('locale','en')->firstOrNew();
-//            if($saveTranslation->g_title == null){
-//                $saveTranslation->g_title = $rowData->translate('en')->name;
-//            }
-//
-//            $saveTranslation->save();
-//
-//        }
 
 
 

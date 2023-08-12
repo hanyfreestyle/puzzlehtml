@@ -34,9 +34,9 @@ class DeveloperPhotoSeeder extends Seeder
 //        }
 
 
-        DeveloperPhoto::unguard();
-        $tablePath = public_path('db/developer_photos.sql');
-        DB::unprepared(file_get_contents($tablePath));
+//        DeveloperPhoto::unguard();
+//        $tablePath = public_path('db/developer_photos.sql');
+//        DB::unprepared(file_get_contents($tablePath));
 
     }
 }

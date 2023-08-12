@@ -50,7 +50,7 @@
                 @endforeach
             </div>
 
-            <x-meta-tage-filde :body-h1="true" :breadcrumb="true"  :old-data="$Developer" :placeholder="false" />
+            <x-meta-tage-filde :body-h1="false" :breadcrumb="false"  :old-data="$Developer" :placeholder="false" />
 
             <hr>
 

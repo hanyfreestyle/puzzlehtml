@@ -20,8 +20,19 @@
 
 
     <x-breadcrumb-def :pageData="$pageData"/>
+
     <section class="div_data">
         <div class="container-fluid">
+
+            <div class="row"><div class="col-lg-12 mb-2">
+                <x-action-button url="{{ route('developer.noPhoto')  }}" print-lable="لا توجد صورة " />
+                <x-action-button url="{{ route('developer.slugErr')  }}" print-lable="رابط متكرر " />
+                <x-action-button url="{{ route('developer.noAr')  }}" print-lable="لا يوجد محتوى عربى  " />
+                <x-action-button url="{{ route('developer.noEn')  }}" print-lable="لا يوجد محتوى انجليزى  " />
+                <x-action-button url="{{ route('developer.unActive')  }}" print-lable="غير فعال  " />
+            </div> </div>
+
+
             <div class="row">
                 <div class="col-lg-12">
 
@@ -42,7 +53,7 @@
                                             <th></th>
                                             <th></th>
                                         @else
-{{--                                            <th>{{__('admin/def.status')}}</th>--}}
+
                                             <th></th>
                                             <th class="tc">{{__('admin/def.photo')}}</th>
                                             @can('developer_edit')
@@ -60,8 +71,8 @@
                                         <tr>
                                             <td>{{$row->id}}</td>
 
-                                            <td>{{$row->translate('ar')->name}}</td>
-                                            <td>{{$row->translate('en')->name}}</td>
+                                            <td>{{optional($row->translate('ar'))->name }}</td>
+                                            <td>{{optional($row->translate('en'))->name}}</td>
 
 
                                             @if($pageData['ViewType'] == 'deleteList')
@@ -70,7 +81,7 @@
                                                 <td class="tc"><x-action-button url="#" id="{{route('developer.force',$row->id)}}" type="deleteSweet"/></td>
                                             @else
                                                 <td>
-                                                    @if(count($row->getMorePhoto) == '0')
+                                                    @if($row->getMorePhoto_count== '0')
                                                         <x-action-button url="{{route('developer.More_Photos',$row->id)}}" type="morePhoto" :tip="true" bg="dark" />
                                                     @else
                                                         <x-action-button url="{{route('developer.More_Photos',$row->id)}}" type="morePhoto" :tip="true" />

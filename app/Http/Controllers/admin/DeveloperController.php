@@ -38,8 +38,14 @@ class DeveloperController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
         $pageData['Trashed'] = Developer::onlyTrashed()->count();
-        $Developers = self::getSelectQuery( Developer::where('id',"!=","0")->with('getMorePhoto'));
-
+        #$Developers = self::getSelectQuery( Developer::where('id',"!=","0")->withCount('getMorePhoto')->with
+        #('translation'));
+        $Developers = Developer::query()
+            ->with('translation')
+            ->withCount('getMorePhoto')
+            ->orderBy('id',"desc")
+            ->paginate(10)
+            ;
         return view('admin.developer.index',compact('pageData','Developers'));
     }
 
@@ -361,4 +367,131 @@ class DeveloperController extends AdminMainController
 
 
 
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noPhoto
+    public function noPhoto()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.developer'),'restore'=> 1, 'more_photo'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Developer::onlyTrashed()->count();
+
+        $Developers = Developer::query()
+            ->where('photo',null)
+            ->with('translation')
+            ->withCount('getMorePhoto')
+            ->orderBy('id',"desc")
+            ->paginate(10)
+        ;
+
+
+        return view('admin.developer.index',compact('pageData','Developers'));
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     slugErr
+    public function slugErr()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.developer'),'restore'=> 1, 'more_photo'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Developer::onlyTrashed()->count();
+
+        $Developers = Developer::query()
+            ->where('slug_count','>',1)
+            ->with('translation')
+            ->withCount('getMorePhoto')
+            ->orderBy('id',"desc")
+            ->paginate(10)
+        ;
+        return view('admin.developer.index',compact('pageData','Developers'));
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noEn
+    public function noEn()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.developer'),'restore'=> 1, 'more_photo'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Developer::onlyTrashed()->count();
+
+        $Developers= Developer::whereHas('teans_en', function ($query) {
+            $query->where('des', '=', null);
+
+        })->paginate(10);
+
+//        echobr( count($Developers));
+//        foreach ($Developers as $developer)
+//        {
+//            echobr($developer->id ." => " .$developer->name);
+//        }
+//        echobr('----');
+         return view('admin.developer.index',compact('pageData','Developers'));
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noAr
+    public function noAr()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.developer'),'restore'=> 1, 'more_photo'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Developer::onlyTrashed()->count();
+
+        $Developers= Developer::whereHas('teans_ar', function ($query) {
+            $query->where('des', '=', null);
+        })->paginate(10);
+
+
+
+
+        return view('admin.developer.index',compact('pageData','Developers'));
+    }
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noAr
+    public function unActive()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.developer'),'restore'=> 1, 'more_photo'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Developer::onlyTrashed()->count();
+
+        $Developers = Developer::query()
+            ->where('is_active',false)
+            ->with('translation')
+            ->withCount('getMorePhoto')
+            ->orderBy('id',"desc")
+            ->paginate(10)
+        ;
+
+
+        return view('admin.developer.index',compact('pageData','Developers'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+

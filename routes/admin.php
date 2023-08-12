@@ -72,6 +72,11 @@ Route::post('/developer/AddMore',[DeveloperController::class,'AddMorePhotos'])->
 Route::get('/developer/PhotoDel/{id}',[DeveloperController::class,'More_PhotosDestroy'])->name('developer.More_PhotosDestroy');
 
 
+Route::get('/developer/noPhoto',[DeveloperController::class,'noPhoto'])->name('developer.noPhoto');
+Route::get('/developer/slugErr',[DeveloperController::class,'slugErr'])->name('developer.slugErr');
+Route::get('/developer/noEn',[DeveloperController::class,'noEn'])->name('developer.noEn');
+Route::get('/developer/noAr',[DeveloperController::class,'noAr'])->name('developer.noAr');
+Route::get('/developer/unActive',[DeveloperController::class,'unActive'])->name('developer.unActive');
 
 
 

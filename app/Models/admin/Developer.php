@@ -34,6 +34,20 @@ class Developer extends Model implements TranslatableContract
         return $this->hasMany(DeveloperPhoto::class,'developer_id','id');
     }
 
+    public function teans_en()
+    {
+        return $this->hasOne(DeveloperTranslation::class,'developer_id','id')
+            ->where('locale','en');
+
+    }
+
+    public function teans_ar()
+    {
+        return $this->hasOne(DeveloperTranslation::class,'developer_id','id')
+            ->where('locale','ar');
+
+    }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     cash_developers
     static function cash_developers()
