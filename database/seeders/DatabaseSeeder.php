@@ -44,35 +44,35 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UsersTableSeeder::class);
 
-//        $this->call(SettingsTableSeeder::class);
-//        $this->call(SettingsTranslationsTableSeeder::class);
-//        $this->call(MetaTagSeeder::class);
-//        $this->call(MetaTagTranslationsTableSeeder::class);
-//        $this->call(AmenitySeeder::class);
-//        $this->call(AmenityTranslationSeeder::class);
-//        $this->call(UploadFilterSeeder::class);
-//        $this->call(UploadFilterSizeSeeder::class);
-//        $this->call(DefPhotoSeeder::class);
-//
-//
-//        $this->call(CategorySeeder::class);
-//        $this->call(CategoryTranslationSeeder::class);
-//        $this->call(LocationSeeder::class);
-//        $this->call(LocationTranslationSeeder::class);
+        $this->call(SettingsTableSeeder::class);
+        $this->call(SettingsTranslationsTableSeeder::class);
+        $this->call(MetaTagSeeder::class);
+        $this->call(MetaTagTranslationsTableSeeder::class);
+        $this->call(AmenitySeeder::class);
+        $this->call(AmenityTranslationSeeder::class);
+        $this->call(UploadFilterSeeder::class);
+        $this->call(UploadFilterSizeSeeder::class);
+        $this->call(DefPhotoSeeder::class);
+
+
+        $this->call(CategorySeeder::class);
+        $this->call(CategoryTranslationSeeder::class);
+        $this->call(LocationSeeder::class);
+        $this->call(LocationTranslationSeeder::class);
 
         $this->call(DeveloperSeeder::class);
         $this->call(DeveloperTranslationSeeder::class);
         $this->call(DeveloperPhotoSeeder::class);
 
 
-//        $this->call(PostSeeder::class);
-//        $this->call(PostTranslationSeeder::class);
-//        $this->call(PostPhotoSeeder::class);
-//
-//        $this->call(ListingSeeder::class);
-//        $this->call(ListingTranslationSeeder::class);
-//        $this->call(QuestionSeeder::class);
-//        $this->call(QuestionTranslationSeeder::class);
+        $this->call(PostSeeder::class);
+        $this->call(PostTranslationSeeder::class);
+        $this->call(PostPhotoSeeder::class);
+
+        $this->call(ListingSeeder::class);
+        $this->call(ListingTranslationSeeder::class);
+        $this->call(QuestionSeeder::class);
+        $this->call(QuestionTranslationSeeder::class);
 
     }
 }

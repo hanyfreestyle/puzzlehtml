@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-9">
-                    <h1 class="def_h1">{{ $Project->translate()->name }}</h1>
+                    <h1 class="def_h1">{{ $Project->translate()->name ?? "" }}</h1>
                 </div>
                 <div class="col-3 text-left">
                     <x-action-button  url="{{route('project.edit', $Project->id)}}" print-lable="{{__('admin/form.button_back')}}" size="s"  bg="dark" icon="fas fa-hand-point-left"  />

@@ -11,7 +11,9 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('listing_type',['Unit','Project','ForSale']);
+            $table->integer('getslider');
+            $table->integer('lang')->default(0);
+            $table->enum('listing_type',['NotList','Unit','Project','ForSale']);
 
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->unsignedBigInteger('location_id')->nullable();
@@ -24,7 +26,7 @@ return new class extends Migration
 
             $table->string("youtube_url")->nullable();
             $table->integer("price")->nullable();
-            $table->string("contact_number")->nullable();
+            //$table->string("contact_number")->nullable();
 
             $table->integer("area")->nullable();
             $table->integer("baths")->nullable();
@@ -33,6 +35,7 @@ return new class extends Migration
 
             $table->enum("status", ['under-construction','completed'])->nullable();
             $table->enum("project_type", ['residential','vacation','commercial','medical'])->nullable();
+            $table->integer("units_count")->default(0);
             $table->enum("property_type", ['apartment','duplex','studio','town-house','twin-house','pent-house','villa','office','store','chalet','chalet-with-garden','pharmacy','clinic','laboratory'])->nullable();
             $table->enum("view", ['main-street','seaview','lakeview','nileview'])->nullable();
             $table->double('latitude')->nullable();

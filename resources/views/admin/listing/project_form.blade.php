@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-9">
-                        <h1 class="def_h1">{{ $Project->translate('ar')->name }}</h1>
+                        <h1 class="def_h1">{{ $Project->translate('ar')->name ?? "" }}</h1>
                     </div>
                     <div class="col-3 text-left">
                         @if($Project->slider_active)
