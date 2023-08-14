@@ -296,4 +296,118 @@ class UnitController extends AdminMainController
     }
 
 
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noPhoto
+    public function noPhoto()
+    {
+
+        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 1 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+
+        $pageData['Trashed'] = Listing::onlyTrashed()
+            ->where('listing_type', 'Project' )
+            ->with('translations')
+            ->count();
+
+        $Units = Listing::query()->forSale()
+            ->with('translations')
+            ->where('photo',null)
+            ->withCount('get_more_photo')
+            ->paginate(15);
+        return view('admin.listing.unit_index',compact('pageData','Units'));
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     slugErr
+    public function slugErr()
+    {
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noEn
+    public function noEn()
+    {
+
+
+
+        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 1 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+
+        $pageData['Trashed'] = Listing::onlyTrashed()
+            ->forSale()
+            ->with('translations')
+            ->count();
+
+        $Units = Listing::query()->forSale()
+            ->with('translations')
+            ->whereHas('teans_en', function ($query) {
+                $query->where('des', '=', null);
+            })
+            ->withCount('get_more_photo')
+            ->paginate(15);
+        return view('admin.listing.unit_index',compact('pageData','Units'));
+
+
+
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noAr
+    public function noAr()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 1 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+
+        $pageData['Trashed'] = Listing::onlyTrashed()
+            ->forSale()
+            ->with('translations')
+            ->count();
+
+        $Units = Listing::query()->forSale()
+            ->with('translations')
+            ->whereHas('teans_ar', function ($query) {
+                $query->where('des', '=', null);
+            })
+            ->withCount('get_more_photo')
+            ->paginate(15);
+        return view('admin.listing.unit_index',compact('pageData','Units'));
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     unActive
+    public function unActive()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 1 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+
+        $pageData['Trashed'] = Listing::onlyTrashed()
+            ->where('listing_type', 'Project' )
+            ->with('translations')
+            ->count();
+
+        $Units = Listing::query()->forSale()
+            ->with('translations')
+            ->where('is_published',false)
+            ->withCount('get_more_photo')
+            ->paginate(15);
+
+        return view('admin.listing.unit_index',compact('pageData','Units'));
+
+    }
+
+
+
+
+
+
+
+
 }

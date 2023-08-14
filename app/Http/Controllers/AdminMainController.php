@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\AdminHelper;
 use App\Models\admin\config\UploadFilter;
 use App\Models\admin\Developer;
+use App\Models\admin\Listing;
 use App\Models\admin\Post;
 use Cache;
 use Illuminate\Support\Facades\View;
@@ -188,6 +189,7 @@ class AdminMainController extends Controller
     {
 
 
+
         $PostsCount = [
             'noPhoto'=> Post::withTrashed()->where('photo',null)->count(),
             'slugErr'=> Post::withTrashed()->where('slug_count','>',1)->count(),
@@ -206,7 +208,29 @@ class AdminMainController extends Controller
         ];
 
 
-        return view('admin.dashbord',compact('PostsCount','DevelopersCount'));
+        $ProjectsCount = [
+            'noPhoto'=> Listing::withTrashed()->Project()->where('photo',null)->count(),
+            'slugErr'=> '0',
+            'unActive'=> Listing::withTrashed()->Project()->where('is_published',false)->count(),
+            'noEn'=> Listing::withTrashed()->Project()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
+            'noAr'=> Listing::withTrashed()->Project()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
+        ];
+
+        //$ProjectsCount = array();
+
+
+       $ForSaleCount = [
+            'noPhoto'=> Listing::withTrashed()->ForSale()->where('photo',null)->count(),
+            'slugErr'=> '0',
+            'unActive'=> Listing::withTrashed()->ForSale()->where('is_published',false)->count(),
+            'noEn'=> Listing::withTrashed()->ForSale()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
+            'noAr'=> Listing::withTrashed()->ForSale()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
+        ];
+
+
+
+
+        return view('admin.dashbord',compact('PostsCount','DevelopersCount','ProjectsCount','ForSaleCount'));
 
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

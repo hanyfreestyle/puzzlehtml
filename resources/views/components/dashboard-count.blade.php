@@ -12,11 +12,14 @@
                 <td><a href="{{route($url.'.noPhoto')}}" class="text-muted"><i class="fas fa-search"></i></a></td>
             </tr>
 
-            <tr>
-                <td>رابط مكرر </td>
-                <td>{{ $cardCount['slugErr'] }} {{$lable}} </td>
-                <td><a href="{{route($url.'.slugErr')}}" class="text-muted"><i class="fas fa-search"></i></a></td>
-            </tr>
+            @if($cardCount['slugErr'] > 0)
+                <tr>
+                    <td>رابط مكرر </td>
+                    <td>{{ $cardCount['slugErr'] }} {{$lable}} </td>
+                    <td><a href="{{route($url.'.slugErr')}}" class="text-muted"><i class="fas fa-search"></i></a></td>
+                </tr>
+
+            @endif
 
             <tr>
                 <td>لا يوجد محتوى عربى </td>
@@ -27,13 +30,13 @@
             <tr>
                 <td>لا يوجد محتوى انجليزى</td>
                 <td>{{ $cardCount['noEn'] }}  {{$lable}} </td>
-                <td><a href="{{route('post.noEn')}}" class="text-muted"><i class="fas fa-search"></i></a></td>
+                <td><a href="{{route($url.'.noEn')}}" class="text-muted"><i class="fas fa-search"></i></a></td>
             </tr>
 
             <tr>
                 <td>غير مفعل </td>
                 <td>{{ $cardCount['unActive'] }} {{$lable}}  </td>
-                <td><a href="{{route('post.unActive')}}" class="text-muted"><i class="fas fa-search"></i></a></td>
+                <td><a href="{{route($url.'.unActive')}}" class="text-muted"><i class="fas fa-search"></i></a></td>
             </tr>
 
             </tbody>

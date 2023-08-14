@@ -23,7 +23,18 @@
     <section class="div_data">
         <div class="container-fluid">
             <div class="row">
+
+                    <div class="row"><div class="col-lg-12 mb-2">
+                        <x-action-button url="{{ route('project.noPhoto')  }}" print-lable="لا توجد صورة " />
+                        <x-action-button url="{{ route('project.noAr')  }}" print-lable="لا يوجد محتوى عربى  " />
+                        <x-action-button url="{{ route('project.noEn')  }}" print-lable="لا يوجد محتوى انجليزى  " />
+                        <x-action-button url="{{ route('project.unActive')  }}" print-lable="غير فعال  " />
+                    </div></div>
+
+
                 <div class="col-lg-12">
+
+
 
                     <x-ui-card  :page-data="$pageData" >
                         <x-mass.confirm-massage/>

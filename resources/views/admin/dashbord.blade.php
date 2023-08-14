@@ -26,22 +26,32 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3">
-
                         <x-dashboard-count name="{{ __('admin/menu.post') }}"
                                            :card-count="$PostsCount"
                                            url="post"
                                            lable="{{__('admin/def.post')}}" />
-
                     </div>
-
                     <div class="col-lg-3">
-
                         <x-dashboard-count name="{{ __('admin/menu.developer') }}"
                                            :card-count="$DevelopersCount"
                                            url="developer"
                                            lable="مطور" />
-
                     </div>
+
+                    <div class="col-lg-3">
+                        <x-dashboard-count name="{{ __('admin/menu.project') }}"
+                                           :card-count="$ProjectsCount"
+                                           url="project"
+                                           lable="مشروع" />
+                    </div>
+
+                    <div class="col-lg-3">
+                        <x-dashboard-count name="{{ __('admin/menu.unit') }}"
+                                           :card-count="$ForSaleCount"
+                                           url="project"
+                                           lable="وحدة" />
+                    </div>
+
 
 
 

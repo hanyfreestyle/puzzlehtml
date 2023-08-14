@@ -28,7 +28,7 @@ class Listing extends Model implements TranslatableContract
     protected function amenity() :Attribute{
         return Attribute::make(
             get: fn($value) => json_decode($value,true),
-//            set: fn($value) => json_encode($value)
+            set: fn($value) => json_encode($value)
         );
     }
 
@@ -112,5 +112,22 @@ class Listing extends Model implements TranslatableContract
     {
         return $this->hasMany(Question::class,'project_id','id');
     }
+
+
+
+    public function teans_en()
+    {
+        return $this->hasOne(ListingTranslation::class,'listing_id','id')
+            ->where('locale','en');
+
+    }
+
+    public function teans_ar()
+    {
+        return $this->hasOne(ListingTranslation::class,'listing_id','id')
+            ->where('locale','ar');
+
+    }
+
 
 }
