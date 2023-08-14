@@ -128,6 +128,24 @@ class PostController extends AdminMainController
             $saveTranslation->save();
         }
 
+
+        if($saveData->slug_count > 1){
+            $updateSlugCount = Post::withTrashed()
+                ->where('slug_count' ,'>',"1")
+                ->get();
+            ;
+            if( count($updateSlugCount) > 0 ){
+                foreach ($updateSlugCount as $listing){
+                    $newCount = Post::withTrashed()->where('slug', $listing->slug )->count();
+                    $listing->slug_count = $newCount;
+                    $listing->save();
+                }
+            }
+        }
+
+
+
+        //dd($saveData->slug);
         if($id == '0'){
             return redirect(route('post.index'))->with('Add.Done',"");
         }else{
@@ -245,6 +263,96 @@ class PostController extends AdminMainController
     }
 
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noPhoto
+    public function noPhoto()
+    {
+
+        $sendArr = ['TitlePage' => __('admin/menu.post'),'restore'=> 1 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Post::onlyTrashed()->count();
+
+        $Posts = self::getSelectQuery( Post::where('id',"!=","0")->where('photo',null)->with('getMorePhoto'));
+
+        return view('admin.post.post_index',compact('pageData','Posts'));
+
+
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     slugErr
+    public function slugErr()
+    {
+
+        $sendArr = ['TitlePage' => __('admin/menu.post'),'restore'=> 1 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Post::onlyTrashed()->count();
+
+        $Posts = self::getSelectQuery( Post::where('id',"!=","0")->where('slug_count','>',1)->with('getMorePhoto'));
+
+        return view('admin.post.post_index',compact('pageData','Posts'));
+
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noEn
+    public function noEn()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.post'),'restore'=> 1 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Post::onlyTrashed()->count();
+        $Posts= Post::whereHas('teans_en', function ($query) {
+            $query->where('des', '=', null);
+
+        })->paginate(10);
+        return view('admin.post.post_index',compact('pageData','Posts'));
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noAr
+    public function noAr()
+    {
+
+
+        $sendArr = ['TitlePage' => __('admin/menu.post'),'restore'=> 1 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Post::onlyTrashed()->count();
+        $Posts= Post::whereHas('teans_ar', function ($query) {
+            $query->where('des', '=', null);
+
+        })->paginate(10);
+        return view('admin.post.post_index',compact('pageData','Posts'));
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     unActive
+    public function unActive()
+    {
+
+
+        $sendArr = ['TitlePage' => __('admin/menu.post'),'restore'=> 1 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Post::onlyTrashed()->count();
+
+        $Posts = self::getSelectQuery( Post::where('id',"!=","0")->where('is_published',false)->with('getMorePhoto'));
+
+        return view('admin.post.post_index',compact('pageData','Posts'));
+
+
+
+    }
+
+
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     sliderGet
@@ -307,6 +415,9 @@ class PostController extends AdminMainController
         dd(count($Posts));
 
     }
+
+
+
 
 
 

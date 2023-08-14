@@ -25,6 +25,15 @@
             <div class="row">
                 <div class="col-lg-12">
 
+                     <div class="row"><div class="col-lg-12 mb-2">
+                            <x-action-button url="{{ route('post.noPhoto')  }}" print-lable="لا توجد صورة " />
+                            <x-action-button url="{{ route('post.slugErr')  }}" print-lable="رابط متكرر " />
+                            <x-action-button url="{{ route('post.noAr')  }}" print-lable="لا يوجد محتوى عربى  " />
+                            <x-action-button url="{{ route('post.noEn')  }}" print-lable="لا يوجد محتوى انجليزى  " />
+                            <x-action-button url="{{ route('post.unActive')  }}" print-lable="غير فعال  " />
+                        </div> </div>
+
+
                     <x-ui-card  :page-data="$pageData" >
                         <x-mass.confirm-massage/>
 

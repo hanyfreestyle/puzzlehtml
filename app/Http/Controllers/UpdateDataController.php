@@ -18,8 +18,31 @@ use File ;
 class UpdateDataController extends Controller
 {
 
-    public function index()
+    public function index_posy_slug_count()
     {
+
+//        $Posts = Post::where('slug_count',0)
+//            ->limit(200)
+//            ->get();
+//
+//        if(count($Posts) > 0){
+//            foreach ($Posts as $post)
+//            {
+//                $slugCount = Post::query()->where('slug',$post->slug)->count();
+//                $post->slug_count = $slugCount ;
+//                $post->save();
+//            }
+//
+//        }
+
+      //  slug_count
+
+
+        $Posts = Post::where('slug_count','>',1)
+            ->count();
+
+        echobr(($Posts));
+
 
     }
 

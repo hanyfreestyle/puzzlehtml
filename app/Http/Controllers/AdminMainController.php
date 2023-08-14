@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\AdminHelper;
 use App\Models\admin\config\UploadFilter;
+use App\Models\admin\Developer;
+use App\Models\admin\Post;
 use Cache;
 use Illuminate\Support\Facades\View;
 use Spatie\Valuestore\Valuestore;
@@ -185,13 +187,59 @@ class AdminMainController extends Controller
     public function Home()
     {
 
-        return view('admin.dashbord');
+
+        $PostsCount = [
+            'noPhoto'=> Post::withTrashed()->where('photo',null)->count(),
+            'slugErr'=> Post::withTrashed()->where('slug_count','>',1)->count(),
+            'unActive'=> Post::withTrashed()->where('is_published',false)->count(),
+            'noEn'=> Post::withTrashed()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
+            'noAr'=> Post::withTrashed()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
+        ];
+
+
+        $DevelopersCount = [
+            'noPhoto'=> Developer::withTrashed()->where('photo',null)->count(),
+            'slugErr'=> Developer::withTrashed()->where('slug_count','>',1)->count(),
+            'unActive'=> Developer::withTrashed()->where('is_active',false)->count(),
+            'noEn'=> Developer::withTrashed()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
+            'noAr'=> Developer::withTrashed()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
+        ];
+
+
+        return view('admin.dashbord',compact('PostsCount','DevelopersCount'));
 
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
 
+/*
 
+
+
+
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     unActive
+    public function unActive()
+    {
+
+
+        $sendArr = ['TitlePage' => __('admin/menu.post'),'restore'=> 1 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['Trashed'] = Post::onlyTrashed()->count();
+
+        $Posts = self::getSelectQuery( Post::where('id',"!=","0")->->with('getMorePhoto'));
+
+        return view('admin.post.post_index',compact('pageData','Posts'));
+
+
+
+    }
+
+ */
 
 
 

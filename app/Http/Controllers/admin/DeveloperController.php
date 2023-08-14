@@ -45,7 +45,7 @@ class DeveloperController extends AdminMainController
             ->withCount('getMorePhoto')
             ->orderBy('id',"desc")
             ->paginate(10)
-            ;
+        ;
         return view('admin.developer.index',compact('pageData','Developers'));
     }
 
@@ -116,7 +116,27 @@ class DeveloperController extends AdminMainController
             $saveTranslation->breadcrumb = $request->input($key.'.breadcrumb');
             $saveTranslation->save();
         }
-         Cache::forget('developers_list_cash');
+
+
+
+        if($saveData->slug_count > 1){
+            $updateSlugCount = Developer::withTrashed()
+                ->where('slug_count' ,'>',"1")
+                ->get();
+            ;
+            if( count($updateSlugCount) > 0 ){
+                foreach ($updateSlugCount as $listing){
+                    $newCount = Developer::withTrashed()->where('slug', $listing->slug )->count();
+                    $listing->slug_count = $newCount;
+                    $listing->save();
+                }
+            }
+        }
+
+
+
+
+        Cache::forget('developers_list_cash');
 
         if($id == '0'){
             return redirect(route('developer.index'))->with('Add.Done',"");
@@ -429,7 +449,7 @@ class DeveloperController extends AdminMainController
 //            echobr($developer->id ." => " .$developer->name);
 //        }
 //        echobr('----');
-         return view('admin.developer.index',compact('pageData','Developers'));
+        return view('admin.developer.index',compact('pageData','Developers'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -451,10 +471,8 @@ class DeveloperController extends AdminMainController
         return view('admin.developer.index',compact('pageData','Developers'));
     }
 
-
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     noAr
+#|||||||||||||||||||||||||||||||||||||| #     unActive
     public function unActive()
     {
         $sendArr = ['TitlePage' => __('admin/menu.developer'),'restore'=> 1, 'more_photo'=> 0 ];

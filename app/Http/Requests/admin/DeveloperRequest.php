@@ -38,12 +38,13 @@ class DeveloperRequest extends FormRequest
             ];
         }
 
-      
+
 
         foreach(config('app.lang_file') as $key=>$lang){
             $rules[$key.".name"] =   'required';
             $rules[$key.".g_title"] =   'required';
             $rules[$key.".g_des"] =   'required';
+            $rules[$key.".des"] =   'required';
         }
 
         return $rules;

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer("slug_count")->default(0);
+
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('developer_id')->nullable();
             $table->unsignedBigInteger('listing_id')->nullable();

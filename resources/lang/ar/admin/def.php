@@ -15,4 +15,5 @@ return
 	'status' => 'الحالة',
 	'status_active' => 'فعال',
 	'status_unactive' => 'غير فعال',
+	'post' => 'مقال',
 ];

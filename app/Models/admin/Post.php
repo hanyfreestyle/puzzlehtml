@@ -52,4 +52,21 @@ class Post extends Model implements TranslatableContract
        # return Str::words($str,500);
         return Str::limit($str,160);
     }
+
+
+
+    public function teans_en()
+    {
+        return $this->hasOne(PostTranslation::class,'post_id','id')
+            ->where('locale','en');
+
+    }
+
+    public function teans_ar()
+    {
+        return $this->hasOne(PostTranslation::class,'post_id','id')
+            ->where('locale','ar');
+
+    }
+
 }

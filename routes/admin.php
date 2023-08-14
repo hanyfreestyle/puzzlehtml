@@ -98,6 +98,12 @@ Route::post('/post/saveSort', [PostController::class,'sortPhotoSave'])->name('po
 Route::post('/post/AddMore',[PostController::class,'AddMorePhotos'])->name('post.More_PhotosAdd');
 Route::get('/post/PhotoDel/{id}',[PostController::class,'More_PhotosDestroy'])->name('post.More_PhotosDestroy');
 
+Route::get('/post/noPhoto',[PostController::class,'noPhoto'])->name('post.noPhoto');
+Route::get('/post/slugErr',[PostController::class,'slugErr'])->name('post.slugErr');
+Route::get('/post/noEn',[PostController::class,'noEn'])->name('post.noEn');
+Route::get('/post/noAr',[PostController::class,'noAr'])->name('post.noAr');
+Route::get('/post/unActive',[PostController::class,'unActive'])->name('post.unActive');
+
 
 
 Route::get('/project/sliderGet',[ProjectController::class,'sliderGet'])->name('project.sliderGet');
