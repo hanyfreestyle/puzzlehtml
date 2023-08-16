@@ -1,3 +1,6 @@
 WebConfig_Cash
 WebMeta_Cash
 DefPhoto_Cash
+
+
+PostsCount_Cash

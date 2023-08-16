@@ -7,6 +7,7 @@ return
 	'dashboard' => 'Home Pgae',
 	'developer' => 'Developer',
 	'lang_file_admin' => 'Admin Lang File',
+	'lang_file_web' => 'Web Lang File',
 	'location' => 'Locations',
 	'post' => 'Posts',
 	'project' => 'Projects',
@@ -23,5 +24,5 @@ return
 	'setting_web' => 'Web Settings',
 	'unit' => 'Units For Sale',
 	'uploadFilter' => 'Upload Filters',
-	'lang_file_web' => 'Web Lang File',
+	'project_update' => 'Update Data',
 ];

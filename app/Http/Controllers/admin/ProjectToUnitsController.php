@@ -119,21 +119,20 @@ class ProjectToUnitsController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     edit
     public function edit($id)
     {
+
         $sendArr = ['TitlePage' => __('admin/menu.unit') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-        $Unit = Listing::findOrFail($id);
+        $Unit = Listing::Unit()->where('id',$id)->firstOrFail();
 
         $Project = Listing::withTrashed()
             ->where('id','=',$Unit->parent_id)
             ->with('developerName')
             ->with('locationName')
             ->firstOrFail();
+         return view('admin.listing.project_unit_form',compact('pageData','Unit','Project'));
 
-
-
-        return view('admin.listing.project_unit_form',compact('pageData','Unit','Project'));
     }
 
 
@@ -144,6 +143,7 @@ class ProjectToUnitsController extends AdminMainController
 
         $saveData =  Listing::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
+        $saveData->listing_type = "Unit";
         $saveData->parent_id = $request->input('parent_id');
         $saveData->location_id = $request->input('location_id');
         $saveData->developer_id  = $request->input('developer_id');
@@ -162,7 +162,6 @@ class ProjectToUnitsController extends AdminMainController
         $saveData->latitude   = $request->input('latitude');
         $saveData->longitude   = $request->input('longitude');
         $saveData->youtube_url   = $request->input('youtube_url');
-        $saveData->contact_number   = $request->input('contact_number');
         $saveData->setPublished((bool) request('is_published', false));
 
         $saveData->save();
@@ -334,5 +333,106 @@ class ProjectToUnitsController extends AdminMainController
         }
         return view('admin.listing.project_unit_old_photos',compact('UnitPhotos','pageData','Unit'));
     }
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noPhoto
+    public function noPhoto()
+    {
+
+        $sendArr = ['TitlePage' => __('admin/project.units_project_title'),'restore'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['AddPageUrl'] ="#";
+
+        $Units = Listing::unit()
+            ->with('translations')
+            ->with('projectName')
+            ->where('photo',null)
+            ->paginate(15);
+
+        return view('admin.listing.project_unit_index_err',compact('pageData','Units'));
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     slugErr
+    public function slugErr()
+    {
+
+    }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noAr
+    public function noAr()
+    {
+
+
+        $sendArr = ['TitlePage' => __('admin/project.units_project_title'),'restore'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['AddPageUrl'] ="#";
+
+        $Units = Listing::unit()
+            ->with('translations')
+            ->with('projectName')
+            ->whereHas('teans_ar', function ($query) {
+                $query->where('des', '=', null);
+            })
+            ->paginate(15);
+
+        return view('admin.listing.project_unit_index_err',compact('pageData','Units'));
+
+
+
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noEn
+    public function noEn()
+    {
+
+        $sendArr = ['TitlePage' => __('admin/project.units_project_title'),'restore'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['AddPageUrl'] ="#";
+
+        $Units = Listing::unit()
+            ->with('translations')
+            ->with('projectName')
+            ->whereHas('teans_en', function ($query) {
+                $query->where('des', '=', null);
+            })
+            ->paginate(15);
+
+        return view('admin.listing.project_unit_index_err',compact('pageData','Units'));
+
+     }
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     unActive
+    public function unActive()
+    {
+
+        $sendArr = ['TitlePage' => __('admin/project.units_project_title'),'restore'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+        $pageData['AddPageUrl'] ="#";
+
+        $Units = Listing::unit()
+            ->with('translations')
+            ->with('projectName')
+            ->where('is_published',false)
+            ->paginate(15);
+
+        return view('admin.listing.project_unit_index_err',compact('pageData','Units'));
+
+    }
+
 
 }

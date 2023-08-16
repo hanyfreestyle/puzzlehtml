@@ -219,6 +219,7 @@ return [
     'website_config_cash' => 60*60*24,
     'def_photo_cash' => 60*60*24,
     'meta_tage_cash' => 60*60*24,
+    'def_24h_cash' => 60*60*24,
 
 
 ];

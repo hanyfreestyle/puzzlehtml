@@ -6,6 +6,20 @@
         <table class="table table-striped table-valign-middle">
             <tbody>
 
+
+
+            <tr>
+                <td>اجمالى المحتوى  </td>
+                <td>{{ $cardCount['all'] ?? 0 }}  {{$lable}} </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>المحتوى المحذوف </td>
+                <td>{{ $cardCount['Trashed'] ?? 0 }}  {{$lable}} </td>
+                <td></td>
+            </tr>
+
             <tr>
                 <td>لا توجد صورة </td>
                 <td>{{ $cardCount['noPhoto'] }}  {{$lable}} </td>

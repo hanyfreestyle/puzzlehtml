@@ -40,7 +40,6 @@ class UnitController extends AdminMainController
 
     }
 
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
     public function index()
@@ -50,7 +49,7 @@ class UnitController extends AdminMainController
         $pageData['ViewType'] = "List";
 
         $pageData['Trashed'] = Listing::onlyTrashed()
-            ->where('listing_type', 'Project' )
+            ->forSale()
             ->with('translations')
             ->count();
 
@@ -70,8 +69,8 @@ class UnitController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "deleteList";
         $Units = Listing::onlyTrashed()
-            ->where('parent_id' , '=', null )
-            ->where('property_type','!=',null)->paginate(15);
+            ->forSale()
+            ->paginate(15);
         return view('admin.listing.unit_index',compact('pageData','Units'));
     }
 
@@ -97,10 +96,8 @@ class UnitController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-       // $Unit = Listing::findOrFail($id);
-        $Unit = Listing::query()
+        $Unit = Listing::forSale()
         ->where('id','=',$id)
-        ->where('parent_id','=',null)
         ->firstOrFail();
 
         return view('admin.listing.unit_form',compact('pageData','Unit'));
@@ -113,6 +110,7 @@ class UnitController extends AdminMainController
 
         $saveData =  Listing::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
+        $saveData->listing_type = "ForSale";
         $saveData->location_id = $request->input('location_id');
         $saveData->developer_id  = $request->input('developer_id');
         $saveData->property_type  = $request->input('property_type');
@@ -130,7 +128,6 @@ class UnitController extends AdminMainController
         $saveData->latitude   = $request->input('latitude');
         $saveData->longitude   = $request->input('longitude');
         $saveData->youtube_url   = $request->input('youtube_url');
-        $saveData->contact_number   = $request->input('contact_number');
         $saveData->setPublished((bool) request('is_published', false));
 
         $saveData->save();
@@ -295,65 +292,25 @@ class UnitController extends AdminMainController
         return back()->with('confirmDelete',"");
     }
 
-
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     noPhoto
     public function noPhoto()
     {
-
-        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 1 ];
+        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 0 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
-
-        $pageData['Trashed'] = Listing::onlyTrashed()
-            ->where('listing_type', 'Project' )
-            ->with('translations')
-            ->count();
-
-        $Units = Listing::query()->forSale()
+        $Units = Listing::forSale()
             ->with('translations')
             ->where('photo',null)
             ->withCount('get_more_photo')
             ->paginate(15);
         return view('admin.listing.unit_index',compact('pageData','Units'));
-
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     slugErr
     public function slugErr()
     {
-
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     noEn
-    public function noEn()
-    {
-
-
-
-        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 1 ];
-        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
-        $pageData['ViewType'] = "List";
-
-        $pageData['Trashed'] = Listing::onlyTrashed()
-            ->forSale()
-            ->with('translations')
-            ->count();
-
-        $Units = Listing::query()->forSale()
-            ->with('translations')
-            ->whereHas('teans_en', function ($query) {
-                $query->where('des', '=', null);
-            })
-            ->withCount('get_more_photo')
-            ->paginate(15);
-        return view('admin.listing.unit_index',compact('pageData','Units'));
-
-
-
 
     }
 
@@ -370,7 +327,7 @@ class UnitController extends AdminMainController
             ->with('translations')
             ->count();
 
-        $Units = Listing::query()->forSale()
+        $Units = Listing::forSale()
             ->with('translations')
             ->whereHas('teans_ar', function ($query) {
                 $query->where('des', '=', null);
@@ -380,28 +337,44 @@ class UnitController extends AdminMainController
         return view('admin.listing.unit_index',compact('pageData','Units'));
     }
 
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noEn
+    public function noEn()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+
+        $Units = Listing::query()->forSale()
+            ->with('translations')
+            ->whereHas('teans_en', function ($query) {
+                $query->where('des', '=', null);
+            })
+            ->withCount('get_more_photo')
+            ->paginate(15);
+        return view('admin.listing.unit_index',compact('pageData','Units'));
+    }
+
+
+
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     unActive
     public function unActive()
     {
-        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 1 ];
+        $sendArr = ['TitlePage' => __('admin/menu.unit'),'restore'=> 0 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
-
-        $pageData['Trashed'] = Listing::onlyTrashed()
-            ->where('listing_type', 'Project' )
-            ->with('translations')
-            ->count();
 
         $Units = Listing::query()->forSale()
             ->with('translations')
             ->where('is_published',false)
             ->withCount('get_more_photo')
             ->paginate(15);
-
         return view('admin.listing.unit_index',compact('pageData','Units'));
-
     }
+
 
 
 

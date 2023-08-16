@@ -24,6 +24,16 @@
 
         <div class="content">
             <div class="container-fluid">
+
+
+                <div class="row">
+                    <div class="col-lg-12 mb-2">
+                        <x-action-button url="{{ route('admin.Dashboard.Update')  }}" bg="w" print-lable="تحديث البيانات " />
+
+                    </div>
+                </div>
+
+
                 <div class="row">
                     <div class="col-lg-3">
                         <x-dashboard-count name="{{ __('admin/menu.post') }}"
@@ -45,10 +55,19 @@
                                            lable="مشروع" />
                     </div>
 
+
+                    <div class="col-lg-3">
+                        <x-dashboard-count name="وحدات المشاريع"
+                                           :card-count="$ProjectUnitsCount"
+                                           url="project.projectUnit"
+                                           lable="وحدة" />
+                    </div>
+
+
                     <div class="col-lg-3">
                         <x-dashboard-count name="{{ __('admin/menu.unit') }}"
                                            :card-count="$ForSaleCount"
-                                           url="project"
+                                           url="unit"
                                            lable="وحدة" />
                     </div>
 

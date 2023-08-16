@@ -190,51 +190,88 @@ class AdminMainController extends Controller
 
 
 
-        $PostsCount = [
-            'noPhoto'=> Post::withTrashed()->where('photo',null)->count(),
-            'slugErr'=> Post::withTrashed()->where('slug_count','>',1)->count(),
-            'unActive'=> Post::withTrashed()->where('is_published',false)->count(),
-            'noEn'=> Post::withTrashed()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
-            'noAr'=> Post::withTrashed()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
-        ];
 
 
-        $DevelopersCount = [
-            'noPhoto'=> Developer::withTrashed()->where('photo',null)->count(),
-            'slugErr'=> Developer::withTrashed()->where('slug_count','>',1)->count(),
-            'unActive'=> Developer::withTrashed()->where('is_active',false)->count(),
-            'noEn'=> Developer::withTrashed()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
-            'noAr'=> Developer::withTrashed()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
-        ];
+        $PostsCount = Cache::remember('PostsCount_Cash',config('app.def_24h_cash'), function (){
+            return  [
+                'all'=> Post::withTrashed()->count(),
+                'Trashed'=> Post::onlyTrashed()->count(),
+                'noPhoto'=> Post::withTrashed()->where('photo',null)->count(),
+                'slugErr'=> Post::withTrashed()->where('slug_count','>',1)->count(),
+                'unActive'=> Post::withTrashed()->where('is_published',false)->count(),
+                'noEn'=> Post::withTrashed()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
+                'noAr'=> Post::withTrashed()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
+            ];
+        });
+
+        $DevelopersCount = Cache::remember('DevelopersCount_Cash',config('app.def_24h_cash'), function (){
+            return  [
+                'all'=> Developer::withTrashed()->count(),
+                'Trashed'=> Developer::onlyTrashed()->count(),
+                'noPhoto'=> Developer::withTrashed()->where('photo',null)->count(),
+                'slugErr'=> Developer::withTrashed()->where('slug_count','>',1)->count(),
+                'unActive'=> Developer::withTrashed()->where('is_active',false)->count(),
+                'noEn'=> Developer::withTrashed()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
+                'noAr'=> Developer::withTrashed()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
+            ];
+        });
 
 
-        $ProjectsCount = [
-            'noPhoto'=> Listing::withTrashed()->Project()->where('photo',null)->count(),
-            'slugErr'=> '0',
-            'unActive'=> Listing::withTrashed()->Project()->where('is_published',false)->count(),
-            'noEn'=> Listing::withTrashed()->Project()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
-            'noAr'=> Listing::withTrashed()->Project()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
-        ];
-
-        //$ProjectsCount = array();
-
-
-       $ForSaleCount = [
-            'noPhoto'=> Listing::withTrashed()->ForSale()->where('photo',null)->count(),
-            'slugErr'=> '0',
-            'unActive'=> Listing::withTrashed()->ForSale()->where('is_published',false)->count(),
-            'noEn'=> Listing::withTrashed()->ForSale()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
-            'noAr'=> Listing::withTrashed()->ForSale()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
-        ];
+        $ProjectsCount = Cache::remember('ProjectsCount_Cash',config('app.def_24h_cash'), function (){
+            return  [
+                'all'=> Listing::withTrashed()->Project()->count(),
+                'Trashed'=> Listing::onlyTrashed()->Project()->count(),
+                'noPhoto'=> Listing::withTrashed()->Project()->where('photo',null)->count(),
+                'slugErr'=> '0',
+                'unActive'=> Listing::withTrashed()->Project()->where('is_published',false)->count(),
+                'noEn'=> Listing::withTrashed()->Project()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
+                'noAr'=> Listing::withTrashed()->Project()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
+            ];
+        });
 
 
+        $ProjectUnitsCount = Cache::remember('ProjectUnitsCount_Cash',config('app.def_24h_cash'), function (){
+            return  [
+                'all'=> Listing::withTrashed()->unit()->count(),
+                'Trashed'=> Listing::onlyTrashed()->unit()->count(),
+                'noPhoto'=> Listing::withTrashed()->unit()->where('photo',null)->count(),
+                'slugErr'=> '0',
+                'unActive'=> Listing::withTrashed()->unit()->where('is_published',false)->count(),
+                'noEn'=> Listing::withTrashed()->unit()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
+                'noAr'=> Listing::withTrashed()->unit()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
+            ];
+        });
+
+        $ForSaleCount = Cache::remember('ForSaleCount_Cash',config('app.def_24h_cash'), function (){
+            return  [
+                'all'=> Listing::withTrashed()->ForSale()->count(),
+                'Trashed'=> Listing::onlyTrashed()->ForSale()->count(),
+                'noPhoto'=> Listing::withTrashed()->ForSale()->where('photo',null)->count(),
+                'slugErr'=> '0',
+                'unActive'=> Listing::withTrashed()->ForSale()->where('is_published',false)->count(),
+                'noEn'=> Listing::withTrashed()->ForSale()->whereHas('teans_en', function ($query) {$query->where('des', '=', null);})->count(),
+                'noAr'=> Listing::withTrashed()->ForSale()->whereHas('teans_ar', function ($query) {$query->where('des', '=', null);})->count(),
+            ];
+        });
 
 
-        return view('admin.dashbord',compact('PostsCount','DevelopersCount','ProjectsCount','ForSaleCount'));
+      return view('admin.dashbord',compact('PostsCount','DevelopersCount','ProjectsCount','ForSaleCount','ProjectUnitsCount'));
 
     }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text
+    public function Update()
+    {
+
+        Cache::forget('PostsCount_Cash');
+        Cache::forget('DevelopersCount_Cash');
+        Cache::forget('ProjectsCount_Cash');
+        Cache::forget('ProjectUnitsCount_Cash');
+        Cache::forget('ForSaleCount_Cash');
+
+        return back();
+    }
 
 /*
 

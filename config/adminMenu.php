@@ -129,13 +129,24 @@
 
         [
             'view'=>true,
-            'sel_routs'=>'cash',
+            'sel_routs'=>'update',
             'type'=>'one',
-            'text'=> 'Cash',
-            'url'=> 'cash.index',
-            'icon'=>'fas fa-bath',
-            'roleView'=>'unit_view',
+            'text'=> 'admin/menu.project_update',
+            'url'=> 'update.UpdateListing',
+            'icon'=>'fas fa-database',
+            'roleView'=>'project_view',
         ],
+
+
+//        [
+//            'view'=>true,
+//            'sel_routs'=>'cash',
+//            'type'=>'one',
+//            'text'=> 'Cash',
+//            'url'=> 'cash.index',
+//            'icon'=>'fas fa-bath',
+//            'roleView'=>'unit_view',
+//        ],
 
     ],
 

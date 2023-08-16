@@ -7,6 +7,7 @@ return
 	'dashboard' => 'الصفحة الرئيسية',
 	'developer' => 'المطورين',
 	'lang_file_admin' => 'ملفات اللغة لوحة التحكم',
+	'lang_file_web' => 'ملفات اللغة للموقع',
 	'location' => 'المناطق',
 	'post' => 'المقالات',
 	'project' => 'المشروعات',
@@ -23,5 +24,5 @@ return
 	'setting_web' => 'الاعدادات العامة',
 	'unit' => 'وحدات للبيع',
 	'uploadFilter' => 'فلاتر الصور',
-	'lang_file_web' => 'ملفات اللغة للموقع',
+	'project_update' => 'تحديث البيانات',
 ];

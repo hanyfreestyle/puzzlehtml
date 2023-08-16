@@ -30,30 +30,26 @@ class UnitRequest extends FormRequest
        $id = $this->route('id');
 
         if($id == '0'){
-            $rules = [
-                'slug'=> "required|unique:listings",
-
-            ];
+            $rules = ['slug'=> "required|unique:listings"];
         }else{
-            $rules =[
-                'slug'=> "required|unique:listings,slug,$id",
-            ];
+            $rules =['slug'=> "required|unique:listings,slug,$id"];
         }
 
         $rules += [
             'location_id'=> "required",
-            'developer_id'=> "required",
             'property_type'=> "required",
             'unit_status'=> "required",
-            'delivery_date'=> "required",
-            'price'=> "required",
+            'delivery_date'=> "required|integer|min:2000|max:2050",
+            'price'=> "required|integer",
+            'latitude'=> "nullable|numeric|required_with:longitude",
+            'longitude'=> "nullable|numeric|required_with:latitude",
+            'youtube_url'=> "nullable|alpha_dash:ascii",
             'view'=> "required",
-            'area'=> "required",
-            'baths'=> "required",
-            'rooms'=> "required",
+            'area'=> "required|integer",
+            'baths'=> "required|integer",
+            'rooms'=> "required|integer",
             'amenity' => "required|array|min:3",
         ];
-
 
         foreach(config('app.lang_file') as $key=>$lang){
             $rules[$key.".name"] =   'required';
@@ -62,9 +58,6 @@ class UnitRequest extends FormRequest
             $rules[$key.".des"] =   'required';
         }
 
-
-
          return $rules;
-
     }
 }

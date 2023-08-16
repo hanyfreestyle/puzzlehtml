@@ -29,7 +29,6 @@
 
                     @if($pageData['ViewType'] == 'deleteList')
                         <x-action-button url="{{route('project.project_units_index',$Project->id)}}" print-lable="{{__('admin/project.list_units')}}" icon="fas fa-bath" :tip="false" bg="p" />
-{{--                        <x-action-button url="{{route('unit.More_Photos',$Unit->id)}}" type="morePhoto" :tip="false" bg="dark" />--}}
                     @endif
                 </div>
             </div>
@@ -42,6 +41,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
+
+
 
                     <x-ui-card  :page-data="$pageData" >
                         <x-mass.confirm-massage/>

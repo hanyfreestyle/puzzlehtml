@@ -43,6 +43,11 @@ class Listing extends Model implements TranslatableContract
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Relations
+    public function projectName() :BelongsTo
+    {
+        return $this->belongsTo(Listing::class,'parent_id','id');
+    }
+
     public function developerName() :BelongsTo
     {
         return $this->belongsTo(Developer::class,'developer_id','id');

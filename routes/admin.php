@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Helpers\AdminHelper;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\config\AmenityController;
 use App\Http\Controllers\admin\DeveloperController;
@@ -10,12 +11,16 @@ use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\ProjectToUnitsController;
 use App\Http\Controllers\admin\QuestionController;
 use App\Http\Controllers\admin\UnitController;
+use App\Http\Controllers\admin\UpdateListingDataController;
 use App\Http\Controllers\admin\UpdateProjectController;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\UpdateDataController;
+use App\Models\admin\Listing;
 
 Route::get('/Home',[AdminMainController::class,'Home'])->name('admin.Dashboard');
+Route::get('/Home/Update',[AdminMainController::class,'Update'])->name('admin.Dashboard.Update');
 Route::get('/UpdateData',[UpdateDataController::class,'index'])->name('updateData');
+Route::get('/UpdateListing',[UpdateListingDataController::class,'update'])->name('update.UpdateListing');
 
 Route::get('/amenity',[AmenityController::class,'index'])->name('amenity.index');
 Route::get('/amenity/create',[AmenityController::class,'create'])->name('amenity.create');
@@ -189,11 +194,16 @@ Route::post('/projectUnit/AddMore',[ProjectToUnitsController::class,'AddMorePhot
 Route::get('/projectUnit/PhotoDel/{id}',[ProjectToUnitsController::class,'More_PhotosDestroy'])->name('project.project_units.More_PhotosDestroy');
 Route::get('/projectUnit/oldphoto/{id}',[ProjectToUnitsController::class,'ListOldPhoto'])->name('project.project_units.Old_Photos');
 
-Route::get('/projectUnit/noPhoto',[ProjectToUnitsController::class,'noPhoto'])->name('projectUnit.noPhoto');
-Route::get('/projectUnit/slugErr',[ProjectToUnitsController::class,'slugErr'])->name('projectUnit.slugErr');
-Route::get('/projectUnit/noEn',[ProjectToUnitsController::class,'noEn'])->name('projectUnit.noEn');
-Route::get('/projectUnit/noAr',[ProjectToUnitsController::class,'noAr'])->name('projectUnit.noAr');
-Route::get('/projectUnit/unActive',[ProjectToUnitsController::class,'unActive'])->name('projectUnit.unActive');
+
+
+
+Route::get('/projectUnits/noPhoto',[ProjectToUnitsController::class,'noPhoto'])->name('project.projectUnit.noPhoto');
+Route::get('/projectUnits/slugErr',[ProjectToUnitsController::class,'slugErr'])->name('project.projectUnit.slugErr');
+Route::get('/projectUnits/noEn',[ProjectToUnitsController::class,'noEn'])->name('project.projectUnit.noEn');
+Route::get('/projectUnits/noAr',[ProjectToUnitsController::class,'noAr'])->name('project.projectUnit.noAr');
+Route::get('/projectUnits/unActive',[ProjectToUnitsController::class,'unActive'])->name('project.projectUnit.unActive');
+
+
 
 
 

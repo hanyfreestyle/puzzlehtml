@@ -29,7 +29,7 @@
                 <x-form-input label="Slug" name="slug" :requiredSpan="true" colrow="col-lg-6 {{getColDir('en')}}"
                               value="{{old('slug',$Unit->slug)}}"  dir="en" inputclass="dir_en"/>
 
-                <x-form-select-arr name="developer_id" label="{{__('admin/project.developer')}}" :sendvalue="old('developer_id',$Unit->developer_id)" :required-span="true" colrow="col-lg-3 " :send-arr="$Developers"/>
+                <x-form-select-arr name="developer_id" label="{{__('admin/project.developer')}}" :sendvalue="old('developer_id',$Unit->developer_id)" :required-span="false" colrow="col-lg-3 " :send-arr="$Developers"/>
                 <x-form-select-arr name="location_id" label="{{__('admin/project.loction')}}" :sendvalue="old('location_id',$Unit->location_id)" :required-span="true" colrow="col-lg-3 " :send-arr="$Locations"/>
 
             </div>
@@ -71,8 +71,8 @@
                 <x-form-input label="{{__('admin/project.youtube')}}" name="youtube_url" :requiredSpan="false" colrow="col-lg-3"
                               value="{{old('youtube_url',$Unit->youtube_url )}}"  dir="ar" />
 
-                <x-form-input label="{{__('admin/project.contact_number')}}" name="contact_number" :requiredSpan="false" colrow="col-lg-3"
-                              value="{{old('contact_number',$Unit->contact_number )}}"  dir="ar" />
+{{--                <x-form-input label="{{__('admin/project.contact_number')}}" name="contact_number" :requiredSpan="false" colrow="col-lg-3"--}}
+{{--                              value="{{old('contact_number',$Unit->contact_number )}}"  dir="ar" />--}}
 
             </div>
 
