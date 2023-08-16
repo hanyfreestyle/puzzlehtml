@@ -39,7 +39,7 @@
                 <x-form-select-arr name="status" label="{{__('admin/project.project_status') }}" :sendvalue="old('status',$Project->status)" :required-span="true" colrow="col-lg-3 " :send-arr="$ProjectSatues_Arr"/>
                 <x-form-select-arr name="project_type" label="{{__('admin/project.project_type')}}" :sendvalue="old('project_type',$Project->project_type)" :required-span="true" colrow="col-lg-3 " :send-arr="$ProjectType_Arr"/>
 
-                <x-form-input label="{{__('admin/project.delivery_date')}}" name="delivery_date" :requiredSpan="false" colrow="col-lg-3 {{getColDir('en')}}"
+                <x-form-input label="{{__('admin/project.delivery_date')}}" name="delivery_date" :requiredSpan="true" colrow="col-lg-3 {{getColDir('en')}}"
                               value="{{old('delivery_date',$Project->delivery_date)}}"  dir="ar" inputclass="dir_en"/>
 
                 <x-form-input label="{{__('admin/project.price')}}" name="price" :requiredSpan="true" colrow="col-lg-3 {{getColDir('en')}}"
@@ -56,9 +56,6 @@
 
                 <x-form-input label="{{__('admin/project.youtube')}}" name="youtube_url" :requiredSpan="false" colrow="col-lg-3"
                               value="{{old('youtube_url',$Project->youtube_url )}}"  dir="ar" />
-
-                <x-form-input label="{{__('admin/project.contact_number')}}" name="contact_number" :requiredSpan="false" colrow="col-lg-3"
-                              value="{{old('contact_number',$Project->contact_number )}}"  dir="ar" />
 
             </div>
 

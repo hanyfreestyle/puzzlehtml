@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer("sort_order")->nullable();
             $table->double("latitude")->nullable();
             $table->double('longitude')->nullable();
-            $table->string('projects_type')->default('compound');
+            $table->string('projects_type')->nullable();
             $table->string("photo")->nullable();
             $table->string("photo_thum_1")->nullable();
             $table->boolean("is_active")->default(true);

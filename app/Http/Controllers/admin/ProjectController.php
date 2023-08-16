@@ -71,9 +71,8 @@ class ProjectController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "deleteList";
         $Projects = Listing::onlyTrashed()
-            ->where('parent_id' , '=', null )
-            ->where('property_type','=',null)->paginate(15);
-
+            ->Project()
+            ->paginate(15);
         return view('admin.listing.project_index',compact('pageData','Projects'));
     }
 
@@ -98,18 +97,11 @@ class ProjectController extends AdminMainController
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
 
-       /// $Project = Listing::findOrFail($id);
-
-
         $Project = Listing::query()
             ->where('id','=',$id)
-            ->where('parent_id','=',null)
-            ->where('property_type','=',null)
+            ->Project()
             ->firstOrFail();
-
-
-
-        return view('admin.listing.project_form',compact('pageData','Project'));
+         return view('admin.listing.project_form',compact('pageData','Project'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -119,6 +111,7 @@ class ProjectController extends AdminMainController
 
         $saveData =  Listing::findOrNew($id);
         $saveData->slug = AdminHelper::Url_Slug($request->slug);
+        $saveData->listing_type = "Project";
         $saveData->location_id = $request->input('location_id');
         $saveData->developer_id  = $request->input('developer_id');
         $saveData->project_type  = $request->input('project_type');
@@ -129,7 +122,6 @@ class ProjectController extends AdminMainController
         $saveData->latitude   = $request->input('latitude');
         $saveData->longitude   = $request->input('longitude');
         $saveData->youtube_url   = $request->input('youtube_url');
-        $saveData->contact_number   = $request->input('contact_number');
         $saveData->setPublished((bool) request('is_published', false));
         $saveData->amenity  = $request->input('amenity');
         $saveData->save();
@@ -147,7 +139,6 @@ class ProjectController extends AdminMainController
             $saveTranslation = ListingTranslation::where('listing_id',$saveData->id)
                 ->where('locale',$key)
                 ->firstOrNew();
-
             $saveTranslation->listing_id = $saveData->id;
             $saveTranslation->locale = $key;
             $saveTranslation->name = $request->input($key.'.name');
@@ -157,13 +148,15 @@ class ProjectController extends AdminMainController
             $saveTranslation->save();
         }
 
-        $UpdateUnits = Listing::withTrashed()
+        $UpdateUnits = Listing::query()
             ->where('parent_id', '=', $saveData->id)
             ->get();
+
         if(count($UpdateUnits) > 0){
             foreach ($UpdateUnits as $UpdateUnit){
                 $UpdateUnit->location_id = $request->input('location_id');
                 $UpdateUnit->developer_id  = $request->input('developer_id');
+                $UpdateUnit->delivery_date  = $request->input('delivery_date');
                 $UpdateUnit->save();
             }
         }
@@ -175,7 +168,6 @@ class ProjectController extends AdminMainController
             ////return redirect(route('post.index'))->with('Edit.Done',"");
         }
     }
-
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     destroy
@@ -235,7 +227,7 @@ class ProjectController extends AdminMainController
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     edit
+#|||||||||||||||||||||||||||||||||||||| #     ListMorePhoto
     public function ListMorePhoto($id)
     {
         $sendArr = ['TitlePage' => __('admin/menu.project') ];
@@ -248,15 +240,13 @@ class ProjectController extends AdminMainController
         return view('admin.listing.project_photos',compact('ProjectPhotos','pageData','Project'));
     }
 
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     edit
+#|||||||||||||||||||||||||||||||||||||| #     ListOldPhoto
     public function ListOldPhoto($id)
     {
         $sendArr = ['TitlePage' => __('admin/menu.project') ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "Edit";
-
 
         $Project = Listing::findOrFail($id) ;
 
@@ -324,30 +314,14 @@ class ProjectController extends AdminMainController
 #|||||||||||||||||||||||||||||||||||||| #     noPhoto
     public function noPhoto()
     {
-
-
-
-        $sendArr = ['TitlePage' => __('admin/menu.project'),'restore'=> 1 ];
+        $sendArr = ['TitlePage' => __('admin/menu.project'),'restore'=> 0 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
-
-        $pageData['Trashed'] = Listing::onlyTrashed()
-            ->where('listing_type', 'Project' )
+        $Projects = Listing::Project()
             ->with('translations')
-            ->count();
-
-        $Projects = Listing::query()->Project()
-            ->with('translations')
-            ->withCount('get_more_photo')
-            ->withCount('get_units_to_project')
-            ->withCount('faq_to_project')
             ->where('photo',null)
             ->paginate(15);
-
-        return view('admin.listing.project_index',compact('pageData','Projects'));
-
-
-
+        return view('admin.listing.project_index_err',compact('pageData','Projects'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -357,96 +331,58 @@ class ProjectController extends AdminMainController
 
     }
 
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     noAr
+    public function noAr()
+    {
+        $sendArr = ['TitlePage' => __('admin/menu.project'),'restore'=> 0 ];
+        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
+        $pageData['ViewType'] = "List";
+
+        $Projects = Listing::Project()
+            ->with('translations')
+            ->whereHas('teans_ar', function ($query) {
+                $query->where('des', '=', null);
+            })
+            ->paginate(15);
+
+        return view('admin.listing.project_index_err',compact('pageData','Projects'));
+    }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     noEn
     public function noEn()
     {
-
-
-        $sendArr = ['TitlePage' => __('admin/menu.project'),'restore'=> 1 ];
+        $sendArr = ['TitlePage' => __('admin/menu.project'),'restore'=> 0 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
-
-        $pageData['Trashed'] = Listing::onlyTrashed()
-            ->where('listing_type', 'Project' )
-            ->with('translations')
-            ->count();
 
         $Projects = Listing::query()->Project()
             ->with('translations')
             ->whereHas('teans_en', function ($query) {
                     $query->where('des', '=', null);
                 })
-            ->withCount('get_more_photo')
-            ->withCount('get_units_to_project')
-            ->withCount('faq_to_project')
-
             ->paginate(15);
 
-        return view('admin.listing.project_index',compact('pageData','Projects'));
+        return view('admin.listing.project_index_err',compact('pageData','Projects'));
     }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     noAr
-    public function noAr()
-    {
-        $sendArr = ['TitlePage' => __('admin/menu.project'),'restore'=> 1 ];
-        $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
-        $pageData['ViewType'] = "List";
 
-        $pageData['Trashed'] = Listing::onlyTrashed()
-            ->where('listing_type', 'Project' )
-            ->with('translations')
-            ->count();
-
-        $Projects = Listing::query()->Project()
-            ->with('translations')
-            ->whereHas('teans_ar', function ($query) {
-                $query->where('des', '=', null);
-            })
-            ->withCount('get_more_photo')
-            ->withCount('get_units_to_project')
-            ->withCount('faq_to_project')
-
-            ->paginate(15);
-
-        return view('admin.listing.project_index',compact('pageData','Projects'));
-    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     unActive
     public function unActive()
     {
-
-        $sendArr = ['TitlePage' => __('admin/menu.project'),'restore'=> 1 ];
+        $sendArr = ['TitlePage' => __('admin/menu.project'),'restore'=> 0 ];
         $pageData = AdminHelper::returnPageDate($this->controllerName,$sendArr);
         $pageData['ViewType'] = "List";
-
-        $pageData['Trashed'] = Listing::onlyTrashed()
-            ->where('listing_type', 'Project' )
-            ->with('translations')
-            ->count();
-
         $Projects = Listing::query()->where('listing_type','Project')
             ->with('translations')
             ->where('is_published',false)
-            ->withCount('get_more_photo')
-            ->withCount('get_units_to_project')
-            ->withCount('faq_to_project')
-
             ->paginate(15);
-
-        return view('admin.listing.project_index',compact('pageData','Projects'));
-
+         return view('admin.listing.project_index_err',compact('pageData','Projects'));
     }
-
-
-
-
-
-
-
-
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     text

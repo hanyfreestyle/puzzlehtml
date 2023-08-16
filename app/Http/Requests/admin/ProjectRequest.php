@@ -15,30 +15,23 @@ class ProjectRequest extends FormRequest
     }
 
 
-//    protected function prepareForValidation()
-//    {
-//        $this->merge([
-//            'slug'    => AdminHelper::Url_Slug($this->get('slug')),
-//        ]);
-//    }
-
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'slug'=> AdminHelper::Url_Slug($this->get('slug')),
+        ]);
+    }
 
     public function rules(Request $request): array
     {
-
+        $request->merge(['slug' => AdminHelper::Url_Slug($request->slug)]);
 
         $id = $this->route('id');
 
         if($id == '0'){
-            $rules =[
-                'slug'=> "required|unique:listings",
-
-            ];
+            $rules =['slug'=> "required|unique:listings"];
         }else{
-            $rules =[
-                'slug'=> "required|unique:listings,slug,$id",
-
-            ];
+            $rules =['slug'=> "required|unique:listings,slug,$id"];
         }
 
         $rules += [
@@ -46,8 +39,11 @@ class ProjectRequest extends FormRequest
             'developer_id'=> "required",
             'project_type'=> "required",
             'status'=> "required",
-            'price'=> "required",
-            'delivery_date'=> "required",
+            'delivery_date'=> "required|integer|min:2000|max:2050",
+            'price'=> "required|integer",
+            'latitude'=> "nullable|numeric|required_with:longitude",
+            'longitude'=> "nullable|numeric|required_with:latitude",
+            'youtube_url'=> "nullable|alpha_dash:ascii",
             'amenity' => "required|array|min:3",
         ];
 

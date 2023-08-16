@@ -48,7 +48,7 @@
                 @endforeach
             </div>
 
-            <x-meta-tage-filde :body-h1="true" :breadcrumb="true"  :old-data="$location" :placeholder="false" />
+            <x-meta-tage-filde :body-h1="false" :breadcrumb="false"  :old-data="$location" :placeholder="false" />
 
             <hr>
 

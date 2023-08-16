@@ -11,9 +11,9 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('getslider');
+            $table->integer('getslider')->nullable();
             $table->integer('lang')->default(0);
-            $table->enum('listing_type',['NotList','Unit','Project','ForSale']);
+            $table->enum('listing_type',['Unit','Project','ForSale']);
 
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->unsignedBigInteger('location_id')->nullable();

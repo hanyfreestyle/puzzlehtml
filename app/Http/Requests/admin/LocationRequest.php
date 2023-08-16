@@ -28,12 +28,17 @@ class LocationRequest extends FormRequest
 
         $id = $this->route('id');
 
+        $rules =[
+            'latitude'=> "nullable|numeric|required_with:longitude",
+            'longitude'=> "nullable|numeric|required_with:latitude",
+        ];
+
         if($id == '0'){
-            $rules =[
+            $rules +=[
                 'slug'=> "required|unique:locations",
             ];
         }else{
-            $rules =[
+            $rules +=[
                 'slug'=> "required|unique:locations,slug,$id",
             ];
         }
