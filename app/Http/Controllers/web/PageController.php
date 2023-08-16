@@ -22,11 +22,21 @@ class PageController extends WebMainController
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     index
+    public function contactUs()
+    {
+        $Meta = parent::getMeatByCatId('contact-us');
+        parent::printSeoMeta($Meta);
+        return view('web.index');
+    }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     DevelopersPage
     public function DevelopersPage()
     {
         $Meta = parent::getMeatByCatId('developer');
-        parent::printSeoMeta($Meta);
+        parent::printSeoMeta($Meta,'developer');
 
         $Developers = Developer::getDeveloperList()
             ->paginate(16);
