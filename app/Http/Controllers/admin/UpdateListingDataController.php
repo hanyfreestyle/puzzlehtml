@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\Controller;
 use App\Models\admin\Developer;
 use App\Models\admin\Listing;
+use DB;
 use Illuminate\Http\Request;
 
 class UpdateListingDataController extends AdminMainController
@@ -14,6 +15,7 @@ class UpdateListingDataController extends AdminMainController
     {
 
         $Developers = Developer::withTrashed()->get();
+
         foreach ($Developers as $Developer){
 
             $projects_count = Listing::Project()
@@ -25,9 +27,11 @@ class UpdateListingDataController extends AdminMainController
                 ->where('is_published', true)
                 ->where('developer_id',$Developer->id)
                 ->count();
+
             $Developer->projects_count = $projects_count;
             $Developer->units_count = $units_count;
             $Developer->save();
+
         }
 
 
@@ -35,6 +39,6 @@ class UpdateListingDataController extends AdminMainController
 
 
 
-        return view('admin.listing.update_listing_data');
+        return view('admin.listing.update_listing_data',compact('Developers'));
     }
 }

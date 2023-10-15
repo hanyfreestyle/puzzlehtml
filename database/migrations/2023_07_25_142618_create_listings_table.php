@@ -52,6 +52,7 @@ return new class extends Migration
             $table->foreign('parent_id')->references('id')->on('listings')->onDelete('cascade');
 
             $table->index("slug");
+            $table->index("developer_id");
         });
 
     }
